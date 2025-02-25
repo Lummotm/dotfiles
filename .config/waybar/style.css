@@ -1,0 +1,184 @@
+@import "mocha.css";
+
+* {
+  font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", "Font Awesome", monospace;
+  font-size: 17px;
+  min-height: 0;
+}
+
+#waybar {
+  background: transparent;
+  color: @text;
+  margin: 0.5rem 0.5rem;
+}
+
+#window{
+  padding: 0.5rem 0.5rem;
+  margin: 5px 0;
+  /*border-radius: 1rem;*/
+  background: @surface0;
+  border: 1px solid rgb(180,190,254);
+}
+
+window#waybar.empty #window{
+  background:none;
+  border: none;
+}
+
+#custom-wall-changer{
+  background: @surface0;
+  padding: 0.5rem 0.5rem;
+  /*border-radius: 0px 1rem 1rem 0px;*/
+  border: 1px solid rgb(180,190,254); 
+}
+
+#workspaces {
+  /*border-radius: 1rem;*/
+  margin: 5px 0;
+  background-color: @surface0;
+  /*border-radius: 1rem 0px 0px 1rem;*/
+  border: 1px solid rgb(180,190,254); 
+  margin-left: 0.5rem;
+}
+
+#workspaces button.active {
+  color: @sky;
+}
+
+
+#workspaces active {
+  color: @lavender;
+}
+
+#workspaces button {
+  color: @lavender;
+  padding: 0.4rem;
+}
+
+#tray,
+#backlight,
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#custom-wall-changer,
+#memory,
+#cpu,
+#language{
+  background-color: @surface0;
+  padding: 0.1rem 0.5rem 0.1rem 0.5rem;
+  margin: 5px 0;
+}
+
+#pulseaudio-output {
+  color: @maroon;
+  background-color: @surface0;
+  padding: 0.1rem 0.5rem;
+  margin-left: 1rem;
+  border: 1px solid @maroon;
+}
+
+#pulseaudio-input {
+  color: @sky;
+  background-color: @surface0;
+  padding: 0.1rem 0.5rem;
+  margin-left: 1rem;
+  border: 1px solid @sky;
+}
+#pulseaudio-output {
+    color: @maroon;
+    background-color: @surface0;
+      padding: 0.1rem 0.5rem;
+      margin-left: 1rem;
+      border: 1px solid @maroon;
+}
+
+#pulseaudio-input {
+    color: @sky;
+    background-color: @surface0;
+      padding: 0.1rem 0.5rem;
+      margin-left: 1rem;
+      border: 1px solid @sky;
+}
+
+#language{
+  border: 1px solid;
+}
+
+#clock {
+  color: @blue;
+  /*border-radius: 0px 1rem 1rem 0px;*/
+  margin-right: 0.5rem;
+  border: 1px solid @blue;
+}
+
+#battery {
+  color: @green;
+  padding-right: 1rem;
+  border: 1px solid @green;
+  margin-right: 0.5rem;
+}
+
+#battery.charging {
+  color: @green;
+  padding-right: 0.5rem;
+  border: 1px solid @green;
+}
+
+#battery.warning:not(.charging) {
+  color: @red;
+  padding-right: 1rem;
+  border: 1px solid @red;
+}
+
+#backlight {
+  color: @yellow;
+  border: 1px solid yellow;
+  padding-right: 0.5rem;
+}
+
+#backlight, #battery, #network, #memory {
+  border-radius: 0;
+}
+
+#pulseaudio {
+  color: @maroon;
+  /*border-radius: 1rem 0px 0px 1rem;*/
+  margin-left: 1rem;
+  padding-right: 1rem;
+  border: 1px solid @maroon;
+}
+
+#network {
+  color: @sapphire;
+  border: 1px solid @sapphire;
+  padding-right: 1.3rem;
+}
+
+#network.ethernet {
+  color: @sapphire;
+  border: 1px solid @sapphire;
+  padding-right: 0.7rem;
+}
+
+#network.disconnected{
+  color: #727275;
+  border: 1px solid #727275;
+  padding-right: 0.6rem;
+}
+
+#memory {
+  color: @rosewater;
+  border: 1px solid @rosewater;
+  padding-right: 1rem;
+}
+
+#cpu {
+  color: @peach; 
+  border: 1px solid @peach;
+  padding-right: 1rem;
+}
+
+#tray {
+  border: 1px solid @lavender;
+}
