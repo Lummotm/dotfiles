@@ -23,8 +23,6 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 echo -ne '\e[5 q'
 
 # Add in zsh plugins
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 
 
@@ -84,6 +82,7 @@ alias clc="clear"
 alias suvi="sudo -E nvim"
 alias visu="sudo -E nvim"
 alias ..="cd .." 
+alias pc="python3 -i ~/Projects/Python/mathLibStartScript.py"
 
 # Shell Integrations
 eval "$(fzf --zsh)"
