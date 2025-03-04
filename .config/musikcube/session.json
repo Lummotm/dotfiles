@@ -1,4 +1,12 @@
 {
+  "LastBrowseCategoryId": -1.0,
+  "LastBrowseCategoryType": "",
+  "LastBrowseFilterVisible": false,
+  "LastCategoryFilter": "arthur",
+  "LastCategoryFilterMatchType": 1,
+  "LastLibraryView": "Browse",
   "LastPlayQueueIndex": -1,
-  "LastPlayQueueTime": 0.0
+  "LastPlayQueueTime": 0.0,
+  "LastTrackFilter": "",
+  "LastTrackFilterMatchType": 1
 }
