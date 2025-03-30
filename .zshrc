@@ -82,7 +82,10 @@ alias clc="clear"
 alias suvi="sudo -E nvim"
 alias visu="sudo -E nvim"
 alias ..="cd .." 
-alias pc="python3 -i ~/Projects/Python/mathLibStartScript.py"
+alias pc="python3 -i ~/Projects/Python/calc.py"
+alias pycalc="pc"
+alias hyprshot-fixed='hyprshot -m output -o ~/Pictures/Screenshots/'
+
 
 # Shell Integrations
 eval "$(fzf --zsh)"

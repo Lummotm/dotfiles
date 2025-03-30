@@ -1,8 +1,9 @@
 {
-  "LastBrowseCategoryId": -1.0,
-  "LastBrowseCategoryType": "",
+  "LastBrowseCategoryId": 14.0,
+  "LastBrowseCategoryType": "artist",
+  "LastBrowseFilter": "",
   "LastBrowseFilterVisible": false,
-  "LastCategoryFilter": "arthur",
+  "LastCategoryFilter": "",
   "LastCategoryFilterMatchType": 1,
   "LastLibraryView": "Browse",
   "LastPlayQueueIndex": -1,

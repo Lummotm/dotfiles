@@ -1,0 +1,164 @@
+@import "tokyonight.css";
+
+* {
+  font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", "Font Awesome", monospace;
+  font-size: 17px;
+  min-height: 0;
+}
+
+#waybar {
+  background: transparent;
+  color: @text;
+  margin: 0.5rem 0.5rem;
+}
+
+#window {
+  padding: 0.5rem 0.5rem;
+  margin: 5px 0;
+  background: @surface0;
+  border: 1px solid @borderHighlight;
+}
+
+window#waybar.empty #window {
+  background: none;
+  border: none;
+}
+
+#custom-wall-changer {
+  background: @surface0;
+  padding: 0.5rem 0.5rem;
+  border: 1px solid @borderHighlight;
+}
+
+/* Workspaces */
+#workspaces {
+  margin: 5px 0;
+  background-color: @surface0;
+  border: 1px solid @borderHighlight;
+  margin-left: 0.5rem;
+}
+
+#workspaces button.active {
+  color: @workspaceActiveColor;
+}
+
+#workspaces button {
+  color: @workspaceInactiveColor;
+  padding: 0.4rem;
+}
+
+/* Módulos comunes */
+#tray,
+#backlight,
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#custom-wall-changer,
+#memory,
+#cpu,
+#language {
+  background-color: @surface0;
+  padding: 0.1rem 0.5rem;
+  margin: 5px 0;
+}
+
+/* Audio */
+#pulseaudio {
+  color: @pulseaudioColor;
+  margin-left: 1rem;
+  padding-right: 1rem;
+  border: 1px solid @pulseaudioColor;
+}
+
+#pulseaudio-output {
+  color: @pulseaudioOutputColor;
+  background-color: @surface0;
+  padding: 0.1rem 0.5rem;
+  margin-left: 1rem;
+  border: 1px solid @pulseaudioOutputColor;
+}
+
+#pulseaudio-input {
+  color: @pulseaudioInputColor;
+  background-color: @surface0;
+  padding: 0.1rem 0.5rem;
+  margin-left: 1rem;
+  border: 1px solid @pulseaudioInputColor;
+}
+
+/* Reloj */
+#clock {
+  color: @clockColor;
+  margin-right: 0.5rem;
+  border: 1px solid @clockColor;
+}
+
+/* Batería */
+#battery {
+  color: @batteryColor;
+  padding-right: 1rem;
+  border: 1px solid @batteryColor;
+  margin-right: 0.5rem;
+}
+
+#battery.charging {
+  color: @batteryChargingColor;
+  padding-right: 0.5rem;
+  border: 1px solid @batteryChargingColor;
+}
+
+#battery.warning:not(.charging) {
+  color: @batteryWarningColor;
+  padding-right: 1rem;
+  border: 1px solid @batteryWarningColor;
+}
+
+/* Brillo */
+#backlight {
+  color: @backlightColor;
+  border: 1px solid @backlightColor;
+  padding-right: 0.5rem;
+}
+
+/* Red */
+#network {
+  color: @networkColor;
+  border: 1px solid @networkColor;
+  padding-right: 1.3rem;
+}
+
+#network.ethernet {
+  color: @networkEthColor;
+  border: 1px solid @networkEthColor;
+  padding-right: 0.7rem;
+}
+
+#network.disconnected {
+  color: @networkDisconnectedColor;
+  border: 1px solid @networkDisconnectedColor;
+  padding-right: 0.6rem;
+}
+
+/* RAM y CPU */
+#memory {
+  color: @memoryColor;
+  border: 1px solid @memoryColor;
+  padding-right: 1rem;
+}
+
+#cpu {
+  color: @cpuColor;
+  border: 1px solid @cpuColor;
+  padding-right: 1rem;
+}
+
+/* Tray (bandeja del sistema) */
+#tray {
+  border: 1px solid @trayColor;
+}
+
+/* Ajustes adicionales */
+#backlight, #battery, #network, #memory {
+  border-radius: 0;
+}

@@ -1,26 +1,23 @@
 // -*- mode: jsonc -*-
 {
-    "layer": "top", // Waybar at top layer
-    "position": "top", // Waybar position (top|bottom|left|right)
-    "height": 30, // Waybar height (to be removed for auto height)
-    // "width": 1280, // Waybar width
-    "spacing": 4, // Gaps between modules (4px)
-    // Choose the order of the modules
-    "modules-left": [
-        "hyprland/workspaces",
-	"custom/wall-changer",
-    ],
-    "modules-center": [
-    	"clock",
-    ],
-    "modules-right": [
-	"pulseaudio",
-        "network",
-        "backlight",
-	"hyprland/language",
-	"memory",
-        "battery",
-    ],
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "spacing": 0,
+    "margin-top": 1,
+    "margin-left": 1,
+    "margin-right": 1,
+    "margin-bottom": 1,
+    
+    "modules-left": ["hyprland/workspaces", "custom/separator", "custom/wall-changer"],
+    "modules-center": [],
+    "modules-right": ["pulseaudio", "custom/separator", "network", "custom/separator", "backlight", "custom/separator", "battery", "custom/separator", "clock"],
+    
+    "custom/separator": {
+        "format": "|",
+        "interval": "once",
+        "tooltip": false
+    },
     "keyboard-state": {
         "numlock": true,
         "capslock": true,
@@ -40,54 +37,16 @@
         "tooltip": true,
         "tooltip-format": "{app}: {title}"
     },
-    "mpd": {
-        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
-        "format-disconnected": "Disconnected ",
-        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
-        "unknown-tag": "N/A",
-        "interval": 5,
-        "consume-icons": {
-            "on": " "
-        },
-        "random-icons": {
-            "off": "<span color=\"#f53c3c\"></span> ",
-            "on": " "
-        },
-        "repeat-icons": {
-            "on": " "
-        },
-        "single-icons": {
-            "on": "1 "
-        },
-        "state-icons": {
-            "paused": "",
-            "playing": ""
-        },
-        "tooltip-format": "MPD (connected)",
-        "tooltip-format-disconnected": "MPD (disconnected)"
-    },
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
-    },
-    "tray": {
-        // "icon-size": 21,
-        "spacing": 10
-    },
     "clock": {
-    	"format": "{:%H:%M}",
-        // "timezone": "America/New_York",
+        "format": "{:%H:%M}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%d-%m-%Y}"
+        "format-alt": "{:%d-%m-%Y}",
     },
     "hyprland/language": {
-	"format": "{}",
-	"format-us": "EN",
-	"format-es": "ES",
-	},
+        "format": "{}",
+        "format-us": "EN",
+        "format-es": "ES",
+    },
     "cpu": {
         "format": "{usage}% ",
         "tooltip": false
@@ -95,15 +54,7 @@
     "memory": {
         "format": "{}% "
     },
-    "temperature": {
-        // "thermal-zone": 2,
-        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-        "critical-threshold": 80,
-        // "format-critical": "{temperatureC}°C {icon}",
-        "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
-    },
-    "backlight": {
+        "backlight": {
         // "device": "acpi_video1",
         "format": "{percent}% {icon}",
         "format-icons": ["", "", "", "", "", "", "", "", ""]
@@ -126,7 +77,7 @@
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "ETHERNET  ",
+        "format-ethernet": "ETHERNET ",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
@@ -152,8 +103,8 @@
         "on-click": "pavucontrol"
     },
     "custom/wall-changer": {
-	"format" : "󰜉",
-	"on-click":"~/./Documents/Code/Bash/hyprpaper_randomizer.sh",
-	"tooltip":false,
+	    "format" : "󰜉",
+      "on-click":"~/./Projects/Bash/hyprpaper_randomizer.sh",
+      "tooltip":false,
     }
 }
