@@ -1,70 +1,404 @@
-16:36:34 [info] [LOG SESSION] ---------- START ----------
-16:36:34 [info] [PluginFactory] loading plugins
-16:36:34 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libmpris.so
-16:36:34 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libsndioout.so
-16:36:34 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libnullout.so
-16:36:34 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libalsaout.so
-16:36:34 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libtaglibreader.so
-16:36:34 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libportaudioout.so
-16:36:34 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libpulseout.so
-16:36:34 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libgmedecoder.so
-16:36:34 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libserver.so
-16:36:34 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libopenmptdecoder.so
-16:36:34 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libsupereqdsp.so
-16:36:34 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libhttpdatastream.so
-16:36:34 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libffmpegdecoder.so
-16:36:34 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libstockencoders.so
-16:36:34 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libpipewireout.so
-16:36:34 [info] [PortAudioOut] Pa_Initialize() return code: 0
-16:36:34 [info] [PipeWireOut] shutdown started
-16:36:34 [info] [PipeWireOut] shutdown complete
-16:36:34 [warning] [PortAudioOut] Pa_AbortStream() return code: -9988
-16:36:34 [warning] [PortAudioOut] Pa_CloseStream() return code: -9988
-16:36:34 [info] [PortAudioOut] Pa_Terminate() return code: 0
-16:36:34 [info] [Indexer] indexer source -1303229654 running...
-16:36:34 [info] [Indexer] indexer source -1303229654 finished
-16:36:34 [info] [Indexer] indexer source 155697690 running...
-16:36:34 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-16:36:34 [info] [LocalLibrary] query 'CategoryListQuery' running
-16:36:34 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-16:36:34 [info] [Indexer] indexer source 155697690 finished
-16:36:34 [info] [Indexer] scanning /home/davidn/Music/
-16:36:34 [info] [Indexer] scan completed successfully
-16:36:34 [info] [Indexer] cleanup 1/2
-16:36:34 [info] [Indexer] cleanup 2/2
-16:36:34 [info] [Indexer] optimizing
-16:36:34 [info] [LocalLibrary] query 'SearchTrackListQuery' enqueued
-16:36:34 [info] [Indexer] done!
-16:36:34 [info] [LocalLibrary] query 'SearchTrackListQuery' running
-16:36:34 [info] [LocalLibrary] query 'SearchTrackListQuery' finished with status=4
-16:36:34 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' enqueued
-16:36:34 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' running
-16:36:34 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' finished with status=4
-16:36:34 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-16:36:34 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-16:36:34 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-16:36:34 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-16:36:34 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-16:36:34 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-16:36:34 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-16:36:34 [info] [LocalLibrary] query 'CategoryListQuery' running
-16:36:34 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-16:36:34 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-16:36:34 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-16:36:34 [info] [LocalLibrary] query 'CategoryListQuery' running
-16:36:34 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=5
-16:36:34 [info] [LocalLibrary] query 'CategoryListQuery' running
-16:36:34 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-16:36:34 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-16:36:34 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-16:36:34 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-16:36:34 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-16:36:34 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-16:36:34 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-16:36:34 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-16:36:34 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-16:36:34 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-16:36:36 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' enqueued
-16:36:36 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' running
-16:36:36 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' finished with status=4
-16:36:36 [info] [GaplessTransport] stop
+18:54:30 [info] [LOG SESSION] ---------- START ----------
+18:54:30 [info] [PluginFactory] loading plugins
+18:54:30 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libmpris.so
+18:54:30 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libsndioout.so
+18:54:30 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libnullout.so
+18:54:30 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libalsaout.so
+18:54:30 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libtaglibreader.so
+18:54:30 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libportaudioout.so
+18:54:30 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libpulseout.so
+18:54:30 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libgmedecoder.so
+18:54:30 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libserver.so
+18:54:30 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libopenmptdecoder.so
+18:54:30 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libsupereqdsp.so
+18:54:30 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libhttpdatastream.so
+18:54:30 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libffmpegdecoder.so
+18:54:30 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libstockencoders.so
+18:54:30 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libpipewireout.so
+18:54:30 [info] [PortAudioOut] Pa_Initialize() return code: 0
+18:54:30 [info] [PipeWireOut] shutdown started
+18:54:30 [info] [PipeWireOut] shutdown complete
+18:54:30 [warning] [PortAudioOut] Pa_AbortStream() return code: -9988
+18:54:30 [warning] [PortAudioOut] Pa_CloseStream() return code: -9988
+18:54:30 [info] [PortAudioOut] Pa_Terminate() return code: 0
+18:54:30 [info] [Indexer] indexer source -1303229654 running...
+18:54:30 [info] [Indexer] indexer source -1303229654 finished
+18:54:30 [info] [Indexer] indexer source 155697690 running...
+18:54:30 [info] [Indexer] indexer source 155697690 finished
+18:54:30 [info] [Indexer] scanning /home/davidn/Music/
+18:54:30 [info] [Indexer] scan completed successfully
+18:54:30 [info] [Indexer] cleanup 1/2
+18:54:30 [info] [Indexer] cleanup 2/2
+18:54:30 [info] [Indexer] optimizing
+18:54:30 [info] [LocalLibrary] query 'SearchTrackListQuery' enqueued
+18:54:30 [info] [Indexer] done!
+18:54:30 [info] [LocalLibrary] query 'SearchTrackListQuery' running
+18:54:30 [info] [LocalLibrary] query 'SearchTrackListQuery' finished with status=4
+18:54:30 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' enqueued
+18:54:30 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' running
+18:54:30 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' finished with status=4
+18:54:30 [info] [LocalLibrary] query 'SearchTrackListQuery' enqueued
+18:54:30 [info] [LocalLibrary] query 'SearchTrackListQuery' running
+18:54:30 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
+18:54:30 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
+18:54:30 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
+18:54:30 [info] [LocalLibrary] query 'SearchTrackListQuery' finished with status=4
+18:54:30 [info] [LocalLibrary] query 'CategoryListQuery' running
+18:54:30 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=5
+18:54:30 [info] [LocalLibrary] query 'CategoryListQuery' running
+18:54:30 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=5
+18:54:30 [info] [LocalLibrary] query 'CategoryListQuery' running
+18:54:30 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
+18:54:30 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
+18:54:30 [info] [LocalLibrary] query 'TrackMetadataQuery' running
+18:54:30 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
+18:54:30 [info] [GaplessTransport] starting track at /home/davidn/Music/全ての人の魂の詩 (P3R ver.).mp3
+18:54:30 [info] [Player] new instance created
+18:54:30 [info] [GaplessTransport] stop
+18:54:30 [info] [Stream] opening /home/davidn/Music/全ての人の魂の詩 (P3R ver.).mp3
+18:54:30 [info] [LocalFileStream] opening file: /home/davidn/Music/全ての人の魂の詩 (P3R ver.).mp3
+18:54:30 [info] [ffmpegdecoder] parsing data stream...
+18:54:30 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
+18:54:30 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
+18:54:30 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
+18:54:30 [info] [ffmpegdecoder] found audio stream!
+18:54:30 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+18:54:30 [info] [Streams] found a decoder for /home/davidn/Music/全ての人の魂の詩 (P3R ver.).mp3
+18:54:30 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:54:30 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
+18:54:30 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
+18:54:30 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
+18:54:30 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
+18:54:30 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
+18:54:30 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
+18:54:31 [info] [LocalLibrary] query 'SearchTrackListQuery' enqueued
+18:54:31 [info] [LocalLibrary] query 'SearchTrackListQuery' running
+18:54:31 [info] [LocalLibrary] query 'SearchTrackListQuery' finished with status=4
+18:54:33 [info] [LocalLibrary] query 'SearchTrackListQuery' enqueued
+18:54:33 [info] [LocalLibrary] query 'SearchTrackListQuery' running
+18:54:33 [info] [LocalLibrary] query 'SearchTrackListQuery' finished with status=4
+18:54:33 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
+18:54:33 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
+18:54:33 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
+18:54:33 [info] [GaplessTransport] starting track at /home/davidn/Music/全ての人の魂の詩 (P3R ver.).mp3
+18:54:33 [info] [Player] new instance created
+18:54:33 [info] [GaplessTransport] stop
+18:54:33 [info] [Stream] opening /home/davidn/Music/全ての人の魂の詩 (P3R ver.).mp3
+18:54:33 [info] [LocalFileStream] opening file: /home/davidn/Music/全ての人の魂の詩 (P3R ver.).mp3
+18:54:33 [info] [ffmpegdecoder] parsing data stream...
+18:54:33 [info] [ffmpegdecoder] found audio stream!
+18:54:33 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+18:54:33 [info] [Streams] found a decoder for /home/davidn/Music/全ての人の魂の詩 (P3R ver.).mp3
+18:54:33 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:54:33 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
+18:54:33 [info] [LocalLibrary] query 'TrackMetadataQuery' running
+18:54:33 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
+18:54:33 [info] [Player] new instance created
+18:54:33 [info] [Stream] opening /home/davidn/Music/Lotus Juice  Azumi Takahashi  ATLUS Sound Team  ATLUS GAME MUSIC - Color Your Night.mp3
+18:54:33 [info] [LocalFileStream] opening file: /home/davidn/Music/Lotus Juice  Azumi Takahashi  ATLUS Sound Team  ATLUS GAME MUSIC - Color Your Night.mp3
+18:54:33 [info] [ffmpegdecoder] parsing data stream...
+18:54:33 [info] [ffmpegdecoder] found audio stream!
+18:54:33 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+18:54:33 [info] [Streams] found a decoder for /home/davidn/Music/Lotus Juice  Azumi Takahashi  ATLUS Sound Team  ATLUS GAME MUSIC - Color Your Night.mp3
+18:54:33 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:54:50 [info] [GaplessTransport] starting track at /home/davidn/Music/Lotus Juice  Azumi Takahashi  ATLUS Sound Team  ATLUS GAME MUSIC - Color Your Night.mp3
+18:54:50 [info] [Player] new instance created
+18:54:50 [info] [GaplessTransport] stop
+18:54:50 [info] [Stream] opening /home/davidn/Music/Lotus Juice  Azumi Takahashi  ATLUS Sound Team  ATLUS GAME MUSIC - Color Your Night.mp3
+18:54:50 [info] [LocalFileStream] opening file: /home/davidn/Music/Lotus Juice  Azumi Takahashi  ATLUS Sound Team  ATLUS GAME MUSIC - Color Your Night.mp3
+18:54:50 [info] [ffmpegdecoder] parsing data stream...
+18:54:50 [info] [ffmpegdecoder] found audio stream!
+18:54:50 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+18:54:50 [info] [Streams] found a decoder for /home/davidn/Music/Lotus Juice  Azumi Takahashi  ATLUS Sound Team  ATLUS GAME MUSIC - Color Your Night.mp3
+18:54:50 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:54:51 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
+18:54:51 [info] [LocalLibrary] query 'TrackMetadataQuery' running
+18:54:51 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
+18:54:51 [info] [Player] new instance created
+18:54:51 [info] [Stream] opening /home/davidn/Music/It_s Going Down Now.m4a
+18:54:51 [info] [LocalFileStream] opening file: /home/davidn/Music/It_s Going Down Now.m4a
+18:54:51 [info] [ffmpegdecoder] parsing data stream...
+18:54:51 [info] [ffmpegdecoder] found audio stream!
+18:54:51 [info] [ffmpegdecoder] resolved codec: AAC (Advanced Audio Coding)
+18:54:51 [info] [Streams] found a decoder for /home/davidn/Music/It_s Going Down Now.m4a
+18:54:51 [info] [GaplessTransport] starting track at /home/davidn/Music/It_s Going Down Now.m4a
+18:54:51 [info] [Player] new instance created
+18:54:51 [info] [GaplessTransport] stop
+18:54:51 [info] [Stream] opening /home/davidn/Music/It_s Going Down Now.m4a
+18:54:51 [info] [LocalFileStream] opening file: /home/davidn/Music/It_s Going Down Now.m4a
+18:54:51 [info] [ffmpegdecoder] parsing data stream...
+18:54:51 [info] [ffmpegdecoder] found audio stream!
+18:54:51 [info] [ffmpegdecoder] resolved codec: AAC (Advanced Audio Coding)
+18:54:51 [info] [Streams] found a decoder for /home/davidn/Music/It_s Going Down Now.m4a
+18:54:52 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
+18:54:52 [info] [LocalLibrary] query 'TrackMetadataQuery' running
+18:54:52 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
+18:54:52 [info] [Player] new instance created
+18:54:52 [info] [Stream] opening /home/davidn/Music/Shihoko Hirata - Shadow World.mp3
+18:54:52 [info] [LocalFileStream] opening file: /home/davidn/Music/Shihoko Hirata - Shadow World.mp3
+18:54:52 [info] [ffmpegdecoder] parsing data stream...
+18:54:52 [info] [ffmpegdecoder] found audio stream!
+18:54:52 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+18:54:52 [info] [Streams] found a decoder for /home/davidn/Music/Shihoko Hirata - Shadow World.mp3
+18:54:52 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:54:52 [info] [GaplessTransport] starting track at /home/davidn/Music/Shihoko Hirata - Shadow World.mp3
+18:54:52 [info] [Player] new instance created
+18:54:52 [info] [GaplessTransport] stop
+18:54:52 [info] [Stream] opening /home/davidn/Music/Shihoko Hirata - Shadow World.mp3
+18:54:52 [info] [LocalFileStream] opening file: /home/davidn/Music/Shihoko Hirata - Shadow World.mp3
+18:54:52 [info] [ffmpegdecoder] parsing data stream...
+18:54:52 [info] [ffmpegdecoder] found audio stream!
+18:54:52 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+18:54:52 [info] [Streams] found a decoder for /home/davidn/Music/Shihoko Hirata - Shadow World.mp3
+18:54:52 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:54:52 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
+18:54:52 [info] [LocalLibrary] query 'TrackMetadataQuery' running
+18:54:52 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
+18:54:52 [info] [GaplessTransport] starting track at /home/davidn/Music/Shihoko Hirata  - Heartbeat, Heartbreak.mp3
+18:54:52 [info] [Player] new instance created
+18:54:52 [info] [Stream] opening /home/davidn/Music/Shihoko Hirata  - Heartbeat, Heartbreak.mp3
+18:54:52 [info] [LocalFileStream] opening file: /home/davidn/Music/Shihoko Hirata  - Heartbeat, Heartbreak.mp3
+18:54:52 [info] [ffmpegdecoder] parsing data stream...
+18:54:52 [info] [GaplessTransport] stop
+18:54:52 [info] [ffmpegdecoder] found audio stream!
+18:54:52 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+18:54:52 [info] [Streams] found a decoder for /home/davidn/Music/Shihoko Hirata  - Heartbeat, Heartbreak.mp3
+18:54:52 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:54:52 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
+18:54:52 [info] [LocalLibrary] query 'TrackMetadataQuery' running
+18:54:52 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
+18:54:52 [info] [GaplessTransport] starting track at /home/davidn/Music/Shihoko Hirata - Heaven.mp3
+18:54:52 [info] [Player] new instance created
+18:54:52 [info] [GaplessTransport] stop
+18:54:52 [info] [Stream] opening /home/davidn/Music/Shihoko Hirata - Heaven.mp3
+18:54:52 [info] [LocalFileStream] opening file: /home/davidn/Music/Shihoko Hirata - Heaven.mp3
+18:54:52 [info] [ffmpegdecoder] parsing data stream...
+18:54:52 [info] [ffmpegdecoder] found audio stream!
+18:54:52 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+18:54:52 [info] [Streams] found a decoder for /home/davidn/Music/Shihoko Hirata - Heaven.mp3
+18:54:52 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:54:52 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
+18:54:52 [info] [LocalLibrary] query 'TrackMetadataQuery' running
+18:54:52 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
+18:54:52 [info] [Player] new instance created
+18:54:52 [info] [Stream] opening /home/davidn/Music/Lyn - Wake Up, Get Up, Get Out There.mp3
+18:54:52 [info] [LocalFileStream] opening file: /home/davidn/Music/Lyn - Wake Up, Get Up, Get Out There.mp3
+18:54:52 [info] [ffmpegdecoder] parsing data stream...
+18:54:52 [info] [ffmpegdecoder] found audio stream!
+18:54:52 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+18:54:52 [info] [Streams] found a decoder for /home/davidn/Music/Lyn - Wake Up, Get Up, Get Out There.mp3
+18:54:52 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:54:52 [info] [GaplessTransport] starting track at /home/davidn/Music/Lyn - Wake Up, Get Up, Get Out There.mp3
+18:54:52 [info] [Player] new instance created
+18:54:52 [info] [Stream] opening /home/davidn/Music/Lyn - Wake Up, Get Up, Get Out There.mp3
+18:54:52 [info] [GaplessTransport] stop
+18:54:52 [info] [LocalFileStream] opening file: /home/davidn/Music/Lyn - Wake Up, Get Up, Get Out There.mp3
+18:54:52 [info] [ffmpegdecoder] parsing data stream...
+18:54:52 [info] [ffmpegdecoder] found audio stream!
+18:54:52 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+18:54:52 [info] [Streams] found a decoder for /home/davidn/Music/Lyn - Wake Up, Get Up, Get Out There.mp3
+18:54:52 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:54:53 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
+18:54:53 [info] [LocalLibrary] query 'TrackMetadataQuery' running
+18:54:53 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
+18:54:53 [info] [Player] new instance created
+18:54:53 [info] [Stream] opening /home/davidn/Music/Beneath the Mask (Acoustic Version).mp3
+18:54:53 [info] [LocalFileStream] opening file: /home/davidn/Music/Beneath the Mask (Acoustic Version).mp3
+18:54:53 [info] [ffmpegdecoder] parsing data stream...
+18:54:53 [info] [ffmpegdecoder] found audio stream!
+18:54:53 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+18:54:53 [info] [Streams] found a decoder for /home/davidn/Music/Beneath the Mask (Acoustic Version).mp3
+18:54:53 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:54:53 [info] [GaplessTransport] starting track at /home/davidn/Music/Beneath the Mask (Acoustic Version).mp3
+18:54:53 [info] [Player] new instance created
+18:54:53 [info] [GaplessTransport] stop
+18:54:53 [info] [Stream] opening /home/davidn/Music/Beneath the Mask (Acoustic Version).mp3
+18:54:53 [info] [LocalFileStream] opening file: /home/davidn/Music/Beneath the Mask (Acoustic Version).mp3
+18:54:53 [info] [ffmpegdecoder] parsing data stream...
+18:54:53 [info] [ffmpegdecoder] found audio stream!
+18:54:53 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+18:54:53 [info] [Streams] found a decoder for /home/davidn/Music/Beneath the Mask (Acoustic Version).mp3
+18:54:53 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:54:53 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
+18:54:53 [info] [LocalLibrary] query 'TrackMetadataQuery' running
+18:54:53 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
+18:54:53 [info] [GaplessTransport] starting track at /home/davidn/Music/Lyn - Life Will Change .mp3
+18:54:53 [info] [Player] new instance created
+18:54:53 [info] [Stream] opening /home/davidn/Music/Lyn - Life Will Change .mp3
+18:54:53 [info] [LocalFileStream] opening file: /home/davidn/Music/Lyn - Life Will Change .mp3
+18:54:53 [info] [ffmpegdecoder] parsing data stream...
+18:54:53 [info] [ffmpegdecoder] found audio stream!
+18:54:53 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+18:54:53 [info] [Streams] found a decoder for /home/davidn/Music/Lyn - Life Will Change .mp3
+18:54:53 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:54:53 [info] [GaplessTransport] stop
+18:54:53 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
+18:54:53 [info] [LocalLibrary] query 'TrackMetadataQuery' running
+18:54:53 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
+18:54:53 [info] [GaplessTransport] starting track at /home/davidn/Music/.debris/2025-03-13/Beneath the Mask (Acoustic Version).mp3
+18:54:53 [info] [Player] new instance created
+18:54:53 [info] [Stream] opening /home/davidn/Music/.debris/2025-03-13/Beneath the Mask (Acoustic Version).mp3
+18:54:53 [info] [LocalFileStream] opening file: /home/davidn/Music/.debris/2025-03-13/Beneath the Mask (Acoustic Version).mp3
+18:54:53 [info] [ffmpegdecoder] parsing data stream...
+18:54:53 [info] [ffmpegdecoder] found audio stream!
+18:54:53 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+18:54:53 [info] [Streams] found a decoder for /home/davidn/Music/.debris/2025-03-13/Beneath the Mask (Acoustic Version).mp3
+18:54:53 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:54:53 [info] [GaplessTransport] stop
+18:55:03 [info] [GaplessTransport] starting track at /home/davidn/Music/全ての人の魂の詩 (P3R ver.).mp3
+18:55:03 [info] [Player] new instance created
+18:55:03 [info] [GaplessTransport] stop
+18:55:03 [info] [Stream] opening /home/davidn/Music/全ての人の魂の詩 (P3R ver.).mp3
+18:55:03 [info] [LocalFileStream] opening file: /home/davidn/Music/全ての人の魂の詩 (P3R ver.).mp3
+18:55:03 [info] [ffmpegdecoder] parsing data stream...
+18:55:03 [info] [ffmpegdecoder] found audio stream!
+18:55:03 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+18:55:03 [info] [Streams] found a decoder for /home/davidn/Music/全ての人の魂の詩 (P3R ver.).mp3
+18:55:03 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:55:04 [info] [Player] new instance created
+18:55:04 [info] [Stream] opening /home/davidn/Music/Lotus Juice  Azumi Takahashi  ATLUS Sound Team  ATLUS GAME MUSIC - Color Your Night.mp3
+18:55:04 [info] [LocalFileStream] opening file: /home/davidn/Music/Lotus Juice  Azumi Takahashi  ATLUS Sound Team  ATLUS GAME MUSIC - Color Your Night.mp3
+18:55:04 [info] [ffmpegdecoder] parsing data stream...
+18:55:04 [info] [ffmpegdecoder] found audio stream!
+18:55:04 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+18:55:04 [info] [Streams] found a decoder for /home/davidn/Music/Lotus Juice  Azumi Takahashi  ATLUS Sound Team  ATLUS GAME MUSIC - Color Your Night.mp3
+18:55:04 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:55:04 [info] [GaplessTransport] starting track at /home/davidn/Music/Lotus Juice  Azumi Takahashi  ATLUS Sound Team  ATLUS GAME MUSIC - Color Your Night.mp3
+18:55:04 [info] [Player] new instance created
+18:55:04 [info] [GaplessTransport] stop
+18:55:04 [info] [Stream] opening /home/davidn/Music/Lotus Juice  Azumi Takahashi  ATLUS Sound Team  ATLUS GAME MUSIC - Color Your Night.mp3
+18:55:04 [info] [LocalFileStream] opening file: /home/davidn/Music/Lotus Juice  Azumi Takahashi  ATLUS Sound Team  ATLUS GAME MUSIC - Color Your Night.mp3
+18:55:04 [info] [ffmpegdecoder] parsing data stream...
+18:55:04 [info] [ffmpegdecoder] found audio stream!
+18:55:04 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+18:55:04 [info] [Streams] found a decoder for /home/davidn/Music/Lotus Juice  Azumi Takahashi  ATLUS Sound Team  ATLUS GAME MUSIC - Color Your Night.mp3
+18:55:04 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:55:05 [info] [Player] new instance created
+18:55:05 [info] [Stream] opening /home/davidn/Music/It_s Going Down Now.m4a
+18:55:05 [info] [LocalFileStream] opening file: /home/davidn/Music/It_s Going Down Now.m4a
+18:55:05 [info] [ffmpegdecoder] parsing data stream...
+18:55:05 [info] [ffmpegdecoder] found audio stream!
+18:55:05 [info] [ffmpegdecoder] resolved codec: AAC (Advanced Audio Coding)
+18:55:05 [info] [Streams] found a decoder for /home/davidn/Music/It_s Going Down Now.m4a
+18:55:07 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:55:08 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:55:08 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:55:08 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:55:14 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:55:15 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:55:16 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:55:16 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:55:19 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:55:19 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:55:19 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:55:21 [info] [GaplessTransport] starting track at /home/davidn/Music/It_s Going Down Now.m4a
+18:55:21 [info] [Player] new instance created
+18:55:21 [info] [GaplessTransport] stop
+18:55:21 [info] [Stream] opening /home/davidn/Music/It_s Going Down Now.m4a
+18:55:21 [info] [LocalFileStream] opening file: /home/davidn/Music/It_s Going Down Now.m4a
+18:55:21 [info] [ffmpegdecoder] parsing data stream...
+18:55:21 [info] [ffmpegdecoder] found audio stream!
+18:55:21 [info] [ffmpegdecoder] resolved codec: AAC (Advanced Audio Coding)
+18:55:21 [info] [Streams] found a decoder for /home/davidn/Music/It_s Going Down Now.m4a
+18:55:21 [info] [Player] new instance created
+18:55:21 [info] [Stream] opening /home/davidn/Music/Shihoko Hirata - Shadow World.mp3
+18:55:21 [info] [LocalFileStream] opening file: /home/davidn/Music/Shihoko Hirata - Shadow World.mp3
+18:55:21 [info] [ffmpegdecoder] parsing data stream...
+18:55:21 [info] [ffmpegdecoder] found audio stream!
+18:55:21 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+18:55:21 [info] [Streams] found a decoder for /home/davidn/Music/Shihoko Hirata - Shadow World.mp3
+18:55:21 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:55:21 [info] [GaplessTransport] starting track at /home/davidn/Music/It_s Going Down Now.m4a
+18:55:21 [info] [Player] new instance created
+18:55:21 [info] [GaplessTransport] stop
+18:55:21 [info] [Stream] opening /home/davidn/Music/It_s Going Down Now.m4a
+18:55:21 [info] [LocalFileStream] opening file: /home/davidn/Music/It_s Going Down Now.m4a
+18:55:21 [info] [ffmpegdecoder] parsing data stream...
+18:55:21 [info] [ffmpegdecoder] found audio stream!
+18:55:21 [info] [ffmpegdecoder] resolved codec: AAC (Advanced Audio Coding)
+18:55:21 [info] [Streams] found a decoder for /home/davidn/Music/It_s Going Down Now.m4a
+18:55:22 [info] [Player] new instance created
+18:55:22 [info] [Stream] opening /home/davidn/Music/Shihoko Hirata - Shadow World.mp3
+18:55:22 [info] [LocalFileStream] opening file: /home/davidn/Music/Shihoko Hirata - Shadow World.mp3
+18:55:22 [info] [ffmpegdecoder] parsing data stream...
+18:55:22 [info] [ffmpegdecoder] found audio stream!
+18:55:22 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+18:55:22 [info] [Streams] found a decoder for /home/davidn/Music/Shihoko Hirata - Shadow World.mp3
+18:55:22 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:55:26 [info] [GaplessTransport] starting track at /home/davidn/Music/Lotus Juice  Azumi Takahashi  ATLUS Sound Team  ATLUS GAME MUSIC - Color Your Night.mp3
+18:55:26 [info] [Player] new instance created
+18:55:26 [info] [GaplessTransport] stop
+18:55:26 [info] [Stream] opening /home/davidn/Music/Lotus Juice  Azumi Takahashi  ATLUS Sound Team  ATLUS GAME MUSIC - Color Your Night.mp3
+18:55:26 [info] [LocalFileStream] opening file: /home/davidn/Music/Lotus Juice  Azumi Takahashi  ATLUS Sound Team  ATLUS GAME MUSIC - Color Your Night.mp3
+18:55:26 [info] [ffmpegdecoder] parsing data stream...
+18:55:26 [info] [ffmpegdecoder] found audio stream!
+18:55:26 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+18:55:26 [info] [Streams] found a decoder for /home/davidn/Music/Lotus Juice  Azumi Takahashi  ATLUS Sound Team  ATLUS GAME MUSIC - Color Your Night.mp3
+18:55:26 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:55:26 [info] [Player] new instance created
+18:55:26 [info] [Stream] opening /home/davidn/Music/It_s Going Down Now.m4a
+18:55:26 [info] [LocalFileStream] opening file: /home/davidn/Music/It_s Going Down Now.m4a
+18:55:26 [info] [ffmpegdecoder] parsing data stream...
+18:55:26 [info] [ffmpegdecoder] found audio stream!
+18:55:26 [info] [ffmpegdecoder] resolved codec: AAC (Advanced Audio Coding)
+18:55:26 [info] [Streams] found a decoder for /home/davidn/Music/It_s Going Down Now.m4a
+18:55:46 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' enqueued
+18:55:46 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' running
+18:55:46 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' finished with status=4
+18:59:11 [info] [ffmpegdecoder] finished decoding.
+18:59:13 [info] [GaplessTransport] stop
+18:59:13 [info] [Player] new instance created
+18:59:13 [info] [Stream] opening /home/davidn/Music/Shihoko Hirata - Shadow World.mp3
+18:59:13 [info] [LocalFileStream] opening file: /home/davidn/Music/Shihoko Hirata - Shadow World.mp3
+18:59:13 [info] [ffmpegdecoder] parsing data stream...
+18:59:13 [info] [ffmpegdecoder] found audio stream!
+18:59:13 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+18:59:13 [info] [Streams] found a decoder for /home/davidn/Music/Shihoko Hirata - Shadow World.mp3
+18:59:13 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+18:59:33 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' enqueued
+18:59:33 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' running
+18:59:33 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' finished with status=4
+19:02:17 [info] [ffmpegdecoder] finished decoding.
+19:02:19 [info] [GaplessTransport] stop
+19:02:19 [info] [Player] new instance created
+19:02:19 [info] [Stream] opening /home/davidn/Music/Shihoko Hirata  - Heartbeat, Heartbreak.mp3
+19:02:19 [info] [LocalFileStream] opening file: /home/davidn/Music/Shihoko Hirata  - Heartbeat, Heartbreak.mp3
+19:02:19 [info] [ffmpegdecoder] parsing data stream...
+19:02:19 [info] [ffmpegdecoder] found audio stream!
+19:02:19 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+19:02:19 [info] [Streams] found a decoder for /home/davidn/Music/Shihoko Hirata  - Heartbeat, Heartbreak.mp3
+19:02:19 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+19:02:39 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' enqueued
+19:02:39 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' running
+19:02:39 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' finished with status=4
+19:07:00 [info] [ffmpegdecoder] finished decoding.
+19:07:02 [info] [GaplessTransport] stop
+19:07:02 [info] [Player] new instance created
+19:07:02 [info] [Stream] opening /home/davidn/Music/Shihoko Hirata - Heaven.mp3
+19:07:02 [info] [LocalFileStream] opening file: /home/davidn/Music/Shihoko Hirata - Heaven.mp3
+19:07:02 [info] [ffmpegdecoder] parsing data stream...
+19:07:02 [info] [ffmpegdecoder] found audio stream!
+19:07:02 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+19:07:02 [info] [Streams] found a decoder for /home/davidn/Music/Shihoko Hirata - Heaven.mp3
+19:07:02 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+19:07:22 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' enqueued
+19:07:22 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' running
+19:07:22 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' finished with status=4
+19:09:15 [info] [ffmpegdecoder] finished decoding.
+19:09:18 [info] [GaplessTransport] stop
+19:09:18 [info] [Player] new instance created
+19:09:18 [info] [Stream] opening /home/davidn/Music/Lyn - Wake Up, Get Up, Get Out There.mp3
+19:09:18 [info] [LocalFileStream] opening file: /home/davidn/Music/Lyn - Wake Up, Get Up, Get Out There.mp3
+19:09:18 [info] [ffmpegdecoder] parsing data stream...
+19:09:18 [info] [ffmpegdecoder] found audio stream!
+19:09:18 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+19:09:18 [info] [Streams] found a decoder for /home/davidn/Music/Lyn - Wake Up, Get Up, Get Out There.mp3
+19:09:18 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+19:09:38 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' enqueued
+19:09:38 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' running
+19:09:38 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' finished with status=4
+19:10:50 [info] [GaplessTransport] pause
+20:57:36 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' enqueued
+20:57:36 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' running
+20:57:36 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' finished with status=4
+20:57:36 [info] [GaplessTransport] stop
