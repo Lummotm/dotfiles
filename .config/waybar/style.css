@@ -59,7 +59,8 @@
     color: inherit;  
 }
 
-#battery {
+/* Reajuste fino para arreglar iconos que salen mal*/
+#battery, #network {
   padding: 0rem 0.5rem 0rem 0;
 }
 
