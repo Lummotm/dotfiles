@@ -2,7 +2,7 @@
 # Fonts Settings
 
 font-family = "MesloLGS Nerd Font Mono"
-font-size = 12
+font-size = 16
 
 
 # Mouse Settings
@@ -30,18 +30,22 @@ keybind = super+shift+s=write_screen_file:open
 keybind = super+shift+w=close_surface
 
 
-# Theming Settings
-
-theme = "tokyonight"
-
 # Window
 
 gtk-single-instance = true
 gtk-tabs-location = bottom
-gtk-wide-tabs = false
+gtk-wide-tabs = true
 
 window-padding-x = 10,5 
 window-padding-y = 10,5
 window-decoration = false
 
 background-opacity = 0.8
+
+# Theming Settings
+
+theme = "tokyonight"
+window-theme = ghostty
+gtk-adwaita = true
+
+
