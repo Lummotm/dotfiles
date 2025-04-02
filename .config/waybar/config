@@ -9,7 +9,7 @@
     "margin-right": 1,
     "margin-bottom": 1,
     
-    "modules-left": ["hyprland/workspaces", "custom/separator", "custom/wall-changer"],
+    "modules-left": ["tray", "hyprland/workspaces",   "custom/separator", "custom/wall-changer"],
     "modules-center": [],
     "modules-right": ["pulseaudio", "custom/separator", "network", "custom/separator", "backlight", "custom/separator", "battery", "custom/separator", "clock"],
     
@@ -106,5 +106,9 @@
 	    "format" : "󰜉",
       "on-click":"~/./Projects/Bash/hyprpaper_randomizer.sh",
       "tooltip":false,
+    },
+     "tray": {
+        "icon-size": 21,
+        "spacing": 10
     }
 }
