@@ -773,3 +773,7 @@
 21:15:54 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' finished with status=4
 21:18:31 [info] [ffmpegdecoder] finished decoding.
 21:18:33 [info] [GaplessTransport] stop
+22:19:38 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' enqueued
+22:19:38 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' running
+22:19:38 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' finished with status=4
+22:19:38 [info] [GaplessTransport] stop
