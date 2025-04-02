@@ -5,8 +5,7 @@ end
 abbr vim nvim 
 abbr vi nvim 
 
-abbr vim nvim 
-abbr vi nvim 
+abbr gitc "git commit -m"
 
 # Starship Theme Initialization
 starship init fish | source
