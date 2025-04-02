@@ -8,6 +8,8 @@ abbr vi nvim
 abbr gc "git commit -m"
 abbr gp "git push -u origin main"
 
+alias hotspot="/home/davidn/Projects/Bash/hotspot.sh"
+
 set -gx MANPAGER 'nvim +Man!'
 
 # Starship Theme Initialization
