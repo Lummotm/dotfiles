@@ -1,174 +1,39 @@
 SndioOut Info: ---------- sndout.ctor ----------
 AlsaOut::AlsaOut() called
-[2025-03-30 18:54:30] [info] asio async_connect error: asio.system:111 (Connection refused)
-[2025-03-30 18:54:30] [info] Error getting remote endpoint: asio.system:107 (Transport endpoint is not connected)
-[2025-03-30 18:54:30] [error] handle_connect error: Connection refused
-ALSA lib confmisc.c:165:(snd_config_get_card) Cannot get card index for 0
-couldn't open play stream: No such file or directory
-SndioOut Info: failed to init device
-ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
-ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
-ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
-ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
-ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM sysdefault
-ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
-ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
-ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
-ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
-ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM sysdefault
-ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
-ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
-ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
-ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
-ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM front
+[2025-04-02 20:37:10] [info] asio async_connect error: asio.system:111 (Connection refused)
+[2025-04-02 20:37:10] [info] Error getting remote endpoint: asio.system:107 (Transport endpoint is not connected)
+[2025-04-02 20:37:10] [error] handle_connect error: Connection refused
+SndioOut Info: device handle initialized
+ALSA lib pcm_dsnoop.c:567:(snd_pcm_dsnoop_open) unable to open slave
+ALSA lib pcm_dmix.c:1000:(snd_pcm_dmix_open) unable to open slave
 ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.rear
 ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.center_lfe
 ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.side
-ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
-ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
-ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
-ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
-ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM surround21
-ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
-ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
-ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
-ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
-ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM surround21
-ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
-ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
-ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
-ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
-ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM surround40
-ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
-ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
-ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
-ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
-ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM surround41
-ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
-ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
-ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
-ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
-ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM surround50
-ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
-ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
-ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
-ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
-ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM surround51
-ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
-ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
-ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
-ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
-ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM surround71
-ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
-ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
-ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
-ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
-ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM iec958
-ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
-ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
-ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
-ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
-ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM spdif
-ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
-ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
-ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
-ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
-ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM spdif
-ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
-ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
-ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+ALSA lib confmisc.c:1377:(snd_func_refer) Unable to find definition 'cards.0.pcm.hdmi.0:CARD=0,AES0=4,AES1=130,AES2=0,AES3=2'
 ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
 ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
 ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM hdmi
-ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
-ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
-ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+ALSA lib confmisc.c:1377:(snd_func_refer) Unable to find definition 'cards.0.pcm.hdmi.0:CARD=0,AES0=4,AES1=130,AES2=0,AES3=2'
 ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
 ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
 ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM hdmi
-ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
-ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
-ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+ALSA lib confmisc.c:1377:(snd_func_refer) Unable to find definition 'cards.0.pcm.modem.0:CARD=0'
 ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
 ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
 ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.phoneline:CARD=0,DEV=0
-ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
-ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
-ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+ALSA lib confmisc.c:1377:(snd_func_refer) Unable to find definition 'cards.0.pcm.modem.0:CARD=0'
 ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
 ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
 ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.phoneline:CARD=0,DEV=0
-ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
-ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
-ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+ALSA lib confmisc.c:1377:(snd_func_refer) Unable to find definition 'cards.0.pcm.modem.0:CARD=0'
 ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
 ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
 ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM phoneline
-ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
-ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
-ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+ALSA lib confmisc.c:1377:(snd_func_refer) Unable to find definition 'cards.0.pcm.modem.0:CARD=0'
 ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
 ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
 ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM phoneline
-ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_id returned error: No such file or directory
-ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
-ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
-ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
-ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
-ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM dmix
+ALSA lib pcm_dmix.c:1000:(snd_pcm_dmix_open) unable to open slave
 PulseOut::PulseOut() called
 AlsaOut: destructor
 AlsaOut: joining...
@@ -176,13 +41,14 @@ AlsaOut: thread finished
 AlsaOut: closing device...
 AlsaOut: destroyed.
 SndioOut Info: joining thread
+SndioOut Info: closing
 SndioOut Info: thread finished
-[mp3 @ 0x7b3c38004440] Could not find codec parameters for stream 1 (Video: png, none): unspecified size
+[mp3 @ 0x74a4cc002a50] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
 Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[mp3float @ 0x7b3c38023b80] Could not update timestamps for skipped samples.
-[mp3 @ 0x7b3c50001b10] Could not find codec parameters for stream 1 (Video: png, none): unspecified size
+[mp3float @ 0x74a4cc05b8f0] Could not update timestamps for skipped samples.
+[mp3 @ 0x74a4d4004260] Could not find codec parameters for stream 1 (Video: png, none): unspecified size
 Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[mp3float @ 0x7b3c5005b3c0] Could not update timestamps for skipped samples.
+[mp3float @ 0x74a4d4024ff0] Could not update timestamps for skipped samples.
 PulseOut: opening device 
 pulse_blocking_stream: CHECK_VALIDITY server
 pulse_blocking_stream: CHECK_VALIDITY dir
@@ -191,24 +57,17 @@ pulse_blocking_stream: CHECK_VALIDITY spec
 pulse_blocking_stream: CHECK_VALIDITY channel map
 pulse_blocking_stream: context is ready
 pulse_blocking_stream: stream is ready
-[mp3 @ 0x7b3c18002a50] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
+[mp3 @ 0x74a4c80028f0] Could not find codec parameters for stream 1 (Video: png, none): unspecified size
 Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[mp3float @ 0x7b3c1804d570] Could not update timestamps for skipped samples.
-[mp3 @ 0x7b3c140029b0] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
+[mp3float @ 0x74a4c8023720] Could not update timestamps for skipped samples.
+[mp3 @ 0x74a4c0002800] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
 Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[mp3float @ 0x7b3c1404d4c0] Could not update timestamps for skipped samples.
-[mov,mp4,m4a,3gp,3g2,mj2 @ 0x7b3c50052260] stream 0, timescale not set
-[mov,mp4,m4a,3gp,3g2,mj2 @ 0x7b3c50052260] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol
-[mov,mp4,m4a,3gp,3g2,mj2 @ 0x7b3c50052260] Could not find codec parameters for stream 0 (Video: mjpeg, none): unspecified size
+[mp3float @ 0x74a4c0070100] Could not update timestamps for skipped samples.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x74a4d402e5f0] stream 0, timescale not set
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x74a4d402e5f0] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x74a4d402e5f0] Could not find codec parameters for stream 1 (Video: png, none): unspecified size
 Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[aac @ 0x7b3c5007c660] channel element 1.10 is not allocated
-[aac @ 0x7b3c5007c660] Could not update timestamps for skipped samples.
-[mov,mp4,m4a,3gp,3g2,mj2 @ 0x7b3c18002fd0] stream 0, timescale not set
-[mov,mp4,m4a,3gp,3g2,mj2 @ 0x7b3c18002fd0] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol
-[mov,mp4,m4a,3gp,3g2,mj2 @ 0x7b3c18002fd0] Could not find codec parameters for stream 0 (Video: mjpeg, none): unspecified size
-Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[aac @ 0x7b3c1804c0b0] channel element 1.10 is not allocated
-[aac @ 0x7b3c1804c0b0] Could not update timestamps for skipped samples.
+[aac @ 0x74a4d402dec0] channel element 3.10 is not allocated
 PulseOut: closing device
 PulseOut: opening device 
 pulse_blocking_stream: CHECK_VALIDITY server
@@ -218,76 +77,16 @@ pulse_blocking_stream: CHECK_VALIDITY spec
 pulse_blocking_stream: CHECK_VALIDITY channel map
 pulse_blocking_stream: context is ready
 pulse_blocking_stream: stream is ready
-[mp3 @ 0x7b3c1405c6f0] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
+[mp3 @ 0x74a4c006fcb0] Could not find codec parameters for stream 1 (Video: png, none): unspecified size
 Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[mp3float @ 0x7b3c14057640] Could not update timestamps for skipped samples.
-[mp3 @ 0x7b3c50052260] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
+[mp3float @ 0x74a4c007afd0] Could not update timestamps for skipped samples.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x74a4c80029c0] stream 0, timescale not set
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x74a4c80029c0] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x74a4c80029c0] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
 Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[mp3float @ 0x7b3c50059380] Could not update timestamps for skipped samples.
-PulseOut: closing device
-[mp3 @ 0x7b3c1806ddf0] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
-Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[mp3float @ 0x7b3c1804c420] Could not update timestamps for skipped samples.
-PulseOut: opening device 
-pulse_blocking_stream: CHECK_VALIDITY server
-pulse_blocking_stream: CHECK_VALIDITY dir
-pulse_blocking_stream: CHECK_VALIDITY device
-pulse_blocking_stream: CHECK_VALIDITY spec
-pulse_blocking_stream: CHECK_VALIDITY channel map
-pulse_blocking_stream: context is ready
-pulse_blocking_stream: stream is ready
-[mp3 @ 0x7b3c50052260] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
-Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[mp3float @ 0x7b3c5007ab00] Could not update timestamps for skipped samples.
-[mp3 @ 0x7b3c180615b0] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
-Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[mp3float @ 0x7b3c18065030] Could not update timestamps for skipped samples.
-[mp3 @ 0x7b3c1405ce70] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
-Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[mp3float @ 0x7b3c140579b0] Could not update timestamps for skipped samples.
-[mp3 @ 0x7b3c50045ce0] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
-Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[mp3float @ 0x7b3c50007bb0] Could not update timestamps for skipped samples.
-[mp3 @ 0x7b3c18061590] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
-Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[mp3float @ 0x7b3c180666f0] Could not update timestamps for skipped samples.
-[mp3 @ 0x7b3c1405c3a0] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
-Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[mp3float @ 0x7b3c14003850] Could not update timestamps for skipped samples.
-[mp3 @ 0x7b3c18066a60] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
-Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[mp3float @ 0x7b3c180657e0] Could not update timestamps for skipped samples.
-[mp3 @ 0x7b3c1405c6d0] Could not find codec parameters for stream 1 (Video: png, none): unspecified size
-Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[mp3float @ 0x7b3c14070880] Could not update timestamps for skipped samples.
-[mp3 @ 0x7b3c18001750] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
-Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[mp3float @ 0x7b3c1804bcd0] Could not update timestamps for skipped samples.
-[mp3 @ 0x7b3c5005cc80] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
-Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[mp3float @ 0x7b3c5007b5b0] Could not update timestamps for skipped samples.
-[mov,mp4,m4a,3gp,3g2,mj2 @ 0x7b3c14056830] stream 0, timescale not set
-[mov,mp4,m4a,3gp,3g2,mj2 @ 0x7b3c14056830] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol
-[mov,mp4,m4a,3gp,3g2,mj2 @ 0x7b3c14056830] Could not find codec parameters for stream 0 (Video: mjpeg, none): unspecified size
-Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[aac @ 0x7b3c14070440] channel element 1.10 is not allocated
-[aac @ 0x7b3c14070440] Could not update timestamps for skipped samples.
-[mp3float @ 0x7b3c5007b5b0] overread, skip -5 enddists: -4 -4
-[mp3float @ 0x7b3c5007b5b0] overread, skip -7 enddists: -5 -5
-[mp3float @ 0x7b3c5007b5b0] overread, skip -5 enddists: -2 -2
-[mp3float @ 0x7b3c5007b5b0] overread, skip -7 enddists: -6 -6
-[mp3float @ 0x7b3c5007b5b0] overread, skip -6 enddists: -3 -3
-[mp3float @ 0x7b3c5007b5b0] overread, skip -9 enddists: -6 -6
-[mp3float @ 0x7b3c5007b5b0] overread, skip -5 enddists: -3 -3
-[mp3float @ 0x7b3c5007b5b0] overread, skip -7 enddists: -2 -2
-[mp3float @ 0x7b3c5007b5b0] overread, skip -5 enddists: -3 -3
-[mp3float @ 0x7b3c5007b5b0] overread, skip -7 enddists: -3 -3
-[mov,mp4,m4a,3gp,3g2,mj2 @ 0x7b3c18000ff0] stream 0, timescale not set
-[mov,mp4,m4a,3gp,3g2,mj2 @ 0x7b3c18000ff0] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol
-[mov,mp4,m4a,3gp,3g2,mj2 @ 0x7b3c18000ff0] Could not find codec parameters for stream 0 (Video: mjpeg, none): unspecified size
-Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[aac @ 0x7b3c1804cd20] channel element 1.10 is not allocated
-[aac @ 0x7b3c1804cd20] Could not update timestamps for skipped samples.
+[aac @ 0x74a4c8006580] Gain control is not implemented. Update your FFmpeg version to the newest one from Git. If the problem still occurs, it means that your file has a feature which has not been implemented.
+[aac @ 0x74a4c8006580] Reserved bit set.
+[aac @ 0x74a4c8006580] Number of scalefactor bands in group (63) exceeds limit (49).
 PulseOut: closing device
 PulseOut: opening device 
 pulse_blocking_stream: CHECK_VALIDITY server
@@ -297,22 +96,24 @@ pulse_blocking_stream: CHECK_VALIDITY spec
 pulse_blocking_stream: CHECK_VALIDITY channel map
 pulse_blocking_stream: context is ready
 pulse_blocking_stream: stream is ready
-[mp3 @ 0x7b3c5005d210] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x74a4d402e5f0] stream 0, timescale not set
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x74a4d402e5f0] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x74a4d402e5f0] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
 Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[mp3float @ 0x7b3c5007d1d0] Could not update timestamps for skipped samples.
-[mov,mp4,m4a,3gp,3g2,mj2 @ 0x7b3c14057240] stream 0, timescale not set
-[mov,mp4,m4a,3gp,3g2,mj2 @ 0x7b3c14057240] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol
-[mov,mp4,m4a,3gp,3g2,mj2 @ 0x7b3c14057240] Could not find codec parameters for stream 0 (Video: mjpeg, none): unspecified size
+[aac @ 0x74a4d4036ea0] Gain control is not implemented. Update your FFmpeg version to the newest one from Git. If the problem still occurs, it means that your file has a feature which has not been implemented.
+[aac @ 0x74a4d4036ea0] Reserved bit set.
+[aac @ 0x74a4d4036ea0] Number of scalefactor bands in group (63) exceeds limit (49).
+[mp3 @ 0x74a4c8037f90] Could not find codec parameters for stream 1 (Video: png, none): unspecified size
 Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[aac @ 0x7b3c140030a0] channel element 1.10 is not allocated
-[aac @ 0x7b3c140030a0] Could not update timestamps for skipped samples.
-[mp3 @ 0x7b3c18066a60] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
+[mp3float @ 0x74a4c80030f0] Could not update timestamps for skipped samples.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x74a4d40008e0] stream 0, timescale not set
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x74a4d40008e0] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x74a4d40008e0] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
 Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[mp3float @ 0x7b3c1806d580] Could not update timestamps for skipped samples.
-[aac @ 0x7b3c140030a0] channel element 1.10 is not allocated
-[mp3 @ 0x7b3c5005d210] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
-Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[mp3float @ 0x7b3c5005d500] Could not update timestamps for skipped samples.
+[aac @ 0x74a4d40366c0] Gain control is not implemented. Update your FFmpeg version to the newest one from Git. If the problem still occurs, it means that your file has a feature which has not been implemented.
+[aac @ 0x74a4d40366c0] Reserved bit set.
+[aac @ 0x74a4d40366c0] Number of scalefactor bands in group (63) exceeds limit (49).
+[mp3float @ 0x74a4c80030f0] Could not update timestamps for discarded samples.
 PulseOut: closing device
 PulseOut: opening device 
 pulse_blocking_stream: CHECK_VALIDITY server
@@ -322,13 +123,24 @@ pulse_blocking_stream: CHECK_VALIDITY spec
 pulse_blocking_stream: CHECK_VALIDITY channel map
 pulse_blocking_stream: context is ready
 pulse_blocking_stream: stream is ready
-[mov,mp4,m4a,3gp,3g2,mj2 @ 0x7b3c14057240] stream 0, timescale not set
-[mov,mp4,m4a,3gp,3g2,mj2 @ 0x7b3c14057240] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol
-[mov,mp4,m4a,3gp,3g2,mj2 @ 0x7b3c14057240] Could not find codec parameters for stream 0 (Video: mjpeg, none): unspecified size
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x74a4c80151b0] stream 0, timescale not set
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x74a4c80151b0] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x74a4c80151b0] Could not find codec parameters for stream 1 (Video: png, none): unspecified size
 Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[aac @ 0x7b3c14070bf0] channel element 1.10 is not allocated
-[aac @ 0x7b3c14070bf0] Could not update timestamps for skipped samples.
-[mp3float @ 0x7b3c5005d500] Could not update timestamps for discarded samples.
+[aac @ 0x74a4c8024730] Reserved bit set.
+[aac @ 0x74a4c8024730] Prediction is not allowed in AAC-LC.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x74a4c007b710] stream 0, timescale not set
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x74a4c007b710] Protocol name not provided, cannot determine if input is local or a network protocol, buffers and access patterns cannot be configured optimally without knowing the protocol
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x74a4c007b710] Could not find codec parameters for stream 1 (Video: png, none): unspecified size
+Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
+[aac @ 0x74a4c007c1f0] Reserved bit set.
+[aac @ 0x74a4c007c1f0] Prediction is not allowed in AAC-LC.
+[mp3 @ 0x74a4d402e320] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
+Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
+[mp3float @ 0x74a4d4032420] Could not update timestamps for skipped samples.
+[mp3 @ 0x74a4c8003660] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
+Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
+[mp3float @ 0x74a4c8017bf0] Could not update timestamps for skipped samples.
 PulseOut: closing device
 PulseOut: opening device 
 pulse_blocking_stream: CHECK_VALIDITY server
@@ -338,30 +150,3 @@ pulse_blocking_stream: CHECK_VALIDITY spec
 pulse_blocking_stream: CHECK_VALIDITY channel map
 pulse_blocking_stream: context is ready
 pulse_blocking_stream: stream is ready
-[mp3 @ 0x7b3c5005d210] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
-Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[mp3float @ 0x7b3c50002b10] Could not update timestamps for skipped samples.
-PulseOut: closing device
-PulseOut: opening device 
-pulse_blocking_stream: CHECK_VALIDITY server
-pulse_blocking_stream: CHECK_VALIDITY dir
-pulse_blocking_stream: CHECK_VALIDITY device
-pulse_blocking_stream: CHECK_VALIDITY spec
-pulse_blocking_stream: CHECK_VALIDITY channel map
-pulse_blocking_stream: context is ready
-pulse_blocking_stream: stream is ready
-[mp3 @ 0x7b3c1405ad10] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
-Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[mp3float @ 0x7b3c1405c6d0] Could not update timestamps for skipped samples.
-[mp3float @ 0x7b3c50002b10] Could not update timestamps for discarded samples.
-[mp3 @ 0x7b3c5005d210] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
-Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[mp3float @ 0x7b3c5007c000] Could not update timestamps for skipped samples.
-[mp3float @ 0x7b3c1405c6d0] Could not update timestamps for discarded samples.
-[mp3 @ 0x7b3c14057240] Could not find codec parameters for stream 1 (Video: mjpeg, none): unspecified size
-Consider increasing the value for the 'analyzeduration' (0) and 'probesize' (5000000) options
-[mp3float @ 0x7b3c1405b6c0] Could not update timestamps for skipped samples.
-[2025-03-30 20:57:36] [error] handle_read_frame error: websocketpp.transport:7 (End of File)
-PulseOut: destroy
-PulseOut: destructor
-PulseOut: closing device
