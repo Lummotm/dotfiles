@@ -48,12 +48,14 @@ window-padding-y = 10,5
 window-decoration = false
 
 background-opacity = 0.8
-background-blur = true
+background-blur = 50
 
 # Theming Settings
 
 theme = "tokyonight"
+
+# For the theme to be well applied on the tabs
 window-theme = ghostty
 gtk-adwaita = true
 
-
+resize-overlay = never

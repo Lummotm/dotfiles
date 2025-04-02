@@ -8,4 +8,5 @@ abbr vi nvim
 abbr vim nvim 
 abbr vi nvim 
 
-
+# Starship Theme Initialization
+starship init fish | source
