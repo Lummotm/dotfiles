@@ -8,5 +8,7 @@ abbr vi nvim
 abbr gc "git commit -m"
 abbr gp "git push -u origin main"
 
+set -gx MANPAGER 'nvim +Man!'
+
 # Starship Theme Initialization
 starship init fish | source
