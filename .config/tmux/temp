@@ -1,0 +1,16 @@
+.
+├── config
+│   ├── keybinds.conf
+│   ├── options.conf
+│   ├── theme.conf
+│   └── theme.conf.bak
+├── plugins
+│   ├── tmux-continuum
+│   ├── tmux-mode-indicator
+│   ├── tmux-resurrect
+│   ├── tmux-sensible
+│   └── tpm
+├── temp
+└── tmux.conf
+
+8 directories, 6 files
