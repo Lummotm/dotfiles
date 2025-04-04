@@ -5,11 +5,11 @@ local keymap = vim.keymap.set
 keymap("n", "<leader>w", ":w<CR>", { desc = "Guardar archivo" })
 
 -- 2. Keymaps de plugins que no requieran configuración importante
-keymap("n", "<C-n>", ":NvimTreeToggle<CR>", { desc = "Toogles NvimTree" })
 keymap("n", "<Leader>ff", ":Telescope find_files<CR>", { desc = "Opens file search with telescope" })
+keymap("n", "<C-n>", ":Neotree toggle left<CR>")
+
 
 -- 3. Keymaps del LSP (nativos de Neovim)
-keymap("n", "gd", vim.lsp.buf.definition, { desc = "Ir a la definición" })
 
 -- 4. Keymaps de plugins complejos (con carga diferida)
 local function setup_plugin_keymaps()
