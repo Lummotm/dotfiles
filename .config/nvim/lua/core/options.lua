@@ -33,6 +33,8 @@ vim.opt.timeoutlen = 300      -- Timeout for key sequences
 
 -- UI Elements
 vim.opt.signcolumn = 'yes'    -- Always show sign column (for LSP/git)
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
 
 --------------------------------------------------------------------------------
 -- Input & Navigation

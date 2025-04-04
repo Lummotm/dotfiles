@@ -1,15 +1,32 @@
+-- lua/core/keymaps.lua
 local keymap = vim.keymap.set
 
--- Atajos generales
+-- 1. Keymaps genéricos
 keymap("n", "<leader>w", ":w<CR>", { desc = "Guardar archivo" })
 
--- Atajos para nvim-tree
-keymap("n", "<C-n>", ":NvimTreeToggle<CR>", { silent = true, noremap = true })
+-- 2. Keymaps de plugins que no requieran configuración importante
+keymap("n", "<C-n>", ":NvimTreeToggle<CR>", { desc = "Toogles NvimTree" })
+keymap("n", "<Leader>ff", ":Telescope find_files<CR>", { desc = "Opens file search with telescope" })
 
--- Atajos LSP
+-- 3. Keymaps del LSP (nativos de Neovim)
 keymap("n", "gd", vim.lsp.buf.definition, { desc = "Ir a la definición" })
-keymap("n", "gr", vim.lsp.buf.references, { desc = "Ver referencias" })
-keymap("n", "K", vim.lsp.buf.hover, { desc = "Mostrar documentación" })
-keymap("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Acciones de código" })
 
--- Puedes añadir más atajos aquí
+-- 4. Keymaps de plugins complejos (con carga diferida)
+local function setup_plugin_keymaps()
+  -- La idea de cargarlo así es la siguiente, si el plugin es complejo o requiere más control que simplemente dar un comando 
+  -- como es el caso en :NvimTreeToggle y infimo más rendimiento entonces es mejor usar la carga con la API.
+  -- Aunque es verdad que es el estandar actual de neovim
+
+  -- Telescope (no le veo sentido con el approach tan simple que necesito)
+  --local telescope_builtin = require("telescope.builtin")
+  --keymap("n", "<Leader>ff", telescope_builtin.find_files, {})
+  --keymap("n", "<Leader>fg", telescope_builtin.live_grep, {})
+end
+
+
+
+-- Cargar después de que todo esté listo
+vim.api.nvim_create_autocmd("User", {
+  pattern = "VeryLazy",
+  callback = setup_plugin_keymaps,
+})
