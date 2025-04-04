@@ -1,11 +1,8 @@
-return{
-  { import = "plugins.ui.theme" },
-  { import = "plugins.ui.filetree" },
-  { import = "plugins.ui.highlight" },
-  { import = "plugins.tools.cmp" },
-  { import = "plugins.tools.lsp" },
-  { import = "plugins.langs.latex" },
-  { import = "plugins.langs.matlab" },
-  { import = "plugins.langs.python" },
-  { import = "plugins.langs.c" },
+return {
+  -- Importa todos los archivos en plugins/ui
+  { import = "plugins.ui." },
+  -- Importa todos los archivos en plugins/tools
+  { import = "plugins.tools." },
+  -- Importa todos los archivos en plugins/langs
+  { import = "plugins.langs." },
 }
