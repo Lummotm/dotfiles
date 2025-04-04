@@ -13,8 +13,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Cargar configuraciones base PRIMERO
-require("core.options")  -- Importante: sin "lua/" en la ruta
+require("core.options")  
 require("core.keymaps")
 
 -- Cargar plugins
-require("lazy").setup("plugins")  -- Carga lua/plugins/init.lua
+require("lazy").setup("plugins")  
