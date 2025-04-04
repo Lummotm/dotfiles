@@ -17,7 +17,7 @@ local function setup_plugin_keymaps()
   -- como es el caso en :NvimTreeToggle y infimo más rendimiento entonces es mejor usar la carga con la API.
   -- Aunque es verdad que es el estandar actual de neovim
 
-  -- Telescope (no le veo sentido con el approach tan simple que necesito)
+  -- Telescope
   --local telescope_builtin = require("telescope.builtin")
   --keymap("n", "<Leader>ff", telescope_builtin.find_files, {})
   --keymap("n", "<Leader>fg", telescope_builtin.live_grep, {})
