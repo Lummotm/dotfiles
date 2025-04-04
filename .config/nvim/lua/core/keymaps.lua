@@ -1,4 +1,4 @@
--- lua/core/keymaps.lua
+-- lua/core/keymaps.luak
 local keymap = vim.keymap.set
 
 -- 1. Keymaps genéricos
@@ -17,10 +17,10 @@ local function setup_plugin_keymaps()
   -- como es el caso en :NvimTreeToggle y infimo más rendimiento entonces es mejor usar la carga con la API.
   -- Aunque es verdad que es el estandar actual de neovim
 
-  -- Telescope
-  --local telescope_builtin = require("telescope.builtin")
-  --keymap("n", "<Leader>ff", telescope_builtin.find_files, {})
-  --keymap("n", "<Leader>fg", telescope_builtin.live_grep, {})
+  local lspconfig = require("lspconfig")
+  keymap("n", "K", vim.lsp.buf.hover, {})
+  keymap("n", "gd", vim.lsp.buf.definition, {})
+  keymap({"n", "v"}, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
 end
 
 
