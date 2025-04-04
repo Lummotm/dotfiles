@@ -1,0 +1,11 @@
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.termguicolors = true
+vim.opt.cursorline = true
+vim.opt.tabstop = 2       -- Cantidad de espacios que un tab representa
+vim.opt.shiftwidth = 2    -- Cantidad de espacios para indentación automática
+vim.opt.softtabstop = 2   -- Cantidad de espacios al presionar Tab
+vim.opt.expandtab = true  -- Convierte tabs a espacios
+vim.opt.mouse = "" -- Desactivar mouse completamente
+vim.g.mapleader = " " -- Establece la tecla de leader como espacio
+vim.g.maplocalleader = " " 
