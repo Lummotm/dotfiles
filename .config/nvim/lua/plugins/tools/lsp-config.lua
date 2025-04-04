@@ -2,7 +2,6 @@
 -- que sabe como va el codigo y todo eso, sea capaz de tener influencia en
 -- los cambios que hacemos reportando errores, etc. 
 
-
 return {
   {
     "williamboman/mason.nvim",
@@ -33,6 +32,20 @@ return {
       lspconfig.lua_ls.setup({})
       lspconfig.matlab_ls.setup({})
       lspconfig.texlab.setup({})
+      -- Configuración global de diagnósticos
+      vim.diagnostic.config({
+        virtual_text = {
+          prefix = "● ", -- Puedes cambiar esto por '■', '▎', etc.
+          source = "if_many",
+          format = function(diagnostic)
+            return string.format("%s", diagnostic.message)
+          end,
+        },
+        signs = true,
+        underline = true,
+        update_in_insert = false,
+        severity_sort = true,
+      })
     end
-  },
+  }
 }

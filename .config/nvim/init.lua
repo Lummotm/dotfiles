@@ -13,8 +13,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Cargar configuraciones base PRIMERO
-require("core.options")  
+require("core.options")
 require("core.keymaps")
 
 -- Cargar plugins
-require("lazy").setup("plugins")  
+require("lazy").setup("plugins")
