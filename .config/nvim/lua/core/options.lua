@@ -7,17 +7,17 @@
 -- Visual Settings
 --------------------------------------------------------------------------------
 -- Line Numbers & Appearance
-vim.opt.number = true -- Show absolute line numbers
+vim.opt.number = true         -- Show absolute line numbers
 vim.opt.relativenumber = true -- Relative numbers for easier navigation
-vim.opt.cursorline = true -- Highlight current line
-vim.opt.termguicolors = true -- Enable 24-bit RGB color support
-vim.opt.showmode = false -- Hide mode (covered by statusline)
+vim.opt.cursorline = true     -- Highlight current line
+vim.opt.termguicolors = true  -- Enable 24-bit RGB color support
+vim.opt.showmode = false      -- Hide mode (covered by statusline)
 
 -- Whitespace & Indentation
-vim.opt.tabstop = 2 -- Number of spaces a TAB represents
-vim.opt.shiftwidth = 2 -- Spaces for auto-indentation
-vim.opt.softtabstop = 2 -- Spaces inserted when pressing TAB
-vim.opt.expandtab = true -- Convert tabs to spaces
+vim.opt.tabstop = 2        -- Number of spaces a TAB represents
+vim.opt.shiftwidth = 2     -- Spaces for auto-indentation
+vim.opt.softtabstop = 2    -- Spaces inserted when pressing TAB
+vim.opt.expandtab = true   -- Convert tabs to spaces
 vim.opt.breakindent = true -- Maintain indentation on wrapped lines
 
 --------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ vim.opt.breakindent = true -- Maintain indentation on wrapped lines
 --------------------------------------------------------------------------------
 -- File Handling
 vim.opt.undofile = true -- Persistent undo history
-vim.opt.confirm = true -- Confirm before unsaved changes
+vim.opt.confirm = true  -- Confirm before unsaved changes
 
 -- Timing & Responsiveness
 vim.opt.updatetime = 250 -- Faster updates (for plugins)
@@ -39,13 +39,15 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 -- Input & Navigation
 --------------------------------------------------------------------------------
 -- Mouse & Keybindings
-vim.opt.mouse = "" -- Disable mouse completely
-vim.g.mapleader = " " -- Set space as leader key
+vim.opt.mouse = ""         -- Disable mouse completely
+vim.g.mapleader = " "      -- Set space as leader key
 vim.g.maplocalleader = " " -- Local leader for buffer-specific mappings
 
 -- Clipboard Integration
 vim.schedule(function()
-	vim.opt.clipboard = "unnamedplus" -- System clipboard integration
+  vim.opt.clipboard = "unnamedplus"                  -- Usa el portapapeles del sistema
+  vim.keymap.set("n", "d", '"_d', { noremap = true }) -- Mapea `d` para no usar el registro, es decir no se guarda en el clipboard
+  vim.keymap.set("v", "d", '"_d', { noremap = true }) -- También en modo visual
 end)
 
 --[[

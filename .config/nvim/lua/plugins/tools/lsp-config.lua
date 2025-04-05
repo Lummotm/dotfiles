@@ -1,6 +1,5 @@
 -- LSP o Language Server Protocol es un servicio que permite que el compilador
 -- que sabe como va el codigo y todo eso, sea capaz de tener influencia en
--- los cambios que hacemos reportando errores, etc.
 
 return {
 	{
