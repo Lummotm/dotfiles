@@ -2,14 +2,15 @@
 local keymap = vim.keymap.set
 
 -- 1. Keymaps genéricos
-keymap("n", "<leader>w", ":w<CR>", { desc = "Save File" })
+keymap("n", "<leader>w", ":w<CR>", { desc = "Save file" })
+keymap("n", "<leader>q", ":q<CR>", { desc = "Exist File" }) -- no need for save and exit due to confirmation when exit
 
 -- 2. Keymaps de plugins que no requieran configuración importante
 keymap("n", "<C-n>", ":Neotree toggle left<CR>")
 keymap("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Search Files" })
-keymap("n", "<leader>fh", "<cmd>Telescope oldfiles<CR>" , { desc = "Search Recent Files" })
-keymap("n", "<leader>fr", "<cmd>Telescope frecency<CR>" , { desc = "Search by recency" })
-keymap("n", "<leader>fg", "<cmd>Telescope live_grep<CR>" , { desc = "Open Live Grep" })
+keymap("n", "<leader>fh", "<cmd>Telescope oldfiles<CR>", { desc = "Search Recent Files" })
+keymap("n", "<leader>fr", "<cmd>Telescope frecency<CR>", { desc = "Search by recency" })
+keymap("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", { desc = "Open Live Grep" })
 
 -- 3. Keymaps del LSP (nativos de Neovim)
 
