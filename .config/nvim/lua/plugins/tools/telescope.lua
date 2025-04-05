@@ -5,6 +5,8 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim", -- Obligatorio
 			"nvim-treesitter/nvim-treesitter", -- Opcional (mejora resaltado)
+      "nvim-telescope/telescope-live-grep-args.nvim",
+      "andrew-george/telescope-themes",
 		},
 		config = function()
 			local telescope = require("telescope")
@@ -14,6 +16,7 @@ return {
 					hidden = true, -- Incluye archivos ocultos (ej: .gitignore)
 				},
 			})
+			telescope.load_extension("themes")
 		end,
 	},
 	{
@@ -46,20 +49,6 @@ return {
 				},
 			})
 			require("telescope").load_extension("frecency")
-		end,
-	},
-	{
-		"nvim-telescope/telescope.nvim",
-		cmd = "Telescope",
-		lazy = true,
-		dependencies = {
-			"andrew-george/telescope-themes",
-			-- other dependencies
-		},
-		config = function()
-			-- load extension
-			local telescope = require("telescope")
-			telescope.load_extension("themes")
 		end,
 	},
 }
