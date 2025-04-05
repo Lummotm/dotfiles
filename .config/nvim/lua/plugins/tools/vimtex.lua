@@ -10,6 +10,13 @@ return {
 		vim.g.vimtex_compiler_latexmk = {
 			build_dir = "build", -- Directorio para archivos auxiliares
 			continuous = 1, -- Compilación continua (1 para activar)
+			options = {
+				"-verbose",
+				"-file-line-error",
+				"-synctex=1",
+				"-interaction=nonstopmode",
+				"-c", -- Esto limpia los archivos auxiliares después de compilar
+			},
 		}
 
 		-- Desactivar quickfix integrado (usaremos vimux)
@@ -17,15 +24,12 @@ return {
 
 		-- Viewer (opcional)
 		vim.g.vimtex_view_method = "zathura"
-
-		-- Atajo personalizado para compilar con vimux
-		vim.api.nvim_set_keymap("n", "<leader>ll", ":VimtexCompile<CR>", { noremap = true, silent = true })
 	end,
 	config = function()
 		-- Sobrescribir el comando :VimtexCompile para usar vimux
 		vim.cmd([[
     function! s:compile_with_vimux() abort
-    let l:cmd = 'latexmk -pdf -interaction=nonstopmode %'
+    let l:cmd = 'latexmk -pdf -c -interaction=nonstopmode %' " Agregado -c aquí también
     call VimuxRunCommand(l:cmd)
     endfunction
 
