@@ -37,6 +37,16 @@ return {
       })
       lspconfig.texlab.setup({
         capabilities = capabilities,
+        settings = {
+          texlab = {
+            diagnostics = {
+              ignoredPatterns = {
+                "Underfull",
+                "Overfull",
+              },
+            },
+          },
+        },
       })
       -- Configuración global de diagnósticos
       vim.diagnostic.config({
