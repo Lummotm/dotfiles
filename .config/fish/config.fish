@@ -11,8 +11,14 @@ abbr gp "git push -u origin main"
 alias ll="eza -l --git --icons --color=auto --group-directories-first --sort=extension"
 alias ls="eza --icons --color=auto --group-directories-first --sort=extension"
 alias hotspot="/home/davidn/Projects/Bash/hotspot.sh"
+alias clc="clear"
 
 set -gx MANPAGER 'nvim +Man!'
+
+
+function __auto_ls_after_cd --on-variable PWD
+    ls
+end
 
 # Starship Theme Initialization
 starship init fish | source
