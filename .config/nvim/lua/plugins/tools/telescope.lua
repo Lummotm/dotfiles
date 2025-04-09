@@ -5,18 +5,31 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim", -- Obligatorio
 			"nvim-treesitter/nvim-treesitter", -- Opcional (mejora resaltado)
-      "nvim-telescope/telescope-live-grep-args.nvim",
-      "andrew-george/telescope-themes",
+			"nvim-telescope/telescope-live-grep-args.nvim",
+			"andrew-george/telescope-themes",
+			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		},
 		config = function()
 			local telescope = require("telescope")
 			telescope.setup({
-				find_files = {
-					theme = "dropdown", -- Interfaz con menú desplegable
-					hidden = true, -- Incluye archivos ocultos (ej: .gitignore)
+				pickers = {
+					find_files = {
+						theme = "ivy",
+					},
+				},
+
+				extensions = {
+					fzf = {
+						fuzzy = true, -- false will only do exact matching
+						override_generic_sorter = true, -- override the generic sorter
+						override_file_sorter = true, -- override the file sorter
+						case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+						-- the default case_mode is "smart_case"
+					},
 				},
 			})
 			telescope.load_extension("themes")
+			telescope.load_extension("fzf")
 		end,
 	},
 	{
