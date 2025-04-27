@@ -12,6 +12,8 @@ alias ll="eza -l --git --icons --color=auto --group-directories-first --sort=ext
 alias ls="eza --icons --color=auto --group-directories-first --sort=extension"
 alias hotspot="/home/davidn/Projects/Bash/hotspot.sh"
 alias clc="clear"
+alias pc="python3 -i /home/davidn/Projects/Python/calc.py"
+alias a="z"
 
 set -gx MANPAGER 'nvim +Man!'
 
