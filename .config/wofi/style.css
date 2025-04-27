@@ -1,53 +1,53 @@
 * {
-  font-family: "JetBrainsMono Nerd Font", monospace;
+    font-family: "JetBrainsMono Nerd Font", monospace;
 }
 
 window {
-  background-color: #1a1b26;
-  border: none;
+    background-color: #1a1b26;
+    border: none;
 }
 
 #input {
-  margin: 5px;
-  border-radius: 0px;
-  border: none;
-  background-color: #24283b;
-  color: #c0caf5;
-  padding: 8px;
+    margin: 5px;
+    border-radius: 0px;
+    border: none;
+    background-color: #24283b;
+    color: #c0caf5;
+    padding: 8px;
 }
 
 #inner-box {
-  background-color: #1a1b26;
+    background-color: #1a1b26;
 }
 
 #outer-box {
-  margin: 2px;
-  padding: 10px;
-  background-color: #1a1b26;
+    margin: 2px;
+    padding: 10px;
+    background-color: #1a1b26;
 }
 
 #scroll {
-  margin: 5px;
+    margin: 5px;
 }
 
 #text {
-  padding: 4px;
-  color: #9299ba;
+    padding: 4px;
+    color: #9299ba;
 }
 
-#entry:nth-child(even) {
-  background-color: #24283b;
+#entry {
+    background-color: #1a1b26;
 }
 
 #entry:selected {
-  background-color: #3b4261;
+    background-color: #3b4261;
 }
 
 #text:selected {
-  color: #7aa2f7;
-  background: transparent;
+    color: #7aa2f7;
+    background: transparent;
 }
 
 #entry:hover {
-  background-color: #3b4261;
+    background-color: #3b4261;
 }
