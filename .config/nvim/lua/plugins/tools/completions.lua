@@ -59,8 +59,8 @@ return {
           { name = "nvim_lsp" },
           { name = "luasnip" },
         }, {
-          { name = "buffer" },
-        }),
+            { name = "buffer" },
+          }),
       })
 
       -- Configuración para la línea de comandos (se mantiene igual)

@@ -8,8 +8,8 @@ abbr vi nvim
 abbr gc "git commit -m"
 abbr gp "git push -u origin main"
 
-alias ll="eza -l --git --icons --color=auto --group-directories-first --sort=extension"
-alias ls="eza --icons --color=auto --group-directories-first --sort=extension"
+alias ll="eza -l --git --icons --color=auto --group-directories-first --sort=extension --sort=name"
+alias ls="eza --icons --color=auto --group-directories-first --sort=extension --sort=name"
 alias hotspot="/home/davidn/Projects/Bash/hotspot.sh"
 alias clc="clear"
 alias pc="python3 -i /home/davidn/Projects/Python/calc.py"

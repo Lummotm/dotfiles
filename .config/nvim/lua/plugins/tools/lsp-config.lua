@@ -18,7 +18,6 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = {
           "lua_ls",
-          "matlab_ls",
         },
       })
     end,
