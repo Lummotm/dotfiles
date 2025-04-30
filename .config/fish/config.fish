@@ -15,6 +15,7 @@ alias clc="clear"
 alias pc="python3 -i /home/davidn/Projects/Python/calc.py"
 alias a="z"
 
+
 set -gx MANPAGER 'nvim +Man!'
 
 function __auto_ls_after_cd --on-variable PWD

@@ -1,0 +1,21 @@
+
+# colors.tmux generado por pywal
+set -g @bg "{background}"
+set -g @fg "{foreground}"
+set -g @color0 "{color0}"
+set -g @color1 "{color1}"
+set -g @color2 "{color2}"
+set -g @color3 "{color3}"
+set -g @color4 "{color4}"
+set -g @color5 "{color5}"
+set -g @color6 "{color6}"
+set -g @color7 "{color7}"
+set -g @color8 "{color8}"
+set -g @color9 "{color9}"
+set -g @color10 "{color10}"
+set -g @color11 "{color11}"
+set -g @color12 "{color12}"
+set -g @color13 "{color13}"
+set -g @color14 "{color14}"
+set -g @color15 "{color15}"
+

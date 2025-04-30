@@ -1,779 +1,214 @@
-20:37:10 [info] [LOG SESSION] ---------- START ----------
-20:37:10 [info] [PluginFactory] loading plugins
-20:37:10 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libmpris.so
-20:37:10 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libsndioout.so
-20:37:10 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libnullout.so
-20:37:10 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libalsaout.so
-20:37:10 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libtaglibreader.so
-20:37:10 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libportaudioout.so
-20:37:10 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libpulseout.so
-20:37:10 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libgmedecoder.so
-20:37:10 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libserver.so
-20:37:10 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libopenmptdecoder.so
-20:37:10 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libsupereqdsp.so
-20:37:10 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libhttpdatastream.so
-20:37:10 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libffmpegdecoder.so
-20:37:10 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libstockencoders.so
-20:37:10 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libpipewireout.so
-20:37:10 [info] [PortAudioOut] Pa_Initialize() return code: 0
-20:37:10 [info] [PipeWireOut] shutdown started
-20:37:10 [info] [PipeWireOut] shutdown complete
-20:37:10 [warning] [PortAudioOut] Pa_AbortStream() return code: -9988
-20:37:10 [warning] [PortAudioOut] Pa_CloseStream() return code: -9988
-20:37:10 [info] [PortAudioOut] Pa_Terminate() return code: 0
-20:37:10 [info] [Indexer] indexer source -1303229654 running...
-20:37:10 [info] [Indexer] indexer source -1303229654 finished
-20:37:10 [info] [Indexer] indexer source 155697690 running...
-20:37:10 [info] [Indexer] indexer source 155697690 finished
-20:37:10 [info] [Indexer] scanning /home/davidn/Music/
-20:37:10 [info] [Indexer] scan completed successfully
-20:37:10 [info] [Indexer] cleanup 1/2
-20:37:10 [info] [Indexer] cleanup 2/2
-20:37:10 [info] [Indexer] optimizing
-20:37:10 [info] [LocalLibrary] query 'SearchTrackListQuery' enqueued
-20:37:10 [info] [Indexer] done!
-20:37:10 [info] [LocalLibrary] query 'SearchTrackListQuery' running
-20:37:10 [info] [LocalLibrary] query 'SearchTrackListQuery' finished with status=4
-20:37:10 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' enqueued
-20:37:10 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' running
-20:37:10 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' finished with status=4
-20:37:10 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-20:37:10 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-20:37:10 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-20:37:10 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:10 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:10 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:10 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:10 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:10 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:10 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:10 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:10 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:10 [info] [GaplessTransport] starting track at /home/davidn/Music/Shihoko Hirata - Heaven.mp3
-20:37:10 [info] [Player] new instance created
-20:37:10 [info] [GaplessTransport] stop
-20:37:10 [info] [Stream] opening /home/davidn/Music/Shihoko Hirata - Heaven.mp3
-20:37:10 [info] [LocalFileStream] opening file: /home/davidn/Music/Shihoko Hirata - Heaven.mp3
-20:37:10 [info] [ffmpegdecoder] parsing data stream...
-20:37:10 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-20:37:10 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-20:37:10 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-20:37:10 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-20:37:10 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-20:37:10 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-20:37:10 [info] [ffmpegdecoder] found audio stream!
-20:37:10 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
-20:37:10 [info] [Streams] found a decoder for /home/davidn/Music/Shihoko Hirata - Heaven.mp3
-20:37:10 [warning] [ffmpegdecoder] invalid packet detected, discarding.
-20:37:14 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-20:37:14 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-20:37:14 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-20:37:14 [info] [LocalLibrary] query 'SearchTrackListQuery' enqueued
-20:37:14 [info] [LocalLibrary] query 'SearchTrackListQuery' running
-20:37:14 [info] [LocalLibrary] query 'SearchTrackListQuery' finished with status=4
-20:37:14 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-20:37:14 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-20:37:14 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-20:37:15 [info] [LocalLibrary] query 'SearchTrackListQuery' enqueued
-20:37:15 [info] [LocalLibrary] query 'SearchTrackListQuery' running
-20:37:15 [info] [LocalLibrary] query 'SearchTrackListQuery' finished with status=4
-20:37:16 [info] [LocalLibrary] query 'SearchTrackListQuery' enqueued
-20:37:16 [info] [LocalLibrary] query 'SearchTrackListQuery' running
-20:37:16 [info] [LocalLibrary] query 'SearchTrackListQuery' finished with status=4
-20:37:16 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-20:37:16 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-20:37:16 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-20:37:18 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:18 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:18 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:18 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:18 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:18 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:18 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:18 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:18 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:18 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=5
-20:37:18 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:18 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=5
-20:37:18 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:18 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:18 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:18 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:18 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:18 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:20 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:20 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:20 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:20 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:20 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:20 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:20 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:20 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:20 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:20 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:20 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:20 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:20 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:20 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:20 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:20 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:20 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:21 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:23 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:23 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:23 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:23 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:23 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:23 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:23 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:23 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:23 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:24 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:24 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:24 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:24 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:24 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:24 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:24 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:24 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:24 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:26 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:26 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:26 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:26 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:26 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:26 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:26 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:26 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:26 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:27 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:27 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:27 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:27 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:27 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:27 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:27 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:27 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:27 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:28 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:28 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:28 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:28 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:28 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:28 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:28 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:28 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:28 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:29 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:29 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:29 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:37:29 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:29 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:29 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:29 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:29 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:37:29 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:37:31 [info] [LocalLibrary] query 'SearchTrackListQuery' enqueued
-20:37:31 [info] [LocalLibrary] query 'SearchTrackListQuery' running
-20:37:31 [info] [LocalLibrary] query 'SearchTrackListQuery' finished with status=4
-20:37:31 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-20:37:31 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-20:37:31 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-20:37:33 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
-20:37:33 [info] [LocalLibrary] query 'TrackMetadataQuery' running
-20:37:33 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
-20:37:33 [info] [GaplessTransport] starting track at /home/davidn/Music/Never Coming Back.mp3
-20:37:33 [info] [Player] new instance created
-20:37:33 [info] [Stream] opening /home/davidn/Music/Never Coming Back.mp3
-20:37:33 [info] [GaplessTransport] stop
-20:37:33 [info] [LocalFileStream] opening file: /home/davidn/Music/Never Coming Back.mp3
-20:37:33 [info] [ffmpegdecoder] parsing data stream...
-20:37:33 [info] [ffmpegdecoder] found audio stream!
-20:37:33 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
-20:37:33 [info] [Streams] found a decoder for /home/davidn/Music/Never Coming Back.mp3
-20:37:33 [warning] [ffmpegdecoder] invalid packet detected, discarding.
-20:37:33 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
-20:37:33 [info] [LocalLibrary] query 'TrackMetadataQuery' running
-20:37:33 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
-20:37:33 [info] [Player] new instance created
-20:37:33 [info] [Stream] opening /home/davidn/Music/.debris/2025-03-29/The Songstress Aria (Instrumental).mp3
-20:37:33 [info] [LocalFileStream] opening file: /home/davidn/Music/.debris/2025-03-29/The Songstress Aria (Instrumental).mp3
-20:37:33 [info] [ffmpegdecoder] parsing data stream...
-20:37:33 [info] [ffmpegdecoder] found audio stream!
-20:37:33 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
-20:37:33 [info] [Streams] found a decoder for /home/davidn/Music/.debris/2025-03-29/The Songstress Aria (Instrumental).mp3
-20:37:33 [warning] [ffmpegdecoder] invalid packet detected, discarding.
-20:37:33 [info] [LocalLibrary] query 'SearchTrackListQuery' enqueued
-20:37:33 [info] [LocalLibrary] query 'SearchTrackListQuery' running
-20:37:33 [info] [LocalLibrary] query 'SearchTrackListQuery' finished with status=4
-20:37:34 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-20:37:34 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-20:37:34 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-20:37:35 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
-20:37:35 [info] [LocalLibrary] query 'TrackMetadataQuery' running
-20:37:35 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
-20:37:35 [info] [GaplessTransport] starting track at /home/davidn/Music/Theme of Cid Kagenou.mp3
-20:37:35 [info] [Player] new instance created
-20:37:35 [info] [GaplessTransport] stop
-20:37:35 [info] [Stream] opening /home/davidn/Music/Theme of Cid Kagenou.mp3
-20:37:35 [info] [LocalFileStream] opening file: /home/davidn/Music/Theme of Cid Kagenou.mp3
-20:37:35 [info] [ffmpegdecoder] parsing data stream...
-20:37:35 [info] [ffmpegdecoder] found audio stream!
-20:37:35 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
-20:37:35 [info] [Streams] found a decoder for /home/davidn/Music/Theme of Cid Kagenou.mp3
-20:37:35 [warning] [ffmpegdecoder] invalid packet detected, discarding.
-20:37:55 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' enqueued
-20:37:55 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' running
-20:37:55 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' finished with status=4
-20:38:39 [info] [GaplessTransport] pause
-20:38:41 [info] [LocalLibrary] query 'SearchTrackListQuery' enqueued
-20:38:41 [info] [LocalLibrary] query 'SearchTrackListQuery' running
-20:38:41 [info] [LocalLibrary] query 'SearchTrackListQuery' finished with status=4
-20:38:41 [info] [LocalLibrary] query 'SearchTrackListQuery' enqueued
-20:38:41 [info] [LocalLibrary] query 'SearchTrackListQuery' running
-20:38:41 [info] [LocalLibrary] query 'SearchTrackListQuery' finished with status=4
-20:38:41 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-20:38:41 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-20:38:41 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-20:38:44 [info] [LocalLibrary] query 'SearchTrackListQuery' enqueued
-20:38:44 [info] [LocalLibrary] query 'SearchTrackListQuery' running
-20:38:44 [info] [LocalLibrary] query 'SearchTrackListQuery' finished with status=4
-20:38:47 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-20:38:47 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-20:38:47 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-20:38:48 [info] [LocalLibrary] query 'SearchTrackListQuery' enqueued
-20:38:48 [info] [LocalLibrary] query 'SearchTrackListQuery' running
-20:38:48 [info] [LocalLibrary] query 'SearchTrackListQuery' finished with status=4
-20:38:48 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-20:38:48 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-20:38:48 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-20:38:57 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-20:38:57 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-20:38:57 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-20:39:03 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:39:03 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:39:03 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:39:03 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:39:03 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:39:03 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:39:03 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:39:03 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:39:03 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:39:03 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=5
-20:39:03 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:39:03 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=5
-20:39:03 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:39:03 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:39:03 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:39:03 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:39:03 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:39:03 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:39:08 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:39:08 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:39:08 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:39:08 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:39:08 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:39:08 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:39:08 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:39:08 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:39:08 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:39:10 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-20:39:10 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-20:39:10 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-20:39:10 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-20:39:10 [info] [LocalLibrary] query 'CategoryListQuery' running
-20:39:10 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-20:39:10 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-20:39:10 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-20:39:10 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-20:39:10 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-20:39:10 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-20:39:10 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-20:39:10 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-20:39:10 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-20:39:10 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-20:39:11 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-20:39:11 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-20:39:11 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-20:39:11 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-20:39:11 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-20:39:11 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-20:39:11 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-20:39:11 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-20:39:11 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-20:39:11 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-20:39:11 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-20:39:11 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-20:39:12 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
-20:39:12 [info] [LocalLibrary] query 'TrackMetadataQuery' running
-20:39:12 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
-20:39:12 [info] [GaplessTransport] starting track at /home/davidn/Music/As The World Caves In - Matt Maltese.m4a
-20:39:12 [info] [Player] new instance created
-20:39:12 [info] [GaplessTransport] stop
-20:39:12 [info] [Stream] opening /home/davidn/Music/As The World Caves In - Matt Maltese.m4a
-20:39:12 [info] [LocalFileStream] opening file: /home/davidn/Music/As The World Caves In - Matt Maltese.m4a
-20:39:12 [info] [ffmpegdecoder] parsing data stream...
-20:39:12 [info] [ffmpegdecoder] found audio stream!
-20:39:12 [info] [ffmpegdecoder] resolved codec: AAC (Advanced Audio Coding)
-20:39:12 [info] [Streams] found a decoder for /home/davidn/Music/As The World Caves In - Matt Maltese.m4a
-20:39:12 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
-20:39:12 [info] [LocalLibrary] query 'TrackMetadataQuery' running
-20:39:12 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
-20:39:12 [info] [Player] new instance created
-20:39:12 [info] [Stream] opening /home/davidn/Music/Creep - Radiohead.mp3
-20:39:12 [info] [LocalFileStream] opening file: /home/davidn/Music/Creep - Radiohead.mp3
-20:39:12 [info] [ffmpegdecoder] parsing data stream...
-20:39:12 [info] [ffmpegdecoder] found audio stream!
-20:39:12 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
-20:39:12 [info] [Streams] found a decoder for /home/davidn/Music/Creep - Radiohead.mp3
-20:39:12 [warning] [ffmpegdecoder] invalid packet detected, discarding.
-20:39:12 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-20:39:12 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-20:39:12 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-20:39:12 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-20:39:12 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-20:39:12 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-20:39:13 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-20:39:13 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-20:39:13 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-20:39:13 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-20:39:13 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-20:39:13 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-20:39:16 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
-20:39:16 [info] [LocalLibrary] query 'TrackMetadataQuery' running
-20:39:16 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
-20:39:16 [info] [GaplessTransport] starting track at /home/davidn/Music/A Letter to Starman - Arthur Black LIVE on stage an original song.m4a
-20:39:16 [info] [Player] new instance created
-20:39:16 [info] [Stream] opening /home/davidn/Music/A Letter to Starman - Arthur Black LIVE on stage an original song.m4a
-20:39:16 [info] [GaplessTransport] stop
-20:39:16 [info] [LocalFileStream] opening file: /home/davidn/Music/A Letter to Starman - Arthur Black LIVE on stage an original song.m4a
-20:39:16 [info] [ffmpegdecoder] parsing data stream...
-20:39:16 [info] [ffmpegdecoder] found audio stream!
-20:39:16 [info] [ffmpegdecoder] resolved codec: AAC (Advanced Audio Coding)
-20:39:16 [info] [Streams] found a decoder for /home/davidn/Music/A Letter to Starman - Arthur Black LIVE on stage an original song.m4a
-20:39:16 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
-20:39:16 [info] [LocalLibrary] query 'TrackMetadataQuery' running
-20:39:16 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
-20:39:16 [info] [Player] new instance created
-20:39:16 [info] [Stream] opening /home/davidn/Music/No surprises - Radiohead.m4a
-20:39:16 [info] [LocalFileStream] opening file: /home/davidn/Music/No surprises - Radiohead.m4a
-20:39:16 [info] [ffmpegdecoder] parsing data stream...
-20:39:16 [info] [ffmpegdecoder] found audio stream!
-20:39:16 [info] [ffmpegdecoder] resolved codec: AAC (Advanced Audio Coding)
-20:39:16 [info] [Streams] found a decoder for /home/davidn/Music/No surprises - Radiohead.m4a
-20:39:36 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' enqueued
-20:39:36 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' running
-20:39:36 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' finished with status=4
-20:39:37 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-20:39:37 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-20:39:37 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-20:39:38 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-20:39:38 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-20:39:38 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-20:39:48 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-20:39:48 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-20:39:48 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-20:39:48 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-20:39:48 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-20:39:48 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-20:43:51 [info] [ffmpegdecoder] finished decoding.
-20:43:53 [info] [GaplessTransport] stop
-20:43:54 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
-20:43:54 [info] [LocalLibrary] query 'TrackMetadataQuery' running
-20:43:54 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
-20:43:54 [info] [Player] new instance created
-20:43:54 [info] [Stream] opening /home/davidn/Music/Adrienne Lenker - Anything cover.mp3
-20:43:54 [info] [LocalFileStream] opening file: /home/davidn/Music/Adrienne Lenker - Anything cover.mp3
-20:43:54 [info] [ffmpegdecoder] parsing data stream...
-20:43:54 [info] [ffmpegdecoder] found audio stream!
-20:43:54 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
-20:43:54 [info] [Streams] found a decoder for /home/davidn/Music/Adrienne Lenker - Anything cover.mp3
-20:43:54 [warning] [ffmpegdecoder] invalid packet detected, discarding.
-20:44:14 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' enqueued
-20:44:14 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' running
-20:44:14 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' finished with status=4
-20:47:28 [info] [ffmpegdecoder] finished decoding.
-20:47:30 [info] [GaplessTransport] stop
-20:47:31 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
-20:47:31 [info] [LocalLibrary] query 'TrackMetadataQuery' running
-20:47:31 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
-20:47:31 [info] [Player] new instance created
-20:47:31 [info] [Stream] opening /home/davidn/Music/Aintree - Arthur Black.m4a
-20:47:31 [info] [LocalFileStream] opening file: /home/davidn/Music/Aintree - Arthur Black.m4a
-20:47:31 [info] [ffmpegdecoder] parsing data stream...
-20:47:31 [info] [ffmpegdecoder] found audio stream!
-20:47:31 [info] [ffmpegdecoder] resolved codec: AAC (Advanced Audio Coding)
-20:47:31 [info] [Streams] found a decoder for /home/davidn/Music/Aintree - Arthur Black.m4a
-20:47:51 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' enqueued
-20:47:51 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' running
-20:47:51 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' finished with status=4
-20:50:40 [info] [ffmpegdecoder] finished decoding.
-20:50:42 [info] [GaplessTransport] stop
-20:50:42 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
-20:50:42 [info] [LocalLibrary] query 'TrackMetadataQuery' running
-20:50:42 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
-20:50:42 [info] [Player] new instance created
-20:50:42 [info] [Stream] opening /home/davidn/Music/Baby Teeth - Arthur Black.m4a
-20:50:42 [info] [LocalFileStream] opening file: /home/davidn/Music/Baby Teeth - Arthur Black.m4a
-20:50:42 [info] [ffmpegdecoder] parsing data stream...
-20:50:42 [info] [ffmpegdecoder] found audio stream!
-20:50:42 [info] [ffmpegdecoder] resolved codec: AAC (Advanced Audio Coding)
-20:50:42 [info] [Streams] found a decoder for /home/davidn/Music/Baby Teeth - Arthur Black.m4a
-20:51:02 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' enqueued
-20:51:02 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' running
-20:51:02 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' finished with status=4
-20:56:59 [info] [GaplessTransport] starting track at /home/davidn/Music/Baby Teeth - Arthur Black.m4a
-20:56:59 [info] [Player] new instance created
-20:56:59 [info] [GaplessTransport] stop
-20:56:59 [info] [Stream] opening /home/davidn/Music/Baby Teeth - Arthur Black.m4a
-20:56:59 [info] [LocalFileStream] opening file: /home/davidn/Music/Baby Teeth - Arthur Black.m4a
-20:56:59 [info] [ffmpegdecoder] parsing data stream...
-20:56:59 [info] [ffmpegdecoder] found audio stream!
-20:56:59 [info] [ffmpegdecoder] resolved codec: AAC (Advanced Audio Coding)
-20:56:59 [info] [Streams] found a decoder for /home/davidn/Music/Baby Teeth - Arthur Black.m4a
-20:56:59 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
-20:56:59 [info] [LocalLibrary] query 'TrackMetadataQuery' running
-20:56:59 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
-20:56:59 [info] [Player] new instance created
-20:56:59 [info] [Stream] opening /home/davidn/Music/Patient 58 - Arthur Black (official audio).mp3
-20:56:59 [info] [LocalFileStream] opening file: /home/davidn/Music/Patient 58 - Arthur Black (official audio).mp3
-20:56:59 [info] [ffmpegdecoder] parsing data stream...
-20:56:59 [info] [ffmpegdecoder] found audio stream!
-20:56:59 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
-20:56:59 [info] [Streams] found a decoder for /home/davidn/Music/Patient 58 - Arthur Black (official audio).mp3
-20:56:59 [warning] [ffmpegdecoder] invalid packet detected, discarding.
-20:57:19 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' enqueued
-20:57:19 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' running
-20:57:19 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' finished with status=4
-21:00:18 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
-21:00:18 [info] [LocalLibrary] query 'TrackMetadataQuery' running
-21:00:18 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
-21:00:18 [info] [GaplessTransport] starting track at /home/davidn/Music/Porcelain Waist - Acoustic version.mp3
-21:00:18 [info] [Player] new instance created
-21:00:18 [info] [Stream] opening /home/davidn/Music/Porcelain Waist - Acoustic version.mp3
-21:00:18 [info] [GaplessTransport] stop
-21:00:18 [info] [LocalFileStream] opening file: /home/davidn/Music/Porcelain Waist - Acoustic version.mp3
-21:00:18 [info] [ffmpegdecoder] parsing data stream...
-21:00:18 [info] [ffmpegdecoder] found audio stream!
-21:00:18 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
-21:00:18 [info] [Streams] found a decoder for /home/davidn/Music/Porcelain Waist - Acoustic version.mp3
-21:00:18 [warning] [ffmpegdecoder] invalid packet detected, discarding.
-21:00:18 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
-21:00:18 [info] [LocalLibrary] query 'TrackMetadataQuery' running
-21:00:18 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
-21:00:18 [info] [Player] new instance created
-21:00:18 [info] [Stream] opening /home/davidn/Music/The Glossary of Podiatry - Arthur Black (official audio).mp3
-21:00:18 [info] [LocalFileStream] opening file: /home/davidn/Music/The Glossary of Podiatry - Arthur Black (official audio).mp3
-21:00:18 [info] [ffmpegdecoder] parsing data stream...
-21:00:18 [info] [ffmpegdecoder] found audio stream!
-21:00:18 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
-21:00:18 [info] [Streams] found a decoder for /home/davidn/Music/The Glossary of Podiatry - Arthur Black (official audio).mp3
-21:00:18 [warning] [ffmpegdecoder] invalid packet detected, discarding.
-21:00:38 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' enqueued
-21:00:38 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' running
-21:00:38 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' finished with status=4
-21:02:20 [info] [GaplessTransport] pause
-21:02:21 [info] [GaplessTransport] resume
-21:02:22 [info] [GaplessTransport] pause
-21:02:22 [info] [GaplessTransport] resume
-21:02:26 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:26 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:26 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:26 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:26 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:26 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:26 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:26 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:26 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:26 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:26 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:26 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:27 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:27 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:27 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:27 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:27 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:27 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:27 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:27 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:27 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:27 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:27 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:27 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:27 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:27 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:27 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:27 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:27 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:27 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:27 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:27 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:27 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:27 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:27 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:27 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:27 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:27 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:27 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:27 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:27 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:27 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:27 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:27 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:27 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:27 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:27 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:27 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:28 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:28 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:28 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:28 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:28 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:28 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:28 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:28 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:28 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:28 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:28 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:28 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:28 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:28 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:28 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:28 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:28 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:28 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:28 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:28 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:28 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:28 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:28 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:28 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:28 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:28 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:28 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:28 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:28 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:28 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:28 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:28 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:28 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:29 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:29 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:29 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:29 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:29 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:29 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:29 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:29 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:29 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:29 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:29 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:29 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:29 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:29 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:29 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:29 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:29 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:29 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:30 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:30 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:30 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:30 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:30 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:30 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:30 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:30 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:30 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:30 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:30 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:30 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:30 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:30 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:30 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:31 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:31 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:31 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:31 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:31 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:31 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:31 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:31 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:31 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:31 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:31 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:31 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:31 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:31 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:31 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:32 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:32 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:32 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:32 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:32 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:32 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:32 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:32 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:32 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:32 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:32 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:32 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:32 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:32 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:32 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:32 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:32 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:32 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:32 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:32 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:32 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:32 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:32 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:32 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:32 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:32 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:32 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:32 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:32 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:32 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:32 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:32 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:32 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:33 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:33 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:33 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:33 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:33 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:33 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:33 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:33 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:33 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:33 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:33 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:33 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:33 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:02:33 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:02:33 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:02:34 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:02:34 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:02:34 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:02:34 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
-21:02:34 [info] [LocalLibrary] query 'TrackMetadataQuery' running
-21:02:34 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
-21:02:34 [info] [GaplessTransport] starting track at /home/davidn/Music/bbno$ - i see london i see france.mp3
-21:02:34 [info] [Player] new instance created
-21:02:34 [info] [GaplessTransport] stop
-21:02:34 [info] [Stream] opening /home/davidn/Music/bbno$ - i see london i see france.mp3
-21:02:34 [info] [LocalFileStream] opening file: /home/davidn/Music/bbno$ - i see london i see france.mp3
-21:02:34 [info] [ffmpegdecoder] parsing data stream...
-21:02:34 [info] [ffmpegdecoder] found audio stream!
-21:02:34 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
-21:02:34 [info] [Streams] found a decoder for /home/davidn/Music/bbno$ - i see london i see france.mp3
-21:02:34 [warning] [ffmpegdecoder] invalid packet detected, discarding.
-21:02:54 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' enqueued
-21:02:54 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' running
-21:02:54 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' finished with status=4
-21:05:05 [info] [ffmpegdecoder] finished decoding.
-21:05:07 [info] [GaplessTransport] stop
-21:06:57 [info] [LocalLibrary] query 'SearchTrackListQuery' enqueued
-21:06:57 [info] [LocalLibrary] query 'SearchTrackListQuery' running
-21:06:57 [info] [LocalLibrary] query 'SearchTrackListQuery' finished with status=4
-21:06:57 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:06:57 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:06:57 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:07:01 [info] [GaplessTransport] starting track at /home/davidn/Music/Never Coming Back.mp3
-21:07:01 [info] [Player] new instance created
-21:07:01 [info] [GaplessTransport] stop
-21:07:01 [info] [Stream] opening /home/davidn/Music/Never Coming Back.mp3
-21:07:01 [info] [LocalFileStream] opening file: /home/davidn/Music/Never Coming Back.mp3
-21:07:01 [info] [ffmpegdecoder] parsing data stream...
-21:07:01 [info] [ffmpegdecoder] found audio stream!
-21:07:01 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
-21:07:01 [info] [Streams] found a decoder for /home/davidn/Music/Never Coming Back.mp3
-21:07:01 [warning] [ffmpegdecoder] invalid packet detected, discarding.
-21:07:01 [info] [Player] new instance created
-21:07:01 [info] [Stream] opening /home/davidn/Music/.debris/2025-03-29/The Songstress Aria (Instrumental).mp3
-21:07:01 [info] [LocalFileStream] opening file: /home/davidn/Music/.debris/2025-03-29/The Songstress Aria (Instrumental).mp3
-21:07:01 [info] [ffmpegdecoder] parsing data stream...
-21:07:01 [info] [ffmpegdecoder] found audio stream!
-21:07:01 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
-21:07:01 [info] [Streams] found a decoder for /home/davidn/Music/.debris/2025-03-29/The Songstress Aria (Instrumental).mp3
-21:07:01 [warning] [ffmpegdecoder] invalid packet detected, discarding.
-21:07:01 [info] [LocalLibrary] query 'SearchTrackListQuery' enqueued
-21:07:01 [info] [LocalLibrary] query 'SearchTrackListQuery' running
-21:07:01 [info] [LocalLibrary] query 'SearchTrackListQuery' finished with status=4
-21:07:02 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-21:07:02 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-21:07:02 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-21:07:02 [info] [LocalLibrary] query 'CategoryListQuery' running
-21:07:02 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-21:07:02 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-21:07:02 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-21:07:02 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-21:07:02 [info] [LocalLibrary] query 'CategoryListQuery' running
-21:07:02 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=5
-21:07:02 [info] [LocalLibrary] query 'CategoryListQuery' running
-21:07:02 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=5
-21:07:02 [info] [LocalLibrary] query 'CategoryListQuery' running
-21:07:02 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-21:07:02 [info] [LocalLibrary] query 'CategoryListQuery' running
-21:07:02 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-21:07:02 [info] [LocalLibrary] query 'CategoryListQuery' running
-21:07:02 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-21:07:04 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-21:07:04 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-21:07:04 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-21:07:04 [info] [LocalLibrary] query 'CategoryListQuery' running
-21:07:04 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-21:07:04 [info] [LocalLibrary] query 'CategoryListQuery' running
-21:07:04 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-21:07:04 [info] [LocalLibrary] query 'CategoryListQuery' running
-21:07:04 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-21:07:05 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
-21:07:05 [info] [LocalLibrary] query 'CategoryListQuery' running
-21:07:05 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
-21:07:05 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:07:05 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:07:05 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
-21:07:05 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:07:05 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
-21:07:05 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
-21:07:05 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
-21:07:05 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
-21:07:05 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
-21:07:05 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
-21:07:05 [info] [LocalLibrary] query 'TrackMetadataQuery' running
-21:07:05 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
-21:07:05 [info] [GaplessTransport] starting track at /home/davidn/Music/Arnon - Te Molla (2019 Version).mp3
-21:07:05 [info] [Player] new instance created
-21:07:05 [info] [GaplessTransport] stop
-21:07:05 [info] [Stream] opening /home/davidn/Music/Arnon - Te Molla (2019 Version).mp3
-21:07:05 [info] [LocalFileStream] opening file: /home/davidn/Music/Arnon - Te Molla (2019 Version).mp3
-21:07:05 [info] [ffmpegdecoder] parsing data stream...
-21:07:05 [info] [ffmpegdecoder] found audio stream!
-21:07:05 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
-21:07:05 [info] [Streams] found a decoder for /home/davidn/Music/Arnon - Te Molla (2019 Version).mp3
-21:07:05 [warning] [ffmpegdecoder] invalid packet detected, discarding.
-21:07:26 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' enqueued
-21:07:26 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' running
-21:07:26 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' finished with status=4
-21:10:03 [info] [ffmpegdecoder] finished decoding.
-21:10:05 [info] [GaplessTransport] stop
-21:15:33 [info] [GaplessTransport] starting track at /home/davidn/Music/Arnon - Te Molla (2019 Version).mp3
-21:15:33 [info] [Player] new instance created
-21:15:33 [info] [GaplessTransport] stop
-21:15:33 [info] [Stream] opening /home/davidn/Music/Arnon - Te Molla (2019 Version).mp3
-21:15:33 [info] [LocalFileStream] opening file: /home/davidn/Music/Arnon - Te Molla (2019 Version).mp3
-21:15:33 [info] [ffmpegdecoder] parsing data stream...
-21:15:33 [info] [ffmpegdecoder] found audio stream!
-21:15:33 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
-21:15:33 [info] [Streams] found a decoder for /home/davidn/Music/Arnon - Te Molla (2019 Version).mp3
-21:15:33 [warning] [ffmpegdecoder] invalid packet detected, discarding.
-21:15:54 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' enqueued
-21:15:54 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' running
-21:15:54 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' finished with status=4
-21:18:31 [info] [ffmpegdecoder] finished decoding.
-21:18:33 [info] [GaplessTransport] stop
-22:19:38 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' enqueued
-22:19:38 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' running
-22:19:38 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' finished with status=4
-22:19:38 [info] [GaplessTransport] stop
+21:17:25 [info] [LOG SESSION] ---------- START ----------
+21:17:25 [info] [PluginFactory] loading plugins
+21:17:25 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libgmedecoder.so
+21:17:25 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libpulseout.so
+21:17:25 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libmpris.so
+21:17:25 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libopenmptdecoder.so
+21:17:25 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libffmpegdecoder.so
+21:17:25 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libnullout.so
+21:17:25 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libsndioout.so
+21:17:25 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libsupereqdsp.so
+21:17:25 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libtaglibreader.so
+21:17:25 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libserver.so
+21:17:25 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libalsaout.so
+21:17:25 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libhttpdatastream.so
+21:17:25 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libstockencoders.so
+21:17:25 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libportaudioout.so
+21:17:25 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libpipewireout.so
+21:17:25 [info] [PortAudioOut] Pa_Initialize() return code: 0
+21:17:25 [info] [PipeWireOut] shutdown started
+21:17:25 [info] [PipeWireOut] shutdown complete
+21:17:25 [warning] [PortAudioOut] Pa_AbortStream() return code: -9988
+21:17:25 [warning] [PortAudioOut] Pa_CloseStream() return code: -9988
+21:17:25 [info] [PortAudioOut] Pa_Terminate() return code: 0
+21:17:25 [info] [Indexer] indexer source -1303229654 running...
+21:17:25 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
+21:17:25 [info] [LocalLibrary] query 'CategoryListQuery' running
+21:17:25 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
+21:17:25 [info] [Indexer] indexer source -1303229654 finished
+21:17:25 [info] [Indexer] indexer source 155697690 running...
+21:17:25 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
+21:17:25 [info] [LocalLibrary] query 'CategoryListQuery' running
+21:17:25 [info] [Indexer] indexer source 155697690 finished
+21:17:25 [info] [Indexer] scanning /home/davidn/Music/
+21:17:25 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
+21:17:25 [info] [Indexer] scan completed successfully
+21:17:25 [info] [Indexer] cleanup 1/2
+21:17:25 [info] [Indexer] cleanup 2/2
+21:17:25 [info] [Indexer] optimizing
+21:17:25 [info] [LocalLibrary] query 'SearchTrackListQuery' enqueued
+21:17:25 [info] [Indexer] done!
+21:17:25 [info] [LocalLibrary] query 'SearchTrackListQuery' running
+21:17:25 [info] [LocalLibrary] query 'SearchTrackListQuery' finished with status=4
+21:17:25 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' enqueued
+21:17:25 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' running
+21:17:25 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' finished with status=4
+21:17:25 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
+21:17:25 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
+21:17:25 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
+21:17:25 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
+21:17:25 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
+21:17:25 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
+21:17:25 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
+21:17:25 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
+21:17:25 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
+21:17:25 [info] [LocalLibrary] query 'CategoryListQuery' running
+21:17:25 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=5
+21:17:25 [info] [LocalLibrary] query 'CategoryListQuery' running
+21:17:25 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=5
+21:17:25 [info] [LocalLibrary] query 'CategoryListQuery' running
+21:17:25 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
+21:17:25 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
+21:17:25 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
+21:17:25 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
+21:17:25 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
+21:17:25 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
+21:17:25 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
+21:17:25 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
+21:17:25 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
+21:17:25 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
+21:17:28 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
+21:17:28 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
+21:17:28 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
+21:17:28 [info] [LocalLibrary] query 'SearchTrackListQuery' enqueued
+21:17:28 [info] [LocalLibrary] query 'SearchTrackListQuery' running
+21:17:28 [info] [LocalLibrary] query 'SearchTrackListQuery' finished with status=4
+21:17:28 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
+21:17:28 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
+21:17:28 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
+21:17:28 [info] [LocalLibrary] query 'SearchTrackListQuery' enqueued
+21:17:28 [info] [LocalLibrary] query 'SearchTrackListQuery' running
+21:17:28 [info] [LocalLibrary] query 'SearchTrackListQuery' finished with status=4
+21:17:28 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
+21:17:28 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
+21:17:28 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
+21:17:29 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
+21:17:29 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
+21:17:29 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
+21:17:29 [info] [LocalLibrary] query 'CategoryListQuery' running
+21:17:29 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
+21:17:29 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
+21:17:29 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
+21:17:29 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
+21:17:29 [info] [LocalLibrary] query 'CategoryListQuery' running
+21:17:29 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=5
+21:17:29 [info] [LocalLibrary] query 'CategoryListQuery' running
+21:17:29 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=5
+21:17:29 [info] [LocalLibrary] query 'CategoryListQuery' running
+21:17:29 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
+21:17:29 [info] [LocalLibrary] query 'CategoryListQuery' running
+21:17:29 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
+21:17:29 [info] [LocalLibrary] query 'CategoryListQuery' running
+21:17:29 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
+21:17:32 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
+21:17:32 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
+21:17:32 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
+21:17:32 [info] [LocalLibrary] query 'CategoryListQuery' running
+21:17:32 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
+21:17:32 [info] [LocalLibrary] query 'CategoryListQuery' running
+21:17:32 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
+21:17:32 [info] [LocalLibrary] query 'CategoryListQuery' running
+21:17:32 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
+21:17:33 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
+21:17:33 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
+21:17:33 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
+21:17:33 [info] [LocalLibrary] query 'CategoryListQuery' running
+21:17:33 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
+21:17:33 [info] [LocalLibrary] query 'CategoryListQuery' running
+21:17:33 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
+21:17:33 [info] [LocalLibrary] query 'CategoryListQuery' running
+21:17:33 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
+21:17:34 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
+21:17:34 [info] [LocalLibrary] query 'CategoryListQuery' running
+21:17:34 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
+21:17:34 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
+21:17:34 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
+21:17:34 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
+21:17:34 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
+21:17:34 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
+21:17:34 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
+21:17:34 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
+21:17:34 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
+21:17:34 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
+21:17:35 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
+21:17:35 [info] [LocalLibrary] query 'TrackMetadataQuery' running
+21:17:35 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
+21:17:35 [info] [GaplessTransport] starting track at /home/davidn/Music/The Neighbourhood - Softcore.mp3
+21:17:35 [info] [Player] new instance created
+21:17:35 [info] [Stream] opening /home/davidn/Music/The Neighbourhood - Softcore.mp3
+21:17:35 [info] [GaplessTransport] stop
+21:17:35 [info] [LocalFileStream] opening file: /home/davidn/Music/The Neighbourhood - Softcore.mp3
+21:17:35 [info] [ffmpegdecoder] parsing data stream...
+21:17:35 [info] [ffmpegdecoder] found audio stream!
+21:17:35 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+21:17:35 [info] [Streams] found a decoder for /home/davidn/Music/The Neighbourhood - Softcore.mp3
+21:17:35 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+21:17:35 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
+21:17:35 [info] [LocalLibrary] query 'TrackMetadataQuery' running
+21:17:35 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
+21:17:35 [info] [Player] new instance created
+21:17:35 [info] [Stream] opening /home/davidn/Music/The Neighbourhood - Sweater Weather.mp3
+21:17:35 [info] [LocalFileStream] opening file: /home/davidn/Music/The Neighbourhood - Sweater Weather.mp3
+21:17:35 [info] [ffmpegdecoder] parsing data stream...
+21:17:35 [info] [ffmpegdecoder] found audio stream!
+21:17:35 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+21:17:35 [info] [Streams] found a decoder for /home/davidn/Music/The Neighbourhood - Sweater Weather.mp3
+21:17:35 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+21:17:55 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' enqueued
+21:17:55 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' running
+21:17:55 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' finished with status=4
+21:20:59 [info] [ffmpegdecoder] finished decoding.
+21:21:01 [info] [GaplessTransport] stop
+21:21:01 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
+21:21:01 [info] [LocalLibrary] query 'TrackMetadataQuery' running
+21:21:01 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
+21:21:01 [info] [Player] new instance created
+21:21:01 [info] [Stream] opening /home/davidn/Music/The Neighbourhood - Reflections.mp3
+21:21:01 [info] [LocalFileStream] opening file: /home/davidn/Music/The Neighbourhood - Reflections.mp3
+21:21:01 [info] [ffmpegdecoder] parsing data stream...
+21:21:01 [info] [ffmpegdecoder] found audio stream!
+21:21:01 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+21:21:01 [info] [Streams] found a decoder for /home/davidn/Music/The Neighbourhood - Reflections.mp3
+21:21:01 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+21:21:21 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' enqueued
+21:21:21 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' running
+21:21:21 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' finished with status=4
+21:24:55 [info] [ffmpegdecoder] finished decoding.
+21:24:58 [info] [GaplessTransport] stop
+21:24:58 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
+21:24:58 [info] [LocalLibrary] query 'TrackMetadataQuery' running
+21:24:58 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
+21:24:58 [info] [Player] new instance created
+21:24:58 [info] [Stream] opening /home/davidn/Music/The Neighbourhood - A Little Death.mp3
+21:24:58 [info] [LocalFileStream] opening file: /home/davidn/Music/The Neighbourhood - A Little Death.mp3
+21:24:58 [info] [ffmpegdecoder] parsing data stream...
+21:24:58 [info] [ffmpegdecoder] found audio stream!
+21:24:58 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+21:24:58 [info] [Streams] found a decoder for /home/davidn/Music/The Neighbourhood - A Little Death.mp3
+21:24:58 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+21:25:18 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' enqueued
+21:25:18 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' running
+21:25:18 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' finished with status=4
+21:29:01 [info] [ffmpegdecoder] finished decoding.
+21:29:03 [info] [GaplessTransport] stop
+21:29:03 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
+21:29:03 [info] [LocalLibrary] query 'TrackMetadataQuery' running
+21:29:03 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
+21:29:03 [info] [Player] new instance created
+21:29:03 [info] [Stream] opening /home/davidn/Music/The Neighbourhood - The Beach.mp3
+21:29:03 [info] [LocalFileStream] opening file: /home/davidn/Music/The Neighbourhood - The Beach.mp3
+21:29:03 [info] [ffmpegdecoder] parsing data stream...
+21:29:03 [info] [ffmpegdecoder] found audio stream!
+21:29:03 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+21:29:03 [info] [Streams] found a decoder for /home/davidn/Music/The Neighbourhood - The Beach.mp3
+21:29:03 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+21:29:23 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' enqueued
+21:29:23 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' running
+21:29:23 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' finished with status=4
+21:32:31 [info] [ffmpegdecoder] finished decoding.
+21:32:33 [info] [GaplessTransport] stop
+21:32:53 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' enqueued
+21:32:53 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' running
+21:32:53 [info] [LocalLibrary] query 'MarkTrackPlayedQuery' finished with status=4
+21:36:48 [info] [ffmpegdecoder] finished decoding.
+21:36:50 [info] [GaplessTransport] stop

@@ -1,22 +1,25 @@
-* {
-    font-family: "JetBrainsMono Nerd Font", "Font Awesome", monospace;
-    font-size: 14px;  
-    min-height: 0;
+*{
+  font-family: "JetBrainsMono Nerd Font", "Font Awesome", monospace;
+  font-size: 14px;  
+  min-height: 0;
+  margin: 0;
+  padding: 0;
 }
+
+@import "/home/davidn/.cache/wal/colors-waybar.css";
 
 #waybar {
-    background: transparent;
-    color: #9299ba;
-    margin: 0; 
+  background: #1a1b26;
+  color: #9299ba;
+  margin: 0; 
+  padding: 0;
 }
-
 /* Contenedores principales */
 .modules-left, .modules-right {
-    background-color: #1a1b26;
-    border-radius: 0;  
-    border: 1px solid #9299ba;
-    padding: 0.5rem 0.5rem 0.5rem 0.5rem;  
-    margin: 0;
+  background-color: #1a1b26;
+  border-radius: 0;  
+  padding: 0.5rem;
+  margin: 0;
 }
 
 #workspaces, 
@@ -27,39 +30,39 @@
 #battery, 
 #clock,
 #custom-separator {
-    padding: 0 0.3rem;  
-    margin: 0;
+  padding: 0 0.3rem;  
+  margin: 0;
 }
 
 #tray{
 }
 
 #workspaces button {
-    padding: 0 0.3rem;
-    color: #9299ba;  
-    background: transparent;
-    border: none;
-    border-radius: 0;
+  padding: 0 0.3rem;
+  color: #9299ba;  
+  background: transparent;
+  border: none;
+  border-radius: 0;
 }
 
 
 #workspaces button.active {
-    color: #7aa2f7;  
-    background: transparent;
+  color: #7aa2f7;  
+  background: transparent;
 }
 
 #workspaces button:hover {
-    background: #1a1b26;
-    color: #7aa2f7;
+  background: #1a1b26;
+  color: #7aa2f7;
 }
 
 #battery, #network, #pulseaudio, #backlight {
-    font-size: 14px;  
+  font-size: 14px;  
 }
 
 #battery.charging, #battery.warning:not(.charging),
 #network.ethernet, #network.disconnected {
-    color: inherit;  
+  color: inherit;  
 }
 
 /* Reajuste fino para arreglar iconos que salen mal*/
@@ -68,18 +71,18 @@
 }
 
 window#waybar {
-    border: none;
-    box-shadow: none;
+  border: none;
+  box-shadow: none;
 }
 
 .modules-left {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .modules-right {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .modules-center {

@@ -1,47 +1,40 @@
-set selection-clipboard clipboard
-set adjust-open "fit-width"
-set pages-per-row 1
+  set selection-clipboard clipboard
+  set adjust-open "fit-width"
+  set pages-per-row 1
+  set scroll-page-aware "true"
+  set smooth-scroll "true"
+  set scroll-full-overlap 0.01
+  set scroll-step 100
+  set guioptions none
 
-#stop at page boundries
-set scroll-page-aware "true"
-set smooth-scroll "true"
-set scroll-full-overlap 0.01
-set scroll-step 100
-set guioptions none
+  set default-bg                  "#0f1010"
+  set default-fg                  "#b9bfd2"
 
+  set statusbar-fg                "#b9bfd2"
+  set statusbar-bg                "#586EAF"
 
-set default-bg                  "#1a1b26"
-set default-fg                  "#a9b1d6"
+  set inputbar-bg                 "#0f1010"
+  set inputbar-fg                 "#7891E3"
 
-set statusbar-fg                "#a9b1d6"
-set statusbar-bg                "#24283b"
+  set notification-bg             "#0f1010"
+  set notification-fg             "#7891E3"
 
-set inputbar-bg                 "#1a1b26"
-set inputbar-fg                 "#73daca"
+  set notification-error-bg       "#0f1010"
+  set notification-error-fg       "#586EAF"
 
-set notification-bg             "#1a1b26"
-set notification-fg             "#73daca"
+  set notification-warning-bg     "#0f1010"
+  set notification-warning-fg     "#6477D0"
 
-set notification-error-bg       "#1a1b26"
-set notification-error-fg       "#f7768e"
+  set highlight-color             "#6B82BB"
+  set highlight-active-color      "#6F89CF"
 
-set notification-warning-bg     "#1a1b26"
-set notification-warning-fg     "#f7768e"
+  set completion-bg               "#586EAF"
+  set completion-fg               "#b9bfd2"
 
-set highlight-color             "#e0af68"
-set highlight-active-color      "#9aa5ce"
+  set completion-highlight-fg     "#6F89CF"
+  set completion-highlight-bg     "#586EAF"
 
-set completion-bg               "#24283b"
-set completion-fg               "#a9b1d6"
-
-set completion-highlight-fg     "#9aa5ce"
-set completion-highlight-bg     "24283b"
-
-set recolor-lightcolor          "#16161e"
-set recolor-darkcolor           "#a9b1d6"
-
-
-set recolor                     "true"
-set recolor-keephue             "false"
-set recolor-lightcolor          "#1a1b26"  
-set recolor-darkcolor           "#a9b1d6" 
+  set recolor                     "true"
+  set recolor-keephue             "false"
+  set recolor-lightcolor          "#0f1010"
+  set recolor-darkcolor           "#b9bfd2"

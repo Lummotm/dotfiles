@@ -1,53 +1,53 @@
-* {
+  * {
     font-family: "JetBrainsMono Nerd Font", monospace;
-}
+  }
 
-window {
-    background-color: #1a1b26;
+  window {
+    background-color: #0f1010;
     border: none;
-}
+  }
 
-#input {
+    #input {
     margin: 5px;
     border-radius: 0px;
     border: none;
-    background-color: #24283b;
-    color: #c0caf5;
+    background-color: #586EAF;
+    color: #b9bfd2;
     padding: 8px;
-}
+  }
 
-#inner-box {
-    background-color: #1a1b26;
-}
+    #inner-box {
+    background-color: #0f1010;
+  }
 
-#outer-box {
+    #outer-box {
     margin: 2px;
     padding: 10px;
-    background-color: #1a1b26;
-}
+    background-color: #0f1010;
+  }
 
-#scroll {
+    #scroll {
     margin: 5px;
-}
+  }
 
-#text {
+    #text {
     padding: 4px;
-    color: #9299ba;
-}
+    color: #7891E3;
+  }
 
-#entry {
-    background-color: #1a1b26;
-}
+    #entry {
+    background-color: #0f1010;
+  }
 
-#entry:selected {
-    background-color: #3b4261;
-}
+    #entry:selected {
+    background-color: #6F89CF; /* Color más neutro y visible */
+    }
 
-#text:selected {
-    color: #7aa2f7;
+    #text:selected {
+    color: #b9bfd2;  /* texto blanco */
     background: transparent;
-}
+    }
 
-#entry:hover {
-    background-color: #3b4261;
-}
+    #entry:hover {
+    background-color: #657AB5;
+  }

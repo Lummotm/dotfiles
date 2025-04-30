@@ -8,8 +8,8 @@
 --------------------------------------------------------------------------------
 -- Line Numbers & Appearance
 vim.opt.number = true         -- Show absolute line numbers
-vim.opt.relativenumber = true -- Relative numbers for easier navigation
-vim.opt.cursorline = true     -- Highlight current line
+vim.opt.relativenumber = false-- Relative numbers for easier navigation
+vim.opt.cursorline = false    -- Highlight current line
 vim.opt.termguicolors = true  -- Enable 24-bit RGB color support
 vim.opt.showmode = false      -- Hide mode (covered by statusline)
 

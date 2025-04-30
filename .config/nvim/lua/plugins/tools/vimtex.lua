@@ -2,17 +2,19 @@ return {
   "lervag/vimtex",
   lazy = false,
   init = function()
-    -- Desactivar el módulo de sintaxis de vimtex (usamos Treesitter)
     vim.g.vimtex_syntax_enabled = 0
-
-    -- Configurar el compilador
     vim.g.vimtex_compiler_method = "latexmk"
+    vim.g.vimtex_view_method = 'zathura'
     vim.g.vimtex_compiler_latexmk = {
-      continuous = 1, -- Compilación continua (1 para activar)
+      continuous = 1,
+      options = {
+        "-shell-escape",
+        "-verbose",
+        "-file-line-error",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+      }
     }
-    vim.g.vimtex_quickfix_open_on_warning = 0
-  end,
-  build = function()
-    vim.fn.system("git config --global http.postBuffer 524288000")
-  end,
+    vim.g.vimtex_matchparen_enabled = 0
+  end
 }
