@@ -2,3 +2,13 @@ plugins/*
 ~/.config/wofi/style.css
 .config/wofi/style.css
 .config/musikcube
+.config/wal/templates
+.config/wal/templates
+.config/wal/templates
+.config/wal/templates/wofi.css
+.config/zathura/zathurarc
+.config/waybar/style.css
+.config/zathura/zathurarc
+.config/waybar/style.css
+.config/waybar/style.css
+.config/zathura/zathurarc
