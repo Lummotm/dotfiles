@@ -29,7 +29,8 @@
 #backlight,
 #battery,
 #clock,
-#custom-separator {
+#custom-separator,
+#hyprland-language{
   padding: 0 0.5rem;
   margin: 0;
 }
