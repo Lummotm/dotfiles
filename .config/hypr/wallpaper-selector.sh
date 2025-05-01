@@ -224,7 +224,6 @@ fi
   sleep 0.2
   notify-send "Temas aplicados a: wofi, zathura, kitty, waybar"
   sleep 0.2
-  notify-send "Fondo copiado para navegador web" "Disponible en ~/Pictures/Wallpapers/web-browser-wallp/"
 } &
 
 wait
