@@ -10,7 +10,7 @@ abbr gp "git push -u origin main"
 
 alias ll="eza -l --git --icons --color=auto --group-directories-first --sort=extension --sort=name"
 alias ls="eza --icons --color=auto --group-directories-first --sort=extension --sort=name"
-alias hotspot="/home/davidn/Projects/Bash/hotspot.sh"
+alias hotspot="nmcli device wifi hotspot ifname wlan0 ssid ThinkingRock band bg password  ThinkingRock123 && nmcli dev wifi show-password"
 alias clc="clear"
 alias pc="python3 -i /home/davidn/Projects/Python/calc.py"
 alias a="z"
