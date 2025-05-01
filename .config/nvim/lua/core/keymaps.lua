@@ -2,7 +2,7 @@ local keymap = vim.keymap.set
 
 keymap("n", "<C-s>", ":w<CR>", { desc = "Save file" })
 keymap("n", "<C-q>", ":q<CR>", { desc = "Exist File" }) -- no need for save and exit due to confirmation when exit
-keymap("n", "<C-A>", "ggvg0Gg$", { noremap = true, silent = true })
+keymap("n", "<C-A>", "ggg0vGg$", { noremap = true, silent = true })
 keymap("n", "<leader>gi", "magg=G`a", { desc = "Autoindent entire file and return to cursor" })
 
 keymap("n", "<C-n>", ":Neotree toggle left<CR>")
