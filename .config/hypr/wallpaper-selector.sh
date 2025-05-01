@@ -12,9 +12,9 @@ mkdir -p "$TEMPLATES_DIR"
 # Crear plantillas si no existen
 if [ ! -f "$TEMPLATES_DIR/wofi.css" ]; then
   cat > "$TEMPLATES_DIR/wofi.css" <<EOF
-* {{
-  font-family: "JetBrainsMono Nerd Font", monospace;
-}}
+  * {{
+    font-family: "JetBrainsMono Nerd Font", monospace;
+  }}
 
 window {{
   background-color: {background};
@@ -22,94 +22,94 @@ window {{
 }}
 
 #input {{
-  margin: 5px;
-  border-radius: 0px;
-  border: none;
-  background-color: {color1};
-  color: {color15};
-  padding: 8px;
+margin: 5px;
+border-radius: 0px;
+border: none;
+background-color: {color1};
+color: {color15};
+padding: 8px;
 }}
 
 #inner-box {{
-  background-color: {background};
+background-color: {background};
 }}
 
 #outer-box {{
-  margin: 2px;
-  padding: 10px;
-  background-color: {background};
+margin: 2px;
+padding: 10px;
+background-color: {background};
 }}
 
 #scroll {{
-  margin: 5px;
+margin: 5px;
 }}
 
 #text {{
-  padding: 4px;
-  color: {color6};
+padding: 4px;
+color: {color6};
 }}
 
 #entry {{
-  background-color: {background};
+background-color: {background};
 }}
 
 #entry:selected {{
-  background-color: {color5}; /* Color más neutro y visible */
+background-color: {color5}; /* Color más neutro y visible */
 }}
 
 #text:selected {{
-  color: {color15};  /* texto blanco */
-  background: transparent;
+color: {color15};  /* texto blanco */
+background: transparent;
 }}
 
 #entry:hover {{
-  background-color: {color2};
+background-color: {color2};
 }}
 EOF
 fi
 
 if [ ! -f "$TEMPLATES_DIR/zathurarc" ]; then
   cat > "$TEMPLATES_DIR/zathurarc" <<EOF
-set selection-clipboard clipboard
-set adjust-open "fit-width"
-set pages-per-row 1
-set scroll-page-aware "true"
-set smooth-scroll "true"
-set scroll-full-overlap 0.01
-set scroll-step 100
-set guioptions none
+  set selection-clipboard clipboard
+  set adjust-open "fit-width"
+  set pages-per-row 1
+  set scroll-page-aware "true"
+  set smooth-scroll "true"
+  set scroll-full-overlap 0.01
+  set scroll-step 100
+  set guioptions none
 
-set default-bg                  "{background}"
-set default-fg                  "{color7}"
+  set default-bg                  "{background}"
+  set default-fg                  "{color7}"
 
-set statusbar-fg                "{color7}"
-set statusbar-bg                "{color1}"
+  set statusbar-fg                "{color7}"
+  set statusbar-bg                "{color1}"
 
-set inputbar-bg                 "{background}"
-set inputbar-fg                 "{color6}"
+  set inputbar-bg                 "{background}"
+  set inputbar-fg                 "{color6}"
 
-set notification-bg             "{background}"
-set notification-fg             "{color6}"
+  set notification-bg             "{background}"
+  set notification-fg             "{color6}"
 
-set notification-error-bg       "{background}"
-set notification-error-fg       "{color1}"
+  set notification-error-bg       "{background}"
+  set notification-error-fg       "{color1}"
 
-set notification-warning-bg     "{background}"
-set notification-warning-fg     "{color3}"
+  set notification-warning-bg     "{background}"
+  set notification-warning-fg     "{color3}"
 
-set highlight-color             "{color4}"
-set highlight-active-color      "{color5}"
+  set highlight-color             "{color4}"
+  set highlight-active-color      "{color5}"
 
-set completion-bg               "{color1}"
-set completion-fg               "{color7}"
+  set completion-bg               "{color1}"
+  set completion-fg               "{color7}"
 
-set completion-highlight-fg     "{color5}"
-set completion-highlight-bg     "{color1}"
+  set completion-highlight-fg     "{color5}"
+  set completion-highlight-bg     "{color1}"
 
-set recolor                     "true"
-set recolor-keephue             "false"
-set recolor-lightcolor          "{background}"
-set recolor-darkcolor           "{color7}"
+  set recolor                     "true"
+  set recolor-keephue             "false"
+  set recolor-lightcolor          "{background}"
+  set recolor-darkcolor           "{color7}"
 EOF
 fi
 
@@ -142,94 +142,89 @@ selected=$(sxiv -g 800x600+560+240 -b -t -o "$WALLPAPERS_DIR"/*.{jpg,jpeg,png,gi
 
 # Aplicar wallpaper con swww
 {
-    swww img "$selected" --transition-type grow --transition-pos 0.98,0.97 --transition-step 255 --transition-fps 60
+  swww img "$selected" --transition-type grow --transition-pos 0.98,0.97 --transition-step 255 --transition-fps 60
 } &
 
-# Crear enlace o copiar para hyprpaper y navegador web
+# Crear enlace o copiar para swww y navegador web
 {
-    # Directorio para el fondo del navegador web
-    BROWSER_WALLPAPER_DIR="$HOME/Pictures/Wallpapers/web-browser-wallp"
-    BROWSER_WALLPAPER="$BROWSER_WALLPAPER_DIR/web-wallpaper.png"
-    
-    # Crear directorio si no existe
-    mkdir -p "$BROWSER_WALLPAPER_DIR"
-    
-    # Copiar al destino principal
-    if [[ "$selected" == *.gif ]]; then
-        convert "$selected[0]" "$DESTINATION"
-    else
-        ln -sf "$selected" "$DESTINATION" 2>/dev/null || cp "$selected" "$DESTINATION"
-    fi
-    
-    # Copiar para el navegador web (siempre como PNG para compatibilidad)
-    if [[ "$selected" == *.gif ]]; then
-        convert "$selected[0]" "$BROWSER_WALLPAPER"
-    else
-        cp "$selected" "$BROWSER_WALLPAPER"
-    fi
-    
-    # Reiniciar hyprpaper
-    killall -SIGKILL hyprpaper 2>/dev/null || true
-    sleep 0.2
-    /usr/bin/hyprpaper >/dev/null 2>&1 &
+  # Directorio para el fondo del navegador web
+  BROWSER_WALLPAPER_DIR="$HOME/Pictures/Wallpapers/web-browser-wallp"
+  BROWSER_WALLPAPER="$BROWSER_WALLPAPER_DIR/web-wallpaper.png"
+
+  # Crear directorio si no existe
+  mkdir -p "$BROWSER_WALLPAPER_DIR"
+
+  # Copiar al destino principal (para compatibilidad con otros scripts)
+  if [[ "$selected" == *.gif ]]; then
+    convert "$selected[0]" "$DESTINATION"
+  else
+    ln -sf "$selected" "$DESTINATION" 2>/dev/null || cp "$selected" "$DESTINATION"
+  fi
+
+  # Copiar para el navegador web (siempre como PNG para compatibilidad)
+  if [[ "$selected" == *.gif ]]; then
+    convert "$selected[0]" "$BROWSER_WALLPAPER"
+  else
+    cp "$selected" "$BROWSER_WALLPAPER"
+  fi
 } &
 
 # Generar tema de colores y aplicar a aplicaciones
 {
-    # Generar tema con pywal
-    rm -rf "$CACHE_DIR"/*
-    wal -i "$selected" --saturate 0.8 -t
-    
-    # Copiar archivos generados a sus ubicaciones
-    mkdir -p ~/.config/wofi
-    mkdir -p ~/.config/zathura
-    
-    # Copiar tema de wofi
-    cp "$CACHE_DIR/wofi.css" ~/.config/wofi/style.css
-    
-    # Copiar tema de zathura
-    cp "$CACHE_DIR/zathurarc" ~/.config/zathura/zathurarc
-    
-    # Cursor de kitty
-    cursor_color=$(sed -n '8p' "$CACHE_DIR/colors")
-    dark_cursor=$(echo "$cursor_color" | awk -F'#' '{ 
-    r = strtonum("0x" substr($2,1,2)) * 0.7;
-    g = strtonum("0x" substr($2,3,2)) * 0.7;
-    b = strtonum("0x" substr($2,5,2)) * 0.7;
-    printf("#%02x%02x%02x\n", r, g, b);
-    }')
+  # Generar tema con pywal
+  rm -rf "$CACHE_DIR"/*
+  wal -i "$selected" --saturate 0.8 -t
 
-    sed -i '/^cursor /d' "$CACHE_DIR/colors-kitty.conf"
-    echo "cursor $dark_cursor" >> "$CACHE_DIR/colors-kitty.conf"
-    
-    # Recargar tmux
-    [ -n "$TMUX" ] && tmux source-file ~/.config/tmux/tmux.conf
-    
-    # Reiniciar neovim si está en ejecución
-    if pgrep -x "nvim" > /dev/null; then
-        pkill nvim
-        sleep 1
-        nvim &
-    fi
+  # Copiar archivos generados a sus ubicaciones
+  mkdir -p ~/.config/wofi
+  mkdir -p ~/.config/zathura
+
+  # Copiar tema de wofi
+  cp "$CACHE_DIR/wofi.css" ~/.config/wofi/style.css
+
+  # Copiar tema de zathura
+  cp "$CACHE_DIR/zathurarc" ~/.config/zathura/zathurarc
+
+  # Cursor de kitty
+  cursor_color=$(sed -n '8p' "$CACHE_DIR/colors")
+  dark_cursor=$(echo "$cursor_color" | awk -F'#' '{ 
+  r = strtonum("0x" substr($2,1,2)) * 0.7;
+  g = strtonum("0x" substr($2,3,2)) * 0.7;
+  b = strtonum("0x" substr($2,5,2)) * 0.7;
+  printf("#%02x%02x%02x\n", r, g, b);
+}')
+
+sed -i '/^cursor /d' "$CACHE_DIR/colors-kitty.conf"
+echo "cursor $dark_cursor" >> "$CACHE_DIR/colors-kitty.conf"
+
+# Recargar tmux
+[ -n "$TMUX" ] && tmux source-file ~/.config/tmux/tmux.conf
+
+# Reiniciar neovim si está en ejecución
+if pgrep -x "nvim" > /dev/null; then
+  pkill nvim
+  sleep 1
+  nvim &
+fi
 } &
 
 # Recargar waybar (fuera del bloque anterior para mejor paralelización)
 {
-    # Matar waybar y reiniciarlo
-    killall -SIGKILL waybar 2>/dev/null || true
-    sleep 0.5
-    /usr/bin/waybar >/dev/null 2>&1 &
+  # Matar waybar y reiniciarlo
+  killall -SIGKILL waybar 2>/dev/null || true
+  sleep 0.5
+  /usr/bin/waybar >/dev/null 2>&1 &
 } &
 
 # Enviar notificaciones en paralelo
 {
-    notify-send "Wallpaper cambiado" "$(basename "$selected")" --icon="$selected"
-    sleep 0.5
-    notify-send "Paleta de colores cambiada"
-    sleep 0.2
-    notify-send "Temas aplicados a: wofi, zathura, kitty, waybar"
-    sleep 0.2
-    notify-send "Fondo copiado para navegador web" "Disponible en ~/Pictures/Wallpapers/web-browser-wallp/"
+  notify-send "Wallpaper cambiado" "$(basename "$selected")" --icon="$selected"
+  sleep 0.5
+  notify-send "Paleta de colores cambiada"
+  sleep 0.2
+  notify-send "Temas aplicados a: wofi, zathura, kitty, waybar"
+  sleep 0.2
+  notify-send "Fondo copiado para navegador web" "Disponible en ~/Pictures/Wallpapers/web-browser-wallp/"
 } &
 
 wait
