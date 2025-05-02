@@ -1,0 +1,27 @@
+
+[general]
+max_width = 1920
+max_height = 1080
+cache_dir = "/tmp/yazi-preview"
+
+[prepend_previewers]
+# Se pueden agregar previsualizadores personalizados aquí
+
+[append_previewers]
+# Se pueden agregar previsualizadores personalizados aquí
+
+# Previsualización de imágenes para Kitty
+[previewers.image]
+# Esta configuración es específica y optimizada para el terminal Kitty
+command = "kitty +kitten icat --clear --stdin no --transfer-mode file --place $width"x"$height"@"$x"x"$y $file"
+# Si la línea anterior no funciona, puedes intentar con esta alternativa:
+# command = "kitty icat --clear --stdin no --transfer-mode memory --place $width"x"$height"@"$x"x"$y $file"
+
+# Configuración para PDFs
+[previewers.pdf]
+command = "pdftoppm -png -singlefile \"$file\" \"$cache\" && kitty +kitten icat --clear --stdin no --transfer-mode file --place $width"x"$height"@"$x"x"$y \"$cache.png\""
+
+# Previsualizaciones de videos usando ffmpegthumbnailer
+[previewers.video]
+command = "ffmpegthumbnailer -i \"$file\" -o \"$cache.jpg\" -s 0 -q 5 && kitty +kitten icat --clear --stdin no --transfer-mode file --place $width"x"$height"@"$x"x"$y \"$cache.jpg\""
+

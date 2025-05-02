@@ -12,3 +12,4 @@ plugins/*
 .config/waybar/style.css
 .config/waybar/style.css
 .config/zathura/zathurarc
+.config/Thunar

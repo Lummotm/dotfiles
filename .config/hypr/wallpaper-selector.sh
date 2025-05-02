@@ -156,16 +156,23 @@ selected=$(sxiv -g 800x600+560+240 -b -t -o "$WALLPAPERS_DIR"/*.{jpg,jpeg,png,gi
 
   # Copiar al destino principal (para compatibilidad con otros scripts)
   if [[ "$selected" == *.gif ]]; then
+    # Extraer el primer frame y guardar como PNG
     convert "$selected[0]" "$DESTINATION"
   else
+    # Si no es GIF, crear enlace simbólico o copiar si no es posible
     ln -sf "$selected" "$DESTINATION" 2>/dev/null || cp "$selected" "$DESTINATION"
   fi
 
   # Copiar para el navegador web (siempre como PNG para compatibilidad)
   if [[ "$selected" == *.gif ]]; then
+    # Verificar si el archivo ya existe y eliminarlo primero para evitar duplicados
+    [ -f "$BROWSER_WALLPAPER" ] && rm "$BROWSER_WALLPAPER"
+    
+    # Extraer el primer frame y guardar como PNG
     convert "$selected[0]" "$BROWSER_WALLPAPER"
   else
-    cp "$selected" "$BROWSER_WALLPAPER"
+    # Si no es GIF, simplemente copiar, sobrescribiendo cualquier archivo existente
+    cp -f "$selected" "$BROWSER_WALLPAPER"
   fi
 } &
 
