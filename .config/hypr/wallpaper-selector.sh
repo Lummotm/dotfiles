@@ -205,7 +205,7 @@ sed -i '/^cursor /d' "$CACHE_DIR/colors-kitty.conf"
 echo "cursor $dark_cursor" >> "$CACHE_DIR/colors-kitty.conf"
 
 # Recargar tmux
-[ -n "$TMUX" ] && tmux source-file ~/.config/tmux/tmux.conf
+tmux source-file ~/.config/tmux/tmux.conf
 
 # Reiniciar neovim si está en ejecución
 if pgrep -x "nvim" > /dev/null; then
