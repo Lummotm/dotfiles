@@ -159,8 +159,7 @@ selected=$(sxiv -g 800x600+560+240 -b -t -o "$WALLPAPERS_DIR"/*.{jpg,jpeg,png,gi
     # Extraer el primer frame y guardar como PNG
     convert "$selected[0]" "$DESTINATION"
   else
-    # Si no es GIF, crear enlace simbólico o copiar si no es posible
-    ln -sf "$selected" "$DESTINATION" 2>/dev/null || cp "$selected" "$DESTINATION"
+    cp "$selected" "$DESTINATION"
   fi
 
   # Copiar para el navegador web (siempre como PNG para compatibilidad)
