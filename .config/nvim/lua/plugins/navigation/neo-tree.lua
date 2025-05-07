@@ -3,14 +3,16 @@ return {
   branch = "v3.x",
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "nvim-tree/nvim-web-devicons", -- Opcional: Quita si no quieres íconos
+    "nvim-tree/nvim-web-devicons",
     "MunifTanjim/nui.nvim",
   },
   opts = {
-    -- Reducir el ancho de la ventana
     window = {
-      width = 25, -- Ancho más estrecho (por defecto suele ser 40)
+      width = 25,
       position = "left",
     },
+  },
+  keys = {
+    { "<C-n>", "<cmd>Neotree toggle left<CR>", desc = "Toggle Neo-tree" },
   },
 }

@@ -29,7 +29,6 @@ return {
           documentation = cmp.config.window.bordered(),
         },
         mapping = cmp.mapping.preset.insert({
-          -- ========== 🔥 Mapeos SuperTab (Solución 4) ==========
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
@@ -50,7 +49,6 @@ return {
             end
           end, { "i", "s" }),
 
-          -- ========== Mapeos originales (opcionales) ==========
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
           ["<CR>"] = cmp.mapping.confirm({ select = true }),

@@ -1,8 +1,8 @@
+
 -- ~/.config/nvim/init.lua
 vim.g.mapleader = " "
 
 -- recuerda clonar el repo si no tira
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -22,4 +22,16 @@ require("core.keymaps")
 
 -- Cargar plugins
 require("lazy").setup("plugins")
-require("current-theme")
+
+-- Cargar tema (ahora en core/theme.lua)
+require("core.theme").setup()
+
+vim.schedule(function()
+  vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
+  vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none" })
+  vim.api.nvim_set_hl(0, "TelescopePromptNormal", { bg = "none" })
+  vim.api.nvim_set_hl(0, "WhichKeyFloat", { bg = "none" })
+  vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+  vim.api.nvim_set_hl(0, "CursorLine", { bg = "none" })
+  vim.api.nvim_set_hl(0, "Visual", { bg = "#414868", fg = "#ffffff" })
+end)
