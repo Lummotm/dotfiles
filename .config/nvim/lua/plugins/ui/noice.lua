@@ -1,18 +1,15 @@
 return {
   "folke/noice.nvim",
-  dependencies = { "MunifTanjim/nui.nvim" },
-  config = function()
-    require("noice").setup({
-      cmdline = {
-        enabled = true,
-        view = "cmdline_popup", -- Vista flotante para comandos
-        position = {
-        },
-      },
-      messages = {
-        enabled = true,
-        view = "notify", -- Mensajes como notificaciones flotantes
-      },
-    })
-  end,
+  opts = {
+    cmdline = {
+      enabled = true,
+      view = "cmdline_popup",
+    },
+    messages  = { enabled = false },  -- Snacks.notifier toma el relevo
+    notify    = { enabled = false },
+    popupmenu = { enabled = false },
+    lsp       = { progress = { enabled = false }, signature = { enabled = false } },
+    markdown  = { hover = { enabled = false } },
+  },
 }
+

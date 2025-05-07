@@ -17,6 +17,7 @@ return {
   },
   {
     "echasnovski/mini.indentscope",
+    enabled = false,
     version = false,
     config = function()
       require("mini.indentscope").setup({

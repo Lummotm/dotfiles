@@ -1,9 +1,6 @@
----@type LazySpec
 return {
   "mikavilpas/yazi.nvim",
   event = "VeryLazy",
-  dependencies = { "folke/snacks.nvim" },
-
   keys = {
     { "<leader>c", name = "+Yazi" },
     { "<leader>cf", "<cmd>Yazi<CR>",       desc = "Yazi: abrir archivo actual" },

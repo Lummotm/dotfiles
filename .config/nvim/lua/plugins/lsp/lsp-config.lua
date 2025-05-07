@@ -1,66 +1,38 @@
--- LSP o Language Server Protocol es un servicio que permite que el compilador
--- que sabe como va el codigo y todo eso, sea capaz de tener influencia en
-
+---@type LazySpec
 return {
   {
-    "williamboman/mason.nvim",
-    -- mason permite administrar servidores de lenguaje instalarlos etc.
-    config = function()
-      require("mason").setup()
-    end,
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    -- mason-lspconfig sirve para integrar mason con lsp, es super util por el tag
-    -- ensure_installed que permite que se haga de manera automatica la instalación
-    -- del servidor de lenguaje y todo eso
-    config = function()
-      require("mason-lspconfig").setup({
-        ensure_installed = {
-          "lua_ls",
-        },
-      })
-    end,
-  },
-  {
     "neovim/nvim-lspconfig",
+    event = "VeryLazy",
+    dependencies = {
+      "mason.nvim",
+      "mason-lspconfig.nvim",
+      "hrsh7th/cmp-nvim-lsp",
+    },
+    keys = {
+      { "K",          vim.lsp.buf.hover,       desc = "Hover LSP" },
+      { "gd",         vim.lsp.buf.definition,  desc = "Ir a definición" },
+      { "<leader>ca", vim.lsp.buf.code_action, desc = "Acciones de código", mode = { "n","v" } },
+      { "<leader>gf", vim.lsp.buf.format,      desc = "Formatear con LSP" },
+    },
     config = function()
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
       local lspconfig = require("lspconfig")
-      lspconfig.lua_ls.setup({
-        capabilities = capabilities,
-      })
-      lspconfig.matlab_ls.setup({
-        capabilities = capabilities,
-      })
-      lspconfig.texlab.setup({
-        capabilities = capabilities,
-        settings = {
-          texlab = {
-            diagnostics = {
-              ignoredPatterns = {
-                "Underfull",
-                "Overfull",
-              },
-            },
-          },
-        },
-      })
-      -- Configuración global de diagnósticos
-      vim.diagnostic.config({
-        virtual_text = {
-          prefix = "■ ",
-          source = "if_many",
-          format = function(diagnostic)
-            return string.format("%s", diagnostic.message)
-          end,
-        },
+      local caps = require("cmp_nvim_lsp").default_capabilities()
+
+      for _, srv in ipairs({ "pyright", "clangd", "bashls", "texlab" }) do
+        lspconfig[srv].setup {
+          capabilities = caps,
+        }
+      end
+
+      -- Config global de diagnósticos
+      vim.diagnostic.config {
+        virtual_text = { prefix = "■ ", source = "if_many" },
         signs = true,
         underline = true,
         update_in_insert = false,
         severity_sort = true,
-      })
+      }
     end,
   },
 }
+
