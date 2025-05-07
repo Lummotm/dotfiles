@@ -1,26 +1,18 @@
-if status is-interactive
-    # Commands to run in interactive sessions can go here
+# ─────────────────────────────────────────────────────────────────────────────
+#  FISH SHELL CONFIG
+#  Author: Lummotm
+#  Last updated: 2025‑05‑09
+# ─────────────────────────────────────────────────────────────────────────────
+
+if not status is-interactive
+    exit
 end
 
-abbr vim nvim 
-abbr vi nvim 
-
-abbr gc "git commit -m"
-abbr gp "git push -u origin main"
-
-alias ll="eza -l --git --icons --color=auto --group-directories-first --sort=extension --sort=name"
-alias ls="eza --icons --color=auto --group-directories-first --sort=extension --sort=name"
-alias hotspot="nmcli device wifi hotspot ifname wlan0 ssid ThinkingRock band bg password  ThinkingRock123 && nmcli dev wifi show-password"
-alias clc="clear"
-alias pc="python3 -i /home/davidn/Projects/Python/calc.py"
-alias a="z"
-
-
+# 1. Pager de man pages en Neovim ─────────────────────────────────────────────
 set -gx MANPAGER 'nvim +Man!'
 
-function __auto_ls_after_cd --on-variable PWD
-    ls
+# 2. Starship prompt ─────────────────────────────────────────────────────────
+if type -q starship
+    starship init fish | source
 end
 
-# Starship Theme Initialization
-starship init fish | source
