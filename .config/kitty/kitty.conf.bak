@@ -7,7 +7,7 @@ confirm_os_window_close     0
 allow_remote_control        yes
 hide_window_decorations     yes
 macos_option_as_alt         no
-background_opacity          0.9
+background_opacity          0.85
 background_blur             64
 term                        xterm-kitty
 
@@ -97,8 +97,4 @@ map ctrl+shift+backspace    restore_font_size
 #######################
 
 #include                     /home/davidn/.cache/wal/colors-kitty.conf
-include                     /home/davidn/.config/kitty/Catppuccin-Mocha.conf
-
-
-# BEGIN_KITTY_THEME
-# END_KITTY_THEME
+include                     /home/davidn/.config/kitty/current-theme.conf

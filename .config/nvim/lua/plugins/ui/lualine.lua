@@ -7,7 +7,6 @@ return {
         theme = "auto",
         component_separators = { left = "│", right = "│" },
         section_separators = { left = "", right = "" },
-        disabled_filetypes = { "alpha", "dashboard", "neo-tree" },
       },
       sections = {
         lualine_a = { "mode" },

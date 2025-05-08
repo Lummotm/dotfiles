@@ -29,6 +29,10 @@ return {
     { "gd",        function() Snacks.picker.lsp_definitions()  end,             desc = "Goto Definition" },
     { "gr",        function() Snacks.picker.lsp_references()   end,             desc = "References" },
 
+    -- Explorer
     { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
+
+    -- Notifier
+    { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History" },
   },
 }

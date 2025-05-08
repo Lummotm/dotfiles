@@ -5,3 +5,5 @@ abbr vi   nvim
 abbr gc   'git commit -m'
 abbr gp   'git push -u origin main'
 
+abbr lazy "lazygit"
+

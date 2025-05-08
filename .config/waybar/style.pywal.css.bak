@@ -1,73 +1,73 @@
-*{
+* {
   font-family: "JetBrainsMono Nerd Font", "Font Awesome", monospace;
-  font-size: 14px;  
+  font-size: 14px;
   min-height: 0;
   margin: 0;
   padding: 0;
 }
 
-@import "/home/davidn/.cache/wal/colors-waybar.css";
+@import "/home/davidn/.config/waybar/colors.css";
 
 #waybar {
-  background: #1a1b26;
-  color: #9299ba;
-  margin: 0; 
+  background: @color0;
+  color: @foreground;
+  margin: 0;
   padding: 0;
 }
-/* Contenedores principales */
+
 .modules-left, .modules-right {
-  background-color: #1a1b26;
-  border-radius: 0;  
+  background-color: @color0;
+  border-radius: 0;
   padding: 0.5rem;
   margin: 0;
 }
 
-#workspaces, 
-#custom-wall-changer, 
-#pulseaudio, 
-#network, 
-#backlight, 
-#battery, 
+#workspaces,
+#custom-wall-changer,
+#pulseaudio,
+#network,
+#backlight,
+#battery,
 #clock,
-#custom-separator {
-  padding: 0 0.3rem;  
+#custom-separator,
+#hyprland-language{
+  padding: 0 0.5rem;
   margin: 0;
 }
 
-#tray{
+#tray {
 }
 
 #workspaces button {
-  padding: 0 0.3rem;
-  color: #9299ba;  
+  padding: 0 0.5rem;
+  color: @color4;
   background: transparent;
   border: none;
   border-radius: 0;
+  
 }
 
-
 #workspaces button.active {
-  color: #7aa2f7;  
+  color: @foreground;
   background: transparent;
 }
 
 #workspaces button:hover {
-  background: #1a1b26;
-  color: #7aa2f7;
+  background: @color0;
+  color: @color4;
 }
 
 #battery, #network, #pulseaudio, #backlight {
-  font-size: 14px;  
+  font-size: 14px;
 }
 
 #battery.charging, #battery.warning:not(.charging),
 #network.ethernet, #network.disconnected {
-  color: inherit;  
+  color: inherit;
 }
 
-/* Reajuste fino para arreglar iconos que salen mal*/
 #battery, #network {
-  padding: 0rem 0.5rem 0rem 0;
+  padding: 0 0.5rem 0 0;
 }
 
 window#waybar {
@@ -86,5 +86,4 @@ window#waybar {
 }
 
 .modules-center {
-
 }

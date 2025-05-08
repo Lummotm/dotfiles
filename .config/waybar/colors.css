@@ -1,0 +1,31 @@
+/* ~/.config/waybar/colors.css */
+:root {
+  /* Tonos básicos */
+  --color0:  #11111B; /* crust */
+  --color1:  #181825; /* mantle */
+  --color2:  #1E1E2E; /* base */
+  --color3:  #313244; /* surface0 */
+  --color4:  #585B70; /* surface1 */
+  --color5:  #7F849C; /* surface2 */
+  --color6:  #9399B2; /* overlay0 */
+  --color7:  #A6ADC8; /* subtext0 */
+  --color8:  #BAC2DE; /* subtext1 */
+  --color9:  #CDD6F4; /* text */
+
+  /* Colores de acento */
+  --color10: #F5C2E7; /* pink */
+  --color11: #CBA6F7; /* mauve */
+  --color12: #FAB387; /* peach */
+  --color13: #F38BA8; /* red */
+  --color14: #F9E2AF; /* yellow */
+  --color15: #A6E3A1; /* green */
+  --color16: #94E2D5; /* teal */
+  --color17: #89DCEB; /* sky */
+  --color18: #89B4FA; /* blue */
+  --color19: #74C7EC; /* sapphire */
+  --color20: #B4BEFE; /* lavender */
+
+  /* Foreground/texto */
+  --foreground: var(--color9);
+}
+

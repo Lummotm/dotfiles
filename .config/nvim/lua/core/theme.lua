@@ -1,22 +1,41 @@
 local M = {}
 
 function M.setup()
-	vim.cmd("colorscheme lushwal")
+	-- obliga a usar true color en el terminal
+	vim.opt.termguicolors = true
 
+	-- carga el tema
+	vim.cmd("colorscheme catppuccin-mocha")
+
+	-- quita el fondo de las ventanas y floats
 	vim.schedule(function()
-		vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
-		vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none" })
-		vim.api.nvim_set_hl(0, "TelescopePromptNormal", { bg = "none" })
+
+		-- floats (WhichKey)
 		vim.api.nvim_set_hl(0, "WhichKeyFloat", { bg = "none" })
 		vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+
+		-- opcional: otras cosas que te molesten
+		vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
 		vim.api.nvim_set_hl(0, "CursorLine", { bg = "none" })
-		vim.api.nvim_set_hl(0, "Visual", { bg = "#414868", fg = "#ffffff" })
 	end)
+
+	-- colores de paréntesis y selección
 	vim.api.nvim_set_hl(0, "MatchParen", {
-		bg = "NONE", -- sin bloque
-		fg = "#7aa2f7", -- o el color que quieras
-		underline = true, -- o bold = true
+		bg = "NONE",
+		fg = "#7aa2f7",
+		underline = true,
 	})
+	vim.api.nvim_set_hl(0, "Visual", {
+		bg = "#414868",
+		fg = "#ffffff",
+	})
+	vim.opt.fillchars:append({
+		-- stl  = statusline (ventana activa)
+		-- stlnc = statusline en ventanas inactivas
+		stl = " ",
+		stlnc = " ",
+	})
+  vim.opt.cmdheight = 0
 end
 
 return M
