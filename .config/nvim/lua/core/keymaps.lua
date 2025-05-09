@@ -3,11 +3,11 @@ local keymap = vim.keymap.set
 -- ╭──────────────────────────────────────────────────╮
 -- │ Edición básica                                   │
 -- ╰──────────────────────────────────────────────────╯
-keymap("n", "<C-s>", ":w<CR>", { desc = "Guardar archivo" })
-keymap("n", "<C-q>", ":q<CR>", { desc = "Salir (confirma si hay cambios)" })
+keymap("n", "<C-s>", ":w<CR>", { desc = "Save File" })
+keymap("n", "<C-q>", ":q<CR>", { desc = "Exit"})
 
 -- ╭──────────────────────────────────────────────────╮
 -- │ Autoindent y movimiento                          │
 -- ╰──────────────────────────────────────────────────╯
-keymap("n", "<C-A>", "ggg0vGg$", { noremap = true, silent = true, desc = "Autoidentar todo el buffer" })
-keymap("n", "<leader>gi", "magg=G`a", { desc = "Autoidentar y volver al cursor" })
+keymap("n", "<C-A>", "ggg0vGg$", { noremap = true, silent = true, desc = "Select all text" })
+keymap("n", "<leader>gi", "magg=G`a", { desc = "Autoindent" })

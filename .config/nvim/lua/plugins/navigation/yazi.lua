@@ -3,9 +3,8 @@ return {
   event = "VeryLazy",
   keys = {
     { "<leader>c", name = "+Yazi" },
-    { "<leader>cf", "<cmd>Yazi<CR>",       desc = "Yazi: abrir archivo actual" },
-    { "<leader>cw", "<cmd>Yazi cwd<CR>",   desc = "Yazi: abrir cwd de nvim" },
-    { "<leader>cr", "<cmd>Yazi toggle<CR>",desc = "Yazi: reanudar sesión" },
+    { "<leader>cf", "<cmd>Yazi<CR>",       desc = "Yazi: open current file" },
+    { "<leader>cw", "<cmd>Yazi cwd<CR>",   desc = "Yazi: open current directory" },
   },
   ---@type YaziConfig
 
