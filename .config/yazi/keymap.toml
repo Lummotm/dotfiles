@@ -88,7 +88,7 @@ keymap = [
   # Copy operations
   { on = [ "c", "c" ], run = "copy path", desc = "Copy full path" },
   { on = [ "c", "d" ], run = "copy dirname", desc = "Copy directory name" },
-  { on = [ "c", "f" ], run = "copy filename", desc = "Copy filename" },
+  { on = [ "c", "a" ], run = "copy filename", desc = "Copy filename" },
   { on = [ "c", "n" ], run = "copy name_without_ext", desc = "Copy filename (no extension)" },
   { on = ["c","z"], run = [
     '''
@@ -97,7 +97,13 @@ keymap = [
       && zip -r "$zip_path" . >/dev/null \
       && echo "file://$zip_path" | wl-copy -t text/uri-list
       '''
-  ], desc = "Create zip of current dir and copy to clipboard" },
+  ], desc = "create zip of current dir and copy to clipboard" },
+
+  { on = [ "c", "f" ], run = [
+    '''
+    shell -- echo "file://$1" | wl-copy -t text/uri-list
+    '''
+  ], desc = "Copy file as URI to clipboard" },
 
   # Sorting
   { on = [ ",", "m" ], run = [ "sort modified --reverse=no", "linemode mtime" ], desc = "Sort by modified time" },
