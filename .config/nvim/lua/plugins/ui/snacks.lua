@@ -81,11 +81,11 @@ return {
 
 		-- Explorer
 		{
-			"<leader>e",
+			"<leader>ef",
 			function()
 				Snacks.explorer()
 			end,
-			desc = "File Explorer",
+			desc = "Snacks: file Explorer",
 		},
 
 		-- Notifier
