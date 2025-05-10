@@ -3,4 +3,5 @@ return {
   { import = "plugins.lsp" },
   { import = "plugins.navigation" },
   { import = "plugins.langs" },
+  { import = "plugins.tools" },
 }
