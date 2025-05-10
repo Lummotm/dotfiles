@@ -73,4 +73,30 @@ keymap("n", "<C-k>", "<cmd><C-U>TmuxNavigateUp<cr>", { desc = "Tmux Up" })
 keymap("n", "<C-l>", "<cmd><C-U>TmuxNavigateRight<cr>", { desc = "Tmux Right" })
 keymap("n", "<C-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>", { desc = "Tmux Previous" })
 
+-- ╭─────────────────────────────────────────────╮
+-- │ VimTeX Keymaps                              │
+-- ╰─────────────────────────────────────────────╯
+-- Only active in .tex buffers
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "tex",
+  callback = function()
+    local opts = { buffer = true, noremap = true, silent = true }
+
+    -- Compilation and viewer
+    keymap("n", "<leader>ll", "<cmd>VimtexCompile<CR>", vim.tbl_extend("force", opts, { desc = "Compile LaTeX" }))
+    keymap("n", "<leader>lv", "<cmd>VimtexView<CR>",    vim.tbl_extend("force", opts, { desc = "View PDF" }))
+    keymap("n", "<leader>lk", "<cmd>VimtexStop<CR>",    vim.tbl_extend("force", opts, { desc = "Stop compilation" }))
+    keymap("n", "<leader>le", "<cmd>VimtexErrors<CR>",  vim.tbl_extend("force", opts, { desc = "Show errors" }))
+    keymap("n", "<leader>lo", "<cmd>VimtexCompileOutput<CR>", vim.tbl_extend("force", opts, { desc = "Show output" }))
+
+    -- Cleanup and control
+    keymap("n", "<leader>lc", "<cmd>VimtexClean<CR>",   vim.tbl_extend("force", opts, { desc = "Clean aux files" }))
+    keymap("n", "<leader>lC", "<cmd>VimtexClean!<CR>",  vim.tbl_extend("force", opts, { desc = "Full clean" }))
+    keymap("n", "<leader>li", "<cmd>VimtexInfo<CR>",    vim.tbl_extend("force", opts, { desc = "Project info" }))
+    keymap("n", "<leader>ls", "<cmd>VimtexToggleMain<CR>", vim.tbl_extend("force", opts, { desc = "Toggle main file" }))
+    keymap("n", "<leader>lr", "<cmd>VimtexReverseSearch<CR>", vim.tbl_extend("force", opts, { desc = "Reverse search" }))
+    keymap("n", "<leader>lx", "<cmd>VimtexReload<CR>",  vim.tbl_extend("force", opts, { desc = "Reload VimTeX" }))
+    keymap("n", "<leader>lt", "<cmd>VimtexTocToggle<CR>", vim.tbl_extend("force", opts, { desc = "Table of contents" }))
+  end,
+})
 
