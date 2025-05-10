@@ -49,6 +49,7 @@ keymap("n", "<leader>ff", function() require("snacks").picker.files() end, { des
 keymap("n", "<leader>fp", function() require("snacks").picker.projects() end, { desc = "Projects" })
 keymap("n", "<leader>fr", function() require("snacks").picker.recent() end, { desc = "Recent Files" })
 keymap("n", "<leader>fg", function() require("snacks").picker.grep() end, { desc = "Grep Text" })
+keymap("n", "<leader>fk", function() require("snacks").picker.keymaps() end, {desc = "Find Keymaps"} )
 
 -- ╭─────────────────────────────────────────────╮
 -- │ LSP Navigation (Snacks)                     │
@@ -62,7 +63,7 @@ keymap("n", "gy", function() require("snacks").picker.lsp_type_definitions() end
 -- ╭─────────────────────────────────────────────╮
 -- │ Notifications                               │
 -- ╰─────────────────────────────────────────────╯
-keymap("n", "<leader>n", function() require("snacks").notifier.show_history() end, { desc = "Notification History" })
+keymap("n", "<leader>nh", function() require("snacks").notifier.show_history() end, { desc = "Notification History" })
 
 -- ╭─────────────────────────────────────────────╮
 -- │ Tmux Navigation                             │
