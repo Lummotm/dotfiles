@@ -17,6 +17,7 @@ return {
 		words = { enabled = true },
 		statuscolumn = { enabled = true },
 		quickfile = { enabled = true },
+		lazygit = { enabled = true },
 	},
 	keys = {
 		-- Pickers
@@ -95,6 +96,15 @@ return {
 				Snacks.notifier.show_history()
 			end,
 			desc = "Notification History",
+		},
+
+		-- lazygit
+		{
+			"<leader>cg",
+			function()
+				Snacks.lazygit()
+			end,
+			desc = "Lazygit",
 		},
 	},
 }
