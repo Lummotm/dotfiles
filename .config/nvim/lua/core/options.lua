@@ -1,56 +1,47 @@
---[[
-  NEOVIM CORE CONFIGURATION
-  Minimalist yet powerful setup with thoughtful defaults
---]]
+-- ╭─────────────────────────────────────────────╮
+-- │ Neovim Core Configuration                   │
+-- ╰─────────────────────────────────────────────╯
 
---------------------------------------------------------------------------------
--- Visual Settings
---------------------------------------------------------------------------------
--- Line Numbers & Appearance
-vim.opt.number = true         -- Show absolute line numbers
-vim.opt.relativenumber = true-- Relative numbers for easier navigation
-vim.opt.cursorline = false    -- Highlight current line
-vim.opt.termguicolors = true  -- Enable 24-bit RGB color support
-vim.opt.showmode = false      -- Hide mode (covered by statusline)
+-- ╭─────────────────────────────────────────────╮
+-- │ Visual Settings                             │
+-- ╰─────────────────────────────────────────────╯
+vim.opt.number = true              -- Show absolute line numbers
+vim.opt.relativenumber = true      -- Relative numbers for easier navigation
+vim.opt.cursorline = false         -- Don't highlight the current line
+vim.opt.termguicolors = true       -- Enable 24-bit RGB color
+vim.opt.showmode = false           -- Disable "-- INSERT --" (handled by statusline)
 
--- Whitespace & Indentation
-vim.opt.tabstop = 2        -- Number of spaces a TAB represents
-vim.opt.shiftwidth = 2     -- Spaces for auto-indentation
-vim.opt.softtabstop = 2    -- Spaces inserted when pressing TAB
-vim.opt.expandtab = true   -- Convert tabs to spaces
-vim.opt.breakindent = true -- Maintain indentation on wrapped lines
+-- ╭─────────────────────────────────────────────╮
+-- │ Whitespace & Indentation                    │
+-- ╰─────────────────────────────────────────────╯
+vim.opt.tabstop = 2                -- Number of spaces a TAB represents
+vim.opt.shiftwidth = 2             -- Spaces for auto-indentation
+vim.opt.softtabstop = 2            -- Spaces inserted when pressing TAB
+vim.opt.expandtab = true           -- Convert tabs to spaces
+vim.opt.breakindent = true         -- Preserve indent in wrapped lines
 
---------------------------------------------------------------------------------
--- Behavior & Performance
---------------------------------------------------------------------------------
--- File Handling
-vim.opt.undofile = true -- Persistent undo history
-vim.opt.confirm = true  -- Confirm before unsaved changes
+-- ╭─────────────────────────────────────────────╮
+-- │ Behavior & Performance                      │
+-- ╰─────────────────────────────────────────────╯
+vim.opt.undofile = true            -- Enable persistent undo
+vim.opt.confirm = true             -- Confirm before quitting unsaved changes
+vim.opt.updatetime = 250           -- Faster updates (useful for plugins)
+vim.opt.timeoutlen = 500           -- Timeout for mapped sequence (ms)
 
--- Timing & Responsiveness
-vim.opt.updatetime = 250 -- Faster updates (for plugins)
-vim.opt.timeoutlen = 500 -- Timeout for key sequences
+-- ╭─────────────────────────────────────────────╮
+-- │ UI Elements                                 │
+-- ╰─────────────────────────────────────────────╯
+vim.opt.signcolumn = "yes"         -- Always show sign column (LSP/git)
+vim.opt.listchars = {
+  tab = "» ",
+  trail = "·",
+  nbsp = "␣",
+}
 
--- UI Elements
-vim.opt.signcolumn = "yes" -- Always show sign column (for LSP/git)
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+-- ╭─────────────────────────────────────────────╮
+-- │ Input & Navigation                          │
+-- ╰─────────────────────────────────────────────╯
+vim.opt.mouse = ""                 -- Disable mouse entirely
+vim.g.mapleader = " "              -- Set <leader> key to space
+vim.g.maplocalleader = " "         -- Local leader (buffer-specific mappings)
 
---------------------------------------------------------------------------------
--- Input & Navigation
---------------------------------------------------------------------------------
--- Mouse & Keybindings
-vim.opt.mouse = ""         -- Disable mouse completely
-vim.g.mapleader = " "      -- Set space as leader key
-vim.g.maplocalleader = " " -- Local leader for buffer-specific mappings
-
--- Clipboard Integration
-vim.schedule(function()
-  vim.opt.clipboard = "unnamedplus"                  -- Usa el portapapeles del sistema
-  vim.keymap.set("n", "d", '"_d', { noremap = true }) -- Mapea `d` para no usar el registro, es decir no se guarda en el clipboard
-  vim.keymap.set("v", "d", '"_d', { noremap = true }) -- También en modo visual
-end)
-
---[[
-  Note: Additional plugin configurations should be added
-  in their respective files under lua/plugins/
---]]
