@@ -11,7 +11,6 @@ return {
 				"Overfull",
 				"specifier changed to",
 			}
-
 			vim.g.vimtex_compiler_latexmk = {
 				continuous = 1,
 				options = {
@@ -19,12 +18,16 @@ return {
 					"-shell-escape",
 					"-verbose",
 					"-file-line-error",
-					"-synctex=1",
 					"-interaction=nonstopmode",
 				},
 			}
-
 			vim.g.vimtex_matchparen_enabled = 0
+			vim.api.nvim_create_autocmd("VimLeavePre", {
+				pattern = "*.tex",
+				callback = function()
+					vim.cmd("VimtexClean")
+				end,
+			})
 		end,
 	},
 	{

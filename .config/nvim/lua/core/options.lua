@@ -10,6 +10,7 @@ vim.opt.relativenumber = true      -- Relative numbers for easier navigation
 vim.opt.cursorline = false         -- Don't highlight the current line
 vim.opt.termguicolors = true       -- Enable 24-bit RGB color
 vim.opt.showmode = false           -- Disable "-- INSERT --" (handled by statusline)
+vim.opt.wrap = false
 
 -- ╭─────────────────────────────────────────────╮
 -- │ Whitespace & Indentation                    │
