@@ -6,16 +6,6 @@ for _, key in ipairs({ "gD", "gr", "grr", "gra", "gri", "grn", "g%", "gx", "gO",
 end
 pcall(vim.keymap.del, "n", "g") -- deletes direct mapping <g>
 
-
--- ╭─────────────────────────────────────────────╮
--- │ Basic Editing                               │
--- ╰─────────────────────────────────────────────╯
-keymap("n", "<C-s>", ":w<CR>", { desc = "Save File" })
-keymap("n", "<C-q>", ":q<CR>", { desc = "Exit" })
-keymap("n", "<C-A>", "ggg0VGg$", { desc = "Select All Text" })
--- Restore native macro recording on 'q'
-vim.keymap.set("n", "q", "q", { noremap = true, silent = true })
-
 -- ╭─────────────────────────────────────────────╮
 -- │ Clipboard Integration                       │
 -- ╰─────────────────────────────────────────────╯
@@ -82,4 +72,5 @@ keymap("n", "<C-j>", "<cmd><C-U>TmuxNavigateDown<cr>", { desc = "Tmux Down" })
 keymap("n", "<C-k>", "<cmd><C-U>TmuxNavigateUp<cr>", { desc = "Tmux Up" })
 keymap("n", "<C-l>", "<cmd><C-U>TmuxNavigateRight<cr>", { desc = "Tmux Right" })
 keymap("n", "<C-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>", { desc = "Tmux Previous" })
+
 
