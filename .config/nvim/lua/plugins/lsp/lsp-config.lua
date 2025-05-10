@@ -8,12 +8,6 @@ return {
       "mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
     },
-    keys = {
-      { "K",          vim.lsp.buf.hover,       desc = "Hover LSP" },
-      { "gd",         vim.lsp.buf.definition,  desc = "Go to definition" },
-      { "<leader>ca", vim.lsp.buf.code_action, desc = "Code actions", mode = { "n","v" } },
-      { "<leader>gf", vim.lsp.buf.format,      desc = "Fomat with LSP" },
-    },
     config = function()
       local lspconfig = require("lspconfig")
       local caps = require("cmp_nvim_lsp").default_capabilities()

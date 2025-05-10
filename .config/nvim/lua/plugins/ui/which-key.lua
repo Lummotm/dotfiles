@@ -11,7 +11,6 @@ return {
 			mappings = false,
 			rules = {},
 			colors = true,
-			keys = {},
 		},
 	},
 	keys = {
@@ -24,13 +23,15 @@ return {
 		},
 	},
 
+  -- which-key groups defined here
 	config = function(_, opts) --ignore "plugin" argument with _ (load opts with second argument)
 		require("which-key").setup(opts)
 		require("which-key").add({
 			{ "<leader>c", group = "[C]ode" },
 			{ "<leader>e", group = "[E]xplorer" },
 			{ "<leader>f", group = "[P]icker" },
-			{ "<leader>g", group = "[S]tylers" },
+			{ "<leader>s", group = "[S]tylers" },
+      { "<leader>g", group = "[G]it"},
 		})
 	end,
 }

@@ -10,7 +10,5 @@ return {
     "rhysd/vim-clang-format",
     ft = { "c", "cpp" },
     cmd = "ClangFormat",
-    keys = {
-    },
   },
 }

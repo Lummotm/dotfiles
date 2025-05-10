@@ -17,8 +17,6 @@ return {
     "psf/black",
     ft = "python",
     cmd = "Black",
-    keys = {
-    },
   },
   {
     "Vimjas/vim-python-pep8-indent",
