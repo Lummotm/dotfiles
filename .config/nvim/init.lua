@@ -17,6 +17,21 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
+if vim.fn.has("unix") == 1 and vim.fn.executable("wl-copy") == 1 then
+	vim.g.clipboard = {
+		name = "wl-clipboard",
+		copy = {
+			["+"] = "wl-copy --foreground --type text/plain",
+			["*"] = "wl-copy --foreground --primary --type text/plain",
+		},
+		paste = {
+			["+"] = "wl-paste --no-newline",
+			["*"] = "wl-paste --no-newline --primary",
+		},
+		cache_enabled = true,
+	}
+end
+
 -- Load core first
 require("core.options")
 require("core.keymaps")
