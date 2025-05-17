@@ -1,0 +1,14 @@
+# Archivos generados por Fisher
+.config/fish/fish_variables
+.config/fish/completions/fisher.fish
+
+# Configs generadas o no necesarias
+.config/zathura/zathurarc
+.config/waybar/style.css
+.config/btop/btop.conf
+.config/musikcube
+.config/Thunar
+.config/wal/templates/
+.config/wal/templates/wofi.css
+.config/wofi/style.css
+.config/tmux/plugins/

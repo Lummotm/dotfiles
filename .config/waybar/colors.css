@@ -1,0 +1,31 @@
+/* ~/.config/waybar/colors.css */
+:root {
+  /* Tonos básicos */
+  --color0:  #11111B;
+  --color1:  #181825;
+  --color2:  #1E1E2E;
+  --color3:  #313244;
+  --color4:  #585B70;
+  --color5:  #7F849C;
+  --color6:  #9399B2;
+  --color7:  #A6ADC8;
+  --color8:  #BAC2DE;
+  --color9:  #CDD6F4;
+
+  /* Colores de acento */
+  --color10: #F5C2E7; 
+  --color11: #CBA6F7; 
+  --color12: #FAB387; 
+  --color13: #F38BA8; 
+  --color14: #F9E2AF; 
+  --color15: #A6E3A1; 
+  --color16: #94E2D5; 
+  --color17: #89DCEB; 
+  --color18: #89B4FA; 
+  --color19: #74C7EC; 
+  --color20: #B4BEFE; 
+
+  /* Foreground/texto */
+  --foreground: var(--color9);
+}
+
