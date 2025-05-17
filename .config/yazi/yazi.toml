@@ -30,7 +30,7 @@ ueberzug_offset = [0, 0, 0, 0]
 
 [opener]
 edit = [{ run = 'nvim "$@"', block = true }]
-open = [{ run = 'xdg-open "$1"', desc = "Open", for = "linux" }]
+open = [{ run = 'xdg-open "$@"', desc = "Open" }]
 reveal = [
     { run = 'xdg-open "$(dirname "$1")"', desc = "Reveal", for = "linux" },
 ]
@@ -46,11 +46,25 @@ rules = [
         "open",
         "reveal",
     ] },
-    # Text
+
+    # Text & Markdown
+    { name = "*.md", use = [
+        "edit",
+        "reveal",
+    ] },
     { mime = "text/*", use = [
         "edit",
         "reveal",
     ] },
+    { mime = "inode/x-empty", use = [
+        "edit",
+        "reveal",
+    ] },
+    { mime = "application/octet-stream", use = [
+        "edit",
+        "reveal",
+    ] }, # <- opcional pero útil
+
     # Image
     { mime = "image/*", use = [
         "open",
