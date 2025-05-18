@@ -43,36 +43,3 @@ keymap("n", "<leader>sce", function()
 		print("Spell check: English")
 	end
 end, { desc = "Toggle Spell check: English" })
-
-vim.keymap.set("n", "<leader>gn", function()
-	vim.fn.system("sync-notes")
-	print("Notas sincronizadas.")
-end, { desc = "Sincronizar notas Obsidian" })
-
-vim.keymap.set("n", "<leader>ob", function()
-	local input = vim.fn.expand("%")
-	local output = "/tmp/preview.html"
-	local cmd = {
-		"pandoc",
-		input,
-		"-s",
-		"--mathjax=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js",
-		"-o",
-		output,
-	}
-
-	vim.fn.jobstart(cmd, {
-		on_exit = function()
-			vim.fn.jobstart({ "zen-browser", output }, { detach = true })
-		end,
-	})
-end, { desc = "Preview Markdown with LaTeX in Zen", noremap = true, silent = true })
-
-vim.keymap.set("n", "<leader>oo", function()
-	local path = vim.fn.expand("%:~:.") -- Ruta relativa
-	local rel = path:gsub("^.*Obsidian/", "") -- Solo lo que va después del vault
-	local encoded = rel:gsub(" ", "%%20") -- Escapa espacios
-	local vault = "Obsidian" -- ¡Pon aquí el nombre real de tu vault!
-	local url = "obsidian://open?vault=" .. vault .. "&file=" .. encoded
-	vim.fn.jobstart({ "xdg-open", url }, { detach = true })
-end, { desc = "Open current file in Obsidian" })
