@@ -63,10 +63,10 @@ vim.keymap.set("n", "<leader>ob", function()
 
 	vim.fn.jobstart(cmd, {
 		on_exit = function()
-			vim.fn.jobstart({ "env", "GDK_BACKEND=x11", "surf", output }, { detach = true })
+			vim.fn.jobstart({ "zen-browser", output }, { detach = true })
 		end,
 	})
-end, { desc = "Preview Markdown with LaTeX in surf", noremap = true, silent = true })
+end, { desc = "Preview Markdown with LaTeX in Zen", noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>oo", function()
 	local path = vim.fn.expand("%:~:.") -- Ruta relativa
