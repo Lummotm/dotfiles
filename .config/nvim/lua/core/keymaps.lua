@@ -5,6 +5,8 @@ local opts = { noremap = true, silent = true }
 keymap({ "n", "v" }, "y", '"+y', { desc = "Yank to system clipboard" })
 keymap("n", "yy", '"+yy', { desc = "Yank line to system clipboard" })
 
+keymap({ "n", "v" }, "x", '"+x', { desc = "Cut to system clipboard" })
+
 keymap({ "n", "v" }, "p", '"+p', { desc = "Paste from system clipboard" })
 keymap({ "n", "v" }, "P", '"+P', { desc = "Paste before from system clipboard" })
 
