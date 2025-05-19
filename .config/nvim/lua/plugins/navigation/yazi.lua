@@ -5,9 +5,7 @@ return {
 		{ "<leader>ee", "<cmd>Yazi<CR>", desc = "Yazi: Current File" },
 		{ "<leader>ew", "<cmd>Yazi cwd<CR>", desc = "Yazi: Current Directory" },
 	},
-	opts = {
-		open_for_directories = true,
-	},
+	opts = {},
 	init = function()
 		vim.g.loaded_netrwPlugin = 1
 	end,
