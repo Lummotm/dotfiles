@@ -33,6 +33,24 @@ return {
 				})
 			end, { desc = "Preview Markdown with LaTeX in Zen", noremap = true, silent = true }),
 
+			vim.keymap.set("n", "<leader>op", function()
+				local input = vim.fn.expand("%")
+				local output = "/tmp/preview.pdf"
+				local cmd = {
+					"pandoc",
+					input,
+					"-s",
+					"-o",
+					output,
+				}
+
+				vim.fn.jobstart(cmd, {
+					on_exit = function()
+						vim.fn.jobstart({ "zathura", output }, { detach = true })
+					end,
+				})
+			end, { desc = "Compile Markdown to PDF with Pandoc and open in Zathura", noremap = true, silent = true }),
+
 			vim.keymap.set("n", "<leader>oo", function()
 				local path = vim.fn.expand("%:~:.") -- Ruta relativa
 				local rel = path:gsub("^.*Obsidian/", "") -- Solo lo que va después del vault
