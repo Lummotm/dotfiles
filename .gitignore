@@ -12,3 +12,6 @@
 .config/wal/templates/wofi.css
 .config/wofi/style.css
 .config/tmux/plugins/
+.config/mpd/playlists
+.config/mpd/pid
+.config/mpd/database
