@@ -9,8 +9,9 @@ if not status is-interactive
 end
 
 # Variables de entorno globales
-set -gx MANPAGER 'nvim +Man!'
 set -gx EDITOR nvim
+set -gx MANPAGER 'nvim +Man!'
+set -gx PAGER "nvim -"
 
 # Ruta de fisher (en caso de fallback)
 set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
