@@ -61,6 +61,5 @@ return {
 		lspconfig.clangd.setup({ capabilities = capabilities })
 		lspconfig.pyright.setup({ capabilities = capabilities })
 		lspconfig.taplo.setup({ capabilities = capabilities })
-		lspconfig.hyprls.setup({ capabilities = capabilities })
 	end,
 }
