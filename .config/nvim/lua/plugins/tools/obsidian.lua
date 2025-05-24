@@ -33,33 +33,16 @@ return {
 				})
 			end, { desc = "Preview Markdown with LaTeX in Zen", noremap = true, silent = true }),
 
-			vim.keymap.set("n", "<leader>op", function()
-				local input = vim.fn.expand("%")
-				local output = "/tmp/preview.pdf"
-				local cmd = {
-					"pandoc",
-					input,
-					"-s",
-					"-o",
-					output,
-				}
-
-				vim.fn.jobstart(cmd, {
-					on_exit = function()
-						vim.fn.jobstart({ "zathura", output }, { detach = true })
-					end,
-				})
-			end, { desc = "Compile Markdown to PDF with Pandoc and open in Zathura", noremap = true, silent = true }),
-
 			vim.keymap.set("n", "<leader>oo", function()
-				local path = vim.fn.expand("%:~:.") -- Ruta relativa
-				local rel = path:gsub("^.*Obsidian/", "") -- Solo lo que va después del vault
-				local encoded = rel:gsub(" ", "%%20") -- Escapa espacios
-				local vault = "Obsidian" -- ¡Pon aquí el nombre real de tu vault!
+				local path = vim.fn.expand("%:~:.")
+				local rel = path:gsub("^.*Obsidian/", "")
+				local encoded = rel:gsub(" ", "%%20")
+				local vault = "Obsidian"
 				local url = "obsidian://open?vault=" .. vault .. "&file=" .. encoded
 				vim.fn.jobstart({ "xdg-open", url }, { detach = true })
 			end, { desc = "Open current file in Obsidian" }),
 		},
+
 		config = function()
 			require("obsidian").setup({
 				workspaces = {
