@@ -6,12 +6,16 @@
 .config/zathura/zathurarc
 .config/waybar/style.css
 .config/btop/btop.conf
-.config/musikcube
-.config/Thunar
+.config/musikcube/
+.config/Thunar/
 .config/wal/templates/
-.config/wal/templates/wofi.css
 .config/wofi/style.css
 .config/tmux/plugins/
-.config/mpd/playlists
+
+# Archivos generados por MPD
+.config/mpd/playlists/
 .config/mpd/pid
 .config/mpd/database
+.config/mpd/state
+.config/mpd/sticker.sql
+.config/mpd/tag_cache
