@@ -54,7 +54,7 @@ return {
 					{ "lsp_progress", color = { bg = "none" } },
 				},
 				lualine_x = {
-					{ "filetype", icon_only = false, color = { bg = "none" } },
+					{ "filetype", icon_only = false, color = { bg = "none" }, padding = 0 },
 				},
 				lualine_y = {},
 				lualine_z = {},
