@@ -10,3 +10,4 @@ alias a   'z'
 
 # Hotspot wifi (adaptar si cambia la interfaz)
 alias hotspot 'nmcli device wifi hotspot ifname wlan0 ssid ThinkingRock band bg password ThinkingRock123 && nmcli dev wifi show-password'
+
