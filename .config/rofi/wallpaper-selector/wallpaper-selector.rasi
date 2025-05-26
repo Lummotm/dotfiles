@@ -1,0 +1,127 @@
+/**
+* ROFI Color Theme
+*
+* Fullscreen theme with switchable PREVIEW option.
+* 
+* User: Dave Davenport
+* Copyright: Dave Davenport
+*/
+/**
+* Theme customized by David Nikolov, added vim-keybinds and made it more like a selector
+*/
+
+* {
+    background-color: transparent;
+    filebrowser-hide-parent: true;
+    filebrowser-hide-path: true;
+    text-color:       white;
+}
+
+window {
+    fullscreen: true;
+    background-color: black/80%;
+    padding: 3em 1.5em 1.5em 1.5em; /* top, right, bottom, left */
+    children: [ listview-split ];
+    spacing: 0em;
+}
+
+
+listview-split {
+    orientation: horizontal;
+    children: [listview];
+}
+
+icon-ib {
+    expand: false;
+    filename: "system-search";
+    vertical-align: 0.5;
+    horizontal-align: 0.5;
+    size: 1em;
+}
+
+message {
+    background-color: red/20%;
+    border-color: lightsalmon;
+    border: 3px 0px 0px 0px;
+    padding: 0.4em;
+    spacing: 0.4em;
+}
+
+listview {
+    flow: horizontal;
+    fixed-columns: true;
+    columns: 7;
+    lines: 5;
+    spacing: 1.0em;
+}
+
+element {
+    orientation: vertical;
+    background-image: linear-gradient(white/5%, white/20%);
+    border-color: lightblue /15%;
+    border: 3px;
+    border-radius: 0.4em;
+    children: [element-icon];
+}
+
+element-icon {
+    size: calc(((100% - 8em) / 7 ));
+    horizontal-align: 0.5;
+    vertical-align: 0.5;
+    expand: true; /* Permitir que el icono se expanda */
+}
+
+element-text {
+    horizontal-align: 0.5;
+    vertical-align: 0.5;
+    padding: 0.2em;
+    expand: false; /* El texto no se expande */
+}
+
+element selected {
+    background-image: linear-gradient(white/25%, white/10%);
+    border-color: lightblue;
+    border: 3px;
+    border-radius: 0.4em;
+}
+
+/**
+* Launching rofi with environment PREVIEW set to true
+* will split the screen and show a preview widget.
+*/
+@media ( enabled: env(PREVIEW, false)) {
+/** preview widget */
+icon-current-entry {
+    expand: false;
+    size:            100%;
+}
+listview-split {
+    children: [listview, icon-current-entry];
+}
+listview {
+    columns: 4;
+}
+
+}
+
+@media ( enabled: env(NO_IMAGE, false)) {
+listview {
+    columns: 1;
+    spacing: 0.4em;
+}
+element {
+    children: [ element-text ];
+}
+element-text {
+    horizontal-align: 0.0;
+}
+}
+
+configuration {
+    kb-row-up: "k";
+    kb-row-down: "j";
+    kb-row-left: "h";
+    kb-row-right: "l";
+    kb-accept-entry: "Return";
+    kb-cancel: "Escape";
+}
