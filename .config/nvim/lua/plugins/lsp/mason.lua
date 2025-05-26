@@ -27,6 +27,7 @@ return {
 				"clangd",
 				"pyright",
 				"taplo",
+				"bashls",
 			},
 		},
 	},

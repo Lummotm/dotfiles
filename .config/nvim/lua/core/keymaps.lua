@@ -15,7 +15,7 @@ keymap("n", "d", '"_d', { desc = "Delete without yanking" })
 keymap("v", "d", '"_d', { desc = "Delete without yanking" })
 
 -- Autoindent del archivo entero
-keymap("n", "<leader>si", "magg=G`a", { desc = "Autoindent Entire File" })
+keymap("n", "<leader>si", "gg=G", { desc = "Autoindent Entire File" })
 
 -- Centrar scroll
 keymap("n", "<C-d>", "<C-d>zz", opts)
