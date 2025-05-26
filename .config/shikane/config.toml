@@ -1,17 +1,18 @@
-
-
 [[profile]]
 name = "laptop builtin"
-	[[profile.output]]
-	search = "eDP-1"
-	enable = true
+[[profile.output]]
+search = "eDP-1"
+mode = "1920x1080@60Hz"
+exec = ["hyprctl keyword monitor eDP-1,1920x1080@60,0x0,1"]
+enable = true
+
 [[profile]]
 name = "no builtin + HDMI"
-	[[profile.output]]
-	search = "n=eDP-1"
-	enable = false
-
-	[[profile.output]]
-	search = "n=HDMI-A-1"
-	mode = "best"
-	enable = true
+[[profile.output]]
+search = "n=eDP-1"
+exec = ["hyprctl keyword monitor eDP-1,disable"]
+enable = false
+[[profile.output]]
+search = "n=HDMI-A-1"
+mode = "1920x1080@144Hz"
+enable = true
