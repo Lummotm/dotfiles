@@ -4,8 +4,7 @@
     "position": "top",
     "height": 30,
     "spacing": 0,
-    "margin-top": 0,
-    "margin-left": 0,
+    "margin-top": 0, "margin-left": 0,
     "margin-right": 0,
     "margin-bottom": 1,
     
@@ -75,39 +74,29 @@
         "format-icons": ["", "", "", "", ""]
     },
     "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "ETHERNET ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
+        "format-wifi": "{essid} ({signalStrength}%) 󰤨 ",
+        "format-ethernet": "󰈀  Ethernet",
+        "tooltip-format": "{ifname} via {gwaddr} 󰈀 ",
+        "format-linked": "{ifname} (No IP) 󰈀 ",
+        "format-disconnected": "Disconnected  "
     },
     "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
         "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon}  {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
+        "format-bluetooth": "{volume}% {icon}󰂯 {format_source}",
+        "format-bluetooth-muted": "󰝟 󰂯 {format_source}",
+        "format-muted": "󰝟 {format_source}",
+        "format-source": "{volume}% 󰍬",
+        "format-source-muted": "󰍭",
         "format-icons": {
-            "headphone": "  ",
-            "hands-free": "  ",
-            "headset": "  ",
-            "phone": " ",
-            "portable": " ",
-            "car": "",
-            "default": [" ", " ", " "]
+            "headphone": "󰋋 ",
+            "hands-free": "󰋋 ",
+            "headset": "󰋋 ",
+            "default": ["󰕿 ", "󰖀 ", "󰕾 "]
         },
         "on-click": "pavucontrol"
     },
-    "custom/wall-changer": {
-	    "format" : "󰜉",
-      "on-click":"~/./Projects/Bash/hyprpaper_randomizer.sh",
-      "tooltip":false,
-    },
-     "tray": {
-        "icon-size": 21,
-        "spacing": 10
+    "tray": {
+            "icon-size": 21,
+            "spacing": 10
     }
 }
