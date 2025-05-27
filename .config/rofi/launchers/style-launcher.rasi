@@ -9,10 +9,11 @@
 
 /*****----- Configuration -----*****/
 configuration {
-    show-icons:                 true;
-    display-drun:               "APPS";
-    display-music:              "MUSIC";
+    show-icons:                     true;
+    display-drun:                 "APPS";
+    display-music:               "MUSIC";
     display-window:             "WINDOW";
+    display-notes:               "NOTES";
     drun-display-format:        "{name}";
     window-format:              "{w} · {c} · {t}";
     kb-element-next:            "";
