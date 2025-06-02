@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 DEVICE="asue120b:00-04f3:31c0-touchpad"
 VAR="device[$DEVICE]:enabled"
@@ -13,4 +13,3 @@ else
     touch "$FLAG"
     notify-send "🖱 Touchpad desactivado"
 fi
-

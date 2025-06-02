@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Función para verificar si existe una sesión de tmux
 check_tmux_session() {

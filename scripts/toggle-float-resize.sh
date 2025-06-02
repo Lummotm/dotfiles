@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 hyprctl dispatch togglefloating
 hyprctl dispatch resizeactive exact 1200 700
