@@ -1,0 +1,10 @@
+[Unit]
+Description=Random Wallpaper Timer
+Requires=randwall.service
+
+[Timer]
+OnCalendar=*:0/10
+Persistent=true
+
+[Install]
+WantedBy=timers.target

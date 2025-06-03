@@ -1,0 +1,12 @@
+[Unit]
+Description=Sync Notes Service
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/davidn/scripts/sync-notes.sh
+StandardOutput=append:/tmp/sync-notes.log
+StandardError=append:/tmp/sync-notes.log
+
+[Install]
+WantedBy=default.target

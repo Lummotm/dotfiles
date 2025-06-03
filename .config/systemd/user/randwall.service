@@ -1,0 +1,11 @@
+[Unit]
+Description=Random Wallpaper Changer
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/davidn/scripts/randWallPick.sh
+Environment=DISPLAY=:0
+
+[Install]
+WantedBy=default.target
