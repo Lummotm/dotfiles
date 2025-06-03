@@ -3,7 +3,7 @@ Description=Random Wallpaper Timer
 Requires=randwall.service
 
 [Timer]
-OnCalendar=*:0/10
+OnCalendar=hourly
 Persistent=true
 
 [Install]

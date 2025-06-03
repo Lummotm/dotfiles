@@ -4,20 +4,23 @@
 base="$HOME/Pictures/Wallpapers/rand-wall"
 
 # Seleccionar imagen aleatoria
+filetemp=$(fd -e png -e jpg . "$HOME/Pictures/Wallpapers/wall-randomizer/" | shuf -n 1)
+
+# Usar la imagen como fondo (swww)
+swww img "$filetemp" --transition-type random --transition-step 255 --transition-fps 60
+
 file=$(fd -e png -e jpg . "$HOME/Pictures/Wallpapers/wall-randomizer/" | shuf -n 1)
-swww img $file --transition-type grow --transition-step 255 --transition-fps 60
 
-# Obtener extensión original
+# Obtener extensión original y definir 'copied'
 ext="${file##*.}"
+copied="$file"
 
-# Ruta con la extensión original (por si quieres guardarla también)
-copied="$base.$ext"
-
+# Convertir a PNG y guardar como rand-wall.png
 if [ "$ext" != "png" ]; then
     rm -f "$base.png"
-    ffmpeg -y -i "$copied" "$base.png"
+    ffmpeg -y -i "$copied" "$base.png" >/dev/null 2>&1
 else
-    # Solo copiar si los paths no son idénticos
+    # Solo copiar si no son el mismo path
     if [ "$copied" != "$base.png" ]; then
         cp "$copied" "$base.png"
     fi

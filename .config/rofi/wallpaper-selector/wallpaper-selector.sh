@@ -1,7 +1,7 @@
 #!/bin/sh
 
 WallDir=${1:-"$HOME/Pictures/Wallpapers/wall-randomizer/"}
-WallChangeCommand="swww img --transition-type grow \
+WallChangeCommand="swww img --transition-type random \
     --transition-step 255 --transition-fps 60"
 ROFI_THEME="$HOME/.config/rofi/wallpaper-selector/wallpaper-selector.rasi"
 
