@@ -11,3 +11,7 @@ alias a   'z'
 # Hotspot wifi (adaptar si cambia la interfaz)
 alias hotspot 'nmcli device wifi hotspot ifname wlan0 ssid ThinkingRock band bg password ThinkingRock123 && nmcli dev wifi show-password'
 
+# Safe update with backup from timeshift previous to update
+alias safe-update='sudo timeshift --create --comments "Antes de yay -Syu" --tags D; and yay -Syu'
+
+
