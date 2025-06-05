@@ -10,7 +10,7 @@
     
     "modules-left": [ "clock","custom/separator","hyprland/workspaces", "custom/separator","tray"],
     "modules-center": [],
-    "modules-right": ["custom/separator","pulseaudio", "custom/separator", "network", "custom/separator", "backlight","custom/separator","hyprland/language", "custom/separator", "battery"],
+    "modules-right": ["custom/separator","pulseaudio", "custom/separator", "network", "custom/separator", "backlight","custom/separator", "battery"],
     
     "custom/separator": {
         "format": "|",
@@ -75,16 +75,16 @@
     },
     "network": {
         "format-wifi": "{essid} ({signalStrength}%) 󰤨 ",
-        "format-ethernet": "󰈀  Ethernet",
+        "format-ethernet": " 󰈀  Ethernet",
         "tooltip-format": "{ifname} via {gwaddr} 󰈀 ",
         "format-linked": "{ifname} (No IP) 󰈀 ",
         "format-disconnected": "Disconnected  "
     },
     "pulseaudio": {
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon}󰂯 {format_source}",
-        "format-bluetooth-muted": "󰝟 󰂯 {format_source}",
-        "format-muted": "󰝟 {format_source}",
+        "format": "{volume}% {icon}  {format_source}",
+        "format-bluetooth": "{volume}% {icon}󰂯  {format_source}",
+        "format-bluetooth-muted": "󰝟 󰂯  {format_source}",
+        "format-muted": "󰝟  {format_source}",
         "format-source": "{volume}% 󰍬",
         "format-source-muted": "󰍭",
         "format-icons": {
