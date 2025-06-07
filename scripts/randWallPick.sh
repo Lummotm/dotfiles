@@ -7,7 +7,15 @@ base="$HOME/Pictures/Wallpapers/rand-wall"
 filetemp=$(fd -e png -e jpg . "$HOME/Pictures/Wallpapers/wall-randomizer/" | shuf -n 1)
 
 # Usar la imagen como fondo (swww)
-swww img "$filetemp" --transition-type random --transition-step 255 --transition-fps 60
+{
+    swww img "$filetemp" --transition-type random --transition-step 255 --transition-fps 60
+    wal -i "$filetemp" >/dev/null 2>&1 &
+    if pgrep -f "waybar" >/dev/null; then
+        pkill waybar
+        waybar >/dev/null 2>&1 &
+    fi
+
+} &
 
 file=$(fd -e png -e jpg . "$HOME/Pictures/Wallpapers/wall-randomizer/" | shuf -n 1)
 
