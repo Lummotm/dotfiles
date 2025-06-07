@@ -26,10 +26,10 @@
     ],
 
     song_table_format: [
-        (prop: (kind: Property(Title), default: (kind: Text("Unknown"))), width: "35%"),
-        (prop: (kind: Property(Artist), default: (kind: Text("Unknown"))), width: "15%"),
-        (prop: (kind: Property(Album), default: (kind: Text("Unknown Album"))), width: "35%"),
-        (prop: (kind: Property(Duration), default: (kind: Text("-"))), width: "15%", alignment: Left)
+        (prop: (kind: Property(Title), default: (kind: Text("Unknown"))), width: "75%"),
+        (prop: (kind: Property(Artist), default: (kind: Text("Unknown"))), width: "25%"),
+        //(prop: (kind: Property(Album), default: (kind: Text("Unknown Album"))), width: "35%"),
+        //(prop: (kind: Property(Duration), default: (kind: Text("-"))), width: "15%", alignment: Left)
     ],
 
     layout: Split(
