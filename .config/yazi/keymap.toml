@@ -70,7 +70,8 @@ keymap = [
 
     # Plugins
     { on = "z", run = "plugin zoxide", desc = "Jump via zoxide" },
-    { on = "Z", run = "plugin fzf", desc = "Jump via fzf" },
+    { on = "f", run = "plugin fzf", desc = "Jump via fzf" },
+
 
     # Quick navigation
     { on = [
