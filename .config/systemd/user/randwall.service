@@ -6,6 +6,8 @@ After=graphical-session.target
 Type=oneshot
 ExecStart=/home/davidn/scripts/randWallPick.sh
 Environment=DISPLAY=:0
+Environment=WAYLAND_DISPLAY=wayland-1
+Environment=XDG_RUNTIME_DIR=/run/user/1000
 
 [Install]
 WantedBy=default.target
