@@ -45,3 +45,5 @@ keymap("n", "<leader>sce", function()
 		print("Spell check: English")
 	end
 end, { desc = "Toggle Spell check: English" })
+
+keymap({ "n", "v" }, "<C-q>", ":q<CR>", { desc = "Exit" })
