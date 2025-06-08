@@ -6,10 +6,10 @@
     "modules-right": ["custom/wallpaper","backlight","pulseaudio","battery","clock","custom/power"],
 
     "pulseaudio": {
-        "format": "{volume}% {icon}  {format_source}",
-        "format-bluetooth": "{volume}% {icon}󰂯  {format_source}",
-        "format-bluetooth-muted": "󰝟 󰂯  {format_source}",
-        "format-muted": "󰝟  {format_source}",
+        "format": "{volume}% {icon}{format_source}",
+        "format-bluetooth": "{volume}% {icon}󰂯 {format_source}",
+        "format-bluetooth-muted": "󰝟 󰂯 {format_source}",
+        "format-muted": "󰝟 {format_source}",
         "format-source": "{volume}% 󰍬",
         "format-source-muted": "󰍭",
         "format-icons": {
@@ -25,18 +25,14 @@
         "format": "{icon}",
         "on-click": "activate",
         "format-icons": {
-            "1": "󰅬",
-            "2": "",
-            "3": "󰈙",
-            "4": "",
-            "5": "󰍡",
+            "active": "󰮯",
+            "default": "󰊠"
         },
         "persistent-workspaces": {
-        "1": [],
-        "2": [],
-        "3": [],
-        "4": [],
-        "5": [],
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
         },
         "sort-by-number": true
     },
@@ -92,7 +88,7 @@
 
     "custom/launcher":{
         "format": " ",
-        "on-click": "rofi -show drun",
+        "on-click": "bash ~/.config/rofi/launchers/launcher.sh",
         "on-click-right": "killall rofi"
     },
 
