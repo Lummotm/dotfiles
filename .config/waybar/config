@@ -25,6 +25,11 @@
         "format": "{icon}",
         "on-click": "activate",
         "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "󰈙",
+            "4": "󰍡",
+            "10": "",
             "active": "󰮯",
             "default": "󰊠"
         },
@@ -70,7 +75,7 @@
     },
 
     "clock": {
-        "format": " {:%I:%M %p  󰸗 %d/%m/%Y}",
+        "format": " {:%H:%M  󰸗 %d/%m/%y}",
     },
 
 
