@@ -27,11 +27,3 @@ selected=$(sxiv -b -t -o "$WALLPAPERS_DIR"/*.{jpg,jpeg,png,gif} 2>/dev/null)
         fi
     fi
 } &
-
-{
-    wal -i "$selected" >/dev/null 2>&1 &
-    if pgrep -f "waybar" >/dev/null; then
-        pkill waybar
-        waybar >/dev/null 2>&1 &
-    fi
-} &
