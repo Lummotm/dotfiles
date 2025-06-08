@@ -3,6 +3,7 @@
 # Mostrar lista si rofi está en modo selección
 if [ -z "$ROFI_RETV" ] || [ "$ROFI_RETV" -eq 0 ]; then
     echo "󰏤  Pausar música"
+    echo "  Reanudar música"
     #find ~/Music -type f \( -iname "*.mp3" -o -iname "*.m4a" \) |
     # Antes usaba find, fd parece ser mucho mas rápido
     fd -e mp3 -e m4a . ~/Music |
@@ -16,6 +17,12 @@ file="$1"
 if [ "$file" = "󰏤  Pausar música" ]; then
     mpc pause >/dev/null
     notify-send "󰏤  Pausar música"
+    exit 0
+fi
+
+if [ "$file" = "  Reanudar música" ]; then
+    mpc play >/dev/null
+    notify-send "  Reanudar música"
     exit 0
 fi
 
