@@ -5,6 +5,7 @@
  * 
  * Configuration For Rofi Version: 1.7.3
  **/
+@theme "default-theme.rasi"
 
 configuration {
 	/*---------- General setting ----------*/
@@ -16,9 +17,7 @@ configuration {
 	normalize-match: true;
 	show-icons: true;
 	icon-theme: "Papirus";
-/*	cache-dir: ;*/
 	steal-focus: false;
-/*	dpi: -1;*/
 
 	/*---------- Matching setting ----------*/
 	matching: "normal";

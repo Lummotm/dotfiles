@@ -4,7 +4,7 @@ notepath="$HOME/Documents/Obsidian/"
 
 if [ -z "$ROFI_RETV" ] || [ "$ROFI_RETV" -eq 0 ]; then
     {
-        echo "Nueva nota"
+        echo " Nueva nota"
         fd -e md . "$notepath" -p | while read -r path; do
             basename "$path"
         done
