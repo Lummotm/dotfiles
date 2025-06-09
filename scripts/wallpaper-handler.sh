@@ -21,4 +21,4 @@ else
     cp "$selected_file" "$base.png"
 fi
 
-notify-send "Wallpaper cambiado: $selected_file"
+echo "Wallpaper cambiado: $selected_file"
