@@ -1,9 +1,9 @@
 {
     "layer": "top",
     "height": 38,
-    "modules-left": ["custom/launcher","hyprland/workspaces","network","cpu","memory","custom/media","tray"],
+    "modules-left": ["clock","hyprland/workspaces","tray"],
     "modules-center": ["mpd"],
-    "modules-right": ["custom/wallpaper","backlight","pulseaudio","battery","clock","custom/power"],
+    "modules-right": ["custom/wallpaper","network","backlight","pulseaudio","battery","custom/power"],
 
     "pulseaudio": {
         "format": "{volume}% {icon}{format_source}",
