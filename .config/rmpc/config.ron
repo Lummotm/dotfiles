@@ -28,6 +28,7 @@
             "4": SwitchToTab("Playlists"),
             "5": SwitchToTab("Search"),
             "q": Quit,
+            "<C-h>": ShowHelp,
             ">": NextTrack,
             "p": TogglePause,
             "<": PreviousTrack,

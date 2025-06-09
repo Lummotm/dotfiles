@@ -26,9 +26,9 @@
     ],
 
     song_table_format: [
-        (prop: (kind: Property(Title), default: (kind: Text("Unknown"))), width: "60%"),
-        (prop: (kind: Property(Artist), default: (kind: Text("Unknown"))), width: "40%"),
-        //(prop: (kind: Property(Album), default: (kind: Text("Unknown Album"))), width: "35%"),
+        (prop: (kind: Property(Title), default: (kind: Text("Unknown"))), width: "40%"),
+        (prop: (kind: Property(Album), default: (kind: Text("Unknown Album"))), width: "30%"),
+        (prop: (kind: Property(Artist), default: (kind: Text("Unknown"))), width: "30%"),
         //(prop: (kind: Property(Duration), default: (kind: Text("-"))), width: "15%", alignment: Left)
     ],
 
@@ -47,7 +47,7 @@
         // (name: "Directories", pane: Pane(Directories)),
         (name: "Albums", pane: Pane(Albums)),
         (name: "Artists", pane: Pane(Artists)),
- e      // (name: "Album Artists", pane: Pane(AlbumArtists)),
+        // (name: "Album Artists", pane: Pane(AlbumArtists)),
         (name: "Playlists", pane: Pane(Playlists)),
         (name: "Search", pane: Pane(Search))
     ],
