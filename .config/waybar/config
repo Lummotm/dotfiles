@@ -46,6 +46,7 @@
         "tooltip": false,
         "format-wifi": " ",
         "format-ethernet": " ",
+        "tooltip": false,
     },
 
     "backlight": {
@@ -54,6 +55,7 @@
         "interval":1,
         "on-scroll-up": "brightnessctl s 5.0%+",
         "on-scroll-down": "brightnessctl s 5.0%-",
+        "tooltip": false,
     },
 
     "battery": {
@@ -67,44 +69,53 @@
         "format-plugged": " {capacity}%",
         "format-alt": "{time} {icon}",
         "format-icons": ["", "", "", "", ""],
+        "tooltip": false,
     },
 
     "tray":{
         "icon-size":18,
         "spacing": 10,
+        "tooltip": false,
     },
 
     "clock": {
-        "format": " {:%H:%M  󰸗 %d/%m/%y}",
+        "format": " {:%H:%M  󰸗 %d/%m}",
+        "format-alt": " {:%H:%M  󰸗 %d/%m/%y}",
+        "tooltip": false,
     },
 
 
     "cpu": {
         "interval": 15,
         "format": " {}%",
-        "max-length": 10
+        "max-length": 10,
+        "tooltip": false,
     },
 
     "memory": {
         "interval": 30,
         "format": " {}%",
-        "max-length": 10
+        "max-length": 10,
+        "tooltip": false,
     },
 
     "custom/launcher":{
         "format": " ",
         "on-click": "bash ~/.config/rofi/launchers/launcher.sh",
-        "on-click-right": "killall rofi"
+        "on-click-right": "killall rofi",
+        "tooltip": false,
     },
 
     "custom/power":{
         "format": " ",
         "on-click": "bash ~/.config/rofi/powermenu/powermenu.sh",
+        "tooltip": false,
     },
 
     "custom/wallpaper":{
         "format":" ",
         "on-click": "bash ~/scripts/randWallPick.sh", 
+        "tooltip": false
     },
 
     "mpd": {
