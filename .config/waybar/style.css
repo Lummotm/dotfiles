@@ -1,0 +1,215 @@
+@import url("file:///home/davidn/.config/waybar/colors.css");
+
+@define-color bg-fixed @background;
+@define-color bg-accent @color2;
+
+* {
+    border: none;
+    border-radius: 0.625rem;
+    font-family: "JetbrainsMono Nerd Font";
+    font-size: 0.9375rem;
+    min-height: 0.625rem;
+}
+
+window#waybar {
+    background: transparent;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+#window {
+    margin-top: 0.375rem;
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
+    border-radius: 0.625rem;
+    transition: none;
+    color: transparent;
+    background: transparent;
+}
+
+#workspaces {
+    margin-top: 0.375rem;
+    margin-left: 0.5rem;
+    font-size: 0.25rem;
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+    border-radius: 0.5rem;
+    background: @bg-fixed;
+    transition: none;
+}
+
+#workspaces button,
+#workspaces button.persistent,
+#workspaces button.visible {
+    transition: none;
+    color: @color4;
+    background: transparent;
+    font-size: 1rem;
+    border-radius: 0.125rem;
+    padding: 0.25rem 0.5rem;
+}
+
+#workspaces button.persistent,
+#workspaces button.visible {
+    transition: none;
+    color: @color4;
+    background: transparent;
+    font-size: 0.25rem;
+}
+
+#workspaces button.active {
+    color: @color7;
+    border-top: 0.125rem solid @color7;
+    border-bottom: 0.125rem solid @color7;
+    border-radius: 0rem;
+}
+
+#workspaces button:hover {
+    transition: none;
+    color: @color8;
+    border-color: @color8;
+}
+
+#workspaces button.active:hover {
+    color: @color8;
+}
+
+#network {
+    margin-top: 0.375rem;
+    margin-left: 0.5rem;
+    padding: 0 0.625rem;
+    border-radius: 0.625rem;
+    transition: none;
+    color: @color9;
+    background: @bg-fixed;
+}
+
+#pulseaudio {
+    margin-top: 0.375rem;
+    margin-left: 0.5rem;
+    padding: 0 0.625rem;
+    border-radius: 0.625rem;
+    transition: none;
+    color: @color9;
+    background: @bg-fixed;
+}
+
+#battery {
+    margin-top: 0.375rem;
+    margin-left: 0.5rem;
+    padding: 0 0.625rem;
+    border-radius: 0.625rem;
+    transition: none;
+    color: @color6;
+    background: @bg-fixed;
+}
+
+#battery.charging,
+#battery.plugged {
+    color: @color9;
+    background-color: @bg-fixed;
+}
+
+#battery.critical:not(.charging) {
+    background-color: @bg-fixed;
+    color: @color12;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+
+@keyframes blink {
+    to {
+        background-color: @bg-fixed;
+        color: @color7;
+    }
+}
+
+#backlight,
+#clock {
+    margin-top: 0.375rem;
+    margin-left: 0.5rem;
+    padding: 0 0.625rem;
+    border-radius: 0.625rem;
+    transition: none;
+    color: @color6;
+    background: @bg-fixed;
+}
+
+#memory,
+#cpu {
+    margin-top: 0.375rem;
+    margin-left: 0.5rem;
+    padding: 0 0.625rem;
+    border-radius: 0.625rem;
+    transition: none;
+    color: @color5;
+    background: @bg-fixed;
+}
+
+#tray {
+    margin-top: 0.375rem;
+    margin-left: 0.5rem;
+    padding: 0 0.625rem;
+    border-radius: 0.625rem;
+    transition: none;
+    color: @color6;
+    background: @bg-fixed;
+}
+
+#custom-launcher {
+    font-size: 1.5rem;
+    margin-top: 0.375rem;
+    margin-left: 0.375rem; /*Match hyprland border*/
+    padding: 0 0.3125rem 0 0.625rem;
+    border-radius: 0.625rem;
+    transition: none;
+    color: @color9;
+    background: @bg-fixed;
+}
+
+#custom-power {
+    font-size: 1.25rem;
+    margin-top: 0.375rem;
+    margin-left: 0.5rem;
+    margin-right: 0.375rem; /*Match hyprland border*/
+    padding: 0 0.3125rem 0 0.625rem;
+    border-radius: 0.625rem;
+    transition: none;
+    background: @bg-fixed;
+    color: @color9;
+}
+
+#custom-wallpaper{
+    font-size: 1.25rem;
+    margin-top: 0.375rem;
+    margin-left: 0.5rem;
+    padding: 0 0.3125rem 0 0.625rem;
+    border-radius: 0.625rem;
+    transition: none;
+    background: @bg-fixed;
+    color: @color9;
+}
+
+#mpd {
+    margin-top: 0.375rem;
+    margin-left: 0.5rem;
+    padding-left: 0.625rem;
+    padding-right: 1rem;
+    border-radius: 0.625rem;
+    transition: none;
+    color: @color6;
+    background: @bg-fixed;
+}
+
+#mpd.disconnected,
+#mpd.stopped {
+    background: transparent;
+    color: transparent;
+}
+

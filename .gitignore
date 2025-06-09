@@ -4,12 +4,10 @@
 
 # Configs generadas o no necesarias
 .config/zathura/zathurarc
-.config/waybar/style.css
 .config/btop/btop.conf
 .config/musikcube/
 .config/Thunar/
 .config/wal/templates/
-.config/wofi/style.css
 .config/tmux/plugins/
 
 # Archivos generados por MPD
