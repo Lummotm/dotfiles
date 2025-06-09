@@ -3,16 +3,13 @@
 # Mostrar lista si rofi está en modo selección
 if [ -z "$ROFI_RETV" ] || [ "$ROFI_RETV" -eq 0 ]; then
     echo "󰏤  Pausar música"
-    echo "  Reanudar música"
-    #find ~/Music -type f \( -iname "*.mp3" -o -iname "*.m4a" \) |
-    # Antes usaba find, fd parece ser mucho mas rápido
-    fd -e mp3 -e m4a . ~/Music |
-        sed "s|^/home/$USER/Music/||"
+    echo " Reanudar música"
+    fd -e mp3 -e m4a . ~/Music | sed "s|^/home/$USER/Music/||"
     exit 0
 fi
 
 file="$1"
-[ -z "$file" ] && exit 0 # Salir si no se seleccionó nada
+[ -z "$file" ] && exit 0
 
 if [ "$file" = "󰏤  Pausar música" ]; then
     mpc pause >/dev/null
@@ -20,33 +17,24 @@ if [ "$file" = "󰏤  Pausar música" ]; then
     exit 0
 fi
 
-if [ "$file" = "  Reanudar música" ]; then
+if [ "$file" = " Reanudar música" ]; then
     mpc play >/dev/null
-    notify-send "  Reanudar música"
+    notify-send " Reanudar música"
     exit 0
 fi
 
-mpc insert "$file"
+# Reproducir canción seleccionada
+mpc add "$file" >/dev/null
 
-# Obtener número total de canciones en la cola
-position=$(mpc status | grep -o '#[0-9]\+/[0-9]\+' | cut -d'/' -f2)
+# Obtener la nueva posición total (que será la posición de la canción recién agregada)
+new_position=$(mpc playlist | wc -l)
 
-if [ -z "$position" ]; then
-    # Si la cola estaba vacía, empieza a reproducir
+# Si no había nada reproduciéndose, empezar
+if ! mpc status | grep -q "\[playing\]" && ! mpc status | grep -q "\[paused\]"; then
     mpc play >/dev/null
-
-    # Revisar si realmente estaba vacía la cola
-
-    # Recalcular posición tras reproducir
-    position=$(mpc status | grep -o '#[0-9]\+/[0-9]\+' | cut -d'/' -f2)
-
-    # Si no es la primera, saltar al final (última insertada)
-    if [ "$position" -ne 1 ]; then
-        mpc play "$position" >/dev/null
-    fi
-else
-    # Si ya había algo reproduciéndose, saltar a la nueva última
-    mpc play "$position" >/dev/null
 fi
+
+# Saltar a la canción recién agregada
+mpc play "$new_position" >/dev/null
 
 notify-send "🎵 Reproduciendo $file"
