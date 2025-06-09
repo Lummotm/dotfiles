@@ -27,8 +27,8 @@
 
     song_table_format: [
         (prop: (kind: Property(Title), default: (kind: Text("Unknown"))), width: "40%"),
-        (prop: (kind: Property(Album), default: (kind: Text("Unknown Album"))), width: "30%"),
-        (prop: (kind: Property(Artist), default: (kind: Text("Unknown"))), width: "30%"),
+        (prop: (kind: Property(Album), default: (kind: Text("Unknown Album"))), width: "40%"),
+        (prop: (kind: Property(Artist), default: (kind: Text("Unknown"))), width: "20%"),
         //(prop: (kind: Property(Duration), default: (kind: Text("-"))), width: "15%", alignment: Left)
     ],
 
