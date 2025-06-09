@@ -12,5 +12,5 @@ if [ "$ext" != "png" ]; then
     rm -f "$base.png"
     ffmpeg -y -i "$file" "$base.png"
 else
-    [ "$file" != "$base.png" ] && cp "$file" "$base.png"
+    cp "$file" "$base.png"
 fi
