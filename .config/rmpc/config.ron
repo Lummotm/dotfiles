@@ -22,9 +22,9 @@
             "<S-Tab>": PreviousTab,
             "1": SwitchToTab("Queue"),
             //"2": SwitchToTab("Directories"),
-            "2": SwitchToTab("Artists"),
+            "2": SwitchToTab("Albums"),
+            "3": SwitchToTab("Artists"),
             //"4": SwitchToTab("Album Artists"),
-            "3": SwitchToTab("Albums"),
             "4": SwitchToTab("Playlists"),
             "5": SwitchToTab("Search"),
             "q": Quit,
@@ -146,6 +146,10 @@
         ),
         **/
         (
+            name: "Albums",
+            pane: Pane(Albums),
+        ),
+        (
             name: "Artists",
             pane: Pane(Artists),
         ),
@@ -153,10 +157,6 @@
             name: "Album Artists",
             pane: Pane(AlbumArtists),
         ),**/
-        (
-            name: "Albums",
-            pane: Pane(Albums),
-        ),
         (
             name: "Playlists",
             pane: Pane(Playlists),
