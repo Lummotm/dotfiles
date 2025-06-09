@@ -64,7 +64,7 @@ mainbox {
 }
 
 imagebox {
-    padding:                     20px;
+    padding:                     10px;
     background-color:            transparent;
     background-image:            url("~/.config/rofi/images/cloudy-sky.png", height);
     orientation:                 vertical;
@@ -72,8 +72,8 @@ imagebox {
 }
 
 listbox {
-    spacing:                     20px;
-    padding:                     20px;
+    spacing:                     10px;
+    padding:                     10px;
     background-color:            transparent;
     orientation:                 vertical;
     children:                    [ "message", "listview" ];
@@ -129,7 +129,7 @@ button selected {
 listview {
     enabled:                     true;
     columns:                     1;
-    lines:                       8;
+    lines:                       5;
     cycle:                       true;
     dynamic:                     true;
     scrollbar:                   false;

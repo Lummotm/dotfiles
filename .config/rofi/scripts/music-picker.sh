@@ -4,6 +4,8 @@
 if [ -z "$ROFI_RETV" ] || [ "$ROFI_RETV" -eq 0 ]; then
     echo "󰏤  Pausar música"
     echo " Reanudar música"
+    echo " Canción siguiente"
+    echo " Canción previa"
     fd -e mp3 -e m4a . ~/Music | sed "s|^/home/$USER/Music/||"
     exit 0
 fi
@@ -20,6 +22,18 @@ fi
 if [ "$file" = " Reanudar música" ]; then
     mpc play >/dev/null
     notify-send " Reanudar música"
+    exit 0
+fi
+
+if [ "$file" = " Canción siguiente" ]; then
+    mpc next >/dev/null
+    notify-send " Canción Siguiente"
+    exit 0
+fi
+
+if [ "$file" = " Canción previa" ]; then
+    mpc prev >/dev/null
+    notify-send " Canción Previa"
     exit 0
 fi
 
