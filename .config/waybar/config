@@ -47,6 +47,7 @@
         "format-wifi": " ",
         "format-ethernet": " ",
         "tooltip": false,
+        "on-click": "iwmenu --launcher rofi",
     },
 
     "backlight": {
