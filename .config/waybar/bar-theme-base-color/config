@@ -1,0 +1,157 @@
+{
+    "layer": "top",
+    "height": 38,
+    "modules-left": ["custom/launcher","clock","hyprland/workspaces","tray"],
+    "modules-center": ["mpd"],
+    "modules-right": ["custom/wallpaper","backlight","pulseaudio","battery","custom/power"],
+
+    "pulseaudio": {
+        "format": "{volume}% {icon}{format_source}",
+        "format-bluetooth": "{volume}% {icon}󰂯 {format_source}",
+        "format-bluetooth-muted": "󰝟 󰂯 {format_source}",
+        "format-muted": "󰝟 {format_source}",
+        "format-source": "{volume}% 󰍬",
+        "format-source-muted": "󰍭",
+        "format-icons": {
+            "headphone": "󰋋 ",
+            "hands-free": "󰋋 ",
+            "headset": "󰋋 ",
+            "default": ["󰕿 ", "󰖀 ", "󰕾 "]
+        },
+        "on-click": "pavucontrol"
+    },
+
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "on-click": "activate",
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "󰈙",
+            "4": "󰍡",
+            "10": "",
+            "active": "󰮯",
+            "default": "󰊠"
+        },
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+        },
+        "sort-by-number": true
+    },
+
+    "network": {
+        "tooltip": false,
+        "format-wifi": " ",
+        "format-ethernet": " ",
+        "tooltip": false,
+        "on-click": "iwmenu --launcher rofi",
+    },
+
+    "backlight": {
+        "tooltip": false,
+        "format": " {}%",
+        "interval":1,
+        "on-scroll-up": "brightnessctl s 5.0%+",
+        "on-scroll-down": "brightnessctl s 5.0%-",
+        "tooltip": false,
+    },
+
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 20,
+        },
+        "format": "{icon}  {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["", "", "", "", ""],
+        "tooltip": false,
+    },
+
+    "tray":{
+        "icon-size":18,
+        "spacing": 10,
+        "tooltip": false,
+    },
+
+    "clock": {
+        "format": " {:%H:%M  󰸗 %d/%m}",
+        "format-alt": " {:%H:%M  󰸗 %d/%m/%y}",
+        "tooltip": false,
+    },
+
+
+    "cpu": {
+        "interval": 15,
+        "format": " {}%",
+        "max-length": 10,
+        "tooltip": false,
+    },
+
+    "memory": {
+        "interval": 30,
+        "format": " {}%",
+        "max-length": 10,
+        "tooltip": false,
+    },
+
+    "custom/launcher":{
+        "format": " ",
+        "on-click": "bash ~/.config/rofi/launchers/launcher.sh",
+        "on-click-right": "killall rofi",
+        "tooltip": false,
+    },
+
+    "custom/power":{
+        "format": " ",
+        "on-click": "bash ~/.config/rofi/powermenu/powermenu.sh",
+        "tooltip": false,
+    },
+
+    "custom/wallpaper":{
+        "format":" ",
+        "on-click": "bash ~/scripts/randWallPick.sh", 
+        "tooltip": false
+    },
+
+    "mpd": {
+        "format": "{stateIcon} {artist} - {title}",
+        "format-disconnected": "",
+        "format-stopped": "",
+        "interval": 5,
+
+        "consume-icons": {
+            "on": " "
+        },
+        "random-icons": {
+            "off": "<span color=\"#f53c3c\"></span> ",
+            "on": " "
+        },
+        "repeat-icons": {
+            "on": " "
+        },
+        "single-icons": {
+            "on": "1 "
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+
+        "tooltip-format": "",
+        "tooltip-format-disconnected": "",
+
+        "on-click": "mpc toggle",                // clic normal → play/pausa
+        "on-click-right": "mpc next",            // clic derecho → siguiente
+        "on-click-middle": "mpc prev",           // clic medio → anterior
+        "on-scroll-up": "mpc volume +5",         // scroll arriba → volumen +
+        "on-scroll-down": "mpc volume -5",       // scroll abajo → volumen -
+        "on-click-backward": "mpc random",       // botón adicional: toggle random
+        "on-click-forward": "mpc repeat"         // botón adicional: toggle repeat
+    },
+}
