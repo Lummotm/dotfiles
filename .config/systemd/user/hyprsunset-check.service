@@ -1,0 +1,14 @@
+[Unit]
+Description=Hyprsunset Checker Changer
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/davidn/scripts/hyprsunset-check.sh
+Environment=DISPLAY=:0
+Environment=WAYLAND_DISPLAY=wayland-1
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+
+[Install]
+WantedBy=default.target
+

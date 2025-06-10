@@ -3,7 +3,7 @@ Description=Sync Notes Timer
 Requires=sync-notes.service
 
 [Timer]
-OnCalendar=*:0/10
+OnCalendar=hourly
 Persistent=true
 
 [Install]
