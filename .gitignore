@@ -5,9 +5,7 @@
 # Configs generadas o no necesarias
 .config/zathura/zathurarc
 .config/btop/btop.conf
-.config/musikcube/
 .config/Thunar/
-.config/wal/templates/
 .config/tmux/plugins/
 
 # Archivos generados por MPD
