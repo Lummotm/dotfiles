@@ -46,5 +46,6 @@ vim.opt.listchars = {
 vim.g.mapleader = " " -- Set <leader> key to space
 vim.g.maplocalleader = " " -- Local leader (buffer-specific mappings)
 vim.opt.ignorecase = true
+vim.opt.path:append("**") -- Lets nvim search in currend directory via find
 
 vim.opt.spelllang = { "es", "en_us" }
