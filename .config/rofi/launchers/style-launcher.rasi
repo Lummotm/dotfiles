@@ -46,8 +46,7 @@ window {
     width:                       1000px;
     x-offset:                    0px;
     y-offset:                    0px;
-
-    /* properties for all widgets */
+    background-image:            url("~/.config/rofi/images/rofi-wallpaper.png",width);
     enabled:                     true;
     border-radius:               15px;
     cursor:                      "default";
@@ -59,17 +58,12 @@ mainbox {
     enabled:                     true;
     spacing:                     0px;
     background-color:            transparent;
-    orientation:                 vertical;
-    children:                    [ "imagebox"];
-}
-
-imagebox {
     padding:                     10px;
     background-color:            transparent;
-    background-image:            url("~/.config/rofi/images/cloudy-sky.png", height);
     orientation:                 vertical;
     children:                    [ "inputbar","listbox", "mode-switcher" ];
 }
+
 
 listbox {
     spacing:                     10px;
