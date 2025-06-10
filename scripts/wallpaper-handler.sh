@@ -10,15 +10,9 @@ if [ -z "$selected_file" ] || [ ! -f "$selected_file" ]; then
 fi
 
 # Cambiar wallpaper con swww
-swww img "$selected_file" --transition-type random --transition-step 255 --transition-fps 60
+swww img "$selected_file" --transition-type any --transition-step 255 --transition-fps 60
 
-# Procesar para lockscreen
-ext="${selected_file##*.}"
-if [ "$ext" != "png" ]; then
-    rm -f "$base.png"
-    ffmpeg -y -i "$selected_file" "$base.png"
-else
-    cp "$selected_file" "$base.png"
-fi
+rm -f "$base.png"
+ffmpeg -i "$selected_file" "$base.png"
 
 echo "Wallpaper cambiado: $selected_file"

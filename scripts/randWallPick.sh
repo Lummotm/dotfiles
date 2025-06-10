@@ -7,10 +7,5 @@ swww img "$file" --transition-type random --transition-step 255 --transition-fps
 # Reshuffle for lockscreen
 file=$(fd -e png -e jpg . "$HOME/Pictures/Wallpapers/wall-randomizer/" | shuf -n 1)
 
-ext="${file##*.}"
-if [ "$ext" != "png" ]; then
-    rm -f "$base.png"
-    ffmpeg -y -i "$file" "$base.png"
-else
-    cp "$file" "$base.png"
-fi
+rm -f "$base.png"
+ffmpeg -i "$selected_file" "$base.png"
