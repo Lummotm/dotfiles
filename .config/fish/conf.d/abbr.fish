@@ -7,7 +7,7 @@ abbr gc   'git commit -m'
 abbr gp   'git push -u origin main'
 
 abbr lg "lazygit"
-abbr oo " cd ~/Documents/Obsidian/001\ -\ inbox/ && nvim"
+abbr oo " cd ~/Documents/Obsidian/ && nvim"
 abbr sn "sync-notes"
 
 abbr yz yazi
