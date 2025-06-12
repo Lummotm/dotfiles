@@ -1,0 +1,81 @@
+[global]
+    monitor = 0
+    follow = keyboard
+
+    width = (300, 600)
+    offset = (10, 20)
+    scale = 1
+
+    indicate_hidden = yes
+    shrink = no
+    transparency = 5
+
+    separator_height = 5
+    padding = 12
+    horizontal_padding = 8
+
+    frame_width = 2
+    frame_color = "#282c34"
+    separator_color = frame
+
+    sort = yes
+    idle_threshold = 120
+
+    font = Noto Sans 11
+    line_height = 0
+
+    markup = full
+    format = "<b>%s</b>\n%b"
+
+    alignment = left
+    show_age_threshold = 60
+    word_wrap = yes
+    ignore_newline = no
+
+    stack_duplicates = true
+    hide_duplicate_count = false
+    show_indicators = yes
+
+    icon_position = right
+    min_icon_size = 48
+    max_icon_size = 96
+    enable_recursive_icon_lookup = true
+    icon_theme = Symbols Nerd Font
+
+    sticky_history = yes
+    history_length = 20
+
+    dmenu = rofi -dmenu -p dunst
+    browser = brave
+    always_run_script = true
+
+    title = Dunst
+    class = Dunst
+
+    mouse_left_click = do_action
+
+    corner_radius = 10
+
+[experimental]
+    per_monitor_dpi = true
+
+[urgency_low]
+    background = "#24272e"
+    foreground = "#abb2bf"
+    timeout = 7
+
+[urgency_normal]
+    background = "#24272e"
+    foreground = "#abb2bf"
+    timeout = 7
+
+[urgency_critical]
+    background = "#24272e"
+    foreground = "#abb2bf"
+    frame_color = "#e06c75"
+    timeout = 0
+
+[Spotify]
+    appname = Spotify
+    new_icon = /home/pedro/.local/share/icons/hicolor/64x64/apps/spotify.png
+    timeout = 3
