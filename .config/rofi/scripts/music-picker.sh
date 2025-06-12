@@ -3,7 +3,7 @@
 # Mostrar lista si rofi está en modo selección
 if [ -z "$ROFI_RETV" ] || [ "$ROFI_RETV" -eq 0 ]; then
     echo "󰏤  Pausar música / Pause music"
-    echo "  Reanudar música / Restart music"
+    echo "  Reanudar música / Play music"
     echo "󰒭  Canción siguiente / Next song"
     echo "󰒮  Canción previa / Previous song"
     echo "󰛉  Parar música / Stop music"
@@ -15,29 +15,29 @@ file="$1"
 [ -z "$file" ] && exit 0
 
 case "$file" in
-"󰏤  Pausar música / Pause music")
+*"Pause"*)
     mpc pause >/dev/null
-    notify-send "󰏤  Pausar música"
+    notify-send "󰏤  Music paused"
     exit 0
     ;;
-"  Reanudar música / Restart music")
+*"Play"*)
     mpc play >/dev/null
-    notify-send "  Reanudar música"
+    notify-send "  Music playing"
     exit 0
     ;;
-"󰒭  Canción siguiente / Next song")
+*"Next"*)
     mpc next >/dev/null
-    notify-send "󰒭  Canción siguiente"
+    notify-send "󰒭  Next song"
     exit 0
     ;;
-"󰒮  Canción previa / Previous song")
+*"Previous"*)
     mpc prev >/dev/null
-    notify-send "󰒮  Canción previa"
+    notify-send "󰒮  Previous song"
     exit 0
     ;;
-"󰛉  Parar música / Stop music")
+*"Stop"*)
     mpc stop >/dev/null
-    notify-send "󰛉  Parar música"
+    notify-send "󰛉  Music stopped"
     exit 0
     ;;
 esac
