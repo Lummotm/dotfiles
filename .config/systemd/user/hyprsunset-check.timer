@@ -3,7 +3,8 @@ Description=Hyprsunset Check Timer
 Requires=hyprsunset-check.service
 
 [Timer]
-OnCalendar=*:0/15
+OnCalendar=hourly
+OnBootSec=2min
 Persistent=true
 
 [Install]
