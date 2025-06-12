@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Rmpc
+Comment=rmpc launch with foot 
+Exec=/home/davidn/scripts/desktop/rmpc-foot.sh
+Icon=
+Terminal=false
+Type=Application
+Categories=System;
+

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=R.E.P.O.
+Comment=Play this game on Steam
+Exec=steam steam://rungameid/3241660
+Icon=steam_icon_3241660
+Terminal=false
+Type=Application
+Categories=Game;
