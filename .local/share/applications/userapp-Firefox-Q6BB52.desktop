@@ -1,8 +1,0 @@
-[Desktop Entry]
-Encoding=UTF-8
-Version=1.0
-Type=Application
-NoDisplay=true
-Exec=/usr/lib/floorp/floorp %u
-Name=Firefox
-Comment=Definición personalizada para Firefox
