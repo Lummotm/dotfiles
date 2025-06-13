@@ -29,3 +29,6 @@ source ~/.config/fish/functions/_auto_ls_after_cd.fish
 # Activar fish_vi_key_bindings
 fish_vi_key_bindings
 
+function prime-run
+    env __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia $argv
+end
