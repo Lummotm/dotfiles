@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 WallDir=${1:-"$HOME/Pictures/Wallpapers/wall-randomizer/"}
-WallChangeCommand="$HOME/scripts/wallpaper-handler.sh"
+WallChangeCommand="$HOME/scripts/wallpaper/wallpaper-handler.sh"
 ROFI_THEME="$HOME/.config/rofi/wallpaper-selector/wallpaper-selector.rasi"
 
 PREVIEW=true \
