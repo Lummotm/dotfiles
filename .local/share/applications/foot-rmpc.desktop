@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Rmpc
-Comment=rmpc launch with foot 
-Exec=/home/davidn/scripts/desktop/rmpc-foot.sh
+Comment=rmpc launch with kitty
+Exec=/home/davidn/scripts/desktop/rmpc-kitty.sh
 Icon=
 Terminal=false
 Type=Application
