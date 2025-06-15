@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Tomar input de rofi como filebrowser
 selected_file="$1"
-base="$HOME/Pictures/Wallpapers/rand-selected"
+base="$HOME/Pictures/Wallpapers/selected-wall"
 
 # Verificar que se pasó un archivo
 if [ -z "$selected_file" ] || [ ! -f "$selected_file" ]; then
