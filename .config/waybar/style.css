@@ -1,4 +1,4 @@
-@import url("file:///home/davidn/.config/waybar/colors.css");
+@import url("file:///home/davidn/.cache/wal/custom-waybar.css");
 
 @define-color bg-fixed @background;
 @define-color bg-accent @color2;
@@ -44,7 +44,7 @@ window#waybar.hidden {
 #workspaces button.persistent,
 #workspaces button.visible {
     transition: none;
-    color: @color4;
+    color: @color8; /* Gris medio para workspaces inactivos */
     background: transparent;
     font-size: 1rem;
     border-radius: 0.125rem;
@@ -54,67 +54,70 @@ window#waybar.hidden {
 #workspaces button.persistent,
 #workspaces button.visible {
     transition: none;
-    color: @color4;
+    color: @color8; /* Mantener consistencia */
     background: transparent;
     font-size: 0.25rem;
 }
 
 #workspaces button.active {
-    color: @color7;
-    border-top: 0.125rem solid @color7;
-    border-bottom: 0.125rem solid @color7;
+    color: @color15; /* Blanco/claro para workspace activo */
+    border-top: 0.125rem solid @color15;
+    border-bottom: 0.125rem solid @color15;
     border-radius: 0rem;
 }
 
 #workspaces button:hover {
     transition: none;
-    color: @color8;
-    border-color: @color8;
+    color: @color7; /* Gris claro para hover */
+    border-color: @color7;
 }
 
 #workspaces button.active:hover {
-    color: @color8;
+    color: @color7;
 }
 
+/* Red/conectividad - Color rojo/naranja */
 #network {
     margin-top: 0.375rem;
     margin-left: 0.5rem;
     padding: 0 0.625rem;
     border-radius: 0.625rem;
     transition: none;
-    color: @color9;
+    color: @color1; /* Rojo para red */
     background: @bg-fixed;
 }
 
+/* Audio - Color púrpura/magenta */
 #pulseaudio {
     margin-top: 0.375rem;
     margin-left: 0.5rem;
     padding: 0 0.625rem;
     border-radius: 0.625rem;
     transition: none;
-    color: @color9;
+    color: @color6; 
     background: @bg-fixed;
 }
 
+/* Batería - Color amarillo (neutral) y verde (cargando) */
 #battery {
     margin-top: 0.375rem;
     margin-left: 0.5rem;
     padding: 0 0.625rem;
     border-radius: 0.625rem;
     transition: none;
-    color: @color6;
+    color: @color3; /* Amarillo para batería normal */
     background: @bg-fixed;
 }
 
 #battery.charging,
 #battery.plugged {
-    color: @color9;
+    color: @color2; /* Verde para cargando */
     background-color: @bg-fixed;
 }
 
 #battery.critical:not(.charging) {
     background-color: @bg-fixed;
-    color: @color12;
+    color: @color9; /* Rojo brillante para crítico */
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -122,14 +125,14 @@ window#waybar.hidden {
     animation-direction: alternate;
 }
 
-
 @keyframes blink {
     to {
         background-color: @bg-fixed;
-        color: @color7;
+        color: @color15; /* Blanco para contraste en blink */
     }
 }
 
+/* Reloj y brillo - Color cian/azul claro */
 #backlight,
 #clock {
     margin-top: 0.375rem;
@@ -137,10 +140,11 @@ window#waybar.hidden {
     padding: 0 0.625rem;
     border-radius: 0.625rem;
     transition: none;
-    color: @color6;
+    color: @color6; /* Cian para reloj y brillo */
     background: @bg-fixed;
 }
 
+/* CPU y memoria - Color azul */
 #memory,
 #cpu {
     margin-top: 0.375rem;
@@ -148,20 +152,22 @@ window#waybar.hidden {
     padding: 0 0.625rem;
     border-radius: 0.625rem;
     transition: none;
-    color: @color5;
+    color: @color4; /* Azul para recursos del sistema */
     background: @bg-fixed;
 }
 
+/* Tray - Color neutral */
 #tray {
     margin-top: 0.375rem;
     margin-left: 0.5rem;
     padding: 0 0.625rem;
     border-radius: 0.625rem;
     transition: none;
-    color: @color6;
+    color: @color7; /* Gris claro para tray */
     background: @bg-fixed;
 }
 
+/* Launcher - Color accent principal */
 #custom-launcher {
     font-size: 1.5rem;
     margin-top: 0.375rem;
@@ -169,10 +175,11 @@ window#waybar.hidden {
     padding: 0 0.3125rem 0 0.625rem;
     border-radius: 0.625rem;
     transition: none;
-    color: @color9;
+    color: @color2; /* Verde como color principal/accent */
     background: @bg-fixed;
 }
 
+/* Power - Color rojo para indicar acción destructiva */
 #custom-power {
     font-size: 1.25rem;
     margin-top: 0.375rem;
@@ -182,9 +189,10 @@ window#waybar.hidden {
     border-radius: 0.625rem;
     transition: none;
     background: @bg-fixed;
-    color: @color9;
+    color: @color1; /* Rojo para power */
 }
 
+/* Wallpaper - Color púrpura para personalización */
 #custom-wallpaper{
     font-size: 1.25rem;
     margin-top: 0.375rem;
@@ -193,9 +201,10 @@ window#waybar.hidden {
     border-radius: 0.625rem;
     transition: none;
     background: @bg-fixed;
-    color: @color9;
+    color: @color6; /* Púrpura para wallpaper */
 }
 
+/* MPD - Color cian para media */
 #mpd {
     margin-top: 0.375rem;
     margin-left: 0.5rem;
@@ -203,7 +212,7 @@ window#waybar.hidden {
     padding-right: 1rem;
     border-radius: 0.625rem;
     transition: none;
-    color: @color6;
+    color: @color6; /* Cian para música */
     background: @bg-fixed;
 }
 
@@ -212,4 +221,3 @@ window#waybar.hidden {
     background: transparent;
     color: transparent;
 }
-
