@@ -20,7 +20,7 @@ fi
 
 # Aplicar pywal SIN cambiar wallpaper y recargar waybar en background
 {
-    wal -i "$selected_file" --no-set     
+    wal -i "$selected_file" -n
     pkill -SIGUSR2 waybar
     notify-send "Waybar recargado" 
 } &> /dev/null &
