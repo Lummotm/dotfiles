@@ -61,7 +61,7 @@ element {
     border-color: lightblue /15%;
     border: 3px;
     border-radius: 0.4em;
-    children: [element-icon];
+    children: [element-icon,element-text];
 }
 
 element-icon {

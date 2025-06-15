@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-
+# Tomar input de rofi como filebrowser
 selected_file="$1"
-base="$HOME/Pictures/Wallpapers/rand-wall"
+base="$HOME/Pictures/Wallpapers/rand-selected"
 
 # Verificar que se pasó un archivo
 if [ -z "$selected_file" ] || [ ! -f "$selected_file" ]; then
@@ -9,10 +9,27 @@ if [ -z "$selected_file" ] || [ ! -f "$selected_file" ]; then
     exit 1
 fi
 
+
+# Ejecución en paralelo de swww, recarga de waybar y clonado de fondo
 # Cambiar wallpaper con swww
-swww img "$selected_file" --transition-type any --transition-step 255 --transition-fps 60
+{
+    swww img "$selected_file" --transition-type grow --transition-step 60 --transition-fps 120
+    sleep 2.5
+    notify-send "Wallpaper cambiado" 
+} &> /dev/null &
 
-rm -f "$base.png"
-ffmpeg -i "$selected_file" "$base.png"
+# Aplicar pywal SIN cambiar wallpaper y recargar waybar en background
+{
+    wal -i "$selected_file" --no-set     
+    pkill -SIGUSR2 waybar
+    notify-send "Waybar recargado" 
+} &> /dev/null &
 
-echo "Wallpaper cambiado: $selected_file"
+# Clonar el fondo para otros usos (hyprlock y demás)
+{
+    rm -f "$base.png"
+    ffmpeg -i "$selected_file" "$base.png" &> /dev/null
+} &> /dev/null &
+
+# Aumentar el orden de seleccion en base mtime de rofi como filebrowser
+touch "$selected_file"
