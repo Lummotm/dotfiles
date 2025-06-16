@@ -26,5 +26,3 @@ end
 # Activar función reactiva de ls al cambiar de directorio
 source ~/.config/fish/functions/_auto_ls_after_cd.fish
 
-# Activar fish_vi_key_bindings
-fish_vi_key_bindings

@@ -9,5 +9,6 @@ abbr gp   'git push -u origin main'
 abbr lg "lazygit"
 abbr oo " cd ~/Documents/Obsidian/ && nvim"
 abbr sn "sync-notes"
+abbr wiki  'wikiman'
 
 abbr yz yazi
