@@ -1,0 +1,22 @@
+# Archivos generados por Fisher
+common/.config/fish/fish_variables
+common/.config/fish/completions/fisher.fish
+
+# Configs generadas o no necesarias
+common/.config/Thunar/
+
+# Archivos generados por MPD
+common/.config/mpd/pid
+common/.config/mpd/database
+common/.config/mpd/state
+common/.config/mpd/sticker.sql
+common/.config/mpd/tag_cache
+common/.config/keepassxc
+common/.config/btop/btop.conf
+common/.local/share/fonts/.uuid
+common/.config/mpd/database
+common/.config/nvim/.mason_tools_installed
+common/.local/share/zoxide/db.zo
+
+# Nvim tools
+common/.config/nvim/.mason_tools_installed

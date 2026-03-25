@@ -1,0 +1,10 @@
+spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+spawn-at-startup "swww-daemon"
+spawn-at-startup "dunst"
+spawn-at-startup "waybar"
+spawn-at-startup "sunsetr"
+spawn-at-startup "mpd-mpris"
+spawn-at-startup "xwayland-satellite" ":0"
+spawn-at-startup "swayosd-server"
+
+spawn-sh-at-startup "~/bin/sys/0-post-boot.sh"

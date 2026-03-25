@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Hyprland
+Comment=An intelligent dynamic tiling Wayland compositor
+Exec=bash -c "/home/davidn/bin/sys/gpu-check.sh && start-hyprland"
+Type=Application
+DesktopNames=Hyprland
+Keywords=tiling;wayland;compositor;

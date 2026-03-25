@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# This script is based of https://github.com/kianblakley/niri-land
+# With minor changes to make it bigger
+
+wall_dir="$HOME/Pictures/Wallpapers/0-god/"
+cache_dir="$HOME/.cache/thumbnails/bgselector"
+
+if [[ "$1" == "--reload" ]]; then
+    rm -rf "$cache_dir"
+fi
+
+mkdir -p "$cache_dir"
+
+find "$wall_dir" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" -o -iname "*.gif" \) |
+    while read -r img; do
+        filename=$(basename "$img")
+        thumb="$cache_dir/$filename.png"
+
+        if [ ! -f "$thumb" ]; then
+            # This sintax is right, is just the magick syntax
+            magick "$img[0]" -strip -thumbnail x540^ -gravity center -extent 529x540 "$thumb"
+        fi
+    done
+
+if [[ "$1" == "--reload" || "$1" == "--cache" ]]; then
+    exit 0
+fi
+
+# Shuffling the wallpaper dir to not allways use the same wallpapers
+wall_selection=$(ls "$wall_dir" | shuf | while read -r A; do
+    echo -en "$A\x00icon\x1f$cache_dir/$A.png\n"
+done | rofi -dmenu -config "$HOME/.config/rofi/bin/bgselector/bgselector.rasi")
+
+if [ -n "$wall_selection" ]; then
+    "$HOME/bin/ui/wallpaper-handler.sh" "$wall_dir/$wall_selection"
+    exit 0
+else
+    exit 1
+fi

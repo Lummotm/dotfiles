@@ -1,0 +1,128 @@
+{
+
+  "reload_style_on_change": true,
+  "layer": "top",
+  "position": "top",
+  "spacing": 0,
+  "height": 25,
+  "modules-left": ["custom/launcher", "niri/workspaces"],
+  "modules-center": ["clock"],
+  
+  "modules-right": [
+    "tray", 
+    "custom/bluetooth",
+    "network",
+    "pulseaudio",
+    "cpu",
+    "backlight",
+    "battery"
+  ],
+
+  "niri/workspaces": {
+    "format": "{}", 
+    "format-icons": {
+      "terminal": "", 
+      "browser": "", 
+      "games": " ", 
+      "default": ""
+    },
+    "on-click": "activate"
+  },
+  "custom/launcher": {
+    "format": "<span font='launcher'>\ue900</span>", 
+    "on-click": "/home/davidn/.config/rofi/bin/rofi-launcher.sh",
+    "on-click-right": "kitty", 
+    "tooltip-format": "Lanzador de aplicaciones (Mod+R)"
+  },
+
+  "cpu": {
+    "interval": 5,
+    "format": "󰍛",
+    "on-click": "kitty btop" 
+  },
+  "clock": {
+    "format": "{:L%A %H:%M}",
+    "format-alt": "{:L%d %B %Y}",
+    "tooltip": false,
+  },
+  "network": {
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+    "format": "{icon}",
+    "format-wifi": "{icon}",
+    "format-ethernet": "󰀂",
+    "format-disconnected": "󰤮",
+    "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}s ⇡{bandwidthUpBytes}",
+    "tooltip-format-ethernet": "⇣{bandwidthDownBytes} ⇡{bandwidthUpBytes}",
+    "tooltip-format-disconnected": "Desconectado",
+    "interval": 3,
+    "spacing": 1,
+    "on-click": "/home/davidn/.config/rofi/bin/ronema/ronema.sh"
+  },
+  "battery": {
+    "format": "{capacity}% {icon}",
+    "format-discharging": "{icon}",
+    "format-charging": "{icon}",
+    "format-plugged": "",
+    "format-icons": {
+      "charging": ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"],
+      "default": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    },
+    "format-full": "󰂅",
+    "tooltip-format-discharging": "{power:>1.0f}W↓ {capacity}%",
+    "tooltip-format-charging": "{power:>1.0f}W↑ {capacity}%",
+    "interval": 5,
+    "on-click": "/home/davidn/.config/rofi/bin/powermenu/powermenu.sh",
+    "states": {
+      "warning": 20,
+      "critical": 10
+    }
+  },
+  "custom/bluetooth": {
+    "format": "{}",
+    "exec": "/home/davidn/.config/waybar/bin/get_bt_battery.sh",
+    "interval": 15,
+    "tooltip": false,
+    "on-click": "/home/davidn/.config/rofi/bin/rofi-bluetooth.sh"
+  },
+  "pulseaudio": {
+    "format": "{icon}",
+    "on-click": "/home/davidn/.config/rofi/bin/rofi-volume.sh",
+    "on-click-right": "pamixer -t", 
+    "tooltip-format": "Volumen: {volume}%",
+    "scroll-step": 5,
+    "format-muted": "",
+    "format-icons": {
+      "default": ["", "", ""]
+    }
+  },
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{icon}",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "on-scroll-down": "brightnessctl s 5%-",
+    "on-scroll-up": "brightnessctl s +5%",
+    "tooltip": true,
+    "tooltip-format": "Brightness: {percent}% ",
+    "smooth-scrolling-threshold": 1
+  },
+  "tray": {
+    "icon-size": 12,
+    "spacing": 17
+  }
+}

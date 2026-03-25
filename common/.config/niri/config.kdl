@@ -1,0 +1,301 @@
+include "startup.kdl"
+include "colors.kdl"
+include "theme.kdl"
+
+layout {
+    preset-column-widths {
+        proportion 0.33
+        proportion 0.5
+        proportion 0.667
+        proportion 1.0
+    }
+}
+
+input {
+    keyboard {
+        xkb {
+            layout "es,us"
+            options "grp:alt_space_toggle"
+        }
+        numlock
+    }
+    touchpad {
+        tap
+        dwt
+        dwtp
+        natural-scroll
+        //off
+    }
+    mouse {
+       accel-profile "flat"
+    }
+    warp-mouse-to-focus
+    workspace-auto-back-and-forth
+}
+
+output "HDMI-A-1" {
+    mode "1920x1080@144"
+    position x=0 y=0
+    scale 1
+    focus-at-startup
+    //transform "90"
+}
+
+output "eDP-1" {
+    mode "1920x1080@60"
+    position x=1920 y=0 
+    scale 1
+}
+
+cursor {
+    hide-when-typing
+    hide-after-inactive-ms 1000
+    xcursor-theme "Bibata-Modern-Classic"
+    xcursor-size 25
+}
+
+screenshot-path "~/Pictures/Screenshots/cap-%Y-%m-%d_%H-%M-%S.png"
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+binds {
+    Mod+Shift+P { show-hotkey-overlay; }
+    Mod+Alt+P hotkey-overlay-title="Power on/off monitors" { 
+        spawn-sh "/home/davidn/bin/sys/monitor-toggle.sh"
+    }
+    Mod+Tab { toggle-overview; }
+
+    Mod+Alt+E hotkey-overlay-title="Launch file manager (Nautilus)" { 
+        spawn "nautilus"; 
+    }
+    Mod+E hotkey-overlay-title="Launch file manager (Yazi)" { 
+        spawn "kitty" "--title=yazi" "-e" "yazi"; 
+    }
+    Mod+Q hotkey-overlay-title="Launch Tmux session" { 
+        spawn "kitty" "--title=tmux" "-e" "/home/davidn/.config/tmux/bin/tmux-launcher.sh"; 
+    }
+    Mod+Alt+Q hotkey-overlay-title="Launch new terminal (Kitty)" { 
+        spawn "kitty"; 
+    }
+    Mod+W hotkey-overlay-title="Launch browser" { 
+        spawn "zen-browser"; 
+    }
+
+    Mod+P hotkey-overlay-title="Toggle Opacity" {
+        spawn "niri" "msg" "action" "toggle-window-rule-opacity";
+    }
+
+    Mod+A hotkey-overlay-title="System status notification" { 
+        spawn-sh "/home/davidn/bin/ui/notify-sys.sh"; 
+    }
+    Mod+B hotkey-overlay-title="Restart Waybar" { 
+        spawn-sh "pkill waybar || waybar"; 
+    }
+    Mod+Alt+A hotkey-overlay-title="Toggle theme (Light/Dark)" { 
+        spawn-sh "/home/davidn/bin/ui/wallpaper-handler.sh toggle"; 
+    }
+    Mod+Shift+Alt+Q { quit; }
+
+    Mod+R hotkey-overlay-title="Rofi: Application launcher" { 
+        spawn-sh "/home/davidn/.config/rofi/bin/rofi-launcher.sh"; 
+    }
+    Mod+N hotkey-overlay-title="Rofi: Notes Manager" {
+        spawn-sh "/home/davidn/.config/rofi/bin/rofi-notes.sh";
+    }
+    Mod+M hotkey-overlay-title="Rofi: Music manager" { 
+        spawn-sh "/home/davidn/.config/rofi/bin/rofi-mpc"; 
+    }
+    Mod+Shift+V hotkey-overlay-title="Rofi: Clipboard history" { 
+        spawn-sh "/home/davidn/.config/rofi/bin/rofi-clipboard.sh"; 
+    }
+
+    // Replaced most of the menus with a general one that lets enter the others
+    Mod+F hotkey-overlay-title="Rofi: General Purpose Menu" { 
+        spawn-sh "/home/davidn/.config/rofi/bin/rofi-center.sh"; 
+    }
+
+
+    Mod+C { close-window; }
+
+    Mod+V { spawn-sh "/home/davidn/.config/niri/bin/niri_resize.sh centering"; }
+    Mod+Plus { spawn-sh "/home/davidn/.config/niri/bin/niri_resize.sh horizontal +10%"; }
+    Mod+Minus { spawn-sh "/home/davidn/.config/niri/bin/niri_resize.sh horizontal -10%"; }   
+    Mod+Shift+Plus { spawn-sh "/home/davidn/.config/niri/bin/niri_resize.sh vertical +10%"; }
+    Mod+Shift+Minus { spawn-sh "/home/davidn/.config/niri/bin/niri_resize.sh vertical -10%"; }   
+    
+    Mod+H { focus-column-left; }
+    Mod+J { focus-window-or-workspace-down; }
+    Mod+K { focus-window-or-workspace-up; }
+    Mod+L { focus-column-right; }
+
+    Mod+Alt+Shift+C hotkey-overlay-title="Activar pantalla de bloqueo" { spawn "hyprlock"; }
+
+    Mod+Alt+H { move-column-left; }
+    Mod+Alt+L { move-column-right; }
+    Mod+Alt+K { move-window-up; }
+    Mod+Alt+J { move-window-down; }
+
+    Mod+Comma { consume-or-expel-window-left; }
+    Mod+Period { consume-or-expel-window-right; }
+    Mod+S { switch-preset-column-width; }
+
+    Mod+1 { focus-workspace 1;}
+    Mod+2 { focus-workspace 2;}
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+
+    Mod+Alt+1 { move-column-to-workspace 1;}
+    Mod+Alt+2 { move-column-to-workspace 2; }
+    Mod+Alt+3 { move-column-to-workspace 3; }
+    Mod+Alt+4 { move-column-to-workspace 4; }
+    Mod+Alt+5 { move-column-to-workspace 5; }
+    Mod+Alt+6 { move-column-to-workspace 6; }
+    Mod+Alt+7 { move-column-to-workspace 7; }
+    Mod+Alt+8 { move-column-to-workspace 8; }
+    Mod+Alt+9 { move-column-to-workspace 9; }
+    Mod+Alt+0 { move-column-to-workspace 10; }
+
+    Mod+D { maximize-column; }
+    Mod+Shift+F hotkey-overlay-title="Toggle fullscreen" { fullscreen-window; }
+
+    Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp   cooldown-ms=1150 { focus-workspace-up; }
+
+    XF86AudioRaiseVolume allow-when-locked=true hotkey-overlay-title="Volume up" { 
+        spawn-sh "/home/davidn/bin/ui/notify-send.sh volume_up || wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"; 
+    }
+    XF86AudioLowerVolume allow-when-locked=true hotkey-overlay-title="Volume down" { 
+        spawn-sh "/home/davidn/bin/ui/notify-send.sh volume_down || wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"; 
+    }
+    XF86AudioMute allow-when-locked=true hotkey-overlay-title="Mute speakers" { 
+        spawn-sh "/home/davidn/bin/ui/notify-send.sh volume_mute || wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; 
+    }
+    XF86AudioMicMute allow-when-locked=true hotkey-overlay-title="Mute microphone" { 
+        spawn-sh "/home/davidn/bin/ui/notify-send.sh mic_mute || wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; 
+    }
+    XF86MonBrightnessUp allow-when-locked=true hotkey-overlay-title="Brightness up" { 
+        spawn-sh "/home/davidn/bin/ui/notify-send.sh brightness_up || brightnessctl s 5.0%+"; 
+    }
+    XF86MonBrightnessDown allow-when-locked=true hotkey-overlay-title="Brightness down" { 
+        spawn-sh "/home/davidn/bin/ui/notify-send.sh brightness_down || brightnessctl s 5.0%-"; 
+    }
+
+    Print hotkey-overlay-title="Screenshot (full screen)" { 
+        screenshot-screen show-pointer=false; 
+    }
+    Mod+Print hotkey-overlay-title="Screenshot (selected region)" { 
+        screenshot show-pointer=false;
+    }
+
+    //  Print hotkey-overlay-title="Screenshot (region)" {
+    //     spawn-sh "flameshot gui -p ~/Pictures/Screenshots/"
+    // }
+
+    F8 hotkey-overlay-title="Toggle touchpad" { 
+        spawn-sh "/home/davidn/bin/sys/touchpad-toggle.sh niri"; 
+    }
+    F11 hotkey-overlay-title="Toggle fullscreen" { fullscreen-window; }
+
+    Mod+Escape { toggle-keyboard-shortcuts-inhibit; }
+
+    XF86PowerOff {
+        spawn-sh "/home/davidn/.config/rofi/bin/powermenu/rofi-power.sh"
+    }
+
+
+    // Headphones binds (isn't linux goated)
+    XF86AudioPlay  { spawn "playerctl" "play-pause"; }
+    XF86AudioPause { spawn "playerctl" "play-pause"; }
+    XF86AudioNext { spawn "playerctl" "next"; }
+    XF86AudioPrev { spawn "playerctl" "previous"; }
+}
+
+
+// WINDOW RULES
+
+// Exclude KeePassXC from screencast
+window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    block-out-from "screencast"
+}
+
+//Steam Nofications
+window-rule {
+    match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+    default-floating-position x=10 y=10 relative-to="bottom-right"
+    open-focused false
+}
+
+
+// ANIMATIONS
+animations {
+    workspace-switch {
+        spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
+    }
+    window-open {
+        duration-ms 200
+        curve "ease-out-quad"
+    }
+    window-close {
+        duration-ms 200
+        curve "ease-out-cubic"
+    }
+    horizontal-view-movement {
+        spring damping-ratio=1.0 stiffness=900 epsilon=0.0001
+    }
+    window-movement {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+    }
+    window-resize {
+        spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
+    }
+    config-notification-open-close {
+        spring damping-ratio=0.6 stiffness=1200 epsilon=0.001
+    }
+    screenshot-ui-open {
+        duration-ms 300
+        curve "ease-out-quad"
+    }
+    overview-open-close {
+        spring damping-ratio=1.0 stiffness=900 epsilon=0.0001
+    }
+}
+
+// ENV VARS
+environment {
+    display ":0" 
+    electron_ozone_platform_hint "auto"
+    xdg_session_type "wayland"
+    xdg_current_desktop "niri"
+
+    // wayland platform settings
+    qt_qpa_platform "wayland"
+    qt_qpa_platformtheme "gtk3"
+    qt_qpa_platformtheme_qt6 "gtk3"
+    qt_wayland_disable_windowdecoration "1"
+    qt_auto_screen_scale_factor "1"
+
+    // gtk settings
+    gdk_backend "wayland,x11"
+
+    // firefox wayland
+    moz_enable_wayland "1"
+    moz_dbus_remote "1"
+
+    // java applications
+    _java_awt_wm_nonreparenting "1"
+
+    // sdl applications
+    sdl_videodriver "wayland"
+
+    // clutter applications
+    clutter_backend "wayland"
+
+}

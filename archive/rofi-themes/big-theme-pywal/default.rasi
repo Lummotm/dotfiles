@@ -1,0 +1,186 @@
+/*****----- Importar colores de pywal -----*****/
+@import "~/.cache/wal/colors-rofi-dark.rasi"
+
+
+configuration {
+    show-icons:                     true;
+    display-drun:                   "APPS";
+    display-notes:                  "NOTES";
+    display-music:                  "MUSIC";
+    display-window:                 "WINDOW";
+    drun-display-format:            "{name}";
+    window-format:                  "{w} · {c} · {t}";
+}
+
+
+* {
+    font:                           "JetBrains Mono Nerd Font 11";
+    background-overlay:             #0b040490;
+}
+
+
+window {
+    transparency:                   "real";
+    location:                       center;
+    anchor:                         center;
+    fullscreen:                     true;
+    width:                          100%;
+    height:                         100%;
+    enabled:                        true;
+    cursor:                         "default";
+    background-color:               @background-overlay;
+}
+
+
+mainbox {
+    enabled:                        true;
+    spacing:                        20px;
+    margin:                         0px;
+    padding:                        0px;
+    background-color:               transparent;
+    children:                       [ "inputbar", "listview", "mode-switcher" ];
+}
+
+inputbar {
+    enabled:                        true;
+    spacing:                        15px;
+    margin:                         180px 500px 0px 500px;
+    padding:                        15px 20px;
+    border-radius:                  8px;
+    background-color:               @selected-normal-background;
+    text-color:                     @selected-normal-foreground;
+    children:                       [ "entry" ];
+}
+
+entry {
+    enabled:                        true;
+    background-color:               @selected-normal-background;
+    text-color:                     @selected-normal-foreground;
+    cursor:                         text;
+    placeholder:                    "Buscar...";
+    placeholder-color:              @selected-normal-foreground;
+}
+
+listview {
+    enabled:                        true;
+    columns:                        1;
+    lines:                          8;
+    cycle:                          true;
+    dynamic:                        true;
+    scrollbar:                      false;
+    layout:                         vertical;
+    reverse:                        false;
+    fixed-height:                   true;
+    fixed-columns:                  true;
+    spacing:                        5px;
+    margin:                         10px 500px 0px 500px;
+    padding:                        10px;
+    background-color:               transparent;
+    text-color:                     @foreground;
+    cursor:                         "default";
+}
+
+element {
+    enabled:                        true;
+    spacing:                        12px;
+    margin:                         0px;
+    padding:                        10px 15px;
+    border-radius:                  6px;
+    background-color:               transparent;
+    text-color:                     @foreground;
+    cursor:                         pointer;
+}
+
+element normal.normal,
+element alternate.normal,
+element normal.urgent,
+element alternate.urgent,
+element normal.active,
+element alternate.active {
+    background-color:               transparent;
+    text-color:                     @foreground;
+}
+
+element selected.normal {
+    background-color:               @selected-normal-background;
+    text-color:                     @selected-normal-foreground;
+    border-radius:                  6px;
+}
+
+element selected.urgent {
+    background-color:               @selected-urgent-background;
+    text-color:                     @foreground;
+    border-radius:                  6px;
+}
+
+element selected.active {
+    background-color:               @selected-active-background;
+    text-color:                     @foreground;
+    border-radius:                  6px;
+}
+
+element-icon {
+    background-color:               transparent;
+    text-color:                     inherit;
+    size:                           22px;
+    cursor:                         inherit;
+}
+
+element-text {
+    background-color:               transparent;
+    text-color:                     inherit;
+    cursor:                         inherit;
+    vertical-align:                 0.5;
+    horizontal-align:               0.0;
+}
+
+mode-switcher {
+    enabled:                        true;
+    spacing:                        12px;
+    margin:                         0px 500px 180px 500px;
+    padding:                        0px;
+    background-color:               transparent;
+    text-color:                     @foreground;
+}
+
+button {
+    padding:                        8px 16px;
+    border-radius:                  6px;
+    background-color:               transparent;
+    text-color:                     @foreground;
+    cursor:                         pointer;
+}
+
+button selected {
+    background-color:               @selected-normal-background;
+    text-color:                     @selected-normal-foreground;
+}
+
+message {
+    enabled:                        true;
+    margin:                         0px 500px;
+    padding:                        0px;
+    background-color:               transparent;
+    text-color:                     @foreground;
+}
+
+textbox {
+    padding:                        15px;
+    border-radius:                  8px;
+    background-color:               @selected-normal-background;
+    text-color:                     @selected-normal-foreground;
+    vertical-align:                 0.5;
+    horizontal-align:               0.0;
+}
+
+error-message {
+    padding:                        15px;
+    border-radius:                  8px;
+    background-color:               @urgent-background;
+    text-color:                     @foreground;
+}
+
+listview, mode-switcher, message {
+    border: 0;
+    border-color: transparent;
+}

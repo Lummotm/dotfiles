@@ -1,0 +1,134 @@
+#!/usr/bin/python
+import subprocess
+from pathlib import Path
+from shutil import rmtree
+
+steam_dir = Path("~/temp/SteamLibrary/steamapps/").expanduser()
+steam_applications = Path("~/.local/share/applications/Steam Games/").expanduser()
+if steam_applications.exists() and steam_applications.is_dir():
+    # Borramos la version previa
+    rmtree(steam_applications)
+steam_applications.mkdir(exist_ok=True, parents=True)
+
+excluded = {"steam", "proton"}
+
+manual_icon_source = Path("~/Pictures/steam_icons/").expanduser()
+objective_icon_base = Path("~/.local/share/icons/hicolor/").expanduser()
+
+SIZES = ["16x16", "32x32", "48x48", "64x64", "128x128", "256x256"]
+
+
+def create_files(name, appid):
+    filename = f"{name}.desktop"
+    filedir = steam_applications / filename
+
+    file_string = (
+        f"[Desktop Entry]\nName={name}\nExec=steam steam://rungameid/{appid}\n"
+    )
+    file_string = (
+        file_string
+        + f"StartupWMClass=steam_app_{appid}\nIcon=steam_icon_{appid}\nTerminal=false\nType=Application\nCategories=Game;"
+    )
+
+    with open(filedir, "w") as f:
+        f.write(file_string)
+
+
+def process_and_get_icon(appid):
+    """Si el icono existe en descargas, lo convierte a hicolor y retorna el nombre."""
+    source_file = None
+    for ext in ["png", "jpg", "ico", "svg"]:
+        p = manual_icon_source / f"{appid}.{ext}"
+        if p.exists():
+            source_file = p
+            break
+
+    if not source_file:
+        return "steam"  # Fallback si no descargaste nada
+
+    for size in SIZES:
+        dim = size.split("x")[0]
+        target_path = objective_icon_base / size / "apps" / f"steam_icon_{appid}.png"
+        target_path.parent.mkdir(parents=True, exist_ok=True)
+
+        # ffmpeg: convierte y escala [cite: 4]
+        subprocess.run(
+            [
+                "ffmpeg",
+                "-y",
+                "-i",
+                str(source_file),
+                "-vf",
+                f"scale={dim}:{dim}:force_original_aspect_ratio=decrease,pad={dim}:{dim}:(ow-iw)/2:(oh-ih)/2:color=black@0",
+                str(target_path),
+            ],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+
+
+def backup_high_res_icons():
+    """Busca el icono de mayor resolución disponible en hicolor y lo respalda."""
+    print("\n--- Iniciando respaldo inverso (Máxima calidad disponible) ---")
+
+    # Obtenemos todos los appids que tienen algún icono en hicolor
+    # Buscamos en todo el árbol de hicolor archivos que sigan el patrón steam_icon_*.png
+    found_icons = {}  # Diccionario para guardar {appid: mejor_ruta_encontrada}
+
+    # Iteramos los tamaños de mayor a menor para asegurar la calidad
+    for size in reversed(SIZES):
+        size_folder = objective_icon_base / size / "apps"
+        if not size_folder.exists():
+            continue
+
+        for icon_path in size_folder.glob("steam_icon_*.png"):
+            appid = icon_path.stem.replace("steam_icon_", "")
+
+            # Si no lo hemos encontrado aún en un tamaño mayor, lo registramos
+            if appid not in found_icons:
+                found_icons[appid] = icon_path
+
+    # Procedemos a copiar los que no tengamos en nuestra carpeta de Pictures
+    for appid, icon_path in found_icons.items():
+        # Comprobamos si existe con cualquier extensión (.png, .jpg, etc)
+        exists_locally = any(
+            (manual_icon_source / f"{appid}.{ext}").exists()
+            for ext in ["png", "jpg", "ico", "svg"]
+        )
+
+        if not exists_locally:
+            backup_path = manual_icon_source / f"{appid}.png"
+            print(
+                f"📦 Respaldo recuperado desde {icon_path.parent.parent.name}: {appid}.png"
+            )
+            # Usamos cp para mantener el archivo tal cual [cite: 7]
+            subprocess.run(["cp", str(icon_path), str(backup_path)])
+
+
+print("Creando shortcuts:\n")
+for root, _, files in steam_dir.walk():
+    for file in files:
+        if "appmanifest" not in file:
+            continue
+        filepath = root / file
+        with open(filepath, "r") as f:
+            for line in f:
+                if "name" in line:
+                    name = line.split('"')[3]
+                if "appid" in line:
+                    appid = line.split('"')[3]
+        if any(ex in name.lower() for ex in excluded):
+            continue
+        print(f"Processing: {name}")
+        create_files(name, appid)
+
+
+print("\nProcesando iconos: \n")
+for _, _, files in manual_icon_source.walk():
+    for file in files:
+        appid = file.split(".")[0]  # Nos quedamos con el nombre solo
+        print(f"Procesando iconos de: {appid}")
+        process_and_get_icon(appid)
+
+# Bacup de iconos
+backup_high_res_icons()
