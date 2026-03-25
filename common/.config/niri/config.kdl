@@ -193,6 +193,9 @@ binds {
     Mod+Print hotkey-overlay-title="Screenshot (selected region)" { 
         screenshot show-pointer=false;
     }
+    Alt+Print hotkey-overlay-title="Screenshot (current window)" { 
+        spawn "niri" "msg" "action" "screenshot-window" "--write-to-disk=false"
+    }
 
     //  Print hotkey-overlay-title="Screenshot (region)" {
     //     spawn-sh "flameshot gui -p ~/Pictures/Screenshots/"

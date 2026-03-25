@@ -20,7 +20,7 @@ apply_wallpaper() {
     local expressions=("wipe" "grow" "wave")
     local random_index=$(($RANDOM % ${#expressions[@]}))
     transition=${expressions[$random_index]}
-    swww img "$SELECTED" --transition-type "$transition" --transition-step 60 --transition-fps 120
+    awww img "$SELECTED" --transition-type "$transition" --transition-step 60 --transition-fps 120
 }
 
 set_theme() {
