@@ -40,17 +40,15 @@ if [ -f "$RESOURCES_ZIP" ]; then
 fi
 
 # Git assume-unchanged
-{
-    cd "$DOTFILES_DIR" || exit 1
-    git update-index --assume-unchanged common/.config/rofi/colors.rasi
-    git update-index --assume-unchanged common/.config/waybar/colors.css
-    git update-index --assume-unchanged common/.config/zathura/zathurarc
-    git update-index --assume-unchanged common/.config/dunst/dunstrc
-    git update-index --assume-unchanged common/.config/nvim/lazy-lock.json
-    git update-index --assume-unchanged common/.config/discord/settings.json
-    git update-index --assume-unchanged common/.config/sioyek/prefs_user.config
-    git update-index --assume-unchanged common/.config/niri/colors.kdl
-} 2>/dev/null
+cd "$DOTFILES_DIR" || exit 1
+git update-index --assume-unchanged common/.config/rofi/colors.rasi
+git update-index --assume-unchanged common/.config/waybar/colors.css
+git update-index --assume-unchanged common/.config/zathura/zathurarc
+git update-index --assume-unchanged common/.config/dunst/dunstrc
+git update-index --assume-unchanged common/.config/nvim/lazy-lock.json
+git update-index --assume-unchanged common/.config/discord/settings.json
+git update-index --assume-unchanged common/.config/sioyek/prefs_user.config
+git update-index --assume-unchanged common/.config/niri/colors.kdl
 
 git config --global http.postBuffer 52428800
 
