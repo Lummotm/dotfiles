@@ -4,20 +4,20 @@
 PASO0="echo 'Empezando actualización'"
 PASO1="sudo reflector --latest 5 --protocol https --sort rate --save /etc/pacman.d/mirrorlist"
 PASO2="yay -Syu --noconfirm"
+# Limpiamos el cache, dejamos las ultimas 2 versiones de un paquete por si acaso
+PASO2_CLEAN="sudo paccache -rk2"
 PASO3="sudo mkinitcpio -P"
 PASO4="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 PASO5="sync"
-PASO6="notify-send 'Actualización Completa' 'CachyOS actualizado y kernel regenerado.' --icon=system-software-update"
+PASO6="notify-send 'Actualización Completa' 'CachyOS actualizado y kernel regenerado.'"
 
 # Ejecución en cadena
-# Si un paso falla, el script se detendrá en ese punto
 echo "Iniciando proceso de actualización..."
-if eval "$PASO0 && $PASO1 && $PASO2 && $PASO3 && $PASO4 && $PASO5 && $PASO6"; then
+if eval "$PASO0 && $PASO1 && $PASO2 && $PASO2_CLEAN && $PASO3 && $PASO4 && $PASO5 && $PASO6"; then
     echo "Proceso finalizado con éxito."
 else
     echo "Ocurrió un error durante la actualización. Revisa los logs arriba."
 fi
 
-# Mantiene la terminal abierta para ver los resultados
 echo "Presiona Enter para cerrar esta ventana..."
 read -r
