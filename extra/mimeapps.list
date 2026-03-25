@@ -1,4 +1,5 @@
 [Default Applications]
+video/mp4=vlc.desktop
 application/x-shellscript=nvim.desktop
 text/x-python=nvim.desktop
 application/x-wine-extension-ini=nvim.desktop
