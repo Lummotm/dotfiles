@@ -2,6 +2,7 @@
 
 DOTFILES_DIR="$HOME/dotfiles"
 THEME_SELECTOR="$HOME/dotfiles/common/bin/ui/theme-selector.sh"
+RESOURCES_ZIP="$HOME/dotfiles/extra/resources.7z"
 
 log() {
     echo "[$(date '+%H:%M:%S')] $*"
@@ -17,29 +18,26 @@ mkdir -vp \
     "$HOME/.local/share"/{applications,icons,fonts,zoxide} \
     "$HOME/temp"
 
-# Fuentes y Cursores
-RESOURCES_ZIP="$DOTFILES_DIR/extra/resources.7z"
-
 if [ -f "$RESOURCES_ZIP" ]; then
+    # Verificar dependencias
     command -v 7z &>/dev/null || sudo pacman -S --noconfirm --needed p7zip
+    command -v rsync &>/dev/null || sudo pacman -S --noconfirm --needed rsync
 
     log "Instalando recursos desde $RESOURCES_ZIP..."
     TEMP_EXTRACT="/tmp/dotfiles_resources"
-    rm -rf "$TEMP_EXTRACT" && mkdir -p "$TEMP_EXTRACT"
+    mkdir -p "$TEMP_EXTRACT"
 
     7z x "$RESOURCES_ZIP" -o"$TEMP_EXTRACT" -aoa >/dev/null
 
-    # Limpiar symlinks viejos para que cp no explote
-    find "$HOME/.local/share/icons" "$HOME/.local/share/fonts" -maxdepth 2 -type l -delete 2>/dev/null
-
-    [ -d "$TEMP_EXTRACT/fonts" ] && cp -rf "$TEMP_EXTRACT/fonts/." "$HOME/.local/share/fonts/"
-    [ -d "$TEMP_EXTRACT/icons" ] && cp -rf "$TEMP_EXTRACT/icons/." "$HOME/.local/share/icons/"
+    # Solo si existen sincronizamos
+    [ -d "$TEMP_EXTRACT/fonts" ] && rsync -av --ignore-existing "$TEMP_EXTRACT/fonts/" "$HOME/.local/share/fonts/"
+    [ -d "$TEMP_EXTRACT/icons" ] && rsync -av --ignore-existing "$TEMP_EXTRACT/icons/" "$HOME/.local/share/icons/"
 
     rm -rf "$TEMP_EXTRACT"
     fc-cache -fv >/dev/null
 fi
 
-# Git assume-unchanged
+# Git
 cd "$DOTFILES_DIR" || exit 1
 git update-index --assume-unchanged common/.config/rofi/colors.rasi
 git update-index --assume-unchanged common/.config/waybar/colors.css
