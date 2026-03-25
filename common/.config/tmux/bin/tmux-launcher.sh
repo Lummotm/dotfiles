@@ -1,37 +1,34 @@
 #!/usr/bin/env bash
 
-# Función para verificar si existe una sesión de tmux
-check_tmux_session() {
-    tmux has-session 2>/dev/null
-}
+# Si estamos dentro de tmux, salir de la sesión (detach)
+if [ -n "$TMUX" ]; then
+    tmux detach-client
+    exit 0
+fi
 
-# Función para obtener el número de clientes conectados
-get_attached_clients() {
-    tmux list-clients | wc -l
-}
+# Prefijo para nuestras terminales genéricas (así no chocan con tus proyectos)
+PREFIX="term-"
 
-# Función principal
-handle_tmux() {
-    if [ -n "$TMUX" ]; then
-        # Si estamos dentro de tmux, salir
-        tmux detach-client
-        exit 0
-    fi
+# Buscamos el primer "tag" o slot (del 1 al 10) que esté libre
+for i in {1..10}; do
+    session_name="${PREFIX}${i}"
 
-    if check_tmux_session; then
-        # Si hay una sesión existente
-        clients=$(get_attached_clients)
-        if [ "$clients" -gt 0 ]; then
-            # Si hay clientes conectados, desconectarlos
-            tmux list-clients | cut -d: -f1 | xargs -n 1 tmux detach-client -t
+    # Comprobamos si la sesión ya existe
+    if tmux has-session -t "$session_name" 2>/dev/null; then
+        # Si existe, miramos si tiene clientes conectados (ventanas de Kitty usándola)
+        attached=$(tmux list-sessions -F "#{session_name} #{session_attached}" | grep "^${session_name} " | awk '{print $2}')
+
+        if [ "$attached" -eq 0 ]; then
+            # Está huérfana (libre), nos conectamos para recuperar el estado
+            exec tmux attach -t "$session_name"
         fi
-        # Conectar a la sesión
-        exec tmux attach
+        # Si tiene clientes conectados, el bucle continúa buscando el siguiente número
     else
-        # Si no hay sesión, crear una nueva
-        exec tmux new-session
+        # La sesión no existe, creamos una nueva con este nombre ("tag")
+        exec tmux new-session -s "$session_name"
     fi
-}
+done
 
-# Ejecutar
-handle_tmux
+# Fallback de seguridad: si logras tener 10 terminales abiertas a la vez,
+# simplemente abre una sesión genérica sin nombre.
+exec tmux new-session

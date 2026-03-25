@@ -126,11 +126,18 @@ open_content() {
             update_todos
         fi
 
-        # Desvincula Neovim del proceso actual (setsid) para que Rofi pueda cerrarse limpiamente
+        # Generamos un nombre de sesión único y limpio basado en el archivo
+        local filename=$(basename "$target")
+        local session_name="note_${filename//[^a-zA-Z0-9]/_}"
+
+        # Expandimos los comandos en una variable para no depender de funciones exportadas dentro de Tmux
+        local inner_cmd="cd '$NOTE_PATH' && nvim '$target'; python3 '$HOME/.config/rofi/bin/dependencies/image_compresion.py'; python3 '$HOME/.config/rofi/bin/dependencies/update-todos.py'; if [ -n \"\$(git -C '$NOTE_PATH' status --porcelain)\" ]; then bash '$SYNC_SCRIPT' '$NOTE_PATH'; else notify-send 'Obsidian' 'Sin cambios, saltando sync.'; fi"
+
+        # Envolvemos el comando en una sesión de Tmux con el flag -A (Attach/Create)
         if [[ "$target" == "$NOTE_PATH"/* ]]; then
-            setsid kitty bash -c "edit_and_sync '$target'" >/dev/null 2>&1 </dev/null &
+            setsid kitty --title="notes" -e tmux new-session -A -s "$session_name" bash -c "$inner_cmd" >/dev/null 2>&1 </dev/null &
         else
-            setsid kitty bash -c "nvim '$target'" >/dev/null 2>&1 </dev/null &
+            setsid kitty --title="notes" -e tmux new-session -A -s "$session_name" bash -c "nvim '$target'" >/dev/null 2>&1 </dev/null &
         fi
     fi
 }

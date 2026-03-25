@@ -71,7 +71,7 @@ binds {
         spawn "nautilus"; 
     }
     Mod+E hotkey-overlay-title="Launch file manager (Yazi)" { 
-        spawn "kitty" "--title=yazi" "-e" "yazi"; 
+        spawn "kitty" "--title=yazi" "-e" "tmux" "new-session" "-A" "-s" "yazi-scratch" "yazi"; 
     }
     Mod+Q hotkey-overlay-title="Launch Tmux session" { 
         spawn "kitty" "--title=tmux" "-e" "/home/davidn/.config/tmux/bin/tmux-launcher.sh"; 
@@ -118,6 +118,8 @@ binds {
 
 
     Mod+C { close-window; }
+    Mod+Alt+C { spawn "tmux" "kill-session"; }
+    Mod+Alt+Shift+C { spawn "tmux" "kill-server"; }
 
     Mod+V { spawn-sh "/home/davidn/.config/niri/bin/niri_resize.sh centering"; }
     Mod+Plus { spawn-sh "/home/davidn/.config/niri/bin/niri_resize.sh horizontal +10%"; }
@@ -129,8 +131,6 @@ binds {
     Mod+J { focus-window-or-workspace-down; }
     Mod+K { focus-window-or-workspace-up; }
     Mod+L { focus-column-right; }
-
-    Mod+Alt+Shift+C hotkey-overlay-title="Activar pantalla de bloqueo" { spawn "hyprlock"; }
 
     Mod+Alt+H { move-column-left; }
     Mod+Alt+L { move-column-right; }
