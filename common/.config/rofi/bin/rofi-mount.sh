@@ -14,9 +14,9 @@ ICON_ERROR="dialog-error"
 [[ -d "$LOG_DIR" ]] || mkdir -p "$LOG_DIR"
 echo "--- Session $(date) ---" >>"$LOG_FILE"
 
-# Wrapper para estandarizar el diseño de Rofi
+# Wrapper para estandarizar el diseño de Rofi (sin markup-rows)
 rofi_cmd() {
-    rofi_core -w "38ch" -N -markup-rows -mesg "Select a disk to mount:" -c 'textbox{padding: 2px 5px;}'
+    rofi_core -w "38ch" -N -mesg "Select a disk to mount:" -c 'textbox{padding: 2px 5px;}'
 }
 
 # Logging con timestamp
@@ -148,16 +148,16 @@ rofi_menu() {
         local mnt="${DEVICES_MOUNT[$i]}"
         local dev_name="${dev#/dev/}"
 
-        # Marcado Pango para diferenciar visualmente montados de desmontados
+        # Texto plano sin formato Pango
         if [[ -n "$mnt" ]]; then
-            options="${options}Mounted: ${label} (${dev_name}) <span size='small'>${info}</span>\n"
+            options="${options}Mounted: ${label} (${dev_name}) ${info}\n"
         else
-            options="${options}${label} (${dev_name})   <span color='#888888'>${info}</span>\n"
+            options="${options}${label} (${dev_name})   ${info}\n"
         fi
         ((i++))
     done
 
-    [[ -z "$options" ]] && options="<i>No devices found</i>\n"
+    [[ -z "$options" ]] && options="No devices found\n"
 
     local toggle_txt
     [[ "$HIDE_MOUNTED" == "true" ]] && toggle_txt="Show All" || toggle_txt="Hide Mounted"
@@ -187,16 +187,39 @@ selection_action() {
         rofi_menu
         ;;
     *)
-        # Extrae el identificador base del dispositivo (ej. sdb1)
-        local dev_name
-        dev_name=$(echo "$SELECTION" | sed -n 's/.*(\(.*\)).*/\1/p' | awk '{print $1}')
+        # Extrae el nombre del dispositivo (ej: sda2)
+        local dev_name=$(echo "$SELECTION" | sed -n 's/.*(\(.*\)).*/\1/p')
+        local device="/dev/$dev_name"
 
-        [[ -z "$dev_name" ]] && exit 1
+        # Datos de tu Crucial
+        local target_uuid="D0668FA2668F87C4"
+        local mount_point="/run/media/davidn/Crucial_X9"
+        local current_uuid=$(lsblk -no UUID "$device")
 
-        if [[ "$SELECTION" == Mounted:* ]]; then
-            unmount_device "/dev/$dev_name"
+        # Si es el Crucial X9
+        # Caso especifico ya que tiene que tener permisos especificos fijados en el fstab
+        if [[ "$current_uuid" == "$target_uuid" ]]; then
+            # Verificamos si ya está montado
+            if mountpoint -q "$mount_point"; then
+                log "Desmontando Crucial X9..."
+                if umount "$mount_point"; then
+                    notification "Disco Desmontado" "Crucial X9 se ha extraído con éxito" "$ICON_UNMOUNTED"
+                else
+                    notification "Error" "No se pudo desmontar. ¿Hay procesos usando el disco?" "$ICON_ERROR"
+                fi
+            else
+                log "Montando Crucial X9..."
+                if mount "$mount_point"; then
+                    notification "Disco Montado" "Crucial X9 listo." "$ICON_MOUNTED"
+                fi
+            fi
         else
-            mount_device "/dev/$dev_name"
+            # Lógica normal de udisksctl para otros discos
+            if mountpoint -q "$(lsblk -no MOUNTPOINT "$device")"; then
+                udisksctl unmount -b "$device"
+            else
+                udisksctl mount -b "$device"
+            fi
         fi
         ;;
     esac

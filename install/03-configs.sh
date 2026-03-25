@@ -307,6 +307,57 @@ setup_nm_hotspot_connection() {
     log "Conexión $CON_NAME creada correctamente."
 }
 
+setup_crucial_disk_fstab() {
+    log "Configurando montaje automático para Crucial X9 en fstab..."
+
+    local TARGET_UUID="D0668FA2668F87C4"
+    local MOUNT_POINT="/run/media/$USER/Crucial_X9"
+
+    local FSTAB_LINE="UUID=$TARGET_UUID  $MOUNT_POINT  ntfs3  defaults,user,uid=1000,gid=1000,umask=000,rw,exec,windows_names,iocharset=utf8,nofail  0  0"
+
+    if grep -q "$TARGET_UUID" /etc/fstab; then
+        log "El UUID del Crucial X9 ya existe en /etc/fstab. Omitiendo configuración."
+        return 0
+    fi
+
+    log "Verificando sintaxis de la nueva entrada..."
+
+    if [ ! -d "$MOUNT_POINT" ]; then
+        log "Creando punto de montaje para validación..."
+        sudo mkdir -p "$MOUNT_POINT"
+    fi
+
+    # Archivos temporales para validación segura
+    local temp_fstab=$(mktemp /tmp/fstab.XXXXXX)
+    local temp_output=$(mktemp /tmp/fstab_check.XXXXXX)
+
+    cp /etc/fstab "$temp_fstab"
+    echo "$FSTAB_LINE" >>"$temp_fstab"
+
+    if findmnt --verify --tab-file "$temp_fstab" >"$temp_output" 2>&1; then
+        log "Sintaxis validada correctamente. Escribiendo en /etc/fstab..."
+        echo -e "\n# Crucial X9 para Steam\n$FSTAB_LINE" | sudo tee -a /etc/fstab >/dev/null
+
+        # Recargar para que systemd se entere de los cambios
+        sudo systemctl daemon-reload
+
+        log "Intentando montar..."
+        # Si el disco no está conectado no pasa nada, fallará silenciosamente y avisará
+        if sudo mount "$MOUNT_POINT" 2>/dev/null; then
+            log "Disco montado con éxito en $MOUNT_POINT"
+        else
+            log "Disco no conectado en este momento, se montará automáticamente cuando se enchufe."
+        fi
+    else
+        log "ERROR CRÍTICO EN FSTAB: La sintaxis no es válida. Abortando configuración del disco."
+        grep "\[E\]" "$temp_output" || cat "$temp_output"
+        rm -f "$temp_fstab" "$temp_output"
+        return 1
+    fi
+
+    rm -f "$temp_fstab" "$temp_output"
+}
+
 setup_services_and_configs() {
     local machine_type="$1"
     local de_profile="$2"
@@ -318,6 +369,7 @@ setup_services_and_configs() {
     setup_keyd_service
     setup_fish_shell
     service_install bluetooth
+    setup_crucial_disk_fstab
 
     if [[ $machine_type == "laptop" ]]; then
         log "Configurando servicios específicos de portátil..."
@@ -334,8 +386,6 @@ setup_services_and_configs() {
     echo ""
 }
 
-# Main execution
-# If executed standalone
 # Main execution
 # If executed standalone
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
@@ -375,6 +425,10 @@ if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
         "login")
             log "Re-configurando módulo: Autologin / Display Manager..."
             setup_login "false" "$PROFILE" "$MACHINE"
+            ;;
+        "disk")
+            log "Re-configurando módulo: Disco Crucial X9..."
+            setup_crucial_disk_fstab
             ;;
         "all")
             log "Ejecutando configuración completa (all)..."
