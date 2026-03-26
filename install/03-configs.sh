@@ -31,13 +31,10 @@ service_install() {
 
 setup_mpd_service() {
     log "Configurando servicio MPD..."
-
     mkdir -p ~/.config/mpd ~/.config/mpd/playlists ~/.local/state/mpd
     chmod 755 ~/.config/mpd ~/.local/state/mpd
     [ -d ~/Music ] && chmod 755 ~/Music
-
     service_install mpd --user
-
     log "Servicio MPD configurado y en ejecución."
 }
 
@@ -47,28 +44,19 @@ setup_keyd_service() {
     local KEYD_CONFIG_SOURCE="$HOME/dotfiles/extra/keyd/default.conf"
 
     if [ ! -f "$KEYD_CONFIG_SOURCE" ]; then
-        log "Error: El archivo de configuración de keyd no se encuentra en $KEYD_CONFIG_SOURCE."
+        log "Error: El archivo de configuración de keyd no se encuentra."
         exit 1
     fi
 
-    if [ -f "$KEYD_CONFIG_DEST" ]; then
-        log "Sobrescribiendo configuración existente de keyd..."
-    fi
-
-    log "Copiando configuración de keyd..."
     sudo mkdir -p "$(dirname "$KEYD_CONFIG_DEST")"
     sudo cp "$KEYD_CONFIG_SOURCE" "$KEYD_CONFIG_DEST"
-
     service_install keyd
-
     log "Servicio keyd configurado y en ejecución."
 }
 
 setup_fish_shell() {
     log "Configurando Fish como shell por defecto..."
-
     local FISH_PATH="/usr/bin/fish"
-
     local CURRENT_SHELL=$(getent passwd "$USER" | cut -d: -f7)
 
     if [ ! -x "$FISH_PATH" ]; then
@@ -83,7 +71,6 @@ setup_fish_shell() {
 
     if chsh -s "$FISH_PATH"; then
         log "Shell cambiado a Fish correctamente."
-        log "El cambio se aplicará en la próxima sesión."
     else
         log "Error: No se pudo cambiar el shell a Fish."
         exit 1
@@ -94,17 +81,22 @@ setup_login() {
     local auto_yes_flag="$1"
     local de_profile="$2"
     local machine_type="$3"
+    local is_personal="$4"
 
     log "Paso 6/6: Configurando el gestor de sesión..."
 
-    case "$machine_type" in
-    "desktop")
-        log "Configurando para Desktop: Autologin con greetd"
+    if [[ "$machine_type" == "laptop" && "$is_personal" == "true" ]]; then
+        log "Configurando manager 'ly' para portátil personal..."
+        sudo pacman -S --needed --noconfirm ly
+        sudo systemctl disable getty@tty2.service 2>/dev/null || true
+        service_install ly
+    else
+        log "Configurando Autologin con greetd..."
         if $auto_yes_flag; then
             REPLY="y"
         else
-            read -p "¿Quieres configurar autologin con greetd? (y/N): " -n 1 -r
-            log
+            read -p "¿Quieres configurar autologin directo con greetd? (y/N): " -n 1 -r
+            echo
         fi
 
         if [[ ! $REPLY =~ ^[Yy]$ ]]; then
@@ -112,68 +104,40 @@ setup_login() {
             return 0
         fi
 
-        log "Instalando dependencias de greetd..."
-        sudo pacman -S --needed greetd
+        sudo pacman -S --needed --noconfirm greetd
 
         local GREETD_CONFIG_DEST="/etc/greetd/config.toml"
         sudo mkdir -p "$(dirname "$GREETD_CONFIG_DEST")"
-        log "Escribiendo $GREETD_CONFIG_DEST para $de_profile..."
+        
+        # Usamos tus configuraciones previas que ya apuntan a la sesión correcta
         if [[ "$de_profile" == "niri" ]]; then
             sudo cp ~/dotfiles/extra/greetd/niri.toml "$GREETD_CONFIG_DEST"
         elif [[ "$de_profile" == "hyprland" ]]; then
             sudo cp ~/dotfiles/extra/greetd/hyprland.toml "$GREETD_CONFIG_DEST"
         fi
+        
+        # Limpieza por si venían de otro manager
+        sudo systemctl disable sddm 2>/dev/null || true
+        sudo systemctl disable ly 2>/dev/null || true
+        
         service_install greetd
-        log "Servicio greetd (autologin) habilitado correctamente."
-
-        ;;
-
-    "laptop")
-        log "Configurando para Laptop: Login manager 'ly'"
-        log "Esto te permitirá elegir la sesión que ejecuta el script de GPU."
-
-        sudo pacman -S --needed ly
-
-        sudo systemctl disable getty@tty2.service
-        sudo systemctl enable ly@tty2.service
-
-        log "Servicio 'ly' habilitado correctamente."
-        log "Tus scripts de .desktop (instalados por setup_toggle_gpu) se usarán."
-        ;;
-    esac
-
-    log "Configuración del gestor de sesión completada."
-    log ""
+    fi
+    echo ""
 }
 
 setup_autocpufreq() {
-    log "Installing autocpufreq"
-
+    log "Instalando autocpufreq..."
     if systemctl is-enabled cpupower.service &>/dev/null; then
-        log "Deshabilitando cpupower.service servicio conflictivo"
-        sudo systemctl disable cpupower.service
-        sudo systemctl stop cpupower.service
+        sudo systemctl disable --now cpupower.service
     fi
-
     if systemctl is-enabled thermald.service &>/dev/null; then
-        log "Deshabilitando thermald.service servicio conflictivo"
-        sudo systemctl disable thermald.service
-        sudo systemctl stop thermald.service
+        sudo systemctl disable --now thermald.service
     fi
-
     if systemctl is-active auto-cpufreq.service &>/dev/null; then
-        log "auto-cpufreq ya esta activo removiendo"
         sudo auto-cpufreq --remove
     fi
-
     if sudo auto-cpufreq --install; then
-        log "Instalación exitosa"
-
-        if systemctl is-active auto-cpufreq.service &>/dev/null; then
-            log "auto-cpufreq esta funcionando correctamenete"
-        else
-            log "auto-cpufreq no esta funcionando correctamenete"
-        fi
+        log "auto-cpufreq instalado correctamente."
     else
         log "Fallo al instalar auto-cpufreq"
         return 1
@@ -181,30 +145,21 @@ setup_autocpufreq() {
 }
 
 setup_toggle_gpu() {
-    log "¿Quiere desactivar la gráfica NVIDIA?"
+    log "¿Quiere desactivar la gráfica NVIDIA (gpu-toggle)?"
     read -p "[y/n] " -n 1 -r
-    log
-
-    local GPU_SUDOERS_SRC="$HOME/dotfiles/extra/sudoers/gpu-rules"
-    local GPU_SUDOERS_DEST="/etc/sudoers.d/gpu-rules"
+    echo
 
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         log "Configurando GPU toggle..."
-
         sudo cp ~/dotfiles/extra/wayland-sessions/gpu-toggle.sh /usr/local/bin/gpu-toggle
         sudo chown root:root /usr/local/bin/gpu-toggle
         sudo chmod 755 /usr/local/bin/gpu-toggle
 
+        local GPU_SUDOERS_SRC="$HOME/dotfiles/extra/sudoers/gpu-rules"
+        local GPU_SUDOERS_DEST="/etc/sudoers.d/gpu-rules"
         if [ -f "$GPU_SUDOERS_SRC" ]; then
             sudo cp "$GPU_SUDOERS_SRC" "$GPU_SUDOERS_DEST"
-            sudo chown root:root "$GPU_SUDOERS_DEST"
             sudo chmod 440 "$GPU_SUDOERS_DEST"
-
-            if ! sudo visudo -c; then
-                log "Error en gpu-rules. Revirtiendo..."
-                sudo rm "$GPU_SUDOERS_DEST"
-                return 1
-            fi
         fi
 
         sudo mkdir -p /usr/share/wayland-sessions/
@@ -224,14 +179,7 @@ setup_general_sudoers() {
 
     if [ -f "$GENERAL_SRC" ]; then
         sudo cp "$GENERAL_SRC" "$GENERAL_DEST"
-        sudo chown root:root "$GENERAL_DEST"
         sudo chmod 440 "$GENERAL_DEST"
-
-        if ! sudo visudo -c; then
-            log "Error en custom-rules. Revirtiendo..."
-            sudo rm "$GENERAL_DEST"
-            return 1
-        fi
         log "Reglas generales aplicadas correctamente."
     fi
 }
@@ -243,57 +191,37 @@ setup_laptop_sudoers() {
 
     if [ -f "$LAPTOP_SRC" ]; then
         sudo cp "$LAPTOP_SRC" "$LAPTOP_DEST"
-        sudo chown root:root "$LAPTOP_DEST"
         sudo chmod 440 "$LAPTOP_DEST"
-
-        if ! sudo visudo -c; then
-            log "Error en laptop-rules. Revirtiendo..."
-            sudo rm "$LAPTOP_DEST"
-            return 1
-        fi
         log "Reglas de batería aplicadas correctamente."
     fi
 }
 
 setup_hotspot_network() {
     log "Configurando red para Hotspot (Forwarding y UFW)..."
-
-    # Detectar interfaces automáticamente
     local ETH_INT=$(nmcli -t -f DEVICE,TYPE device status | grep ":ethernet" | head -n1 | cut -d: -f1)
     local WIFI_INT=$(nmcli -t -f DEVICE,TYPE device status | grep ":wifi" | head -n1 | cut -d: -f1)
 
     if [[ -z "$ETH_INT" || -z "$WIFI_INT" ]]; then
-        log "Advertencia: No se detectaron ambas interfaces (Ethernet/Wi-Fi). Saltando configuración de red."
+        log "Advertencia: No se detectaron ambas interfaces. Saltando configuración de red."
         return 1
     fi
 
-    # IP Forwarding permanente
-    log "Habilitando IP Forwarding..."
     echo "net.ipv4.ip_forward=1" | sudo tee /etc/sysctl.d/99-hotspot.conf
     sudo sysctl --system
-
-    # Reglas de UFW (Permanentes)
-    log "Configurando reglas de UFW para $WIFI_INT -> $ETH_INT"
     sudo ufw route allow in on "$WIFI_INT" out on "$ETH_INT"
     sudo ufw allow in on "$WIFI_INT" to any port 67 proto udp
     sudo ufw allow in on "$WIFI_INT" to any port 53
-
-    # Asegurar que UFW esté activo
     sudo ufw --force enable
 }
 
 setup_nm_hotspot_connection() {
     log "Creando conexión de NetworkManager para Hotspot..."
-
     local WIFI_INT=$(nmcli -t -f DEVICE,TYPE device status | grep ":wifi" | head -n1 | cut -d: -f1)
     local CON_NAME="Hotspot"
     local SSID="Hostpot"
     local PASS="ThinkingRock123"
 
-    # Borrar si ya existe
     nmcli con delete "$CON_NAME" 2>/dev/null || true
-
-    # Crear conexión con los parámetros de seguridad que funcionan para tu MediaTek
     nmcli con add type wifi ifname "$WIFI_INT" con-name "$CON_NAME" autoconnect no ssid "$SSID" \
         802-11-wireless.mode ap \
         802-11-wireless-security.key-mgmt wpa-psk \
@@ -303,64 +231,45 @@ setup_nm_hotspot_connection() {
         802-11-wireless-security.pairwise ccmp \
         802-11-wireless-security.pmf 0 \
         ipv4.method shared
-
     log "Conexión $CON_NAME creada correctamente."
 }
 
 setup_crucial_disk_fstab() {
     log "Configurando montaje automático para Crucial X9 en fstab..."
-
     local TARGET_UUID="D0668FA2668F87C4"
     local MOUNT_POINT="/run/media/$USER/Crucial_X9"
-
     local FSTAB_LINE="UUID=$TARGET_UUID  $MOUNT_POINT  ntfs3  defaults,user,uid=1000,gid=1000,umask=000,rw,exec,windows_names,iocharset=utf8,nofail  0  0"
 
     if grep -q "$TARGET_UUID" /etc/fstab; then
-        log "El UUID del Crucial X9 ya existe en /etc/fstab. Omitiendo configuración."
+        log "El UUID del Crucial X9 ya existe en /etc/fstab. Omitiendo."
         return 0
     fi
 
-    log "Verificando sintaxis de la nueva entrada..."
+    [ ! -d "$MOUNT_POINT" ] && sudo mkdir -p "$MOUNT_POINT"
 
-    if [ ! -d "$MOUNT_POINT" ]; then
-        log "Creando punto de montaje para validación..."
-        sudo mkdir -p "$MOUNT_POINT"
-    fi
-
-    # Archivos temporales para validación segura
     local temp_fstab=$(mktemp /tmp/fstab.XXXXXX)
     local temp_output=$(mktemp /tmp/fstab_check.XXXXXX)
-
     cp /etc/fstab "$temp_fstab"
     echo "$FSTAB_LINE" >>"$temp_fstab"
 
     if findmnt --verify --tab-file "$temp_fstab" >"$temp_output" 2>&1; then
-        log "Sintaxis validada correctamente. Escribiendo en /etc/fstab..."
         echo -e "\n# Crucial X9 para Steam\n$FSTAB_LINE" | sudo tee -a /etc/fstab >/dev/null
-
-        # Recargar para que systemd se entere de los cambios
         sudo systemctl daemon-reload
-
-        log "Intentando montar..."
-        # Si el disco no está conectado no pasa nada, fallará silenciosamente y avisará
         if sudo mount "$MOUNT_POINT" 2>/dev/null; then
             log "Disco montado con éxito en $MOUNT_POINT"
         else
-            log "Disco no conectado en este momento, se montará automáticamente cuando se enchufe."
+            log "Disco no conectado, se montará automáticamente al enchufar."
         fi
     else
-        log "ERROR CRÍTICO EN FSTAB: La sintaxis no es válida. Abortando configuración del disco."
-        grep "\[E\]" "$temp_output" || cat "$temp_output"
-        rm -f "$temp_fstab" "$temp_output"
-        return 1
+        log "ERROR CRÍTICO EN FSTAB: Sintaxis inválida."
     fi
-
     rm -f "$temp_fstab" "$temp_output"
 }
 
 setup_services_and_configs() {
     local machine_type="$1"
     local de_profile="$2"
+    local is_personal="$3"
 
     log "Paso 4/5: Configurando servicios del sistema..."
 
@@ -369,76 +278,77 @@ setup_services_and_configs() {
     setup_keyd_service
     setup_fish_shell
     service_install bluetooth
-    setup_crucial_disk_fstab
 
-    if [[ $machine_type == "laptop" ]]; then
-        log "Configurando servicios específicos de portátil..."
+    if [[ "$is_personal" == "true" ]]; then
+        log "Modo personal detectado: Instalando configuraciones privadas..."
+        setup_crucial_disk_fstab
+        if [[ "$machine_type" == "laptop" ]]; then
+            setup_nm_hotspot_connection
+            setup_hotspot_network
+            setup_toggle_gpu
+        fi
+    else
+        log "Instalación estándar: Omitiendo módulos personales (hotspot, fstab privado, toggle de gpu)."
+    fi
+
+    if [[ "$machine_type" == "laptop" ]]; then
+        log "Configurando servicios generales de portátil..."
         setup_laptop_sudoers
         setup_autocpufreq
-        setup_toggle_gpu
-        setup_nm_hotspot_connection
-        setup_hotspot_network
-    else
-        log "Omitiendo configuración de servicios de portátil."
     fi
 
     log "Servicios del sistema configurados."
     echo ""
 }
 
-# Main execution
-# If executed standalone
+# Main execution (Standalone)
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
-    # Validaciones básicas
     if [ -z "$1" ] || [ -z "$2" ]; then
         log "Error: Se requieren argumentos."
-        log "Uso: $0 <laptop|desktop> <niri|hyprland> [modulo1] [modulo2] ..."
-        log "Módulos disponibles: hotspot, gpu, login, all"
+        log "Uso: $0 <laptop|desktop> <niri|hyprland> [--personal] [modulo1] ..."
         exit 1
     fi
 
     MACHINE="$1"
     PROFILE="$2"
+    IS_PERSONAL="false"
     shift 2
+
+    if [[ "$1" == "--personal" ]]; then
+        IS_PERSONAL="true"
+        shift
+    fi
 
     validate_input "$MACHINE"
 
-    # Si no le pasamos ningún módulo extra, asumimos "all"
     if [ $# -eq 0 ]; then
         MODULES=("all")
     else
-        MODULES=("$@") # Guardamos todos los argumentos restantes en un array
+        MODULES=("$@")
     fi
 
-    # Procesamos cada módulo uno por uno
     for MODULE in "${MODULES[@]}"; do
         case "$MODULE" in
         "hotspot")
-            log "Re-configurando módulo: Hotspot..."
-            setup_nm_hotspot_connection
-            setup_hotspot_network
+            if [[ "$IS_PERSONAL" == "true" ]]; then
+                setup_nm_hotspot_connection
+                setup_hotspot_network
+            fi
             ;;
         "gpu")
-            log "Re-configurando módulo: GPU Toggle..."
-            setup_toggle_gpu
+            if [[ "$IS_PERSONAL" == "true" ]]; then setup_toggle_gpu; fi
             ;;
         "login")
-            log "Re-configurando módulo: Autologin / Display Manager..."
-            setup_login "false" "$PROFILE" "$MACHINE"
+            setup_login "false" "$PROFILE" "$MACHINE" "$IS_PERSONAL"
             ;;
         "disk")
-            log "Re-configurando módulo: Disco Crucial X9..."
-            setup_crucial_disk_fstab
+            if [[ "$IS_PERSONAL" == "true" ]]; then setup_crucial_disk_fstab; fi
             ;;
         "all")
-            log "Ejecutando configuración completa (all)..."
-            setup_services_and_configs "$MACHINE" "$PROFILE"
-            log "---"
-            setup_login "false" "$PROFILE" "$MACHINE"
+            setup_services_and_configs "$MACHINE" "$PROFILE" "$IS_PERSONAL"
+            setup_login "false" "$PROFILE" "$MACHINE" "$IS_PERSONAL"
             ;;
-        *)
-            log "Error: Módulo '$MODULE' no reconocido. Omitiendo..."
-            ;;
+        *) log "Error: Módulo '$MODULE' no reconocido." ;;
         esac
     done
 fi

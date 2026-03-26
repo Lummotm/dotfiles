@@ -6,14 +6,6 @@ if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
     source "$SCRIPT_DIR/00-utils.sh"
 fi
 
-# 02-packages.sh - instalación de paquetes oficiales y AUR
-# =================================================================================
-# Antes usaba un hash junto con pacman -Ssq para clasificar los paquetes
-# Esto era rápido en búsqueda O(1) y usaba una llamada de pacman solo,
-# pero requería cargar toda la DB de pacman.
-# Ahora se usa -T para hacerlo más rapido y simple
-# =================================================================================
-
 install_packages_smart() {
     local packages=("$@")
     local official_packages=()
@@ -79,169 +71,64 @@ install_packages_smart() {
 install_all_packages() {
     local machine_type="$1"
     local de_profile="$2"
+    local gpu_type="$3"
     local packages
+    local ALL_PACKAGES=()
 
     local PKG_CORE=(
-        git
-        stow
-        base-devel
-        pipewire
-        pipewire-alsa
-        pipewire-pulse
-        libpulse
-        unzip
-        unrar
-        7zip
-        ncdu
-        fish
-        tmux
-        starship
-        reflector
-        inotify-tools
-        zip
-        expect
-        bc
-        libgit2
-        libmpdclient
+        git stow base-devel pipewire pipewire-alsa pipewire-pulse libpulse
+        unzip unrar 7zip ncdu fish tmux starship reflector inotify-tools
+        zip expect bc libgit2 libmpdclient
     )
 
     local PKG_USER_APPS=(
-        neovim
-        vlc
-        vlc-plugin-ffmpeg
-        mpd
-        mpc
-        rmpc
-        yazi
-        btop
-        eza
-        fzf
-        zoxide
-        # Zathura is now unreliable
-        # zathura
-        # zathura-pdf-mupdf
-        # Now using sioyek
-        sioyek-git
-        mpd-mpris # acts as a man-in-the-middle for mpris used to interact with playerctl
-        kitty
-        npm
-        zen-browser-bin
-        yt-dlp
-        keepassxc
-        discord # Using normal discord for good streaming
-        lazygit
-        wikiman
-        man-db
-        man-pages
-        arch-wiki-docs
-        steam
-        proton-ge-custom-bin
-        protonplus
-        heroic-games-launcher-bin
-        steam
-        calibre-bin
-        udsiks2
-        proton-vpn-gtk-app
-        gimp
-        atlauncher-bin
-        obsidian-bin
-        anki-bin
-        qpdf
-        transmission-qt
-        perl-image-exiftool # Yazi dep to use exif read
+        neovim vlc vlc-plugin-ffmpeg mpd mpc rmpc yazi btop eza fzf zoxide
+        sioyek-git mpd-mpris kitty npm zen-browser-bin yt-dlp keepassxc
+        discord lazygit wikiman man-db man-pages arch-wiki-docs steam
+        proton-ge-custom-bin protonplus heroic-games-launcher-bin
+        calibre-bin udsiks2 proton-vpn-gtk-app gimp atlauncher-bin
+        obsidian-bin anki-bin qpdf transmission-qt perl-image-exiftool
     )
 
     local PKG_NVIM_DEPS=(
-        # Treesitter Deps
-        tree-sitter
-        tree-sitter-c
-        tree-sitter-cli
-        tree-sitter-lua
-        tree-sitter-markdown
-        tree-sitter-query
-        tree-sitter-vim
-        tree-sitter-vimdoc
-
-        # Languajes
-        python
-        python-pip
-        gcc
-        clang
-        make
-        cmake
-        typst
-        nodejs
-
-        # Latex Dependencies
-        # texlive-bin
-        # texlive-bin
-        # tex-files
-        # texlive-binextra
-        # texlive-latex
-        # texlive-latexextra
-
+        tree-sitter tree-sitter-c tree-sitter-cli tree-sitter-lua
+        tree-sitter-markdown tree-sitter-query tree-sitter-vim tree-sitter-vimdoc
+        python python-pip gcc clang make cmake typst nodejs
     )
 
     local PKG_DE_GENERAL=(
-        libxkbcommon-x11
-        libdecor
-        rofi
-        rofi-calc
-        waybar
-        swww
-        cliphist
-        keyd
-        pywal
-        nwg-look
-        aurutils
-        polkit-gnome
-        tumbler
-        gvfs-mtp
-        sxiv
-        hyprlock
-        dunst
-
-        # Matlab dep
-        gtk2
+        libxkbcommon-x11 libdecor rofi rofi-calc waybar swww cliphist keyd
+        pywal nwg-look aurutils polkit-gnome tumbler gvfs-mtp sxiv hyprlock dunst gtk2
     )
 
-    # Listas por Perfil de Máquina
     local PKG_LAPTOP=(
-        brightnessctl
-        auto-cpufreq
+        brightnessctl auto-cpufreq
     )
-    local PKG_DESKTOP=(
-        amd-ucode
-        amdvlk
-        lib32-amdvlk
-        lib32-vulkan-radeon
-        mesa
-        lib32-mesa
-        vulkan-radeon
-        xf86-video-amdgpu
-        xf86-video-ati
-        linux-firmware-amdgpu
+    
+    local PKG_DESKTOP=()
+
+    local PKG_NIRI=(
+        niri xwayland-satellite xdg-desktop-portal-gnome
+    )
+    
+    local PKG_HYPRLAND=(
+        hyprland hyprcursor hyprgraphics hyprland-qt-support hyprland-qtutils
+        hyprlang hyprshot hyprsunset hyprwayland-scanner xdg-desktop-portal-hyprland hyprutils
     )
 
-    #  Listas por Perfil de Entorno
-    local PKG_NIRI=(
-        niri
-        xwayland-satellite
-        xdg-desktop-portal-gnome
-    )
-    local PKG_HYPRLAND=(
-        hyprland
-        hyprcursor
-        hyprgraphics
-        hyprland-qt-support
-        hyprland-qtutils
-        hyprlang
-        hyprshot
-        hyprsunset
-        hyprwayland-scanner
-        xdg-desktop-portal-hyprland
-        hyprutils
-    )
+    local PKG_GPU=()
+    if [[ "$gpu_type" == *"amd"* ]]; then
+        PKG_GPU+=(amd-ucode mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon xf86-video-amdgpu linux-firmware-amdgpu)
+        log "Añadiendo paquetes de GPU: AMD"
+    fi
+    if [[ "$gpu_type" == *"intel"* ]]; then
+        PKG_GPU+=(intel-ucode mesa lib32-mesa vulkan-intel lib32-vulkan-intel)
+        log "Añadiendo paquetes de GPU: Intel"
+    fi
+    if [[ "$gpu_type" == *"nvidia"* ]]; then
+        PKG_GPU+=(nvidia nvidia-utils lib32-nvidia-utils egl-wayland)
+        log "Añadiendo paquetes de GPU: NVIDIA"
+    fi
 
     # Construir la lista total
     ALL_PACKAGES+=(
@@ -249,61 +136,52 @@ install_all_packages() {
         "${PKG_USER_APPS[@]}"
         "${PKG_NVIM_DEPS[@]}"
         "${PKG_DE_GENERAL[@]}"
+        "${PKG_GPU[@]}"
     )
 
-    # Añadir paquetes de máquina
     if [[ "$machine_type" == "laptop" ]]; then
         ALL_PACKAGES+=("${PKG_LAPTOP[@]}")
-        log "Añadiendo ${#PKG_LAPTOP[@]} paquetes de 'laptop'."
+        log "Añadiendo paquetes de 'laptop'."
     elif [[ "$machine_type" == "desktop" ]]; then
         ALL_PACKAGES+=("${PKG_DESKTOP[@]}")
-        log "Añadiendo ${#PKG_DESKTOP[@]} paquetes de 'desktop'."
-    else
-        log "Advertencia: machine_type '$machine_type' no reconocido."
+        log "Añadiendo paquetes de 'desktop'."
     fi
 
-    # Añadir paquetes de DE
     if [[ "$de_profile" == "niri" ]]; then
         ALL_PACKAGES+=("${PKG_NIRI[@]}")
-        log "Añadiendo ${#PKG_NIRI[@]} paquetes de 'niri'."
+        log "Añadiendo paquetes de 'niri'."
     elif [[ "$de_profile" == "hyprland" ]]; then
         ALL_PACKAGES+=("${PKG_HYPRLAND[@]}")
-        log "Añadiendo ${#PKG_HYPRLAND[@]} paquetes de 'hyprland'."
-    else
-        log "Advertencia: de_profile '$de_profile' no reconocido."
+        log "Añadiendo paquetes de 'hyprland'."
     fi
 
-    # Deduplicar la lista final
-    local packages
+    # Undupe packages
     mapfile -t packages < <(printf '%s\n' "${ALL_PACKAGES[@]}" | sort -u)
 
     if [ ${#packages[@]} -eq 0 ]; then
         log "No se encontraron paquetes para instalar. Saltando."
-        log "NOTA: Rellena las listas de paquetes en 02-packages.sh."
         return
     fi
 
     log "Se procesarán ${#packages[@]} paquetes únicos."
-
     install_packages_smart "${packages[@]}"
     log "Instalación de paquetes completada."
     echo ""
 }
 
-# Main execution
-# If executed standalone
+# Standalone
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
-    if [ -z "$1" ] || [ -z "$2" ]; then
+    if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
         log "Error: Se requieren argumentos."
-        log "Uso: $0 <laptop|desktop> <niri|hyprland>"
+        log "Uso: $0 <laptop|desktop> <niri|hyprland> <amd|nvidia|intel|amd+nvidia|intel+nvidia>"
         exit 1
     fi
-    validate_input "$1" # de 00-utils.sh
+    validate_input "$1"
 
     if [[ ! "$2" =~ ^(niri|hyprland)$ ]]; then
         log "Error: Perfil DE debe ser 'niri' o 'hyprland'"
         exit 1
     fi
 
-    install_all_packages "$1" "$2"
+    install_all_packages "$1" "$2" "$3"
 fi
