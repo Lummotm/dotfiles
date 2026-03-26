@@ -1,28 +1,33 @@
-## Mis dotfiles personales
+# 🏠 Dotfiles de Lummotm
 
-No se porque estas aquí pero bueno si quieres mis dotfiles aquí están. 
+> *Mi entorno de trabajo modular para Wayland (Hyprland & Niri).*
 
-### No se que son unos dotfiles, solo quiero la config.
-Para instalarlos de una usa
-~~~bash
-git clone https://github.com/Lummotm/dotfiles.git ~/dotfiles && cd ~/dotfiles/install && ./setup-install.sh
-~~~
-Hay una instalación y te va preguntando que quieres instalar, la interfaz fue hecha por Gemini AI, el setup general es mio. 
+No sé por qué estás aquí, pero bueno, si quieres mis dotfiles, aquí están. Este repositorio contiene toda la configuración de mis sistemas, pensada para ser predecible, rápida y fácil de mantener.
 
-### Si no quieres cosas de mi setup
-Siempre puedes hacer un fork en github hacer, git clone a ese repo e ir borrando las cosas que no quieras. 
+## 🌟 Highlights
+* **Wayland First:** Optimizado totalmente para Hyprland y Niri.
+* **Modular:** Separación clara entre portátil (`laptop`) y sobremesa (`desktop`).
+* **Automatizado:** Usa `stow` y un script interactivo para gestionar los enlaces.
+* **Scripting:** Funciones personalizadas para batería, Wi-Fi, Bluetooth y la GPU.
 
+## ⬇️ Instalación Rápida
+Para instalarlos de una, lanza este comando en tu terminal:
 
+```bash
+git clone [https://github.com/Lummotm/dotfiles.git](https://github.com/Lummotm/dotfiles.git) ~/dotfiles && cd ~/dotfiles/install && ./setup-install.sh
+```
 
-#### No sigas leyendo, mucho texto incoming.
+El script lanzará un asistente que te irá preguntando qué quieres instalar. *(Dato: la interfaz del instalador fue generada con mi ayuda como IA, pero la lógica y el setup general son del autor original).*
 
-La filosofía es ser un setup modular, hay 7 carpetas.
-1. archive, solo tiene barras que use antes y temas en general usados antes de los que me da pena desprenderme
-2. desktop / laptop son efectivamente configuraciones especificas de pc de escritorio o portatil, aunque la moyoria de cosas sean compartidas temas como variables de entorno, la existencia de wifi, bluetooth y demas no lo son. 
-3. common son configuraciones, scripts temas que son generales de cualquiera de mis 2 ordenadores.
-4. install, pues efectivamente donde vive todo el tema de setup, los scripts importantes son:
-     - stow-config.sh, es un script que tiene todas las bases de como linkeamos las distintas configuraciones, se basas en gnu-stow, un gestor symlinks, ademas como lo uso como un pseudo-orquestador entonces tiene muchas mas funciones utiles: tema de fuentes lo maneja,tema de defaults de git como evitar que gestione configuraciones de color y demas entre otros. 
-     - setup-install, es el script principal de instalación, pues eso que instala las cosas. 
-5. extra, cosas que han de ser gestionadas por dotfiles para que tenerlas guardadas pero que no son archivos de configuracion. 
-    - keyd. Daemon que se encarga de cambiar la Caps key por Meta si mantienes y Esc si haces tap, es super comodo. 
-    - bin, sudoers, greetd, wayland-sessions. Son carpetas en las que hay configuraciones en las que no confio que un script de bash guarde bien asi que las copio a sus respectivos sitios de configuracion en general con 03-config.sh.
+## ℹ️ Filosofía y Estructura
+La filosofía de este setup es ser totalmente **modular**. Todo el repositorio está dividido en estas carpetas principales:
+
+* 📦 **`archive/`**: Barras y temas generales que usé en el pasado y de los que me da pena desprenderme.
+* 💻 **`desktop/`** y 💻 **`laptop/`**: Configuraciones específicas para el PC de escritorio o el portátil (variables de entorno, gestión de Wi-Fi, Bluetooth y batería).
+* 🤝 **`common/`**: Configuraciones, scripts y temas generales que uso en cualquiera de mis ordenadores.
+* ⚙️ **`install/`**: Donde vive la magia del setup.
+* 🧩 **`extra/`**: Archivos del sistema que *no* se enlazan con Stow por seguridad, sino que el script copia con permisos `sudo` (ej. daemon de `keyd` para remapear el *Caps Lock*, configuraciones de `greetd`, reglas de `sudoers`).
+
+## 💭 Instalación a la carta y Feedback
+Si no quieres todas las cosas de mi setup, ¡no te preocupes! Siempre puedes hacer un **fork** de este repositorio en GitHub, clonar tu versión e ir borrando las carpetas que no te sirvan antes de ejecutar el instalador.
+
