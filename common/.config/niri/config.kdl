@@ -132,6 +132,10 @@ binds {
     Mod+K { focus-window-or-workspace-up; }
     Mod+L { focus-column-right; }
 
+    Mod+Shift+L hotkey-overlay-title="Rofi: Clipboard history" { 
+        spawn-sh "hyprlock"
+    }
+
     Mod+Alt+H { move-column-left; }
     Mod+Alt+L { move-column-right; }
     Mod+Alt+K { move-window-up; }
