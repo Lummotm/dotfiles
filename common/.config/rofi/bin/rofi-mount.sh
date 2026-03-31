@@ -48,7 +48,8 @@ get_drives_fresh() {
         # Ignora dispositivos virtuales y particiones de sistema
         if [[ "$NAME" == loop* || "$NAME" == zram* ]]; then continue; fi
         if [[ "$MOUNTPOINT" == "/" || "$MOUNTPOINT" == "[SWAP]" ]]; then continue; fi
-        if [[ "$MOUNTPOINT" == "/boot"* || "$MOUNTPOINT" == "/home"* ]]; then continue; fi
+        if [[ "$MOUNTPOINT" == "/boot"* ]]; then continue; fi
+        if [[ "$MOUNTPOINT" == "/home"* && "$MOUNTPOINT" != *"/mnt/"* ]]; then continue; fi
 
         # Ignora particiones EFI/Recovery por tamaño y discos base sin sistema de archivos
         if [[ "$SIZE" == "1M" || "$SIZE" == "16M" || "$SIZE" == "200M" || "$SIZE" == "748M" || "$SIZE" == "529M" ]]; then continue; fi
@@ -193,12 +194,14 @@ selection_action() {
 
         # Datos de tu Crucial
         local target_uuid="D0668FA2668F87C4"
-        local mount_point="/run/media/davidn/Crucial_X9"
+        local mount_point="$HOME/mnt/Crucial_X9"
         local current_uuid=$(lsblk -no UUID "$device")
 
         # Si es el Crucial X9
         # Caso especifico ya que tiene que tener permisos especificos fijados en el fstab
         if [[ "$current_uuid" == "$target_uuid" ]]; then
+            mkdir -p "$mount_point"
+
             # Verificamos si ya está montado
             if mountpoint -q "$mount_point"; then
                 log "Desmontando Crucial X9..."

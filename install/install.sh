@@ -255,11 +255,25 @@ setup_sudoers() {
 }
 
 setup_crucial_disk_fstab() {
-    log "Configurando Crucial X9 en fstab..."
-    if ! grep -q "D0668FA2668F87C4" /etc/fstab; then
-        sudo mkdir -p "/run/media/$USER/Crucial_X9"
-        echo -e "\n# Crucial X9 para Steam\nUUID=D0668FA2668F87C4  /run/media/$USER/Crucial_X9  ntfs3  defaults,user,uid=1000,gid=1000,umask=000,rw,exec,windows_names,iocharset=utf8,nofail  0  0" | sudo tee -a /etc/fstab >/dev/null
+    log "Configurando Crucial X9 en fstab (Ruta de usuario)..."
+
+    # Definimos la ruta en tu home para evitar líos de permisos en /run
+    local MOUNT_PATH="/home/$USER/mnt/Crucial_X9"
+    local UUID_CRUCIAL="D0668FA2668F87C4"
+
+    if ! grep -q "$UUID_CRUCIAL" /etc/fstab; then
+        # Creamos la ruta y aseguramos que el dueño seas tú
+        mkdir -p "$MOUNT_PATH"
+        sudo chown -R "$USER:$USER" "/home/$USER/mnt"
+
+        # Añadimos la línea al fstab
+        # Nota: quitamos windows_names e iocharset para máxima compatibilidad con ntfs3
+        echo -e "\n# Crucial X9 para Steam\nUUID=$UUID_CRUCIAL  $MOUNT_PATH  ntfs3  user,noauto,uid=1000,gid=1000,umask=000,rw,exec,nofail  0  0" | sudo tee -a /etc/fstab >/dev/null
+
+        log "fstab actualizado. Ruta: $MOUNT_PATH"
         sudo systemctl daemon-reload
+    else
+        log "La configuración del Crucial X9 ya existe en /etc/fstab."
     fi
 }
 
