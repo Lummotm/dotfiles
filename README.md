@@ -8,7 +8,7 @@ Me suelo decantar siempre por trabajar con menús de Rofi para todo lo que se pu
 ## Instalación Rápida
 Clona el repositorio y lanza el asistente interactivo en un solo paso:
 ```bash
-git clone https://github.com/Lummotm/dotfiles.git ~/dotfiles && cd ~/dotfiles/install && ./install.sh
+git clone https://github.com/Lummotm/dotfiles.git ~/dotfiles && cd ~/dotfiles/install && ./install.sh --full
 ```
 
 El script te guiará preguntando qué módulos y configuraciones específicas quieres aplicar en tu máquina actual.

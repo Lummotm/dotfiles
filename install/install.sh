@@ -3,6 +3,7 @@ set -e
 
 IS_PERSONAL=false
 [[ "$USER" == "davidn" ]] && IS_PERSONAL=true
+PS3="Introduce el número de tu elección: "
 
 log() {
     echo -e "\n[$(date '+%H:%M:%S')] $1"
@@ -11,44 +12,55 @@ log() {
 
 trap 'rm -rf /tmp/yay_install 2>/dev/null || true' EXIT
 
-clear
-echo "Instalador Base del Sistema"
-echo "------------------------------"
+service_install() {
+    local service="$1"
+    local flag="$2"
+    local cmd="sudo systemctl"
+    [[ "$flag" == "--user" ]] && cmd="systemctl --user"
+    $cmd enable --now "$service" 2>/dev/null || log "Advertencia: No se pudo habilitar $service"
+}
 
-# Resulta que bash tiene menus facheros por defecto (https://linuxize.com/post/bash-select/)
+ask_machine_type() {
+    [[ -n "$machine_type" ]] && return
+    echo -e "\n¿Qué tipo de máquina es esta?"
+    select machine_type in "laptop" "desktop" "salir"; do
+        case $machine_type in
+        laptop | desktop) break ;;
+        salir) exit 0 ;;
+        *) echo "Opción inválida. Inténtalo de nuevo." ;;
+        esac
+    done
+}
 
-PS3="Introduce el número de tu elección: "
+ask_de_profile() {
+    [[ -n "$de_profile" ]] && return
+    echo -e "\n¿Qué Entorno de Escritorio quieres instalar?"
+    select de_profile in "niri" "hyprland" "salir"; do
+        case $de_profile in
+        niri | hyprland) break ;;
+        salir) exit 0 ;;
+        *) echo "Opción inválida. Inténtalo de nuevo." ;;
+        esac
+    done
+}
 
-echo -e "\n1. ¿Qué tipo de máquina es esta?"
-select machine_type in "laptop" "desktop" "salir"; do
-    case $machine_type in
-    laptop | desktop) break ;;
-    salir) exit 0 ;;
-    *) echo "Opción inválida. Inténtalo de nuevo." ;;
-    esac
-done
+ask_gpu_type() {
+    [[ -n "$gpu_type" ]] && return
+    echo -e "\nSelecciona tus drivers gráficos:"
+    select gpu_type in "amd" "nvidia" "intel" "amd+nvidia" "intel+nvidia" "ninguna" "salir"; do
+        case $gpu_type in
+        amd | nvidia | intel | amd+nvidia | intel+nvidia | ninguna) break ;;
+        salir) exit 0 ;;
+        *) echo "Opción inválida. Inténtalo de nuevo." ;;
+        esac
+    done
+}
 
-echo -e "\n2. ¿Qué Entorno de Escritorio quieres instalar?"
-select de_profile in "niri" "hyprland" "salir"; do
-    case $de_profile in
-    niri | hyprland) break ;;
-    salir) exit 0 ;;
-    *) echo "Opción inválida. Inténtalo de nuevo." ;;
-    esac
-done
-
-echo -e "\n3. Selecciona tus drivers gráficos:"
-select gpu_type in "amd" "nvidia" "intel" "amd+nvidia" "intel+nvidia" "ninguna" "salir"; do
-    case $gpu_type in
-    amd | nvidia | intel | amd+nvidia | intel+nvidia | ninguna) break ;;
-    salir) exit 0 ;;
-    *) echo "Opción inválida. Inténtalo de nuevo." ;;
-    esac
-done
-
-echo ""
-read -p "¿Autoconfirmar todas las instalaciones y reiniciar al terminar? (y/N): " -n 1 -r autoyes
-echo
+ask_autoyes() {
+    [[ -n "$autoyes" ]] && return
+    read -p "¿Autoconfirmar todas las instalaciones y reiniciar al terminar? (y/N): " -n 1 -r autoyes
+    echo
+}
 
 check_basics() {
     log "Comprobando conexión y espacio..."
@@ -58,6 +70,16 @@ check_basics() {
     }
     local available=$(df / | awk 'NR==2{print $4}')
     [ "$available" -lt 10000000 ] && log "Advertencia: Poco espacio en disco (< 10GB)"
+}
+
+setup_custom_repo() {
+    log "Añadiendo repositorio personalizado oglo-arch-repo..."
+    if ! grep -q "\[oglo-arch-repo\]" /etc/pacman.conf; then
+        echo -e '\n[oglo-arch-repo]\nSigLevel = Optional DatabaseOptional\nServer = https://gitlab.com/Oglo12/$repo/-/raw/main/$arch' | sudo tee -a /etc/pacman.conf >/dev/null
+        sudo pacman -Sy
+    else
+        log "El repositorio oglo-arch-repo ya estaba configurado."
+    fi
 }
 
 update_system_and_yay() {
@@ -77,7 +99,6 @@ install_all_packages() {
         unzip unrar 7zip ncdu fish tmux starship reflector inotify-tools
         zip expect bc libgit2 libmpdclient
     )
-
     local PKG_USER_APPS=(
         neovim vlc vlc-plugin-ffmpeg mpd mpc rmpc yazi btop eza fzf zoxide
         sioyek-git mpd-mpris kitty npm zen-browser-bin yt-dlp keepassxc
@@ -86,34 +107,25 @@ install_all_packages() {
         udisks2 proton-vpn-gtk-app gimp atlauncher-bin obsidian-bin anki-bin
         qpdf transmission-qt perl-image-exiftool
     )
-
     local PKG_NVIM_DEPS=(
         tree-sitter tree-sitter-c tree-sitter-cli tree-sitter-lua
         tree-sitter-markdown tree-sitter-query tree-sitter-vim tree-sitter-vimdoc
         python python-pip gcc clang make cmake typst nodejs
     )
-
     local PKG_DE_GENERAL=(
         libxkbcommon-x11 libdecor rofi rofi-calc waybar swww cliphist keyd
         pywal nwg-look aurutils polkit-gnome tumbler gvfs-mtp sxiv hyprlock
         dunst gtk2
     )
-
-    local PKG_LAPTOP=(
-        brightnessctl auto-cpufreq
-    )
-
-    local PKG_NIRI=(
-        niri xwayland-satellite xdg-desktop-portal-gnome
-    )
-
+    local PKG_LAPTOP=(brightnessctl auto-cpufreq)
+    local PKG_NIRI=(niri xwayland-satellite xdg-desktop-portal-gnome)
     local PKG_HYPRLAND=(
         hyprland hyprcursor hyprgraphics hyprland-qt-support hyprland-qtutils
         hyprlang hyprshot hyprsunset hyprwayland-scanner xdg-desktop-portal-hyprland
         hyprutils
     )
-
     local PKG_GPU=()
+
     if [[ "$gpu_type" == *"amd"* ]]; then
         PKG_GPU+=(amd-ucode mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon xf86-video-amdgpu linux-firmware-amdgpu)
     fi
@@ -124,44 +136,21 @@ install_all_packages() {
         PKG_GPU+=(nvidia nvidia-utils lib32-nvidia-utils egl-wayland)
     fi
 
-    local ALL_PACKAGES=(
-        "${PKG_CORE[@]}"
-        "${PKG_USER_APPS[@]}"
-        "${PKG_NVIM_DEPS[@]}"
-        "${PKG_DE_GENERAL[@]}"
-        "${PKG_GPU[@]}"
-    )
+    local ALL_PACKAGES=("${PKG_CORE[@]}" "${PKG_USER_APPS[@]}" "${PKG_NVIM_DEPS[@]}" "${PKG_DE_GENERAL[@]}" "${PKG_GPU[@]}")
 
-    if [[ "$machine_type" == "laptop" ]]; then
-        ALL_PACKAGES+=("${PKG_LAPTOP[@]}")
-    fi
-
-    if [[ "$de_profile" == "niri" ]]; then
-        ALL_PACKAGES+=("${PKG_NIRI[@]}")
-    fi
-
-    if [[ "$de_profile" == "hyprland" ]]; then
-        ALL_PACKAGES+=("${PKG_HYPRLAND[@]}")
-    fi
+    if [[ "$machine_type" == "laptop" ]]; then ALL_PACKAGES+=("${PKG_LAPTOP[@]}"); fi
+    if [[ "$de_profile" == "niri" ]]; then ALL_PACKAGES+=("${PKG_NIRI[@]}"); fi
+    if [[ "$de_profile" == "hyprland" ]]; then ALL_PACKAGES+=("${PKG_HYPRLAND[@]}"); fi
 
     mapfile -t packages < <(printf '%s\n' "${ALL_PACKAGES[@]}" | sort -u)
 
     log "Instalando paquetes. Primero mediante pacman para mayor velocidad..."
     sudo pacman -S --needed --noconfirm "${packages[@]}" 2>/dev/null || true
 
-    # Hay que desactivar el check de errores
     log "Asegurando paquetes restantes y de AUR con yay..."
     set +e
     yay -S --needed --noconfirm "${packages[@]}"
     set -e
-}
-
-service_install() {
-    local service="$1"
-    local flag="$2"
-    local cmd="sudo systemctl"
-    [[ "$flag" == "--user" ]] && cmd="systemctl --user"
-    $cmd enable --now "$service" 2>/dev/null || log "Advertencia: No se pudo habilitar $service"
 }
 
 setup_dotfiles() {
@@ -170,7 +159,6 @@ setup_dotfiles() {
     [ ! -d "$REPO_DIR" ] && git clone "https://github.com/Lummotm/dotfiles" "$REPO_DIR"
 
     cd "$REPO_DIR"
-
     log "Ajustando variables de usuario en archivos de configuración..."
     find . -type f -not -path "*/\.git/*" -not -name "*.7z" -not -name "*.zip" -not -name "*.png" -not -name "*.jpg" -exec sed -i "s/davidn/$USER/g" {} + 2>/dev/null || true
 
@@ -209,16 +197,31 @@ setup_fish_shell() {
 
 setup_login() {
     log "Configurando gestor de sesión..."
-    if [[ "$machine_type" == "laptop" && "$IS_PERSONAL" == "true" ]]; then
-        sudo pacman -S --needed --noconfirm ly
-        sudo systemctl disable getty@tty2.service 2>/dev/null || true
-        service_install ly
+
+    if [[ "$machine_type" == "laptop" ]]; then
+        read -p "¿Quieres habilitar el autologin directo en este laptop? (y/N): " -n 1 -r laptop_autologin
+        echo
+
+        if [[ $laptop_autologin =~ ^[Yy]$ ]]; then
+            log "Configurando Greetd (Autologin) para Laptop..."
+            sudo pacman -S --needed --noconfirm greetd
+            sudo mkdir -p /etc/greetd
+            sudo cp "$HOME/dotfiles/extra/greetd/laptop.toml" /etc/greetd/config.toml 2>/dev/null || true
+            sudo systemctl disable sddm ly getty@tty2.service 2>/dev/null || true
+            service_install greetd
+        else
+            log "Configurando Ly como gestor de sesión para Laptop..."
+            sudo pacman -S --needed --noconfirm ly
+            sudo systemctl disable getty@tty2.service greetd sddm 2>/dev/null || true
+            service_install ly
+        fi
     else
-        if [[ "$autoyes" =~ ^[Yy]$ ]] || { read -p "¿Autologin directo con greetd? (y/N): " -n 1 -r && echo && [[ $REPLY =~ ^[Yy]$ ]]; }; then
+        if [[ "$autoyes" =~ ^[Yy]$ ]] || { read -p "¿Autologin directo con greetd para desktop? (y/N): " -n 1 -r && echo && [[ $REPLY =~ ^[Yy]$ ]]; }; then
+            log "Configurando Greetd (Autologin) para Desktop..."
             sudo pacman -S --needed --noconfirm greetd
             sudo mkdir -p /etc/greetd
             sudo cp "$HOME/dotfiles/extra/greetd/${de_profile}.toml" /etc/greetd/config.toml 2>/dev/null || true
-            sudo systemctl disable sddm ly 2>/dev/null || true
+            sudo systemctl disable sddm ly getty@tty2.service 2>/dev/null || true
             service_install greetd
         fi
     fi
@@ -293,52 +296,94 @@ setup_hotspot_network() {
         nmcli con delete "Hotspot" 2>/dev/null || true
         nmcli con add type wifi ifname "$wifi" con-name "Hotspot" autoconnect no ssid "Hotspot" 802-11-wireless.mode ap 802-11-wireless-security.key-mgmt wpa-psk 802-11-wireless-security.psk "ThinkingRock123" 802-11-wireless-security.proto rsn 802-11-wireless-security.group ccmp 802-11-wireless-security.pairwise ccmp 802-11-wireless-security.pmf 0 ipv4.method shared
     else
-        log "Advertencia: No se detectaron interfaces de Ethernet y Wifi necesarias para el Hotspot. Omitiendo."
+        log "Advertencia: No se detectaron interfaces de Ethernet y Wifi necesarias para el Hotspot."
     fi
 }
 
-setup_custom_repo() {
-    # Para nebos cuando me entren ganas, de hecho en potencia deberia de ser capaz de funcionar por completo sin usar este script ni ningun otro solo con nebos
-    log "Añadiendo repositorio personalizado oglo-arch-repo..."
-    if ! grep -q "\[oglo-arch-repo\]" /etc/pacman.conf; then
-        echo -e '\n[oglo-arch-repo]\nSigLevel = Optional DatabaseOptional\nServer = https://gitlab.com/Oglo12/$repo/-/raw/main/$arch' | sudo tee -a /etc/pacman.conf >/dev/null
-        sudo pacman -Sy
-    else
-        log "El repositorio oglo-arch-repo ya estaba configurado."
-    fi
+show_help() {
+    echo "Uso: $0 [opción]"
+    echo "Opciones modulares:"
+    echo "  --full          Ejecución completa (por defecto)"
+    echo "  --login         Configura solo el gestor de sesión (Ly/Greetd)"
+    echo "  --dotfiles      Solo clona y aplica dotfiles"
+    echo "  --gpu           Configura solo el toggle de GPU"
+    echo "  --sudoers       Aplica reglas personalizadas de sudoers"
+    echo "  --hotspot       Configura la red hotspot (solo laptop)"
+    echo "  --help          Muestra este menú"
 }
 
-check_basics
-setup_custom_repo
-update_system_and_yay
-install_all_packages
-setup_dotfiles
+full_install() {
+    clear
+    echo "Instalador Base del Sistema"
+    echo "------------------------------"
 
-setup_sudoers
-setup_mpd_service
-setup_keyd_service
-setup_fish_shell
-service_install bluetooth
+    ask_machine_type
+    ask_de_profile
+    ask_gpu_type
+    ask_autoyes
 
-if [[ "$machine_type" == "laptop" ]]; then
-    setup_autocpufreq
-fi
+    check_basics
+    setup_custom_repo
+    update_system_and_yay
+    install_all_packages
+    setup_dotfiles
 
-if [[ "$IS_PERSONAL" == "true" ]]; then
-    log "Modo personal detectado: Instalando módulos privados..."
-    setup_crucial_disk_fstab
+    setup_sudoers
+    setup_mpd_service
+    setup_keyd_service
+    setup_fish_shell
+    service_install bluetooth
+
     if [[ "$machine_type" == "laptop" ]]; then
-        setup_hotspot_network
-        setup_toggle_gpu
+        setup_autocpufreq
     fi
-fi
 
-setup_login
+    if [[ "$IS_PERSONAL" == "true" ]]; then
+        log "Modo personal detectado: Instalando módulos privados..."
+        setup_crucial_disk_fstab
+        if [[ "$machine_type" == "laptop" ]]; then
+            setup_hotspot_network
+            setup_toggle_gpu
+        fi
+    fi
 
-log "¡Instalación completada!"
-if [[ "$autoyes" =~ ^[Yy]$ ]]; then
-    reboot
-else
-    read -p "¿Reiniciar ahora? (y/N): " -n 1 -r
-    [[ $REPLY =~ ^[Yy]$ ]] && reboot
-fi
+    setup_login
+
+    log "¡Instalación completada!"
+    if [[ "$autoyes" =~ ^[Yy]$ ]]; then
+        reboot
+    else
+        read -p "¿Reiniciar ahora? (y/N): " -n 1 -r
+        [[ $REPLY =~ ^[Yy]$ ]] && reboot
+    fi
+}
+
+case "$1" in
+--login)
+    ask_machine_type
+    ask_de_profile
+    ask_autoyes
+    setup_login
+    ;;
+--dotfiles)
+    ask_machine_type
+    setup_dotfiles
+    ;;
+--gpu)
+    setup_toggle_gpu
+    ;;
+--sudoers)
+    ask_machine_type
+    setup_sudoers
+    ;;
+--hotspot)
+    setup_hotspot_network
+    ;;
+--full | "")
+    full_install
+    ;;
+--help | *)
+    show_help
+    exit 0
+    ;;
+esac
