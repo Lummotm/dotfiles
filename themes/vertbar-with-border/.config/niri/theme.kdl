@@ -9,7 +9,7 @@ layout {
     }
     border {
         on
-        width 4
+        width 3
     }
 
     default-column-width { proportion 0.5; }
