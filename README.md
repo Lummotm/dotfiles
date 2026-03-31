@@ -1,29 +1,31 @@
-# 🏠 Dotfiles de Lummotm
-No sé por qué estás aquí, pero bueno, si quieres mis dotfiles, aquí están. Este repositorio contiene toda la configuración de mis sistemas, pensada para ser predecible, rápida y fácil de mantener.
+# Lummotm's Dotfiles
+Mis dotfiles personales. Este es el repositorio en el que gestiono todo mi setup de Linux.
 
-## 🌟 Highlights
-* Wayland First: Optimizado totalmente para Hyprland y Niri.
-* Modular: Separación clara entre portátil (`laptop`) y sobremesa (`desktop`).
-* Automatizado: Usa `stow` y un script interactivo para gestionar los enlaces.
-* Scripting: Funciones personalizadas para batería, Wi-Fi, Bluetooth y la GPU.
+En general, los dotfiles se centran en 2 configuraciones principales: la de mi PC de escritorio, en el que busco tener autologin, y la de mi laptop, en la que necesito ajustes específicos como desactivar la gráfica dedicada y optimizar batería. 
 
-## ⬇️ Instalación Rápida
-Para instalarlos de una, lanza este comando en tu terminal:
+Me suelo decantar siempre por trabajar con menús de Rofi para todo lo que se pueda: selector de fondos, gestor de apagado, gestor de audio, gestor de bluetooth, gestor de internet... 
+
+## Instalación Rápida
+Clona el repositorio y lanza el asistente interactivo en un solo paso:
 ```bash
-git clone [https://github.com/Lummotm/dotfiles.git](https://github.com/Lummotm/dotfiles.git) ~/dotfiles && cd ~/dotfiles/install && ./setup-install.sh
+git clone https://github.com/Lummotm/dotfiles.git ~/dotfiles && cd ~/dotfiles/install && ./install.sh
 ```
-El script lanzará un asistente que te irá preguntando qué quieres instalar. *(Dato: la interfaz del instalador fue generada con mi ayuda como IA, pero la lógica y el setup general son del autor original).*
 
-## ℹ️ Filosofía y Estructura
-La filosofía de este setup es ser totalmente modular. Todo el repositorio está dividido en estas carpetas principales:
+El script te guiará preguntando qué módulos y configuraciones específicas quieres aplicar en tu máquina actual.
 
-* 📦 `archive/`: Barras y temas generales que usé en el pasado y de los que me da pena deshacerme.
-* 💻 `desktop/` y 💻 `laptop/`: Configuraciones específicas para el PC de escritorio o el portátil (variables de entorno, gestión de Wi-Fi, Bluetooth y batería).
-* 🤝 `common/`: Configuraciones, scripts y temas generales que uso en cualquiera de mis ordenadores.
-* ⚙️ `install/`: Donde están los scripts de instalación.
-* 🧩 `extra/`: Archivos del sistema que *no* se enlazan con Stow por seguridad, sino que el script copia con permisos `sudo` (ej. daemon de `keyd` para remapear el *Caps Lock*, configuraciones de `greetd`, reglas de `sudoers`).
+## Estructura del Repositorio
+La filosofía del repositorio, se basa en ser estrictamente modular, para poder trabajar con GNU stow de manera cómoda.
+La estructura es la siguiente:
 
-## ⬇️ Instalación Custom
-Si no quieres algo del setup siempre puedes hacer un fork mi repo y quitar lo que quieras.
+* `common/`: El núcleo. Configuraciones generales, iconos, y scripts compartidos en todos mis equipos.
+* `desktop/` y `laptop/`: Configuraciones específicas según la máquina (variables de entorno, monitores, gestión de energía).
+* `themes/`: Diferentes perfiles visuales (barras verticales, minimalistas, con o sin bordes).
+* `install/`: Scripts de despliegue (`install.sh` y `apply.sh`).
+* `extra/`: Archivos del sistema que requieren permisos de root (configuraciones de `greetd`, remapeo de teclas con `keyd`, reglas de `sudoers`). Estos **no** se enlazan con stow por seguridad, se copian directamente.
+* `archive/`: Temas y configuraciones antiguas (Rofi/Waybar) que conservo como referencia.
 
+### NOTAS 
+Estos dotfiles son totalmente personales, tienen muchos scripts en la sección de common/bin que son objetivamente demasiado específicos para ser útiles salvo para mi.
+
+Si te gusta la base pero quieres cambiar cosas, la estructura modular te lo pone fácil. Simplemente haz un fork del repositorio, elimina los módulos que no necesites dentro de `common/`, y modifica los archivos a tu gusto antes de lanzar el instalador.
 
