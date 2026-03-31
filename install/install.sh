@@ -206,14 +206,14 @@ setup_login() {
             log "Configurando Greetd (Autologin) para Laptop..."
             sudo pacman -S --needed --noconfirm greetd
             sudo mkdir -p /etc/greetd
-            sudo cp "$HOME/dotfiles/extra/greetd/laptop.toml" /etc/greetd/config.toml 2>/dev/null || true
-            sudo systemctl disable sddm ly getty@tty2.service 2>/dev/null || true
+            sudo cp "$HOME/dotfiles/extra/greetd/laptop.toml" /etc/greetd/config.toml
+            sudo systemctl disable sddm ly@tty2.service getty@tty2.service 2>/dev/null || true
             service_install greetd
         else
             log "Configurando Ly como gestor de sesión para Laptop..."
             sudo pacman -S --needed --noconfirm ly
             sudo systemctl disable getty@tty2.service greetd sddm 2>/dev/null || true
-            service_install ly
+            service_install ly@tty2.service
         fi
     else
         if [[ "$autoyes" =~ ^[Yy]$ ]] || { read -p "¿Autologin directo con greetd para desktop? (y/N): " -n 1 -r && echo && [[ $REPLY =~ ^[Yy]$ ]]; }; then
@@ -221,7 +221,7 @@ setup_login() {
             sudo pacman -S --needed --noconfirm greetd
             sudo mkdir -p /etc/greetd
             sudo cp "$HOME/dotfiles/extra/greetd/${de_profile}.toml" /etc/greetd/config.toml 2>/dev/null || true
-            sudo systemctl disable sddm ly getty@tty2.service 2>/dev/null || true
+            sudo systemctl disable sddm ly@tty2.service getty@tty2.service 2>/dev/null || true
             service_install greetd
         fi
     fi
