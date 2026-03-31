@@ -5,5 +5,5 @@ vt = 1
 
 # The default session, also known as the greeter.
 [default_session]
-command = bash -c "/home/davidn/bin/sys/gpu-check.sh && niri-session"
+command = bash -c "gpu-check && niri-session"
 user = "davidn"

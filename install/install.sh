@@ -278,7 +278,8 @@ setup_crucial_disk_fstab() {
 
 setup_toggle_gpu() {
     log "Configurando GPU toggle..."
-    sudo cp ~/dotfiles/extra/wayland-sessions/gpu-toggle.sh /usr/local/bin/gpu-toggle 2>/dev/null && sudo chmod 755 /usr/local/bin/gpu-toggle || true
+    sudo cp ~/dotfiles/extra/bin/gpu-check.sh /usr/local/bin/gpu-check
+    sudo cp ~/dotfiles/extra/bin/gpu-toggle.sh /usr/local/bin/gpu-toggle 2>/dev/null && sudo chmod 755 /usr/local/bin/gpu-toggle || true
     if [ -f "$HOME/dotfiles/extra/sudoers/gpu-rules" ]; then
         if sudo visudo -cf "$HOME/dotfiles/extra/sudoers/gpu-rules" &>/dev/null; then
             sudo cp "$HOME/dotfiles/extra/sudoers/gpu-rules" /etc/sudoers.d/gpu-rules
