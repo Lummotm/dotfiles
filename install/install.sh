@@ -196,34 +196,33 @@ setup_fish_shell() {
 }
 
 setup_login() {
-    log "Configurando gestor de sesión..."
+    log "Configurando el acceso al sistema..."
 
-    if [[ "$machine_type" == "laptop" ]]; then
-        read -p "¿Quieres habilitar el autologin directo en este laptop? (y/N): " -n 1 -r laptop_autologin
-        echo
+    sudo systemctl disable ly.service ly@tty2.service greetd sddm getty@tty2.service 2>/dev/null || true
+    sudo rm -f /etc/systemd/system/getty@tty1.service.d/autologin.conf 2>/dev/null
+    sudo systemctl daemon-reload
 
-        if [[ $laptop_autologin =~ ^[Yy]$ ]]; then
-            log "Configurando Greetd (Autologin) para Laptop..."
-            sudo pacman -S --needed --noconfirm greetd
+    if [[ "$machine_type" == "desktop" ]]; then
+        log "Configurando Greetd (Autologin) para Desktop..."
+
+        sudo pacman -S --needed --noconfirm greetd
+
+        local greetd_config="$HOME/dotfiles/extra/greetd/$([[ "$de_profile" == "niri" ]] && echo "niri.toml" || echo "hyprland.toml")"
+
+        if [ -f "$greetd_config" ]; then
             sudo mkdir -p /etc/greetd
-            sudo cp "$HOME/dotfiles/extra/greetd/laptop.toml" /etc/greetd/config.toml
-            sudo systemctl disable sddm ly@tty2.service getty@tty2.service 2>/dev/null || true
-            service_install greetd
+            sudo cp "$greetd_config" /etc/greetd/config.toml
+            sudo systemctl enable greetd.service
         else
-            log "Configurando Ly como gestor de sesión para Laptop..."
-            sudo pacman -S --needed --noconfirm ly
-            sudo systemctl disable getty@tty2.service greetd sddm 2>/dev/null || true
-            service_install ly@tty2.service
+            log "Error: No se encontró la configuración de greetd en $greetd_config"
         fi
+
     else
-        if [[ "$autoyes" =~ ^[Yy]$ ]] || { read -p "¿Autologin directo con greetd para desktop? (y/N): " -n 1 -r && echo && [[ $REPLY =~ ^[Yy]$ ]]; }; then
-            log "Configurando Greetd (Autologin) para Desktop..."
-            sudo pacman -S --needed --noconfirm greetd
-            sudo mkdir -p /etc/greetd
-            sudo cp "$HOME/dotfiles/extra/greetd/${de_profile}.toml" /etc/greetd/config.toml 2>/dev/null || true
-            sudo systemctl disable sddm ly@tty2.service getty@tty2.service 2>/dev/null || true
-            service_install greetd
-        fi
+        log "Configurando Ly en TTY2 para Laptop..."
+
+        sudo pacman -S --needed --noconfirm ly
+        sudo systemctl disable getty@tty2.service || true
+        sudo systemctl enable ly@tty2.service
     fi
 }
 
