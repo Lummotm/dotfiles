@@ -14,6 +14,12 @@ if ! command -v stow &>/dev/null || ! command -v 7z &>/dev/null || ! command -v 
     sudo pacman -S --noconfirm --needed stow p7zip rsync || exit 1
 fi
 
+# Para evitar conflictos
+rm -rf ~/.config/waybar
+rm -rf ~/.config/rofi
+rm -rf ~/.config/niri
+rm -rf ~/.config/dunst
+
 # Crear directorios base necesarios
 log "Creando estructura de directorios..."
 find "$HOME/.local/share" -xtype l -delete 2>/dev/null
