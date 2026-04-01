@@ -5,7 +5,7 @@ return {
 	opts = {
 		picker = {
 			enabled = true,
-			layout = "custom_ivy",
+			layout = "custom_default",
 			layouts = {
 				custom_ivy = {
 					layout = {
@@ -25,6 +25,25 @@ return {
 						{ win = "input", height = 1, border = "rounded" },
 					},
 				},
+				custom_default = {
+					layout = {
+						box = "horizontal",
+						width = 0.9,
+						min_width = 120,
+						height = 0.9,
+						{
+							box = "vertical",
+							border = true,
+							title = "{title} {live} {flags}",
+							{ win = "input", height = 1, border = "bottom" },
+							{ win = "list", border = "none" },
+						},
+						{ win = "preview", title = "{preview}", border = true, width = 0.5 },
+					},
+				},
+			},
+			debug = {
+				scores = true,
 			},
 		},
 		dashboard = require("plugins.tools.snacks.dashboard"),
@@ -119,7 +138,7 @@ return {
 			function()
 				Snacks.picker.zoxide({})
 			end,
-			desc = "Grep with input",
+			desc = "Change dir with zoxide",
 			mode = "n",
 		},
 		{
