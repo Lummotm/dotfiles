@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Niri
 Comment=A scrollable-tiling Wayland compositor
-Exec=bash -c "gpu-check && niri-session"
+Exec=/usr/local/bin/wayland-launcher niri
 Type=Application
 DesktopNames=niri

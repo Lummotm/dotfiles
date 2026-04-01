@@ -6,7 +6,6 @@ spawn-at-startup "sunsetr"
 spawn-at-startup "mpd-mpris"
 spawn-at-startup "xwayland-satellite" ":0"
 spawn-at-startup "swayosd-server"
-// spawn-at-startup "hyprlock"
-// For now it seems that the only greeter compatible with my gpu toggle is ly, and ly cant autologin
+spawn-at-startup "hyprlock"
 
 spawn-sh-at-startup "~/bin/sys/0-post-boot.sh"

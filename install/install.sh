@@ -62,6 +62,12 @@ ask_autoyes() {
     echo
 }
 
+ask_autologin() {
+    [[ -n "$use_autologin" ]] && return
+    read -p "¿Deseas habilitar el autologin con Greetd? (y/N): " -n 1 -r use_autologin
+    echo
+}
+
 check_basics() {
     log "Comprobando conexión y espacio..."
     ping -c 1 github.com &>/dev/null || {
@@ -196,33 +202,69 @@ setup_fish_shell() {
 }
 
 setup_login() {
-    log "Configurando el acceso al sistema..."
+    log "Configurando el gestor de sesión..."
 
+    # Limpieza previa de servicios
     sudo systemctl disable ly.service ly@tty2.service greetd sddm getty@tty2.service 2>/dev/null || true
     sudo rm -f /etc/systemd/system/getty@tty1.service.d/autologin.conf 2>/dev/null
     sudo systemctl daemon-reload
 
-    if [[ "$machine_type" == "desktop" ]]; then
-        log "Configurando Greetd (Autologin) para Desktop..."
+    local toggle_script="$HOME/.config/niri/bin/niri_prop_toggle.py"
+    local startup_kdl="$HOME/.config/niri/startup.kdl"
+    local wm_name="$de_profile"
+    local greetd_base="$HOME/dotfiles/extra/greetd"
 
-        sudo pacman -S --needed --noconfirm greetd
+    # 1. Instalar el wayland-launcher universal para Greetd y Ly
+    if [ -f "$HOME/dotfiles/extra/bin/wayland-launcher" ]; then
+        sudo cp "$HOME/dotfiles/extra/bin/wayland-launcher" "/usr/local/bin/wayland-launcher"
+        sudo chmod 755 "/usr/local/bin/wayland-launcher"
+    else
+        log "Advertencia: No se encontró wayland-launcher en extra/bin/"
+    fi
 
-        local greetd_config="$HOME/dotfiles/extra/greetd/$([[ "$de_profile" == "niri" ]] && echo "niri.toml" || echo "hyprland.toml")"
+    # 2. Copiar sesiones .desktop (Para Ly, tanto en laptop como desktop)
+    sudo mkdir -p /usr/share/wayland-sessions/
+    sudo cp ~/dotfiles/extra/wayland-sessions/*.desktop /usr/share/wayland-sessions/ 2>/dev/null || true
+
+    if [[ "$use_autologin" =~ ^[Yy]$ ]]; then
+        log "Habilitando Autologin con Greetd y bloqueo inicial con hyprlock..."
+        sudo pacman -S --needed --noconfirm greetd python hyprlock
+
+        # No se porque hace exit aun con el true al lado
+        set +e
+        # Desabilitar tema de login que no sea el que queremos
+        sudo systemctl disable getty@tty2.service || true
+        sudo systemctl disable ly@tty2.service || true
+        sudo pacman -Rns --noconfirm ly
+        set -e
+
+        # Determinamos qué toml usar según el entorno elegido
+        local greetd_config="$greetd_base/${wm_name}.toml"
 
         if [ -f "$greetd_config" ]; then
             sudo mkdir -p /etc/greetd
             sudo cp "$greetd_config" /etc/greetd/config.toml
             sudo systemctl enable greetd.service
         else
-            log "Error: No se encontró la configuración de greetd en $greetd_config"
+            log "Error Crítico: No se encontró la configuración en $greetd_config"
         fi
 
     else
-        log "Configurando Ly en TTY2 para Laptop..."
+        log "Configurando Ly (Login manual)..."
+        sudo pacman -S --needed --noconfirm ly python
 
-        sudo pacman -S --needed --noconfirm ly
+        set +e
         sudo systemctl disable getty@tty2.service || true
+        sudo systemctl disable greetd.service || true
         sudo systemctl enable ly@tty2.service
+        sudo pacman -Rns --noconfirm greetd
+        set -e
+
+        log "Intentando desactivar hyprlock en el inicio del compositor para evitar doble login..."
+
+        # Niri: Intentamos usar el script de python. Si falla o no existe, no pasa nada (|| true).
+        python "$toggle_script" "$startup_kdl" "spawn-at-startup" "hyprlock" 2>/dev/null || true
+
     fi
 }
 
@@ -239,7 +281,7 @@ setup_sudoers() {
             sudo cp "$HOME/dotfiles/extra/sudoers/custom-rules" /etc/sudoers.d/custom-rules
             sudo chmod 440 /etc/sudoers.d/custom-rules
         else
-            log "Error Crítico: El archivo custom-rules tiene fallos de sintaxis. Omitiendo por seguridad."
+            log "Error Crítico: fallos de sintaxis en custom-rules."
         fi
     fi
 
@@ -248,47 +290,46 @@ setup_sudoers() {
             sudo cp "$HOME/dotfiles/extra/sudoers/laptop-rules" /etc/sudoers.d/laptop-rules
             sudo chmod 440 /etc/sudoers.d/laptop-rules
         else
-            log "Error Crítico: El archivo laptop-rules tiene fallos de sintaxis. Omitiendo por seguridad."
+            log "Error Crítico: fallos de sintaxis en laptop-rules."
         fi
     fi
 }
 
 setup_crucial_disk_fstab() {
-    log "Configurando Crucial X9 en fstab (Ruta de usuario)..."
-
-    # Definimos la ruta en tu home para evitar líos de permisos en /run
+    log "Configurando Crucial X9 en fstab..."
     local MOUNT_PATH="/home/$USER/mnt/Crucial_X9"
     local UUID_CRUCIAL="D0668FA2668F87C4"
 
     if ! grep -q "$UUID_CRUCIAL" /etc/fstab; then
-        # Creamos la ruta y aseguramos que el dueño seas tú
         mkdir -p "$MOUNT_PATH"
-        sudo chown -R "$USER:$USER" "/home/$USER/mnt"
+        sudo chown -R "$USER:$USER" "$(dirname "$MOUNT_PATH")"
 
-        # Añadimos la línea al fstab
-        # Nota: quitamos windows_names e iocharset para máxima compatibilidad con ntfs3
-        echo -e "\n# Crucial X9 para Steam\nUUID=$UUID_CRUCIAL  $MOUNT_PATH  ntfs3  user,noauto,uid=1000,gid=1000,umask=000,rw,exec,nofail  0  0" | sudo tee -a /etc/fstab >/dev/null
+        local FSTAB_LINE="UUID=$UUID_CRUCIAL  $MOUNT_PATH  ntfs3  user,noauto,uid=$(id -u),gid=$(id -g),umask=000,rw,exec,nofail,prealloc,discard  0  0"
 
-        log "fstab actualizado. Ruta: $MOUNT_PATH"
+        echo -e "\n# Crucial X9 (Steam & Backups)\n$FSTAB_LINE" | sudo tee -a /etc/fstab >/dev/null
+
+        log "fstab actualizado con flags: exec, prealloc, discard."
         sudo systemctl daemon-reload
     else
-        log "La configuración del Crucial X9 ya existe en /etc/fstab."
+        log "Crucial X9 ya existe en fstab. Saltando configuración."
     fi
 }
 
 setup_toggle_gpu() {
-    log "Configurando GPU toggle..."
-    sudo cp ~/dotfiles/extra/bin/gpu-check.sh /usr/local/bin/gpu-check
-    sudo cp ~/dotfiles/extra/bin/gpu-toggle.sh /usr/local/bin/gpu-toggle 2>/dev/null && sudo chmod 755 /usr/local/bin/gpu-toggle || true
+    log "Configurando scripts de GPU (Solo Laptop)..."
+
+    # Copiamos solo los scripts individuales
+    sudo cp ~/dotfiles/extra/bin/gpu-check /usr/local/bin/gpu-check 2>/dev/null || true
+    sudo cp ~/dotfiles/extra/bin/gpu-toggle /usr/local/bin/gpu-toggle 2>/dev/null || true
+    sudo chmod 755 /usr/local/bin/gpu-check /usr/local/bin/gpu-toggle 2>/dev/null || true
+
+    # Aplicamos reglas de Sudoers exclusivas de la GPU
     if [ -f "$HOME/dotfiles/extra/sudoers/gpu-rules" ]; then
         if sudo visudo -cf "$HOME/dotfiles/extra/sudoers/gpu-rules" &>/dev/null; then
             sudo cp "$HOME/dotfiles/extra/sudoers/gpu-rules" /etc/sudoers.d/gpu-rules
             sudo chmod 440 /etc/sudoers.d/gpu-rules
         fi
     fi
-
-    sudo mkdir -p /usr/share/wayland-sessions/
-    sudo cp ~/dotfiles/extra/wayland-sessions/*.desktop /usr/share/wayland-sessions/ 2>/dev/null || true
 }
 
 setup_hotspot_network() {
@@ -309,8 +350,6 @@ setup_hotspot_network() {
 
         nmcli con delete "Hotspot" 2>/dev/null || true
         nmcli con add type wifi ifname "$wifi" con-name "Hotspot" autoconnect no ssid "Hotspot" 802-11-wireless.mode ap 802-11-wireless-security.key-mgmt wpa-psk 802-11-wireless-security.psk "ThinkingRock123" 802-11-wireless-security.proto rsn 802-11-wireless-security.group ccmp 802-11-wireless-security.pairwise ccmp 802-11-wireless-security.pmf 0 ipv4.method shared
-    else
-        log "Advertencia: No se detectaron interfaces de Ethernet y Wifi necesarias para el Hotspot."
     fi
 }
 
@@ -376,7 +415,7 @@ case "$1" in
 --login)
     ask_machine_type
     ask_de_profile
-    ask_autoyes
+    ask_autologin
     setup_login
     ;;
 --dotfiles)

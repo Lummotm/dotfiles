@@ -1,9 +1,0 @@
-[terminal]
-# The VT to run the greeter on. Can be "next", "current" or a number
-# designating the VT.
-vt = 1
-
-# The default session, also known as the greeter.
-[default_session]
-command = bash -c "gpu-check && niri-session"
-user = "davidn"

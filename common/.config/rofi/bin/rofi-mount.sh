@@ -202,20 +202,33 @@ selection_action() {
         if [[ "$current_uuid" == "$target_uuid" ]]; then
             mkdir -p "$mount_point"
 
-            # Verificamos si ya está montado
             if mountpoint -q "$mount_point"; then
                 log "Desmontando Crucial X9..."
                 if umount "$mount_point"; then
-                    notification "Disco Desmontado" "Crucial X9 se ha extraído con éxito" "$ICON_UNMOUNTED"
+                    notification "Disco Desmontado" "Crucial X9 extraído con éxito" "$ICON_UNMOUNTED"
                 else
-                    notification "Error" "No se pudo desmontar. ¿Hay procesos usando el disco?" "$ICON_ERROR"
+                    notification "Error" "No se pudo desmontar." "$ICON_ERROR"
                 fi
             else
                 log "Montando Crucial X9..."
-                if mount "$mount_point"; then
+                # Intentamos montar
+                if ! mount "$mount_point" 2>/dev/null; then
+                    log "FALLO INICIAL: Crucial X9 (Posible NTFS sucio)"
+                    notification "Reparando..." "Detectado error en NTFS" "$ICON_ERROR"
+
+                    sudo /usr/bin/ntfsfix -d "$device" >>"$LOG_FILE" 2>&1
+
+                    # REINTENTO
+                    if mount "$mount_point"; then
+                        notification "Disco Montado" "Reparado y montado con éxito" "$ICON_MOUNTED"
+                    else
+                        notification "Error Crítico" "Fallo incluso tras ntfsfix" "$ICON_ERROR"
+                    fi
+                else
                     notification "Disco Montado" "Crucial X9 listo." "$ICON_MOUNTED"
                 fi
             fi
+            # ...
         else
             # Lógica normal de udisksctl para otros discos
             if mountpoint -q "$(lsblk -no MOUNTPOINT "$device")"; then
