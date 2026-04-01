@@ -48,6 +48,7 @@ return {
 					"shfmt",
 					"latexindent",
 					"matlab_ls",
+					"rust-analyzer",
 				},
 				auto_update = false,
 				run_on_start = false,

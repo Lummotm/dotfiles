@@ -94,6 +94,22 @@ return {
 					},
 				},
 			},
+			rust_analyzer = {
+				capabilities = capabilities,
+				settings = {
+					["rust-analyzer"] = {
+						checkOnSave = {
+							command = "clippy",
+						},
+						procMacro = {
+							enable = true,
+						},
+						cargo = {
+							allFeatures = true,
+						},
+					},
+				},
+			},
 		}
 
 		-- Configurar cada servidor

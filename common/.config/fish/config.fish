@@ -3,7 +3,7 @@ if not status is-interactive
 end
 
 # Added to path 
-set -gx PATH ~/.local/bin $PATH
+set -gx PATH ~/.cargo/bin ~/.local/bin $PATH
 set -gx NNN_OPENER xdg-open
 
 # Variables de entorno globales

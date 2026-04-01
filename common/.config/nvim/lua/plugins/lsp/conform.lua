@@ -12,6 +12,7 @@ return {
 			tex = { "latexindent" },
 			sh = { "shfmt" },
 			c = { "clang_format" },
+			rust = { "rustfmt" },
 		},
 		default_format_opts = {
 			lsp_format = "fallback", -- Fallback to LSP formatting
