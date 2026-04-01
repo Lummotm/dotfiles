@@ -42,9 +42,6 @@ return {
 					},
 				},
 			},
-			debug = {
-				scores = true,
-			},
 		},
 		dashboard = require("plugins.tools.snacks.dashboard"),
 		notify = { enabled = true },
