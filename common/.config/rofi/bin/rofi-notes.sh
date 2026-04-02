@@ -164,16 +164,28 @@ sync_notes() {
 
     # La lógica de ejecución basada en tu variable $strategy
     case "$strategy" in
-    " Standart")
-        notify-send "Git" "Sync Standart (Safe Mode)..."
+    " PC Priority")
+        notify-send "Git" "Prioridad PC (Force Push)..."
+        # Limpieza de bloqueos previos
+        git rebase --abort >/dev/null 2>&1 || true
+        git merge --abort >/dev/null 2>&1 || true
 
         optimizar_vault
         git add -A
-        # Commit con timestamp detallado
-        git diff --cached --quiet || git commit -m "PC Sync: $(date '+%Y-%m-%d %H:%M')"
+        git commit -m "PC Priority: $(date +%R)" || true
+        git push origin main --force
+        ;;
 
+    " Standart")
+        notify-send "Git" "Sync Standart (Safe)..."
+
+        optimizar_vault
+        git add -A
+        git commit -m "Sync PC: $(date +%R)" || true
+
+        # Sin -Xours. Si hay conflicto, el script sale y te avisa.
         if ! git pull --rebase --autostash origin main; then
-            notify-send -u critical "Git Conflict" "Conflicto detectado. Arréglalo manualmente en la terminal."
+            notify-send -u critical "Git Conflict" "Conflicto detectado. Arréglalo en la terminal."
             exit 1
         fi
 
@@ -184,18 +196,8 @@ sync_notes() {
         git push origin main
         ;;
 
-    " PC Priority")
-        notify-send "Git" "Prioridad PC (Force Push)..."
-        # Limpiamos y aplastamos la nube con nuestra versión local
-        optimizar_vault
-        git add -A
-        git commit -m "PC Priority: $(date +%R)" || true
-        git push origin main --force
-        ;;
-
     "󰊄 Mobile Priority")
         notify-send "Git" "Prioridad Móvil (Hard Reset)..."
-        # Bajamos la versión cruda de la nube, la limpiamos y la resubimos limpia
         git fetch origin main
         git reset --hard origin/main
         optimizar_vault
