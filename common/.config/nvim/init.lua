@@ -49,7 +49,14 @@ local theme = require("core.theme")
 theme.setup()
 
 -- Load and setup plugins via Lazy.nvim
-require("lazy").setup("plugins")
+require("lazy").setup({
+	spec = {
+		{ import = "plugins.lsp" },
+		{ import = "plugins.navigation" },
+		{ import = "plugins.ui" },
+		{ import = "plugins.tools" },
+	},
+})
 
 -- Load mason-tools on the first time only
 vim.api.nvim_create_autocmd("VimEnter", {
