@@ -165,16 +165,15 @@ sync_notes() {
     # La lógica de ejecución basada en tu variable $strategy
     case "$strategy" in
     " Standart")
-        notify-send "Git" "Sync Standart..."
+        notify-send "Git" "Sync Standart (Safe Mode)..."
 
-        # Limpiamos, guardamos lo nuestro, traemos la nube, limpiamos lo nuevo y subimos
         optimizar_vault
         git add -A
-        git diff --cached --quiet || git commit -m "Sync PC: $(date +%R)"
+        # Commit con timestamp detallado
+        git diff --cached --quiet || git commit -m "PC Sync: $(date '+%Y-%m-%d %H:%M')"
 
-        if ! git pull --rebase --autostash -Xours origin main; then
-            notify-send -u critical "Git Error" "Conflicto serio. Usa Mobile/PC Priority."
-            git rebase --abort
+        if ! git pull --rebase --autostash origin main; then
+            notify-send -u critical "Git Conflict" "Conflicto detectado. Arréglalo manualmente en la terminal."
             exit 1
         fi
 
