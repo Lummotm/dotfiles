@@ -25,6 +25,7 @@ brightnessctl set 30%
 {
     ~/bin/ui/wallpaper-handler.sh ~/Pictures/Wallpapers/current-wallpaper
     ~/.config/rofi/bin/bgselector/bgselector --cache
+    ~/.config/hypr/bin/gen-art.sh
 } &
 
 # Clipboard
