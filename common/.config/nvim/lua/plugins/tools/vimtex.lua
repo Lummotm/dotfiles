@@ -1,3 +1,4 @@
+-- Para la escritura de texto matematico formal (LaTeX)
 return {
 	"lervag/vimtex",
 	ft = "tex", -- Load VimTeX only for TeX file types

@@ -1,3 +1,4 @@
+-- Configuración de servidores de lenguaje (Lspconfig)
 return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },

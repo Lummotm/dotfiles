@@ -1,3 +1,4 @@
+-- Formateador de código
 return {
 	"stevearc/conform.nvim",
 	event = { "BufReadPre", "BufNewFile" },

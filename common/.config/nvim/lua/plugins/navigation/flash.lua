@@ -1,3 +1,4 @@
+-- Salto rápido de cursor con etiquetas
 return {
 	"folke/flash.nvim",
 	event = "VeryLazy",

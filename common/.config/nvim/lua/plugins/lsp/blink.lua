@@ -1,3 +1,4 @@
+-- Motor de autocompletado (LSP, snippets, path)
 return {
 	"saghen/blink.cmp",
 	version = "v0.*",

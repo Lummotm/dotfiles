@@ -1,3 +1,4 @@
+-- Para la escritura de texto matematico formal (Typst)
 return {
 	"chomosuke/typst-preview.nvim",
 	ft = "typst",

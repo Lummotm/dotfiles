@@ -1,3 +1,4 @@
+-- Integración con el explorador de terminal Yazi
 return {
 	"mikavilpas/yazi.nvim",
 	cmd = "Yazi",

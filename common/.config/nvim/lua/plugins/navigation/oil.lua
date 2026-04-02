@@ -1,3 +1,4 @@
+-- Edición del sistema de archivos como si fuera un buffer de texto
 return {
 	"stevearc/oil.nvim",
 	lazy = false,

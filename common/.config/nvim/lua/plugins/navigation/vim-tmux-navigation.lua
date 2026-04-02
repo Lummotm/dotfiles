@@ -1,3 +1,4 @@
+-- Movimiento fluido entre paneles de Neovim y Tmux
 return {
 	"christoomey/vim-tmux-navigator",
 	lazy = true,

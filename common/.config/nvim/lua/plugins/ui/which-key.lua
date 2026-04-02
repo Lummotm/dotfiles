@@ -1,3 +1,4 @@
+-- Muestra que keybinds hay seguidas que keys previamente presionadas
 return {
 	"folke/which-key.nvim",
 	event = "VeryLazy", -- Load when the UI is ready

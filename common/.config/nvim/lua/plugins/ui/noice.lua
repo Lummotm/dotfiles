@@ -1,3 +1,4 @@
+-- Hace lo del CMD-Line el medio y gestiona notfiicaciones, ns pq no se junta con snacks
 return {
 	"folke/noice.nvim",
 	event = "VeryLazy",

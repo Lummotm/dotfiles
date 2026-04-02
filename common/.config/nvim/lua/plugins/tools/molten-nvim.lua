@@ -3,6 +3,7 @@
 return {
 	{
 		"benlubas/molten-nvim",
+		enabled = false,
 		version = "^1.0.0",
 		dependencies = { "3rd/image.nvim" },
 		build = ":UpdateRemotePlugins",
@@ -19,6 +20,7 @@ return {
 	},
 	{
 		"3rd/image.nvim",
+		enabled = false,
 		opts = {
 			backend = "kitty",
 			max_width = 100,

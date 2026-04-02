@@ -1,3 +1,4 @@
+-- Gestor de binarios (LSP, Linters, Debuggers)
 return {
 	{
 		"williamboman/mason.nvim",
