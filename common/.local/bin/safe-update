@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+# If Ctrl + C then exit
+trap 'echo -e "\nProceso cancelado por el usuario. Saliendo..."; exit 0' SIGINT
+
+if ! command -v topgrade &>/dev/null; then
+    echo "Topgrade no fue detectado en el sistema."
+    echo "Instalando topgrade-bin a través de yay..."
+    yay -S topgrade-bin --noconfirm
+fi
+
+echo "Actualizando mirrors..."
+if command -v cachyos-rate-mirrors &>/dev/null; then
+    sudo cachyos-rate-mirrors
+else
+    sudo reflector --latest 5 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+fi
+
+echo "Iniciando actualización general con Topgrade..."
+topgrade
+
+echo "Regenerando initramfs y GRUB..."
+sudo mkinitcpio -P
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+echo "¡Proceso finalizado con éxito! Presiona Enter para cerrar esta ventana..."
+read -r

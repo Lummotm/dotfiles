@@ -1,0 +1,36 @@
+{
+    "reload_style_on_change": true,
+    "layer": "top",
+    "position": "top",
+    "exclusive": true,
+    "passthrough": false,
+    "fixed-center": true,
+    "margin-top": 2,
+    "margin-left": 2,
+    "margin-right": 2,
+    "margin-bottom": 0,
+    "height": 28,
+    "include": ["~/.config/waybar/modules.json"],
+    "modules-left": [
+        "custom/launcher",
+        "custom/updates",
+        "niri/workspaces",
+        "privacy",
+        "hyprland/window"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "group/extras",
+        "cpu",
+        "memory",
+        "network",
+        "bluetooth",
+        "pulseaudio#microphone",
+        "group/audio",
+        "custom/brightness",
+        "battery",
+        "custom/powermenu",
+    ]
+}

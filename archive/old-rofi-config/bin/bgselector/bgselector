@@ -1,0 +1,177 @@
+#!/usr/bin/env bash
+# Basado en https://github.com/kianblakley/niri-land con mejoras de sincronización
+#
+# Modos de operación (argumento $1):
+#   <ruta>      Muestra los fondos de esa carpeta (o recursivamente si es
+#               la raíz). Orden aleatorio.
+#   --cache     Genera o actualiza los thumbnails de toda la biblioteca
+#               sin lanzar rofi.
+#   --reload    Igual que --cache pero borra primero los thumbs existentes
+#               (útil tras renombrar o eliminar imágenes).
+#
+# Argumento opcional $2:
+#   --top       Activa el modo SCORE: muestra solo los fondos que tienen
+#               puntuación registrada, ordenados de mayor a menor.
+#
+# Puntuación:
+#   Cada vez que se confirma un wallpaper (en cualquier modo), su score
+#   se incrementa en +1 en ~/.cache/thumbnails/bgselector/scores.txt
+#   con el formato  stem=N  (stem = nombre de archivo sin extensión).
+#
+# Dependencias: rofi, ImageMagick (magick), wallpaper-handler.sh
+
+ROFI_CONFIG="$HOME/.config/rofi/bin/bgselector/bgselector.rasi"
+cache_dir="$HOME/.cache/thumbnails/bgselector"
+score_file="$HOME/Pictures/Wallpapers/scores.txt"
+
+# Argumentos:
+#   $1 — --reload | --cache | <ruta a subcarpeta>
+#   $2 — --top (opcional, muestra todos los fondos puntuados ordenados por score)
+if [[ "$1" == "--reload" || "$1" == "--cache" ]]; then
+    mode="$1"
+    wall_base="$HOME/Pictures/Wallpapers/0-god"
+elif [[ -n "$1" ]]; then
+    wall_dir="$1"
+    mode=""
+else
+    wall_dir="$HOME/Pictures/Wallpapers/0-god"
+    mode=""
+fi
+
+top_mode=false
+[[ "$2" == "--top" ]] && top_mode=true
+
+# ── Modo cache/reload
+if [[ "$mode" == "--reload" ]]; then
+    # Solo deberia de borrar cache de imagenes, no los scores
+    find "$cache_dir" -name "*.png" -delete
+fi
+
+if [[ "$mode" == "--reload" || "$mode" == "--cache" ]]; then
+    mkdir -p "$cache_dir"
+
+    find "$wall_base" -type d | while read -r subdir; do
+        subname=$(realpath --relative-to="$wall_base" "$subdir")
+        sub_cache="$cache_dir/$subname"
+        mkdir -p "$sub_cache"
+
+        # Elimina thumbs huérfanos
+        for thumb in "$sub_cache"/*.png; do
+            [ -e "$thumb" ] || continue
+            filename=$(basename "$thumb" .png)
+            if [ ! -f "$subdir/$filename" ]; then
+                rm "$thumb"
+            fi
+        done
+
+        # Genera thumbs que falten
+        find "$subdir" -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" -o -iname "*.gif" \) |
+            while read -r img; do
+                filename=$(basename "$img")
+                thumb="$sub_cache/$filename.png"
+                if [ ! -f "$thumb" ]; then
+                    magick "$img[0]" -strip -thumbnail x540^ -gravity center -extent 529x540 "$thumb"
+                fi
+            done
+    done
+    exit 0
+fi
+
+# ── Modo top
+if $top_mode; then
+    touch "$score_file"
+    wall_selection=$(sort -t= -k2 -rn "$score_file" | cut -d= -f1 | while read -r stem; do
+        # El thumb se llama stem.ext.png (incluye la extensión original)
+        thumb=$(find "$cache_dir" -name "$stem.*.png" -o -name "$stem.png" 2>/dev/null | head -1)
+        wall_file=$(find "$HOME/Pictures/Wallpapers/0-god" -type f \( \
+            -iname "$stem.jpg" -o -iname "$stem.jpeg" -o \
+            -iname "$stem.png" -o -iname "$stem.webp" -o -iname "$stem.gif" \
+            \) | head -1)
+        display_name=$([ -n "$wall_file" ] && basename "$wall_file" || echo "$stem")
+        [ -n "$thumb" ] && echo -en "$display_name\x00icon\x1f$thumb\n"
+    done | rofi -dmenu -config "$ROFI_CONFIG")
+
+    if [ -n "$wall_selection" ]; then
+        wall_file=$(find "$HOME/Pictures/Wallpapers/0-god" -name "$wall_selection" -type f | head -1)
+        if [ -n "$wall_file" ]; then
+            stem="${wall_selection%.*}"
+            current=$(grep "^$stem=" "$score_file" | cut -d= -f2)
+            current=${current:-0}
+            sed -i "/^$stem=/d" "$score_file"
+            echo "$stem=$((current + 1))" >>"$score_file"
+            "$HOME/bin/ui/wallpaper-handler.sh" "$wall_file"
+            exit 0
+        fi
+    fi
+    exit 1
+fi
+
+# ── Modo selección normal
+subname=$(realpath --relative-to="$HOME/Pictures/Wallpapers/0-god" "$wall_dir" 2>/dev/null || basename "$wall_dir")
+sub_cache="$cache_dir/$subname"
+mkdir -p "$sub_cache"
+touch "$score_file"
+
+# Detecta si estamos en la carpeta raíz (TODOS) o una subcarpeta
+if [[ "$wall_dir" == "$HOME/Pictures/Wallpapers/0-god" ]]; then
+    # Modo TODOS: buscar recursivamente en TODAS las subcarpetas
+    wall_selection=$(find "$wall_dir" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" -o -iname "*.gif" \) |
+        shuf |
+        while read -r img; do
+            filename=$(basename "$img")
+            subdir=$(realpath --relative-to="$wall_dir" "$(dirname "$img")")
+            thumb_dir="$cache_dir/$subdir"
+            mkdir -p "$thumb_dir"
+            thumb="$thumb_dir/$filename.png"
+            if [ ! -f "$thumb" ]; then
+                magick "$img[0]" -strip -thumbnail x540^ -gravity center -extent 529x540 "$thumb"
+            fi
+            echo -en "$filename\x00icon\x1f$thumb\n"
+        done | rofi -dmenu -config "$ROFI_CONFIG")
+
+    if [ -n "$wall_selection" ]; then
+        # Busca el archivo en todas las subcarpetas
+        wall_file=$(find "$wall_dir" -name "$wall_selection" -type f | head -1)
+        if [ -n "$wall_file" ]; then
+            stem="${wall_selection%.*}"
+            current=$(grep "^$stem=" "$score_file" | cut -d= -f2)
+            current=${current:-0}
+            sed -i "/^$stem=/d" "$score_file"
+            echo "$stem=$((current + 1))" >>"$score_file"
+            "$HOME/bin/ui/wallpaper-handler.sh" "$wall_file"
+            exit 0
+        fi
+    fi
+else
+    # Modo subcarpeta: comportamiento original
+    # Genera thumbs que falten para esta subcarpeta (por si acaso)
+    find "$wall_dir" -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" -o -iname "*.gif" \) |
+        while read -r img; do
+            filename=$(basename "$img")
+            thumb="$sub_cache/$filename.png"
+            if [ ! -f "$thumb" ]; then
+                magick "$img[0]" -strip -thumbnail x540^ -gravity center -extent 529x540 "$thumb"
+            fi
+        done
+
+    # Selección con rofi (shuffle normal)
+    wall_selection=$(find "$wall_dir" -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" -o -iname "*.gif" \) |
+        shuf |
+        while read -r img; do
+            filename=$(basename "$img")
+            echo -en "$filename\x00icon\x1f$sub_cache/$filename.png\n"
+        done | rofi -dmenu -config "$ROFI_CONFIG")
+
+    if [ -n "$wall_selection" ]; then
+        stem="${wall_selection%.*}"
+        current=$(grep "^$stem=" "$score_file" | cut -d= -f2)
+        current=${current:-0}
+        sed -i "/^$stem=/d" "$score_file"
+        echo "$stem=$((current + 1))" >>"$score_file"
+
+        "$HOME/bin/ui/wallpaper-handler.sh" "$wall_dir/$wall_selection"
+        exit 0
+    fi
+fi
+
+exit 1

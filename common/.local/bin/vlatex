@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+BINARY="$HOME/bin/utils/vlatex.py"
+LATEX_ARG="$1"
+
+python3 "$BINARY" "$LATEX_ARG"

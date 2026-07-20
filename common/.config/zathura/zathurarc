@@ -1,0 +1,41 @@
+# Recuerda este tema se edita en ~/.config/wal/templates/
+set selection-clipboard clipboard
+set adjust-open "fit-width"
+set pages-per-row 1
+set scroll-page-aware "true"
+set smooth-scroll "true"
+set scroll-full-overlap 0.01
+set scroll-step 100
+set guioptions none
+
+set default-bg               "#0a111b"
+set default-fg               "#9dc2d6"
+
+set statusbar-bg             "#CF8F73"
+set statusbar-fg             "#0a111b"
+
+set inputbar-bg              "#0a111b"
+set inputbar-fg              "#9dc2d6"
+
+set notification-bg             "#0a111b"
+set notification-fg             "#5D718E"
+
+set notification-error-bg       "#0a111b"
+set notification-error-fg       "#CF8F73"
+
+set notification-warning-bg     "#0a111b"
+set notification-warning-fg     "#0B4C96"
+
+set highlight-color             "#1B61A5"
+set highlight-active-color      "#2571B1"
+
+set completion-bg               "#0B4C96"
+set completion-fg               "#9dc2d6"
+
+set completion-highlight-fg     "#2571B1"
+set completion-highlight-bg     "#0B4C96"
+
+set recolor                     "true"
+set recolor-keephue             "false"
+set recolor-lightcolor          "#0a111b"
+set recolor-darkcolor           "#9dc2d6"

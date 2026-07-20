@@ -1,0 +1,26 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# dependencies = [
+#   "markitdown[all]",
+# ]
+# ///
+import sys
+from markitdown import MarkItDown
+
+def main():
+    if len(sys.argv) < 2:
+        print("Uso: md-convert <ruta_al_archivo>")
+        sys.exit(1)
+        
+    archivo = sys.argv[1]
+    md = MarkItDown()
+    
+    try:
+        result = md.convert(archivo)
+        print(result.text_content)
+    except Exception as e:
+        print(f"Error al convertir: {e}", file=sys.stderr)
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()

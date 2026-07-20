@@ -1,0 +1,17 @@
+// ENV VARS
+environment {
+    electron_ozone_platform_hint "auto"
+    xdg_session_type "wayland"
+    xdg_current_desktop "niri"
+
+    qt_qpa_platform "wayland;xcb" 
+    qt_qpa_platformtheme "gtk3"
+    qt_wayland_disable_windowdecoration "1"
+
+    moz_enable_wayland "1"
+    _java_awt_wm_nonreparenting "1"
+}
+
+xwayland-satellite {
+    path "xwayland-satellite"
+} 

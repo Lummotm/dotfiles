@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+export PATH="$HOME/.cargo/bin:$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
+
+export MOZ_ENABLE_WAYLAND=1
+export QT_QPA_PLATFORM=wayland
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+command -v gpu-check &>/dev/null && gpu-check
+
+SESSION_NAME="$1"
+shift
+
+export XDG_SESSION_TYPE=wayland
+export XDG_SESSION_DESKTOP="$SESSION_NAME"
+export XDG_CURRENT_DESKTOP="$SESSION_NAME"
+
+case "$SESSION_NAME" in
+hyprland)
+    exec start-hyprland "$@"
+    ;;
+niri)
+    exec niri-session "$@"
+    ;;
+*)
+    echo "Error: Sesión '$SESSION_NAME' no soportada."
+    exit 1
+    ;;
+esac

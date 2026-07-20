@@ -1,0 +1,162 @@
+// KEYBINDS
+binds {
+    Super+P { 
+        spawn-sh "~/.config/niri/bin/show_binds ~/dotfiles/common/.config/niri/keybinds.kdl" 
+    }
+    Super+Alt+P hotkey-overlay-title="Power on/off monitors" { 
+        spawn-sh "~/bin/sys/monitor-toggle.sh"
+    }
+    Super+Tab { toggle-overview; }
+
+    Super+Alt+E hotkey-overlay-title="Launch file manager (Nautilus)" { 
+        spawn "nautilus"; 
+    }
+    Super+E hotkey-overlay-title="Launch file manager (Yazi)" { 
+        spawn "kitty" "--title=yazi" "-e" "yazi"; 
+    }
+    Super+Q hotkey-overlay-title="Launch Tmux session" { 
+        spawn "kitty" "--title=tmux" "-e" ".config/tmux/bin/tmux-launcher.sh"; 
+    }
+    Super+Alt+Q hotkey-overlay-title="Launch new terminal (Kitty)" { 
+        spawn "kitty"; 
+    }
+    Super+W hotkey-overlay-title="Launch Browser" { 
+        spawn "zen-browser"; 
+    }
+
+    Super+A hotkey-overlay-title="Current status notification" { 
+        spawn-sh "~/bin/ui/notify-sys.sh"; 
+    }
+    Super+B hotkey-overlay-title="Toggle Waybar" { 
+        spawn-sh "pkill waybar || waybar"; 
+    }
+    Super+Alt+A hotkey-overlay-title="Toggle theme (Light/Dark)" { 
+        spawn-sh "~/bin/ui/wallpaper-handler.sh toggle"; 
+    }
+    Super+Shift+Alt+Q { quit; }
+
+    Super+R hotkey-overlay-title="Rofi: Application launcher" { 
+        spawn-sh "~/.config/rofi/bin/rofi-launcher.sh"; 
+    }
+    Super+N hotkey-overlay-title="Rofi: Notes Manager" {
+        spawn-sh "~/.config/rofi/bin/rofi-notes.sh";
+    }
+    Super+M hotkey-overlay-title="Rofi: Music manager" { 
+        spawn-sh "~/.config/rofi/bin/rofi-mpc"; 
+    }
+    Super+Shift+C hotkey-overlay-title="Rofi: Clipboard history" { 
+        spawn-sh "~/.config/rofi/bin/rofi-clipboard.sh"; 
+    }
+
+    // Replaced most of the menus with a general one that lets enter the others
+    Super+F hotkey-overlay-title="Rofi: General Purpose Menu" { 
+        spawn-sh "~/.config/rofi/bin/rofi-center.sh"; 
+    }
+
+
+    Super+C { close-window; }
+    Super+Alt+C { spawn "tmux" "kill-session"; }
+    Super+Alt+Shift+C { spawn "tmux" "kill-server"; }
+
+    Super+V hotkey-overlay-title="Toggle Floating Window (Centered)" { 
+        spawn-sh "~/.config/niri/bin/resize_window centering"; 
+    }
+    Super+Shift+V { switch-focus-between-floating-and-tiling; }
+
+    Super+Plus { spawn-sh "~/.config/niri/bin/resize_window horizontal +10%"; }
+    Super+Minus { spawn-sh "~/.config/niri/bin/resize_window horizontal -10%"; }   
+    Super+Shift+Plus { spawn-sh "~/.config/niri/bin/resize_window vertical +10%"; }
+    Super+Shift+Minus { spawn-sh "~/.config/niri/bin/resize_window vertical -10%"; }   
+    
+    Super+H { focus-column-left; }
+    Super+J { focus-window-or-workspace-down; }
+    Super+K { focus-window-or-workspace-up; }
+    Super+L { focus-column-right; }
+
+    Super+Shift+L hotkey-overlay-title="Launch Lockscreen" { 
+        spawn-sh "hyprlock"
+    }
+
+    Super+Alt+H { move-column-left; }
+    Super+Alt+L { move-column-right; }
+    Super+Alt+K { move-window-up; }
+    Super+Alt+J { move-window-down; }
+
+    Super+Comma { consume-or-expel-window-left; }
+    Super+Period { consume-or-expel-window-right; }
+    Super+S { switch-preset-column-width; }
+    Super+Shift+S { switch-preset-window-height; }
+
+    Super+1 { focus-workspace 1;}
+    Super+2 { focus-workspace 2;}
+    Super+3 { focus-workspace 3; }
+    Super+4 { focus-workspace 4; }
+    Super+5 { focus-workspace 5; }
+    Super+6 { focus-workspace 6; }
+    Super+7 { focus-workspace 7; }
+    Super+8 { focus-workspace 8; }
+    Super+9 { focus-workspace 9; }
+
+    Super+Alt+1 { move-column-to-workspace 1;}
+    Super+Alt+2 { move-column-to-workspace 2; }
+    Super+Alt+3 { move-column-to-workspace 3; }
+    Super+Alt+4 { move-column-to-workspace 4; }
+    Super+Alt+5 { move-column-to-workspace 5; }
+    Super+Alt+6 { move-column-to-workspace 6; }
+    Super+Alt+7 { move-column-to-workspace 7; }
+    Super+Alt+8 { move-column-to-workspace 8; }
+    Super+Alt+9 { move-column-to-workspace 9; }
+    Super+Alt+0 { move-column-to-workspace 10; }
+
+    Super+D { maximize-column; }
+    Super+Shift+F hotkey-overlay-title="Toggle fullscreen" { fullscreen-window; }
+
+    Super+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
+    Super+WheelScrollUp   cooldown-ms=1150 { focus-workspace-up; }
+
+    XF86AudioRaiseVolume allow-when-locked=true hotkey-overlay-title="Volume up" { 
+        spawn-sh "~/bin/ui/notify-send.sh volume_up || wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"; 
+    }
+    XF86AudioLowerVolume allow-when-locked=true hotkey-overlay-title="Volume down" { 
+        spawn-sh "~/bin/ui/notify-send.sh volume_down || wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"; 
+    }
+    XF86AudioMute allow-when-locked=true hotkey-overlay-title="Mute speakers" { 
+        spawn-sh "~/bin/ui/notify-send.sh volume_mute || wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; 
+    }
+    XF86AudioMicMute allow-when-locked=true hotkey-overlay-title="Mute microphone" { 
+        spawn-sh "~/bin/ui/notify-send.sh mic_mute || wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; 
+    }
+    XF86MonBrightnessUp allow-when-locked=true hotkey-overlay-title="Brightness up" { 
+        spawn-sh "~/bin/ui/notify-send.sh brightness_up || brightnessctl s 5.0%+"; 
+    }
+    XF86MonBrightnessDown allow-when-locked=true hotkey-overlay-title="Brightness down" { 
+        spawn-sh "~/bin/ui/notify-send.sh brightness_down || brightnessctl s 5.0%-"; 
+    }
+
+    Print hotkey-overlay-title="Screenshot (fullscreen)" { 
+        screenshot-screen show-pointer=false; 
+    }
+    Super+Print hotkey-overlay-title="Screenshot (selected region)" { 
+        screenshot show-pointer=false;
+    }
+    Shift+Print hotkey-overlay-title="Screenshot (current window)" { 
+        spawn "niri" "msg" "action" "screenshot-window" "--write-to-disk=false"
+    }
+
+    F8 hotkey-overlay-title="Toggle touchpad" { 
+        spawn-sh "~/bin/sys/touchpad-toggle.sh niri"; 
+    }
+
+    Super+Escape { toggle-keyboard-shortcuts-inhibit; }
+
+    // Headphones binds (isn't linux goated)
+    XF86AudioPlay  { spawn "playerctl" "play-pause"; }
+    XF86AudioPause { spawn "playerctl" "play-pause"; }
+    XF86AudioNext { spawn "playerctl" "next"; }
+    XF86AudioPrev { spawn "playerctl" "previous"; }
+
+    // Change languaje and notify to waybar
+    Alt+Space hotkey-overlay-title="Toggle Languaje (EN/ES)" {
+        spawn "sh" "-c" "niri msg action switch-layout next && pkill -RTMIN+1 waybar"
+    }
+}

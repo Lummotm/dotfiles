@@ -1,0 +1,282 @@
+{
+    "group/extras": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 400,
+            "children-class": "extras",
+            "transition-left-to-right": false
+        },
+        "modules": [
+            "custom/menu",
+            "tray"
+        ]
+    },
+    "group/brightness": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 400,
+            "children-class": "brightness",
+            "transition-left-to-right": false
+        },
+        "modules": [
+            "custom/brightness"
+        ]
+    },
+    "group/audio": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 400,
+            "children-class": "audio",
+            "transition-left-to-right": false
+        },
+        "modules": [
+            "pulseaudio",
+            "pulseaudio/slider"
+        ]
+    },
+    "custom/brightness": {
+        "format": "{text}",
+        "return-type": "json",
+        "exec": "~/.config/waybar/bin/brightness.sh",
+        "interval": 5,
+        "signal": 2,
+        "on-click": "sys-menu brightness --rofi",
+        "on-scroll-up": "~/.config/waybar/bin/brightness.sh up",
+        "on-scroll-down": "~/.config/waybar/bin/brightness.sh down",
+        "tooltip": true
+    },
+    "custom/launcher": {
+        "format": "󰣇",
+        "tooltip": false,
+        "on-click": "sys-menu launcher --rofi"
+    },
+    "cpu": {
+        "interval": 2,
+        "format": "{usage}% 󰍛",
+        "tooltip": true,
+        "tooltip-format": "CPU Usage: {usage}%\nLoad: {load}",
+        "on-click": "kitty -e btop"
+    },
+    "memory": {
+        "interval": 2,
+        "format": "{percentage}% 󰾆",
+        "tooltip": true,
+        "tooltip-format": "Memory Status\n──────────────\nUsage: {percentage}%\nUsed: {used}GiB",
+        "on-click": "kitty -e btop"
+    },
+    "clock": {
+        "interval": 1,
+        "format": " {:%H:%M %a}",
+        "format-alt": " {:%d/%m/%Y  %H:%M:%S}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "month",
+            "weeks-pos": "right",
+            "mode-mon-col": 3,
+            "on-click-right": "mode",
+            "format": {
+                "month": "<span color='#E5A359'><b>{}</b></span>",
+                "weekdays": "<span color='#E6E1D3'><b>{}</b></span>",
+                "today": "<span color='#C14F3D'><b><u>{}</u></b></span>"
+            }
+        }
+    },
+    "custom/menu": {
+        "format": "󰅃",
+        "tooltip": false
+    },
+    "tray": {
+        "spacing": 10,
+        "reverse-direction": true,
+        "icon-size": 14,
+        "show-passive-items": false
+    },
+    "privacy": {
+        "icon-size": 14,
+        "transition-duration": 250,
+        "modules": [
+            {
+                "type": "screenshare",
+                "tooltip": false
+            }
+        ],
+        "ignore": [
+            {
+                "type": "screenshare",
+                "name": "obs"
+            }
+        ]
+    },
+    "network": {
+        "format-icons": {
+            "wifi": [
+                "󰤯",
+                "󰤟",
+                "󰤢",
+                "󰤥",
+                "󰤨"
+            ],
+            "ethernet": "󰀂",
+            "disabled": "󰤭",
+            "disconnected": "󰖪",
+            "linked": "󱘖"
+        },
+        "format-wifi": "{icon}",
+        "format-ethernet": "{icon}",
+        "format-linked": "{icon}",
+        "format-disconnected": "{icon}",
+        "format-disabled": "{icon}",
+        "interval": 5,
+        "tooltip": true,
+        "tooltip-format": "{essid}\t{gwaddr}",
+        "tooltip-format-wifi": "{icon} Connected to : <span color='#89b4fa' weight='bold'>{essid}</span>\nIP: {ipaddr}\nSignal: {signaldBm}dBm",
+        "tooltip-format-ethernet": "{icon} Connected to <b>Ethernet</b>\nIP: {ipaddr}",
+        "tooltip-format-linked": "{icon} <span color='#f9e2af' weight='bold'>VPN Active</span>\nInterface: {ifname}",
+        "tooltip-format-disconnected": "<span color='#f38ba8'>Disconnected</span>",
+        "on-click": "sys-menu network --rofi",
+        "max-length": 20
+    },
+    "bluetooth": {
+        "interval": 5,
+        "format-on": "󰂯",
+        "format-off": "󰂲",
+        "format-disabled": "󰂲",
+        "format-connected": "󰂱",
+        "format-no-controller": "󰂯",
+        "tooltip": true,
+        "tooltip-format": "Bluetooth\nStatus: {status}",
+        "tooltip-format-connected": "Connected\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}  |  󰁹 {device_battery_percentage}%",
+        "on-click": "sys-menu bluetooth --rofi"
+    },
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "format-source": "󰍬",
+        "format-source-muted": "󰍭",
+        "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+        "on-click-right": "pavucontrol -t 4",
+        "tooltip": false
+    },
+    "pulseaudio/slider": {
+        "min": 0,
+        "max": 100,
+        "orientation": "horizontal"
+    },
+    "pulseaudio": {
+        "interval": 5,
+        "format": "{icon}",
+        "format-icons": [
+            "󰕿",
+            "󰖀",
+            "󰕾"
+        ],
+        "format-muted": "󰝟",
+        "on-click": "sys-menu audio --rofi",
+        "reverse-scrolling": true,
+        "tooltip": true,
+        "tooltip-format": "Volume: {volume}%\n{desc}",
+        "ignored-sinks": [
+            "Easy Effects Sink"
+        ]
+    },
+    "backlight/slider": {
+        "min": 0,
+        "max": 100,
+        "orientation": "horizontal"
+    },
+    "backlight": {
+        "format": "{icon}",
+        "format-icons": [
+            "󰃚",
+            "󰃛",
+            "󰃜",
+            "󰃝",
+            "󰃞",
+            "󰃟",
+            "󰃠"
+        ],
+        "reverse-scrolling": true,
+        "smooth-scrolling-threshold": 0.2,
+        "tooltip": false
+    },
+    "battery": {
+        "interval": 5,
+        "states": {
+            "warning": 20,
+            "critical": 10
+        },
+        "format": "{capacity}% {icon}",
+        "format-icons": {
+            "charging": [
+                "󰢜",
+                "󰂆",
+                "󰂇",
+                "󰂈",
+                "󰢝",
+                "󰂉",
+                "󰢞",
+                "󰂊",
+                "󰂋",
+                "󰂅"
+            ],
+            "default": [
+                "󰁺",
+                "󰁻",
+                "󰁼",
+                "󰁽",
+                "󰁾",
+                "󰁿",
+                "󰂀",
+                "󰂁",
+                "󰂂",
+                "󰁹"
+            ]
+        },
+        "format-charging": "{capacity}% {icon}",
+        "format-plugged": "󰚥",
+        "format-full": "󰂅",
+        "tooltip": true,
+        "tooltip-format": "Battery\nRemaining: {capacity}%\nTime: {time}",
+        "tooltip-format-charging": "Charging\nCurrent: {capacity}%\nFull in: {time}",
+        "tooltip-format-plugged": "Power Source\nFully Charged",
+        "tooltip-format-critical": "CRITICAL\nLow Battery: {capacity}%\nSave your work!",
+        "on-click": "sys-menu power --rofi"
+    },
+    "custom/powermenu": {
+        "format": "󰐥",
+        "on-click": "sys-menu power --rofi",
+        "tooltip": false
+    },
+    "custom/updates": {
+        "format": "{text}",
+        "return-type": "json",
+        "exec": "~/bin/ui/waybar-update-count.sh",
+        "interval": 600,
+        "on-click": "kitty -e safe-update",
+        "signal": 1
+    },
+    "niri/workspaces": {
+        "on-click": "activate",
+        "disable-scroll": true,
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "1": "<span>一</span>",
+            "2": "<span>二</span>",
+            "3": "<span>三</span>",
+            "4": "<span>四</span>",
+            "5": "<span>五</span>",
+            "6": "<span>六</span>",
+            "7": "<span>七</span>",
+            "8": "<span>八</span>"
+        },
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": []
+        }
+    }
+}

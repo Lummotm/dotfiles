@@ -1,0 +1,38 @@
+# Recuerda este tema se edita en ~/.config/wal/templates/
+[global]
+origin = top-right
+offset = 20x20
+width = (0, 500)
+height = (0, 350)
+font = "JetBrains Propo Nerd Font 13" 
+padding = 10 
+text_icon_padding = 8 
+frame_width = 3
+corner_radius = 0
+
+icon_position = left 
+enable_recursive_icon_lookup = true 
+min_icon_size = 32
+max_icon_size = 64
+
+
+frame_color = "{color2}"
+separator_color = frame
+highlight = "{color3}"
+
+
+[urgency_low]
+background = "{color0}"
+foreground = "{color15}"
+timeout = 2
+
+[urgency_normal]
+background = "{color0}"
+foreground = "{color15}"
+timeout = 4
+
+[urgency_critical]
+background = "{color0}"
+foreground = "{color15}"
+frame_color = "{color2}"
+timeout = 0

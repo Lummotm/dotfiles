@@ -1,0 +1,66 @@
+#!/bin/bash
+
+USER_TERMUX="u0_a308"
+LOCAL_DIR="$HOME/Music"
+REMOTE_DIR="~/storage/music"
+
+EXCLUDE_ARGS=(
+    --exclude="Merlin"
+    --exclude=".thumbnails"
+    --exclude=".data"
+    --exclude="cover"
+)
+
+IP=""
+PORT=""
+DELETE_ARG=""
+
+for arg in "$@"; do
+    if [[ "$arg" == "--delete" ]]; then
+        DELETE_ARG="--delete"
+    elif [[ "$arg" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+        IP="$arg"
+    elif [[ "$arg" =~ ^[0-9]+$ ]]; then
+        PORT="$arg"
+    fi
+done
+
+if [ -z "$IP" ]; then
+    echo "Error: Dirección IP no especificada."
+    echo "Uso: $0 <IP> [PUERTO] [--delete]"
+    exit 1
+fi
+
+if [ -z "$PORT" ]; then
+    read -p "Puerto SSH (ej. 8022): " PORT
+    if [ -z "$PORT" ]; then
+        echo "Error: Puerto obligatorio."
+        exit 1
+    fi
+fi
+
+echo "Dirección de sincronización:"
+echo "1) PC -> Móvil"
+echo "2) Móvil -> PC"
+read -p "Opción (1 o 2): " DIRECTION
+
+echo "Iniciando..."
+
+chmod 644 "$HOME/Music/0-playlists/"*.m3u
+
+if [ "$DIRECTION" == "1" ]; then
+    # Se expande el array correctamente usando "${EXCLUDE_ARGS[@]}"
+    python3 "$HOME/bin/utils/music-playlist-fix.py" --silent
+    rsync -rtvP --no-perms --inplace $DELETE_ARG "${EXCLUDE_ARGS[@]}" -e "ssh -p $PORT" "${LOCAL_DIR}/" "${USER_TERMUX}@${IP}:${REMOTE_DIR}"
+elif [ "$DIRECTION" == "2" ]; then
+    # Se expande el array correctamente usando "${EXCLUDE_ARGS[@]}"
+    rsync -rtvP --no-perms --inplace $DELETE_ARG "${EXCLUDE_ARGS[@]}" -e "ssh -p $PORT" "${USER_TERMUX}@${IP}:${REMOTE_DIR}/" "$LOCAL_DIR"
+    python3 "$HOME/bin/utils/music-playlist-fix.py" --silent
+else
+    echo "Opción no válida. Cancelando."
+    exit 1
+fi
+
+chmod 644 "$HOME/Music/0-playlists/"*.m3u
+
+echo "Sincronización finalizada."

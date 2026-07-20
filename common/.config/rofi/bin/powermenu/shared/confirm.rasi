@@ -1,0 +1,96 @@
+configuration {
+    show-icons:                 true;
+}
+
+@import "~/.cache/wal/colors-rofi-dark.rasi"
+* {
+    font:                       "JetBrains Mono Nerd Font 12";
+    
+    background-overlay:         #0b040490;
+    background-normal:          transparent;
+    background-selected:        @selected-normal-background;
+    background-alt:             @background-alt;
+    foreground-normal:          @foreground;
+    foreground-selected:        @selected-normal-foreground;
+}
+
+window {
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       500px;
+    border-radius:               20px;
+    cursor:                      "default";
+    transparency:                "real";
+    background-color:            var(background-overlay);
+}
+
+mainbox {
+    spacing:                     30px;
+    padding:                     30px;
+    background-color:            transparent;
+    children:                    [ "message", "listview" ];
+}
+
+message {
+    margin:                      0px;
+    padding:                     20px;
+    border-radius:               20px;
+    background-color:            var(background-selected);
+    text-color:                  var(foreground-selected);
+}
+
+textbox {
+    background-color:            transparent;
+    text-color:                  inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0;
+    placeholder-color:           var(foreground-normal);
+    blink:                       true;
+    markup:                      true;
+}
+
+listview {
+    columns:                     2;
+    lines:                       1;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    
+    spacing:                     30px;
+    background-color:            transparent;
+    text-color:                  var(foreground-normal);
+    cursor:                      "default";
+}
+
+element {
+    padding:                     60px 10px;
+    border-radius:               20px;
+    background-color:            var(background-normal);
+    text-color:                  var(foreground-normal);
+    cursor:                      pointer;
+}
+
+element-text {
+    font:                        "feather 42px";
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      inherit;
+    vertical-align:              0.0;
+    horizontal-align:            0.4;
+}
+
+element selected.normal {
+    background-color:            var(background-selected);
+    text-color:                  var(foreground-selected);
+}
+
+/* Fix para pywal */
+listview, mode-switcher, message {
+    border: 0;
+    border-color: transparent;
+}
