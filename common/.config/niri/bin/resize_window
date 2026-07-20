@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Based of https://github.com/niri-wm/niri/discussions/3066
+
+case "$1" in
+*"horizontal"*)
+    niri msg action set-column-width $2
+    ;;
+*"vertical"*)
+    niri msg action set-window-height $2
+    ;;
+*"centering"*)
+    # Alterna el estado flotante
+    niri msg action toggle-window-floating
+
+    # Obtiene el nuevo estado después del cambio
+    WINDOW_JSON=$(niri msg --json focused-window)
+    IS_FLOATING=$(echo "$WINDOW_JSON" | jq '.is_floating')
+
+    if [ "$IS_FLOATING" == "true" ]; then
+        niri msg action set-column-width 80%
+        niri msg action set-window-height 80%
+    else
+        niri msg action maximize-column
+        niri msg action maximize-window
+    fi
+    ;;
+*)
+    notify-send "$1 not a valid argument" "Check your binding when using $0"
+    ;;
+esac
+WINDOW_JSON=$(niri msg --json focused-window)
+IS_FLOATING=$(echo "$WINDOW_JSON" | jq '.is_floating')
+
+if [ "$IS_FLOATING" == "true" ]; then
+    niri msg action center-window
+fi

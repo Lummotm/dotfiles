@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+is_hotspot_active() {
+    # Se considera activo si create_ap está corriendo
+    pgrep -x "create_ap" >/dev/null
+}
+if is_hotspot_active; then
+    clients=$(get_connected_clients)
+    cat <<EOF
+{ "class": "connected", "text": " 󱜠", "tooltip": "Hotspot activo\\n$clients" }
+EOF
+else
+    cat <<EOF
+{ "class": "disconnected", "text": " 󱜡", "tooltip": "Hotspot inactivo. Click para activar." }
+EOF
+fi

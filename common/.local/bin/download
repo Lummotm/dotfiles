@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+if [ -z "$1" ]; then
+    echo "Error: You must provide a link."
+    echo "Usage: $0 <LINK>"
+    exit 1
+fi
+
+LINK=$1
+COOKIES_INSTA="$HOME/Documents/cookies-instagram.txt"
+PARAMS_COOKIES=""
+
+# Detect if it's Instagram to use cookies
+if [[ "$LINK" == *"instagram.com"* ]]; then
+    if [ -f "$COOKIES_INSTA" ]; then
+        echo "Instagram link detected. Loading cookies..."
+        PARAMS_COOKIES="--cookies $COOKIES_INSTA"
+    else
+        echo "Warning: Instagram link detected, but the cookie file was not found at $COOKIES_INSTA"
+    fi
+fi
+
+HASH=$(echo -n "$LINK" | md5sum | cut -c1-12)
+DOWNLOAD_DIR="$HOME/Downloads/$HASH"
+
+# Selection menu
+echo "============================================="
+echo " Choose an option for the link:"
+echo "============================================="
+echo "1) Download AUDIO (MP3 with thumbnail)"
+echo "2) Download VIDEO (Max quality)"
+echo "3) Download IMAGE (gallery-dl)"
+echo "4) Exit"
+echo "============================================="
+read -p "Option [1-4]: " OPCION
+
+mkdir -p "$DOWNLOAD_DIR"
+cd "$DOWNLOAD_DIR"
+
+# Process choice
+case $OPCION in
+1)
+    echo "Downloading audio..."
+    yt-dlp $PARAMS_COOKIES -x --audio-quality 0 --audio-format mp3 --embed-thumbnail "$LINK"
+    ;;
+2)
+    echo "Downloading video..."
+    yt-dlp $PARAMS_COOKIES -f "bestvideo+bestaudio/best" --merge-output-format mp4 --embed-metadata "$LINK"
+    ;;
+3)
+    echo "Downloading image..."
+    gallery-dl $PARAMS_COOKIES "$LINK"
+    ;;
+4 | *)
+    echo "Operation cancelled."
+    rmdir "$DOWNLOAD_DIR"
+    exit 0
+    ;;
+esac
+
+echo "Downloads in $DOWNLOAD_DIR"
+echo "Process completed."

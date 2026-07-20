@@ -1,0 +1,19 @@
+/* Recuerda que este tema se edita dentro de ~/.config/wal/templates/ */
+@define-color color0  #120d17;
+@define-color color1  #2C684C;
+@define-color color2  #605D67;
+@define-color color3  #79737C;
+@define-color color4  #822E55;
+@define-color color5  #628176;
+@define-color color6  #7D4E81;
+@define-color color7  #b4b1b7;
+@define-color color8  #7d7b80;
+@define-color color9  #2C684C;
+@define-color color10 #605D67;
+@define-color color11 #79737C;
+@define-color color12 #822E55;
+@define-color color13 #628176;
+@define-color color14 #7D4E81;
+@define-color color15 #b4b1b7;
+@define-color background @color0;
+@define-color foreground @color8;

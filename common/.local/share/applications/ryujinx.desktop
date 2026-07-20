@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Ryujinx
+Exec=/home/davidn/Games/Ryujinx/Ryujinx.sh
+Terminal=false
+Type=Application
+Icon=/home/davidn/.local/share/icons/custom/ryujinx.png
+Categories=Game;

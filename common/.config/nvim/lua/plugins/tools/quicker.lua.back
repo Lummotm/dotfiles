@@ -1,0 +1,7 @@
+-- Quickfix navigation: Enhanced quickfix list
+return {
+	"stevearc/quicker.nvim",
+	ft = "qf",
+	enabled = false,
+	opts = {},
+}

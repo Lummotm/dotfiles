@@ -1,0 +1,27 @@
+# Colors Config
+config-file = /home/davidn/.cache/wal/ghostty.conf
+background-opacity = 0.75
+background-blur-radius = 20
+selection-invert-fg-bg = true
+
+font-family = "JetBrains Mono"
+font-size = 12
+
+window-padding-y = 10
+window-padding-x = 10
+
+cursor-invert-fg-bg = true
+
+confirm-close-surface = false
+
+copy-on-select = clipboard
+
+# Cursor config
+cursor-style = bar
+scrollback-limit = 10000
+
+
+# Keybinds
+keybind = ctrl+shift>v=paste_from_clipboard
+keybind = ctrl+shift>c=copy_to_clipboard
+keybind = ctrl+0=reset_font_size

@@ -1,0 +1,304 @@
+@import "./colors.css";
+
+/* ============================= */
+/* GLOBAL RESET                  */
+/* ============================= */
+* {
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 13px;
+    font-weight: bold;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+box, .modules-left, .modules-center, .modules-right {
+    margin: 0;
+    padding: 0;
+}
+.modules-left {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.modules-right{
+    margin-top: 10px;
+    margin-right: 10px;
+}
+.modules-center {
+    margin-top: 10px;
+}
+
+
+/* ============================= */
+/* WAYBAR WINDOW                 */
+/* ============================= */
+window#waybar {
+    background-color: transparent;
+    border: none;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+    background-color: @background;
+    border: 3px solid @color1;
+    border-radius: 0px;
+}
+
+/* ============================= */
+/* MODULE BASE STYLE             */
+/* ============================= */
+#custom-launcher,
+#custom-updates,
+#clock,
+#tray,
+#cpu,
+#memory,
+#network,
+#bluetooth,
+#pulseaudio,
+#pulseaudio.microphone,
+#custom-brightness,
+#custom-menu,
+#battery,
+#privacy,
+#custom-brightness,
+#custom-powermenu {
+    color: @color7;
+    padding: 2px 8px;
+    min-width: 14px;
+    border-radius: 0px;
+    margin: 2px 1px;
+}
+
+/* ============================= */
+/* WORKSPACES                    */
+/* ============================= */
+#workspaces button {
+    margin: 2px 1px;
+    padding: 0 6px;
+    border-radius: 0px;
+    background-color: @background;
+    color: @color8;
+}
+
+#workspaces button.active {
+    background-color: @color5;
+    color: @background;
+}
+
+#workspaces button:hover {
+    background-color: @color3;
+    color: @background;
+}
+
+/* ============================= */
+/* INDIVIDUAL MODULE COLORS      */
+/* ============================= */
+
+/* Launcher — acento fuerte */
+#custom-launcher {
+    background-color: @color3;
+    color: @background;
+    font-size: 16px;
+    padding: 2px 10px;
+}
+
+/* Updates — aviso */
+#custom-updates {
+    background-color: @color5;
+    color: @background;
+}
+
+/* Clock */
+#clock {
+    background-color: @background;
+    color: @color6;
+}
+
+/* CPU y Memory */
+#cpu, #memory {
+    background-color: @background;
+    color: @color8;
+}
+
+#cpu.critical {
+    background-color: @color2;
+    color: @color7;
+    animation: blink-warning 0.5s linear infinite alternate;
+}
+
+/* Network */
+#network {
+    background-color: @background;
+    color: @color6;
+}
+
+#network.disabled,
+#network.disconnected {
+    color: @color2;
+}
+
+/* Bluetooth */
+#bluetooth {
+    background-color: @background;
+    color: @color8;
+}
+
+#bluetooth.connected {
+    color: @color5;
+}
+
+#bluetooth.disabled {
+    color: @color2;
+}
+
+/* Audio */
+#pulseaudio {
+    background-color: @background;
+    color: @color7;
+}
+
+#pulseaudio.sink-muted:not(.microphone) {
+    color: @color2;
+}
+
+#pulseaudio.microphone {
+    background-color: @background;
+    color: @color8;
+}
+
+#pulseaudio.microphone.source-muted {
+    color: @color2;
+}
+
+/* Brightness */
+#custom-brightness {
+    background-color: @background;
+    color: @color8;
+}
+
+/* Battery */
+#battery {
+    background-color: @background;
+    color: @color6;
+}
+
+#battery.charging {
+    color: @color5;
+}
+
+#battery.plugged {
+    color: @color5;
+}
+
+#battery.warning {
+    color: @color4;
+}
+
+#battery.critical {
+    background-color: @color2;
+    color: @color7;
+    animation: blink-warning 0.5s linear infinite alternate;
+}
+
+/* Privacy */
+#privacy {
+    color: @color5;
+    margin: 2px 4px;
+}
+
+/* Tray */
+#tray {
+    background-color: @background;
+    color: @color7;
+}
+
+/* Power menu */
+#custom-powermenu {
+    background-color: @color3;
+    color: @background;
+    padding: 2px 10px;
+}
+
+/* ============================= */
+/* HOVER EFFECTS                 */
+/* ============================= */
+#clock:hover,
+#cpu:hover,
+#memory:hover,
+#battery:hover,
+#network:hover,
+#pulseaudio:hover,
+#bluetooth:hover,
+#custom-brightness:hover,
+#custom-updates:hover,
+#custom-brightness:hover {
+    background-color: @color7;
+    color: @background;
+}
+
+#custom-launcher:hover,
+#custom-powermenu:hover {
+    opacity: 0.75;
+}
+
+/* ============================= */
+/* BLINK ANIMATION               */
+/* ============================= */
+@keyframes blink-warning {
+    to {
+        background-color: @background;
+        color: @color2;
+    }
+}
+
+/* ============================= */
+/* SLIDERS                       */
+/* ============================= */
+#pulseaudio-slider,
+#backlight-slider {
+    min-width: 80px;
+}
+
+#pulseaudio-slider slider,
+#backlight-slider slider {
+    background: transparent;
+    border: none;
+}
+
+#pulseaudio-slider trough,
+#backlight-slider trough {
+    min-height: 6px;
+    background-color: @color1;
+}
+
+#pulseaudio-slider highlight {
+    background: @color5;
+}
+
+#backlight-slider highlight {
+    background: @color4;
+}
+
+/* ============================= */
+/* TOOLTIP                       */
+/* ============================= */
+tooltip {
+    background-color: @background;
+    border: 1px solid @color5;
+    border-radius: 4px;
+}
+
+tooltip label {
+    color: @color7;
+    margin: 8px;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+tooltip * {
+    background: transparent;
+}

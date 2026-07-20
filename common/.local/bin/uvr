@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# Validar que se pasó un archivo
+SCRIPT_FILE="$1"
+if [[ ! -f "$SCRIPT_FILE" ]]; then
+    echo "Error: No se encontró el archivo '$SCRIPT_FILE'"
+    exit 1
+fi
+
+# Ruta al extractor de dependencias
+PYTHON_EXTRACTOR="$HOME/bin/utils/extract_uv_deps.py"
+
+# Capturar dependencias
+DEPS=$(python3 "$PYTHON_EXTRACTOR" "$SCRIPT_FILE")
+
+# Si hay dependencias, las inyectamos en el bloque metadata del script
+if [[ -n "$DEPS" ]]; then
+    # uv add --script añade el bloque # /// script si no existe
+    uv add --script "$SCRIPT_FILE" $DEPS
+fi
+
+# Ejecutamos el script pasando el resto de argumentos ($@)
+shift # Quitamos el nombre del script de la lista de argumentos
+uv run "$SCRIPT_FILE" "$@"

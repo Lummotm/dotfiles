@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Eden Emulator
+Exec=/home/davidn/Games/Eden-Emulator.AppImage
+Terminal=false
+Type=Application
+Icon=/home/davidn/.local/share/icons/custom/Eden-Emulator.ico
+Categories=Game;Emulator;

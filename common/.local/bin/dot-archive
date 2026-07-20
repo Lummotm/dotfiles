@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+DOTFILES_DIR="$HOME/dotfiles"
+ZIP_PATH="$DOTFILES_DIR/extra/resources.7z"
+
+echo "Acataulizando arhcivo con recursos de fuentes e iconos"
+
+7z u "$ZIP_PATH" "$HOME/.local/share/fonts" "$HOME/.local/share/icons" -ms=on
+
+echo "Listo."

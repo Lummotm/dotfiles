@@ -1,0 +1,47 @@
+layout {
+    gaps 12
+    center-focused-column "never"
+    background-color "transparent"
+    always-center-single-column
+
+    focus-ring {
+        off
+    }
+    border {
+        on
+        width 3
+    }
+
+    default-column-width { proportion 0.5; }
+}
+
+
+overview {
+    zoom 0.5
+    workspace-shadow {
+        off
+    }
+}
+
+
+layer-rule {
+    match namespace="awww-daemon"
+    place-within-backdrop true
+}
+
+window-rule {
+    clip-to-geometry true
+    geometry-corner-radius 0
+    draw-border-with-background false
+}
+prefer-no-csd
+
+// WINDOWS RULES TO USE OPACITY AS FOCUS INDICATOR
+// window-rule {
+//     match is-focused=false
+//     opacity 0.90
+// }
+// window-rule {
+//     match is-focused=true
+//     opacity 0.95
+// }

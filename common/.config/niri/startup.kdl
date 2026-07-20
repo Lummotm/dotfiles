@@ -1,0 +1,9 @@
+// spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+// spawn-at-startup "awww-daemon"
+// spawn-at-startup "dunst"
+// // spawn-at-startup "waybar"
+// spawn-at-startup "sunsetr"
+// spawn-at-startup "mpd-mpris"
+// // spawn-at-startup "hyprlock"
+
+spawn-sh-at-startup "~/bin/sys/0-post-boot.sh"

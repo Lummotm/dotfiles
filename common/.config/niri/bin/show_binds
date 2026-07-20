@@ -1,0 +1,87 @@
+#!/usr/bin/env python
+import os
+import re
+import subprocess
+import sys
+
+if len(sys.argv) > 1:
+    keybinds_path = os.path.expanduser(sys.argv[1])
+else:
+    # Asumimos posición de config default
+    keybinds_path = os.path.expanduser("~/.config/niri/config.kdl")
+
+if not os.path.exists(keybinds_path):
+    print(f"Error: El archivo {keybinds_path} no existe.")
+    sys.exit(1)
+
+binds = []
+
+with open(keybinds_path, encoding="utf-8", errors="ignore") as f:
+    for line in f:
+        line = line.strip()
+
+        # Ignorar líneas irrelevantes
+        if not line or line.startswith(("//", "XF86", "}", "binds")):
+            continue
+
+        key_match = re.match(r"^([A-Za-z0-9\+]+)\s+", line)
+        if not key_match:
+            continue
+
+        key = key_match.group(1).replace("Mod", "Super").replace("+", " + ")
+
+        # Intentar extraer título explícito
+        title_match = re.search(r'hotkey-overlay-title="([^"]+)"', line)
+        if title_match:
+            binds.append((key, title_match.group(1)))
+            continue
+
+        # Si no hay título, extraer comando interno; si falla, saltar
+        action_match = re.search(r"\{\s*([^;}]+)", line)
+        if not action_match:
+            continue
+
+        raw_action = action_match.group(1).strip()
+
+        # Procesar comandos nativos de Niri
+        if not raw_action.startswith("spawn"):
+            desc = raw_action.replace("-", " ").title()
+            binds.append((key, desc))
+            continue
+
+        # Procesar comandos externos
+        clean_action = (
+            raw_action.replace("spawn", "")
+            .replace("-sh", "")
+            .replace("_", " ")
+            .replace('"', "")
+            .strip()
+        )
+
+        desc = clean_action.split("/")[-1].title()
+        binds.append((key, desc))
+
+if not binds:
+    sys.exit(0)
+
+# Ajustar tamaño (no es la mejor forma pero funciona)
+max_key_len = max(len(key) for key, _ in binds)
+lines = [f"{key.ljust(max_key_len + 4)} {desc}" for key, desc in binds]
+rofi_input = "\n".join(lines)
+
+try:
+    subprocess.run(
+        [
+            "rofi",
+            "-dmenu",
+            "-i",
+            "-matching",
+            "fuzzy",
+            "-theme-str",
+            "window {width: 35%;} listview {lines: 10;}",
+        ],
+        input=rofi_input,
+        text=True,
+    )
+except FileNotFoundError:
+    print(rofi_input)

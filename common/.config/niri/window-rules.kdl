@@ -1,0 +1,30 @@
+// WINDOW RULES - WORKSPACES
+
+// workspace "main"
+// workspace "games"
+
+window-rule {
+    match app-id=r#"(?i)keepassxc"#
+    match title=r#"(?i)whatsapp"#
+    match title=r#"(?i)instagram"#
+    match title=r#"(?i)Private"#
+    block-out-from "screencast"
+}
+
+//Steam Nofications
+window-rule {
+    match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+    default-floating-position x=10 y=10 relative-to="bottom-right"
+    open-focused false
+}
+window-rule {
+    match app-id="steam"
+    open-on-workspace "games"
+    open-fullscreen false
+}
+
+window-rule {
+    match app-id="yad"
+    open-floating true
+    open-focused false
+}
