@@ -123,8 +123,6 @@ install_all_packages() {
         xapp-mp3-thumbnailer nautilus
         # for the color picker
         yad gamemode gamescope lib32-gamemode
-        # Hotcorners on wayland
-        waycorner
     )
     local PKG_NVIM_DEPS=(
         tree-sitter tree-sitter-c tree-sitter-cli tree-sitter-lua
@@ -218,6 +216,15 @@ setup_dotfiles() {
     else
         log "Error: Script de aplicación no encontrado en $APPLY_SCRIPT"
     fi
+}
+
+setup_audio() {
+    log "Aplicando exclusión a discord en audio."
+    local TARGET_DIR="/etc/pipewire/pipewire-pulse.d"
+    sudo mkdir -p "$TARGET_DIR"
+    sudo cp $HOME/dotfiles/extra/10-adjustQuirkRules.conf \
+        "$TARGET_DIR"/10-adjustQuirkRules.conf
+    systemctl --user restart pipewire pipewire-pulse wireplumber
 }
 
 setup_mpd_service() {
@@ -499,6 +506,7 @@ full_install() {
     setup_sysctl_gaming
 
     setup_sudoers
+    setup_audio
     setup_mpd_service
     setup_keyd_service
     setup_printers
