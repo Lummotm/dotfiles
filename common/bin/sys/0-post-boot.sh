@@ -19,6 +19,7 @@ mpd-mpris &
 $HOME/bin/sys/mute-sound.sh
 $HOME/bin/sys/monitor-toggle.sh startup
 mpc stop
+$HOME/bin/utils/create-desktops
 
 # Launch stuff when on charger
 if [[ "$STATUS" == "1" ]]; then
