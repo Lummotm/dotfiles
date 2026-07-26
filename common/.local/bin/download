@@ -33,6 +33,7 @@ echo "3) Download IMAGE (gallery-dl)"
 echo "4) Exit"
 echo "============================================="
 read -p "Option [1-4]: " OPCION
+echo ""
 
 mkdir -p "$DOWNLOAD_DIR"
 cd "$DOWNLOAD_DIR"

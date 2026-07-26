@@ -8,7 +8,7 @@ EXCLUDE_ARGS=(
     --exclude="Merlin"
     --exclude=".thumbnails"
     --exclude=".data"
-    --exclude="cover"
+    --exclude=".cover"
 )
 
 IP=""
