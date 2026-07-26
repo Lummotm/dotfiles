@@ -41,11 +41,11 @@ cd "$DOWNLOAD_DIR"
 case $OPCION in
 1)
     echo "Downloading audio..."
-    yt-dlp $PARAMS_COOKIES -x --audio-quality 0 --audio-format mp3 --embed-thumbnail "$LINK"
+    yt-dlp $PARAMS_COOKIES -x --audio-quality 0 --audio-format mp3 --embed-thumbnail -o "%(title)s.%(ext)s" "$LINK"
     ;;
 2)
     echo "Downloading video..."
-    yt-dlp $PARAMS_COOKIES -f "bestvideo+bestaudio/best" --merge-output-format mp4 --embed-metadata "$LINK"
+    yt-dlp $PARAMS_COOKIES -f "bestvideo+bestaudio/best" --merge-output-format mp4 --embed-metadata -o "%(title)s.%(ext)s" "$LINK"
     ;;
 3)
     echo "Downloading image..."
@@ -58,5 +58,8 @@ case $OPCION in
     ;;
 esac
 
+echo ""
 echo "Downloads in $DOWNLOAD_DIR"
+echo "---"
+ls -1 "$DOWNLOAD_DIR" 2>/dev/null
 echo "Process completed."
