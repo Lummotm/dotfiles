@@ -269,7 +269,8 @@ case "$SELECTED" in
 "$DAILY_NOTE")
     python3 "$HOME/.config/rofi/bin/dependencies/update-todos.py"
     daily_path=$(get_folder_by_pattern "$DAILY_NOTES_PATTERN")
-    current_date=$(date +%d-%m-%Y)
+    # this way it sorts orderly
+    current_date=$(date +%Y-%m-%d)
     open_content "$daily_path/$current_date.md"
     ;;
 "$NEW_NOTE")

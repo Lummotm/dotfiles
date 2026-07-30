@@ -15,6 +15,7 @@ EXCLUDING_KEYWORDS = {
     "excalidraw",
     ".git",
     "books_vault",
+    "40_daily",
     "00_seguimiento",
     TASKS_SUBDIR,
 }
