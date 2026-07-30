@@ -79,7 +79,7 @@ case "$CHOICE" in
 "$OPT_CALC") "$ROFI_DIR/rofi-calc.sh" ;;
 "$OPT_ICONS") "$ROFI_DIR/rofi-nerd-icons.sh" ;;
 "$OPT_COLORS")
-    yad --color --hex-value --title="Selector" | wl-copy
+    yad --color --title="Selector" | wl-copy
     ;;
 "$OPT_CHARGING_MODE")
     "$HOME/bin/sys/battery-mode-check.sh"
