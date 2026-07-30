@@ -107,6 +107,13 @@ return {
 				},
 			},
 
+			-- QML / Quickshell language server
+			qmlls = {
+				cmd = { "qml-language-server" },
+				capabilities = capabilities,
+				root_markers = { { "qmldir", "shell.qml" }, ".git" },
+			},
+
 			-- Rust: Rust development with clippy
 			rust_analyzer = {
 				capabilities = capabilities,
@@ -130,6 +137,7 @@ return {
 		-- Register all servers with Neovim's LSP client
 		for server_name, config in pairs(servers) do
 			vim.lsp.config(server_name, config)
+			vim.lsp.enable(server_name)
 		end
 	end,
 }
