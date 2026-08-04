@@ -16,7 +16,7 @@
 # Depends on:
 #   Arch repositories: rofi, bluez-utils (contains bluetoothctl), bc
 
-source "$HOME/.config/rofi/bin/dependencies/rofi-core.sh"
+source "$HOME/bin/pickers/dependencies/core.sh"
 
 divider="---------"
 goback="Back"

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source "$HOME/.config/rofi/bin/dependencies/rofi-core.sh"
+source "$HOME/bin/pickers/dependencies/core.sh"
 
 CONFIG_STR="$HOME/dotfiles/common/.config/niri/monitors.kdl"
 PY_TOGGLE="$HOME/.config/niri/bin/niri_prop_toggle.py"

@@ -3,7 +3,7 @@
 THEMES_DIR="$HOME/dotfiles/themes"
 THEME_SELECTOR="$HOME/bin/ui/theme-selector.sh"
 
-source "$HOME/.config/rofi/bin/dependencies/rofi-core.sh"
+source "$HOME/bin/pickers/dependencies/core.sh"
 
 if [ ! -d "$THEMES_DIR" ]; then
     notify-send "Error" "No se encontró el directorio de temas."

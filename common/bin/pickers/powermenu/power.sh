@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # Current Theme
-theme="$HOME/.config/rofi/bin/powermenu/powermenu.rasi"
-theme_confirm="$HOME/.config/rofi/bin/powermenu/shared/confirm.rasi"
+theme="$HOME/bin/pickers/powermenu/powermenu.rasi"
+theme_confirm="$HOME/bin/pickers/powermenu/shared/confirm.rasi"
 
 # CMDs
 uptime="$(uptime -p | sed -e 's/up //g')"

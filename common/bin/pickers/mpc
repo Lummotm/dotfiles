@@ -1,17 +1,37 @@
 #!/usr/bin/env python
 # From https://github.com/Marco98/rofi-mpc
 
+import os
 import sys
 from html import escape
 from subprocess import PIPE, Popen, check_call, check_output
 
+ENGINE = os.environ.get("ROFI_ENGINE", "rofi")
 
-def get_current():
-    return check_output(["mpc", "current"])
+
+def run_menu(options_str, prompt="Select: ", mesg=None, selected_row=None):
+    cmd = [ENGINE]
+
+    if ENGINE == "tofi":
+        if mesg:
+            options_str = f"--- {mesg} ---\n" + options_str
+        if prompt:
+            cmd.extend(["--prompt-text", prompt])
+    else:
+        cmd.extend(["-i", "-dmenu"])
+        if prompt:
+            cmd.extend(["-p", prompt])
+        if mesg:
+            cmd.extend(["-mesg", mesg])
+        if selected_row is not None:
+            cmd.extend(["-selected-row", str(selected_row)])
+
+    proc = Popen(cmd, stdout=PIPE, stdin=PIPE)
+    stdout, _ = proc.communicate(input=options_str.encode())
+    return stdout.decode().rstrip()
 
 
 def get_current_title():
-    # %title% extrae directamente el nombre de la canción de los metadatos
     return check_output(["mpc", "-f", "%title%", "current"]).decode().strip()
 
 
@@ -23,60 +43,39 @@ def get_playlist_len():
 def show_sources():
     source_options = f"{OPT_PLAYLISTS}\n{OPT_ALBUMS}\n{OPT_ARTISTS}\n{OPT_ALL_SONGS}"
 
-    rofi_sources = Popen(
-        ["rofi", "-mesg", current_track, "-i", "-dmenu", "-p", "Search by: "],
-        stdout=PIPE,
-        stdin=PIPE,
-    )
-
-    source_selection = (
-        rofi_sources.communicate(input=source_options.encode())[0].decode().rstrip()
+    source_selection = run_menu(
+        source_options, prompt="Search by: ", mesg=current_track
     )
 
     if not source_selection:
         sys.exit(0)
 
     elif source_selection == OPT_ALBUMS:
-        albums = check_output(["mpc", "list", "album"])
-        rofi_albums = Popen(
-            ["rofi", "-i", "-dmenu", "-p", "Choose Album: "],
-            stdout=PIPE,
-            stdin=PIPE,
-        )
-        chosen_album = rofi_albums.communicate(input=albums)[0].decode().rstrip()
+        albums = check_output(["mpc", "list", "album"]).decode()
+        chosen_album = run_menu(albums, prompt="Choose Album: ")
 
         if chosen_album:
             check_call(["mpc", "findadd", "album", chosen_album])
             check_call(["mpc", "play"])
 
     elif source_selection == OPT_ARTISTS:
-        artists = check_output(["mpc", "list", "artist"])
-        rofi_artists = Popen(
-            ["rofi", "-i", "-dmenu", "-p", "Choose Artist: "],
-            stdout=PIPE,
-            stdin=PIPE,
-        )
-        chosen_artist = rofi_artists.communicate(input=artists)[0].decode().rstrip()
+        artists = check_output(["mpc", "list", "artist"]).decode()
+        chosen_artist = run_menu(artists, prompt="Choose Artist: ")
 
         if chosen_artist:
             check_call(["mpc", "findadd", "artist", chosen_artist])
             check_call(["mpc", "play"])
 
     elif source_selection == OPT_ALL_SONGS:
-        files = check_output(["mpc", "listall"])
-        all_menu = f"{OPT_PLAY_ALL}\n".encode() + files
+        files = check_output(["mpc", "listall"]).decode()
+        all_menu = f"{OPT_PLAY_ALL}\n" + files
 
-        rofi_all = Popen(
-            ["rofi", "-i", "-dmenu", "-p", "Search Song: "],
-            stdout=PIPE,
-            stdin=PIPE,
-        )
-        chosen_song = rofi_all.communicate(input=all_menu)[0].decode().rstrip()
+        chosen_song = run_menu(all_menu, prompt="Search Song: ")
 
         if chosen_song == OPT_PLAY_ALL:
             check_call(["mpc", "update"])
             add = Popen(["mpc", "add"], stdin=PIPE)
-            add.communicate(files)
+            add.communicate(files.encode())
             Popen(["mpc", "play"])
         elif chosen_song:
             check_call(["mpc", "add", chosen_song])
@@ -91,13 +90,8 @@ def show_sources():
             if line.strip() and line.strip() != "tmp.m3u"
         ]
 
-        playlists_input = "\n".join(clean_playlists).encode()
-
-        rofi_pls = Popen(
-            ["rofi", "-i", "-dmenu", "-p", "Playlist: "], stdout=PIPE, stdin=PIPE
-        )
-
-        chosen_pl = rofi_pls.communicate(input=playlists_input)[0].decode().rstrip()
+        playlists_input = "\n".join(clean_playlists)
+        chosen_pl = run_menu(playlists_input, prompt="Playlist: ")
 
         if chosen_pl:
             pl_name = chosen_pl.replace(".m3u", "")
@@ -109,8 +103,6 @@ current_track = get_current_title()
 status_output = check_output(["mpc"]).decode()
 
 if not current_track:
-    # Si el archivo no tiene metadatos de título, mpc devuelve el nombre del archivo
-    # Aquí podrías aplicar una limpieza de emergencia
     current_track = "Nothing is currently playing"
 else:
     if "paused" not in status_output:
@@ -118,21 +110,9 @@ else:
     else:
         current_track = "Paused: " + escape(current_track)
 
-
-if "random: on" in status_output:
-    RANDOM = "󰒝 Random: On"
-else:
-    RANDOM = "󰒝 Random: Off"
-
-if "repeat: on" in status_output:
-    REPEAT = "󰑖 Repeat: On"
-else:
-    REPEAT = "󰑖 Repeat: Off"
-
-if "consume: on" in status_output:
-    CONSUME = "󱃘 Consume: On"
-else:
-    CONSUME = "󱃘 Consume: Off"
+RANDOM = "󰒝 Random: On" if "random: on" in status_output else "󰒝 Random: Off"
+REPEAT = "󰑖 Repeat: On" if "repeat: on" in status_output else "󰑖 Repeat: Off"
+CONSUME = "󱃘 Consume: On" if "consume: on" in status_output else "󱃘 Consume: Off"
 
 TOGGLE = "󰐎 Play/Pause"
 NEXT = "󰒭 Next"
@@ -148,7 +128,7 @@ OPT_PLAY_ALL = "[Play All]"
 
 playlist_length = get_playlist_len()
 
-if playlist_length == str(0):
+if playlist_length == "0":
     selection = "SOURCES"
 else:
     menu_options = [
@@ -165,23 +145,9 @@ else:
         "Volume 75%",
         "Volume 100%",
     ]
-    commands = "\n".join(menu_options).encode()
+    commands = "\n".join(menu_options)
 
-    rofi = Popen(
-        [
-            "rofi",
-            "-selected-row",
-            "1",
-            "-mesg",
-            current_track,
-            "-i",
-            "-dmenu",
-        ],
-        stdout=PIPE,
-        stdin=PIPE,
-    )
-
-    selection = rofi.communicate(input=commands)[0].decode().rstrip()
+    selection = run_menu(commands, mesg=current_track, selected_row=1)
 
 if selection == TOGGLE:
     check_call(["mpc", "toggle"])
@@ -203,24 +169,17 @@ elif "Volume" in selection:
     check_call(["mpc", "volume", vol])
 
 elif selection == LIST:
-    titles = check_output(["mpc", "playlist"])
+    titles = check_output(["mpc", "playlist"]).decode()
     track_count = 0
     track_list = ""
     for line in titles.splitlines():
         track_count += 1
-        track_list = track_list + "[" + str(track_count) + "] " + line.decode() + "\n"
+        track_list += f"[{track_count}] {line}\n"
 
     if track_count > 1:
-        track_list.rstrip()
-        track_list = "[SOURCES]\n" + track_list
+        track_list = "[SOURCES]\n" + track_list.rstrip()
 
-        rofi = Popen(
-            ["rofi", "-selected-row", "0", "-i", "-dmenu", "-p", "Play: "],
-            stdout=PIPE,
-            stdin=PIPE,
-        )
-
-        selection = rofi.communicate(input=track_list.encode())[0].decode().rstrip()
+        selection = run_menu(track_list, prompt="Play: ", selected_row=0)
         selection = selection[selection.find("[") + 1 : selection.find("]")]
     else:
         selection = "SOURCES"
@@ -230,6 +189,5 @@ elif selection == LIST:
 
 if selection == "SOURCES":
     show_sources()
-
-else:
+elif selection and selection != "SOURCES":
     check_call(["mpc", "play", selection])

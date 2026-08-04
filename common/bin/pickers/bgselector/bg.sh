@@ -11,10 +11,10 @@
 #
 # Seleccionar cualquier opción incrementa el score del fondo elegido en +1.
 
-source "$HOME/.config/rofi/bin/dependencies/rofi-core.sh"
+source "$HOME/bin/pickers/dependencies/core.sh"
 
 WALL_BASE="$HOME/Pictures/Wallpapers/0-god"
-BGSELECTOR="$HOME/.config/rofi/bin/bgselector/bgselector"
+BGSELECTOR="$HOME/bin/pickers/bgselector/bgselector"
 
 rofi_cmd() {
     rofi_core -w "20ch" \

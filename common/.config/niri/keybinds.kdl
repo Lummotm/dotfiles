@@ -1,7 +1,7 @@
 // KEYBINDS
 binds {
     Super+P { 
-        spawn-sh "~/.config/niri/bin/show_binds ~/dotfiles/common/.config/niri/keybinds.kdl" 
+        spawn-sh "ROFI_ENGINE=tofi ~/.config/niri/bin/show_binds ~/dotfiles/common/.config/niri/keybinds.kdl" 
     }
     Super+Alt+P hotkey-overlay-title="Power on/off monitors" { 
         spawn-sh "~/bin/sys/monitor-toggle.sh"
@@ -35,22 +35,20 @@ binds {
     }
     Super+Shift+Alt+Q { quit; }
 
-    Super+R hotkey-overlay-title="Rofi: Application launcher" { 
-        spawn-sh "~/.config/rofi/bin/rofi-launcher.sh"; 
+    Super+R hotkey-overlay-title="Application launcher" { 
+        spawn-sh "ROFI_ENGINE=tofi ~/bin/pickers/launcher.sh"; 
     }
-    Super+N hotkey-overlay-title="Rofi: Notes Manager" {
-        spawn-sh "~/.config/rofi/bin/rofi-notes.sh";
+    Super+N hotkey-overlay-title="Notes Manager" {
+        spawn-sh "ROFI_ENGINE=tofi ~/bin/pickers/notes.sh";
     }
-    Super+M hotkey-overlay-title="Rofi: Music manager" { 
-        spawn-sh "~/.config/rofi/bin/rofi-mpc"; 
+    Super+M hotkey-overlay-title="Music manager" { 
+        spawn-sh "ROFI_ENGINE=tofi ~/bin/pickers/mpc"; 
     }
-    Super+Shift+C hotkey-overlay-title="Rofi: Clipboard history" { 
-        spawn-sh "~/.config/rofi/bin/rofi-clipboard.sh"; 
+    Super+Shift+C hotkey-overlay-title="Clipboard history" { 
+        spawn-sh "ROFI_ENGINE=tofi ~/bin/pickers/clipboard.sh"; 
     }
-
-    // Replaced most of the menus with a general one that lets enter the others
-    Super+F hotkey-overlay-title="Rofi: General Purpose Menu" { 
-        spawn-sh "~/.config/rofi/bin/rofi-center.sh"; 
+    Super+F hotkey-overlay-title="General Purpose Menu" { 
+        spawn-sh "ROFI_ENGINE=tofi ~/bin/pickers/center.sh"; 
     }
 
 

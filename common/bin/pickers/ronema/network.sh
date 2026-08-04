@@ -4,7 +4,7 @@
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-source "$HOME/.config/rofi/bin/dependencies/rofi-core.sh"
+source "$HOME/bin/pickers/dependencies/core.sh"
 
 rofi_cmd() {
     rofi_core -N \
@@ -112,17 +112,17 @@ function get_wifi_list_cached() {
 function lazy_load_config() {
     [[ $CONFIG_LOADED -eq 1 ]] && return
 
-    source "$DIR/ronema.conf" || source "$HOME/.config/rofi/bin/ronema-config/ronema.conf" || {
+    source "$DIR/ronema.conf" || source "$HOME/bin/pickers/ronema-config/ronema.conf" || {
         log "Error: Could not load configuration"
         exit 1
     }
 
-    source "$DIR/languages/${LANGUAGE}.lang" || source "$HOME/.config/rofi/bin/ronema-config/languages/${LANGUAGE}.lang" || {
+    source "$DIR/languages/${LANGUAGE}.lang" || source "$HOME/bin/pickers/ronema-config/languages/${LANGUAGE}.lang" || {
         log "Error: Could not load language file"
         exit 1
     }
 
-    { [[ -d "$DIR/icons" ]] && ICON_DIR="$DIR/icons"; } || { [[ -d "$HOME/.config/rofi/bin/ronema-config/icons" ]] && ICON_DIR="$HOME/.config/rofi/bin/ronema-config/icons"; } || {
+    { [[ -d "$DIR/icons" ]] && ICON_DIR="$DIR/icons"; } || { [[ -d "$HOME/bin/pickers/ronema-config/icons" ]] && ICON_DIR="$HOME/bin/pickers/ronema-config/icons"; } || {
         log "Error: Could not find icons directory"
         exit 1
     }

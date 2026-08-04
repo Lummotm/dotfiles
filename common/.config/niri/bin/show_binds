@@ -69,19 +69,28 @@ max_key_len = max(len(key) for key, _ in binds)
 lines = [f"{key.ljust(max_key_len + 4)} {desc}" for key, desc in binds]
 rofi_input = "\n".join(lines)
 
+engine = os.environ.get("ROFI_ENGINE", "rofi")
+
 try:
-    subprocess.run(
-        [
-            "rofi",
-            "-dmenu",
-            "-i",
-            "-matching",
-            "fuzzy",
-            "-theme-str",
-            "window {width: 35%;} listview {lines: 10;}",
-        ],
-        input=rofi_input,
-        text=True,
-    )
+    if engine == "tofi":
+        subprocess.run(
+            ["tofi", "--prompt-text", "Keybinds: "],
+            input=rofi_input,
+            text=True,
+        )
+    else:
+        subprocess.run(
+            [
+                "rofi",
+                "-dmenu",
+                "-i",
+                "-matching",
+                "fuzzy",
+                "-theme-str",
+                "window {width: 35%;} listview {lines: 10;}",
+            ],
+            input=rofi_input,
+            text=True,
+        )
 except FileNotFoundError:
     print(rofi_input)
