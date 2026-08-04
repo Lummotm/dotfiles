@@ -12,7 +12,8 @@ return {
 		{ "K", vim.lsp.buf.hover, desc = "Hover docs", mode = "n" },
 		-- { "gd", vim.lsp.buf.definition, desc = "Go to definition" },
 		-- { "gr", vim.lsp.buf.references, desc = "Show references" },
-		{ "<leader>cr", vim.lsp.buf.rename, desc = "Rename symbol" },
+		-- { "<leader>cr", vim.lsp.buf.rename, desc = "Rename symbol" },
+		{ "gl", vim.diagnostic.setloclist, desc = "Open diagnostics in loclist buffer" },
 		{ "[d", vim.diagnostic.goto_prev, desc = "Previous diagnostic" },
 		{ "]d", vim.diagnostic.goto_next, desc = "Next diagnostic" },
 	},
@@ -20,14 +21,32 @@ return {
 	config = function()
 		-- Get LSP capabilities from Blink.cmp for enhanced completion
 		local capabilities = require("blink.cmp").get_lsp_capabilities()
-
-		-- Diagnostic display: Show errors/warnings in multiple ways
 		vim.diagnostic.config({
 			signs = true, -- Show icons in sign column
 			underline = true, -- Underline error locations
 			virtual_text = true, -- Inline error messages
 			update_in_insert = true, -- Update while typing
 			severity_sort = true, -- Sort by severity
+
+			-- Configuración específica para los diagnósticos en ventana flotante
+			float = {
+				focusable = false,
+				style = "minimal",
+				border = "rounded",
+				source = "always",
+				header = "",
+				prefix = "",
+				wrap = true,
+				max_width = 80, -- Limita el ancho para que la ventana crezca hacia abajo
+			},
+		})
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = "vimdiagnostic",
+			callback = function(args)
+				-- Forzar wrap a nivel de ventana y de buffer
+				vim.wo[0][0].wrap = true
+				vim.bo[args.buf].textwidth = 0
+			end,
 		})
 
 		-- LSP servers: Each server provides language-specific features
