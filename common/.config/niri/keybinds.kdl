@@ -42,7 +42,7 @@ binds {
         spawn-sh "ROFI_ENGINE=tofi ~/bin/pickers/notes.sh";
     }
     Super+M hotkey-overlay-title="Music manager" { 
-        spawn-sh "ROFI_ENGINE=tofi ~/bin/pickers/mpc"; 
+        spawn-sh "ROFI_ENGINE=tofi ~/bin/pickers/music"; 
     }
     Super+Shift+C hotkey-overlay-title="Clipboard history" { 
         spawn-sh "ROFI_ENGINE=tofi ~/bin/pickers/clipboard.sh"; 
