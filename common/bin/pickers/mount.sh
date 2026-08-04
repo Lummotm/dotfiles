@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source "$HOME/.config/rofi/bin/dependencies/rofi-core.sh"
+source "$HOME/bin/pickers/dependencies/core.sh"
 
 LOG_DIR="$HOME/logs"
 LOG_FILE="$LOG_DIR/romount.log"

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source "$HOME/.config/rofi/bin/dependencies/rofi-core.sh"
+source "$HOME/bin/pickers/dependencies/core.sh"
 
 rofi_cmd() {
     rofi_core -w "25%" "$@"

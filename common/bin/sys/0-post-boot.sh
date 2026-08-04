@@ -2,12 +2,12 @@
 
 # Don't wanna dupe scripts
 SCRIPTS=(
-    "battery-notification.sh"
+  "battery-notification.sh"
 )
 STATUS=$(cat /sys/class/power_supply/AC0/online)
 
 for s in "${SCRIPTS[@]}"; do
-    pkill -f "$s"
+  pkill -f "$s"
 done
 
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
@@ -19,36 +19,36 @@ mpd-mpris &
 $HOME/bin/sys/mute-sound.sh
 $HOME/bin/sys/monitor-toggle.sh startup
 mpc stop
-$HOME/bin/utils/create-desktops
 
 # Launch stuff when on charger
 if [[ "$STATUS" == "1" ]]; then
-    # steam 2>&1 &
-    True
+  # steam 2>&1 &
+  True
 else
-    brightnessctl set 20%
+  brightnessctl set 20%
 fi
 
 {
-    $HOME/bin/sys/battery-mode-check.sh
-    $HOME/bin/sys/battery-notification.sh
+  $HOME/bin/sys/battery-mode-check.sh
+  $HOME/bin/sys/battery-notification.sh
 } &
 
 {
-    # Deberia de esperar a que se busque wifi antes de sync
-    sleep 2
-    $HOME/bin/sys/sync-git.sh ~/Documents/Obsidian/ ~/Documents/Keepass/
+  # Deberia de esperar a que se busque wifi antes de sync
+  sleep 2
+  $HOME/bin/sys/sync-git.sh ~/Documents/Obsidian/ ~/Documents/Keepass/
 } &
 
 {
-    $HOME/.config/rofi/bin/rofi-mount.sh --mount-crucial
+  $HOME/.config/rofi/bin/rofi-mount.sh --mount-crucial
 } &
+$HOME/bin/utils/create-desktops
 
 {
-    sleep 2
-    # $HOME/bin/ui/wallpaper-randomizer.sh --score
-    $HOME/.config/rofi/bin/bgselector/bgselector --cache
-    $HOME/.config/hypr/bin/gen-art.sh
+  sleep 2
+  # $HOME/bin/ui/wallpaper-randomizer.sh --score
+  $HOME/.config/rofi/bin/bgselector/bgselector --cache
+  $HOME/.config/hypr/bin/gen-art.sh
 } &
 
 # Clipboard

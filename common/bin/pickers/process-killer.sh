@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Process killer con rofi - diseñado para funcionar desde rofi-center
 
-source "$HOME/.config/rofi/bin/dependencies/rofi-core.sh" 2>/dev/null || true
+source "$HOME/bin/pickers/dependencies/core.sh" 2>/dev/null || true
 
 rofi_cmd() {
     rofi_core -w "100ch" \

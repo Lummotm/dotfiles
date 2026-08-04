@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-source "$HOME/.config/rofi/bin/dependencies/rofi-core.sh"
+source "$HOME/bin/pickers/dependencies/core.sh"
 
 cliphist list | rofi_core | cliphist decode | wl-copy
