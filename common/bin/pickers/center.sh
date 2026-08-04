@@ -90,6 +90,6 @@ case "$CHOICE" in
 "$OPT_HOTKEYS")
   "$HOME/.config/niri/bin/show_binds" "$HOME/dotfiles/common/.config/niri/keybinds.kdl"
   ;;
-"$OPT_MUSIC") "$ROFI_DIR/mpc" ;;
+"$OPT_MUSIC") "$ROFI_DIR/music" ;;
 "$OPT_NOTES") "$ROFI_DIR/notes.sh" ;;
 esac
