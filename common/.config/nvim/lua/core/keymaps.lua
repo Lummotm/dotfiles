@@ -74,3 +74,16 @@ end, { desc = "Toggle auto-format on save" })
 
 -- MARKDOWN
 keymap("n", "<leader>m", ":MarkdownPreviewToggle<CR>", { desc = "Toggle Markdown Preview" })
+
+-- Compile.lua
+local compile = require("core.compile")
+
+vim.keymap.set("n", "<leader>cc", function()
+	vim.cmd("Compile")
+end, { desc = "Compilar (Compile)" })
+
+vim.keymap.set("n", "<leader>cR", function()
+	compile.reset()
+end, { desc = "Reiniciar comando de compilación" })
+
+vim.keymap.set("n", "<leader>cr", ":Run<CR>", { desc = "Compile and Run" })
