@@ -129,6 +129,10 @@ preloaders = [
     { mime = "font/*", run = "font" },
     { mime = "application/ms-opentype", run = "font" },
 ]
+
+prepend_previewers = [
+    { mime = "audio/*",   run = "exifaudio"}
+]
 previewers = [
     { url = "*/", run = "folder" },
     { mime = "text/*", run = "code" },
@@ -220,3 +224,4 @@ sort_by           = "none"
 sort_sensitive = false
 sort_reverse      = false
 sort_translit  = false
+

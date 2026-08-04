@@ -1,32 +1,48 @@
-local config_dir = "/home/davidn/.config/yazi"
+local config_dir = os.getenv("HOME") .. "/.config/yazi"
 local plugins_dir = config_dir .. "/plugins"
-local package_toml = config_dir .. "/package.toml"
 
--- Lista de plugins: nombre y repo para instalar
+-- Plugins list
+-- repo: the one thats on "ya pkg add {repo}"
 local plugins = {
-	{ name = "full-border", repo = "yazi-rs/plugins:full-border" },
-	-- { name = "otro-plugin", repo = "usuario/repo:otro-plugin" },
+	{ repo = "yazi-rs/plugins:full-border" },
+	{ repo = "Sonico98/exifaudio" },
 }
 
-for _, plugin in ipairs(plugins) do
-	local plugin_path = plugins_dir .. "/" .. plugin.name .. ".yazi/main.lua"
+local dir_exists = os.rename(plugins_dir, plugins_dir)
 
-	-- Instala el plugin si no existe
-	if not io.open(plugin_path, "r") then
-		os.execute("mkdir -p " .. plugins_dir)
-		os.execute("rm -f " .. package_toml)
+if not dir_exists then
+	os.remove("package.toml")
+end
+
+for _, plugin in ipairs(plugins) do
+	-- Clean name
+	local raw_name = plugin.name or plugin.repo:match(":(.+)$") or plugin.repo:match("/([^/]+)$")
+	local mod_name = raw_name:gsub("%.yazi$", "") -- "exifaudio.yazi" -> "exifaudio"
+
+	local plugin_folder = plugins_dir .. "/" .. mod_name .. ".yazi"
+	local entry_file = plugin_folder .. "/main.lua"
+
+	-- Install if it doesnt exists
+	local check_file = io.open(entry_file, "r")
+	if not check_file then
 		os.execute("ya pkg add " .. plugin.repo)
+	else
+		check_file:close()
 	end
 
-	-- Carga el plugin, registrando el error si algo falla
+	-- Load pluign when added
 	local ok, err = pcall(function()
-		require(plugin.name):setup()
+		local mod = require(mod_name)
+		if type(mod) == "table" and type(mod.setup) == "function" then
+			mod:setup()
+		end
 	end)
 
+	-- Register errors on fail
 	if not ok then
-		local log_file = io.open(config_dir .. "/error_" .. plugin.name .. ".txt", "w")
+		local log_file = io.open(config_dir .. "/error_" .. mod_name .. ".txt", "w")
 		if log_file then
-			log_file:write("--- Error cargando " .. plugin.name .. " ---\n" .. tostring(err) .. "\n")
+			log_file:write("--- Error cargando " .. mod_name .. " ---\n" .. tostring(err) .. "\n")
 			log_file:close()
 		end
 	end
