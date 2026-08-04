@@ -18,7 +18,7 @@ rofi_cmd() {
     -kb-custom-1 "Shift+Return"
 }
 
-ROFI_DIR="$HOME/bin/pickers"
+PICKERS_DIR="$HOME/bin/pickers"
 
 OPT_AUDIO="  Audio"
 OPT_NET=" 󰛳 Network"
@@ -37,6 +37,7 @@ OPT_HOTKEYS=" 󰧺 Binds/Hotkeys"
 OPT_CHARGING_MODE=""
 OPT_MUSIC="  Music"
 OPT_NOTES=" 󰂺 Notes"
+OPT_DOCUMENTS=" 󱔗 Documents"
 
 # Detección de batería
 for bat in /sys/class/power_supply/BAT*; do
@@ -49,7 +50,7 @@ for bat in /sys/class/power_supply/BAT*; do
 done
 
 # 3. Lanzar el menú usando rofi_cmd (ahora respeta ROFI_ENGINE)
-CHOICE=$(echo -e "$OPT_AUDIO\n$OPT_NET\n$OPT_BLUETOOTH\n$OPT_MONITOR\n$OPT_BRIGHTNESS\n$OPT_WALL\n$OPT_THEME\n$OPT_KILL\n$OPT_MOUNT\n$OPT_POWER\n$OPT_COLORS\n$OPT_ICONS\n$OPT_CALC\n$OPT_HOTKEYS\n$OPT_CHARGING_MODE\n$OPT_MUSIC\n$OPT_NOTES" | rofi_cmd)
+CHOICE=$(echo -e "$OPT_AUDIO\n$OPT_NET\n$OPT_BLUETOOTH\n$OPT_MONITOR\n$OPT_BRIGHTNESS\n$OPT_WALL\n$OPT_THEME\n$OPT_KILL\n$OPT_MOUNT\n$OPT_POWER\n$OPT_COLORS\n$OPT_ICONS\n$OPT_CALC\n$OPT_HOTKEYS\n$OPT_CHARGING_MODE\n$OPT_MUSIC\n$OPT_NOTES\n$OPT_DOCUMENTS" | rofi_cmd)
 EXIT_CODE=$?
 
 [[ -z "$CHOICE" ]] && exit 0
@@ -63,33 +64,34 @@ else
 fi
 
 case "$CHOICE" in
-"$OPT_AUDIO") "$ROFI_DIR/audio.sh" ;;
-"$OPT_NET") "$ROFI_DIR/ronema/ronema/network.sh" ;;
-"$OPT_BLUETOOTH") "$ROFI_DIR/bluetooth.sh" ;;
-"$OPT_MONITOR") "$ROFI_DIR/monitors.sh" ;;
-"$OPT_BRIGHTNESS") "$ROFI_DIR/brightness.sh" ;;
+"$OPT_AUDIO") "$PICKERS_DIR/audio.sh" ;;
+"$OPT_NET") "$PICKERS_DIR/ronema/ronema/network.sh" ;;
+"$OPT_BLUETOOTH") "$PICKERS_DIR/bluetooth.sh" ;;
+"$OPT_MONITOR") "$PICKERS_DIR/monitors.sh" ;;
+"$OPT_BRIGHTNESS") "$PICKERS_DIR/brightness.sh" ;;
 "$OPT_WALL")
   if [[ "$MODE" == "ALTERNATIVE_MODE" ]]; then
     bash "$HOME/bin/ui/wallpaper-randomizer.sh" "--score"
   else
-    "$ROFI_DIR/bgselector/bg.sh"
+    "$PICKERS_DIR/bgselector/bg.sh"
   fi
   ;;
-"$OPT_THEME") "$ROFI_DIR/theme-selector.sh" ;;
-"$OPT_KILL") "$ROFI_DIR/process-killer.sh" ;;
-"$OPT_POWER") "$ROFI_DIR/powermenu/powermenu/power.sh" ;;
-"$OPT_CALC") "$ROFI_DIR/calc.sh" ;;
-"$OPT_ICONS") "$ROFI_DIR/nerd-icons.sh" ;;
+"$OPT_THEME") "$PICKERS_DIR/theme-selector.sh" ;;
+"$OPT_KILL") "$PICKERS_DIR/process-killer.sh" ;;
+"$OPT_POWER") "$PICKERS_DIR/powermenu/powermenu/power.sh" ;;
+"$OPT_CALC") "$PICKERS_DIR/calc.sh" ;;
+"$OPT_ICONS") "$PICKERS_DIR/nerd-icons.sh" ;;
 "$OPT_COLORS")
   yad --color --title="Selector" | wl-copy
   ;;
 "$OPT_CHARGING_MODE")
   "$HOME/bin/sys/battery-mode-check.sh"
   ;;
-"$OPT_MOUNT") "$ROFI_DIR/mount.sh" ;;
+"$OPT_MOUNT") "$PICKERS_DIR/mount.sh" ;;
 "$OPT_HOTKEYS")
   "$HOME/.config/niri/bin/show_binds" "$HOME/dotfiles/common/.config/niri/keybinds.kdl"
   ;;
-"$OPT_MUSIC") "$ROFI_DIR/music" ;;
-"$OPT_NOTES") "$ROFI_DIR/notes.sh" ;;
+"$OPT_MUSIC") "$PICKERS_DIR/music" ;;
+"$OPT_NOTES") "$PICKERS_DIR/notes.sh" ;;
+"$OPT_DOCUMENTS") "$PICKERS_DIR/sioyek-document-opener.sh" ;;
 esac
