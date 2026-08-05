@@ -12,10 +12,17 @@ if [[ "$ENGINE" == "tofi" ]]; then
 
   # 1. Buscamos todos los .desktop (siguiendo symlinks)
   # 2. Leemos la primera línea Name= de cada archivo
-  # 3. Formateamos la lista con un delimitador limpio " :: " para evitar alertas en awk
+  # 3. Guardamos registro de lo que ya procesamos para dar prioridad a ~/.local
   DESKTOP_LIST=$(find -L "${APP_DIRS[@]}" -type f -name "*.desktop" 2>/dev/null | awk -F'/' '
     {
         file = $0
+        basename = $NF # Obtiene el nombre del archivo (ej. firefox.desktop)
+
+        # Según el estándar XDG, si hay dos archivos con el mismo nombre, 
+        # el de ~/.local sobreescribe al del sistema.
+        if (seen_file[basename]) next;
+        seen_file[basename] = 1
+
         name = ""
         while ((getline line < file) > 0) {
             if (line ~ /^Name=/ && name == "") {
@@ -24,10 +31,16 @@ if [[ "$ENGINE" == "tofi" ]]; then
             }
         }
         close(file)
+        
         if (name != "") {
-            print name " :: " file
+            # También evitamos duplicados visuales en la lista de Tofi
+            # (por si dos archivos distintos tienen exactamente el mismo "Name=")
+            if (!seen_name[name]) {
+                seen_name[name] = 1
+                print name " :: " file
+            }
         }
-    }' | sort -u)
+    }' | sort)
 
   # Lanzar Tofi en modo dmenu
   SELECTION=$(echo "$DESKTOP_LIST" | tofi --prompt-text "Apps: ")

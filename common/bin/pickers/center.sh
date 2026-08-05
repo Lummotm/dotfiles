@@ -78,7 +78,7 @@ case "$CHOICE" in
   ;;
 "$OPT_THEME") "$PICKERS_DIR/theme-selector.sh" ;;
 "$OPT_KILL") "$PICKERS_DIR/process-killer.sh" ;;
-"$OPT_POWER") "$PICKERS_DIR/powermenu/powermenu/power.sh" ;;
+"$OPT_POWER") "$PICKERS_DIR/powermenu/power.sh" ;;
 "$OPT_CALC") "$PICKERS_DIR/calc.sh" ;;
 "$OPT_ICONS") "$PICKERS_DIR/nerd-icons.sh" ;;
 "$OPT_COLORS")

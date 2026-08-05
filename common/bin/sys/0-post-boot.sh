@@ -40,14 +40,14 @@ fi
 } &
 
 {
-  $HOME/.config/rofi/bin/rofi-mount.sh --mount-crucial
+  $HOME/bin/pickers/mount.sh --mount-crucial
 } &
 $HOME/bin/utils/create-desktops
 
 {
   sleep 2
   # $HOME/bin/ui/wallpaper-randomizer.sh --score
-  $HOME/.config/rofi/bin/bgselector/bgselector --cache
+  $HOME/bin/pickers/bgselector/bgselector --cache
   $HOME/.config/hypr/bin/gen-art.sh
 } &
 
