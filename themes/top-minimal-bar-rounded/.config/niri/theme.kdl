@@ -2,7 +2,6 @@ layout {
     gaps 10
     center-focused-column "never"
     background-color "transparent"
-    always-center-single-column
 
     // Focus ring will never have an inactive window
     focus-ring {
