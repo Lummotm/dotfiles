@@ -133,15 +133,20 @@ return {
 				root_markers = { { "qmldir", "shell.qml" }, ".git" },
 			},
 
-			-- Rust: Rust development with clippy
+			-- Rust type shit
 			rust_analyzer = {
 				capabilities = capabilities,
 				settings = {
 					["rust-analyzer"] = {
-						checkOnSave = { command = "clippy" },
+						checkOnSave = { command = "check" }, -- Using check instead of clippy
 						procMacro = { enable = true },
-						cargo = { allFeatures = false },
-						-- Añade esto:
+						cargo = {
+							allFeatures = false,
+							buildScripts = { enable = false },
+						},
+						workspace = {
+							symbol = { search = { scope = "workspace_and_dependencies" } },
+						},
 						completion = {
 							privateEditable = { enable = false },
 							fullFunctionSignatures = { enable = false },
