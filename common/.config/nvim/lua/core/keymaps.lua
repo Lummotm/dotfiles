@@ -37,6 +37,28 @@ keymap("n", "<leader>bp", ":bprevious<CR>", { desc = "Previous buffer" })
 keymap("n", "<leader>ba", ':%bdelete|edit #|normal `"<CR>', { desc = "Delete all except current" })
 keymap("n", "<leader>bD", ":bdelete!<CR>", { desc = "Force delete buffer" })
 keymap("n", "<leader>bw", ":w!<CR>", { desc = "Save buffer" })
+vim.keymap.set("n", "<leader>bb", function()
+	local buffers = vim.fn.getbufinfo({ buflisted = 1 })
+	local qf_items = {}
+	for _, buf in ipairs(buffers) do
+		if buf.name ~= "" then
+			table.insert(qf_items, {
+				filename = buf.name,
+				lnum = 1,
+				col = 1,
+				text = "Buffer: " .. buf.name,
+			})
+		end
+	end
+
+	vim.fn.setqflist({}, " ", {
+		title = "Buffers",
+		items = qf_items,
+		context = { is_buffer_qf = true },
+	})
+
+	vim.cmd("copen")
+end, { desc = "Open open buffers in quickfix list" })
 
 -- WINDOWS
 keymap("n", "<leader>wh", "<C-w>h", { desc = "Move to left window" })
@@ -87,3 +109,22 @@ vim.keymap.set("n", "<leader>cR", function()
 end, { desc = "Reiniciar comando de compilación" })
 
 vim.keymap.set("n", "<leader>cr", ":Run<CR>", { desc = "Compile and Run" })
+
+-- Diagonostics
+vim.keymap.set("n", "gl", function()
+	local current_win = vim.api.nvim_get_current_win()
+	local wininfo = vim.fn.getwininfo(current_win)[1]
+
+	if wininfo and wininfo.loclist == 1 then
+		vim.cmd("lclose")
+	else
+		vim.diagnostic.setloclist()
+
+		for _, winid in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+			if vim.fn.getwininfo(winid)[1].loclist == 1 then
+				vim.api.nvim_set_current_win(winid)
+				break
+			end
+		end
+	end
+end, { desc = "Toggle, refresh and focus diagnostics in loclist" })

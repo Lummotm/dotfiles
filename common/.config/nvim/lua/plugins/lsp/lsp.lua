@@ -13,7 +13,6 @@ return {
 		-- { "gd", vim.lsp.buf.definition, desc = "Go to definition" },
 		-- { "gr", vim.lsp.buf.references, desc = "Show references" },
 		-- { "<leader>cr", vim.lsp.buf.rename, desc = "Rename symbol" },
-		{ "gl", vim.diagnostic.setloclist, desc = "Open diagnostics in loclist buffer" },
 		{ "[d", vim.diagnostic.goto_prev, desc = "Previous diagnostic" },
 		{ "]d", vim.diagnostic.goto_next, desc = "Next diagnostic" },
 	},
@@ -138,7 +137,7 @@ return {
 				capabilities = capabilities,
 				settings = {
 					["rust-analyzer"] = {
-						checkOnSave = { command = "check" }, -- Using check instead of clippy
+						checkOnSave = { command = "clippy" }, -- Using check instead of clippy
 						procMacro = { enable = true },
 						cargo = {
 							allFeatures = false,
