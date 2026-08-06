@@ -28,3 +28,12 @@ window-rule {
     open-floating true
     open-focused false
 }
+
+window-rule {
+    match title="bgselector-gui"
+
+    // ¡Aquí está la magia! Esto elimina el marco de Niri
+    border {
+        width 0
+    }
+}
