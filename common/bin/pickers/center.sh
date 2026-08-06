@@ -11,8 +11,9 @@ export ROFI_ENGINE="${ROFI_ENGINE:-rofi}"
 # 2. rofi_cmd unificado que usa rofi_core (compatible tanto con rofi como con tofi)
 rofi_cmd() {
   rofi_core -w "$CHARS" \
-    -N -c 'textbox{ padding: 5px;}' \
+    -c 'textbox{ padding: 5px;}' \
     -c "listview {lines: $LINES; columns:$COLUMNS;}" \
+    -p "Select Menu: " \
     -sort \
     -kb-accept-alt "" \
     -kb-custom-1 "Shift+Return"
@@ -65,16 +66,12 @@ fi
 
 case "$CHOICE" in
 "$OPT_AUDIO") "$PICKERS_DIR/audio.sh" ;;
-"$OPT_NET") "$PICKERS_DIR/ronema/ronema/network.sh" ;;
+"$OPT_NET") "$PICKERS_DIR/ronema/network.sh" ;;
 "$OPT_BLUETOOTH") "$PICKERS_DIR/bluetooth.sh" ;;
 "$OPT_MONITOR") "$PICKERS_DIR/monitors.sh" ;;
 "$OPT_BRIGHTNESS") "$PICKERS_DIR/brightness.sh" ;;
 "$OPT_WALL")
-  if [[ "$MODE" == "ALTERNATIVE_MODE" ]]; then
-    bash "$HOME/bin/ui/wallpaper-randomizer.sh" "--score"
-  else
-    "$PICKERS_DIR/bgselector/bg.sh"
-  fi
+  "$PICKERS_DIR/bgselector/bgselector"
   ;;
 "$OPT_THEME") "$PICKERS_DIR/theme-selector.sh" ;;
 "$OPT_KILL") "$PICKERS_DIR/process-killer.sh" ;;
