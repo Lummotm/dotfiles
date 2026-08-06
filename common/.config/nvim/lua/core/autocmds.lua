@@ -17,3 +17,19 @@ vim.api.nvim_create_autocmd({ "RecordingEnter", "RecordingLeave" }, {
 		})
 	end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "qf",
+	callback = function(args)
+		vim.keymap.set("n", "<CR>", function()
+			local ctx = vim.fn.getqflist({ context = 0 }).context
+			local line = vim.fn.line(".")
+
+			vim.cmd(line .. "cc")
+
+			if type(ctx) == "table" and ctx.is_buffer_qf then
+				vim.cmd("cclose")
+			end
+		end, { buffer = args.buf, silent = true })
+	end,
+})
