@@ -4,6 +4,7 @@ set -euo pipefail
 WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
 CURRENT_WALL="$WALLPAPER_DIR/current-wallpaper"
 LIGHT_FLAG="$HOME/.tmp/light_flag"
+TMP_FILE_PATH="$HOME/.cache/tmp.png"
 
 SELECTED="$1"
 
@@ -103,8 +104,8 @@ case "$1" in
   cp "$1" "$CURRENT_WALL"
 
   # There are certain programs that require the usage of a png even if the file is a gif
-  rm "$HOME/Pictures/Wallpapers/tmp.png" || true
-  ffmpeg -i "$CURRENT_WALL" -frames:v 1 "$HOME/Pictures/Wallpapers/tmp.png" || true
+  rm "$TMP_FILE_PATH" || true
+  ffmpeg -i "$CURRENT_WALL" -frames:v 1 "$TMP_FILE_PATH" || true
 
   apply_wallpaper &>/dev/null &
 

@@ -30,7 +30,7 @@ window-rule {
 }
 
 window-rule {
-  match title="bgselector-gui"
+  match title="bgselector"
 
   default-column-width { proportion 1.0; }
   default-window-height { proportion 1.0; }
