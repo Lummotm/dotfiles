@@ -32,7 +32,8 @@ window-rule {
 window-rule {
     match title="bgselector-gui"
 
-    // ¡Aquí está la magia! Esto elimina el marco de Niri
+    default-column-width { proportion 1.0; }
+    default-window-height { proportion 1.0; }
     border {
         width 0
     }
