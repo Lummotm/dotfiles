@@ -2,15 +2,15 @@
 set -euo pipefail
 
 HANDLER="$HOME/bin/ui/wallpaper-handler.sh"
-GUI_BIN="$HOME/bin/pickers/bgselector/bgselector-gui"
-WALL_DIR="${1:-$HOME/Pictures/Wallpapers/0-god}"
+GUI_BIN="$HOME/.local/libexec/bgselector-gui"
+WALL_DIR="${1:-$HOME/Pictures/Wallpapers/00-tmp}"
 
 if [[ "$WALL_DIR" == "--reload" || "$WALL_DIR" == "--cache" ]]; then
   "$GUI_BIN" "$WALL_DIR"
   exit 0
 fi
 
-SELECTED_WALL=$("$GUI_BIN" -p --dir "$WALL_DIR" 2>/dev/null || true)
+SELECTED_WALL=$("$GUI_BIN" --dir "$WALL_DIR" 2>/dev/null || true)
 
 if [[ -n "${SELECTED_WALL:-}" && -f "$SELECTED_WALL" ]]; then
   "$HANDLER" "$SELECTED_WALL"
