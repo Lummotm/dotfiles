@@ -4,37 +4,37 @@
 // workspace "games"
 
 window-rule {
-    match app-id=r#"(?i)keepassxc"#
-    match title=r#"(?i)whatsapp"#
-    match title=r#"(?i)instagram"#
-    match title=r#"(?i)Private"#
-    block-out-from "screencast"
+  match app-id=r#"(?i)keepassxc"#
+  match title=r#"(?i)whatsapp"#
+  match title=r#"(?i)instagram"#
+  match title=r#"(?i)Private"#
+  block-out-from "screencast"
 }
 
 //Steam Nofications
 window-rule {
-    match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
-    default-floating-position x=10 y=10 relative-to="bottom-right"
-    open-focused false
+  match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+  default-floating-position x=10 y=10 relative-to="bottom-right"
+  open-focused false
 }
 window-rule {
-    match app-id="steam"
-    open-on-workspace "games"
-    open-fullscreen false
-}
-
-window-rule {
-    match app-id="yad"
-    open-floating true
-    open-focused false
+  match app-id="steam"
+  open-on-workspace "games"
+  open-fullscreen false
 }
 
 window-rule {
-    match title="bgselector-gui"
+  match app-id="yad"
+  open-floating true
+  open-focused false
+}
 
-    default-column-width { proportion 1.0; }
-    default-window-height { proportion 1.0; }
-    border {
-        width 0
-    }
+window-rule {
+  match title="bgselector-gui"
+
+  default-column-width { proportion 1.0; }
+  default-window-height { proportion 1.0; }
+  border {
+    width 0
+  }
 }
