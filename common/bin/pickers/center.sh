@@ -71,7 +71,7 @@ case "$CHOICE" in
 "$OPT_MONITOR") "$PICKERS_DIR/monitors.sh" ;;
 "$OPT_BRIGHTNESS") "$PICKERS_DIR/brightness.sh" ;;
 "$OPT_WALL")
-  "$PICKERS_DIR/bgselector/bgselector"
+  "$PICKERS_DIR/bgselector/bgselector-wrap"
   ;;
 "$OPT_THEME") "$PICKERS_DIR/theme-selector.sh" ;;
 "$OPT_KILL") "$PICKERS_DIR/process-killer.sh" ;;
