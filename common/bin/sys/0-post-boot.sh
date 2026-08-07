@@ -41,8 +41,8 @@ fi
 
 {
   $HOME/bin/pickers/mount.sh --mount-crucial
+  $HOME/bin/utils/create-desktops
 } &
-$HOME/bin/utils/create-desktops
 
 {
   sleep 2
