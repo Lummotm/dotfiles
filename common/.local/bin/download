@@ -1,66 +1,78 @@
 #!/usr/bin/env bash
-
 if [ -z "$1" ]; then
-    echo "Error: You must provide a link."
-    echo "Usage: $0 <LINK>"
-    exit 1
+  echo "Error: Debes proporcionar al menos un link."
+  echo "Uso: $0 <LINK1> [LINK2] [LINK3] ..."
+  exit 1
 fi
 
-LINK=$1
+LINKS=("$@")
 COOKIES_INSTA="$HOME/Documents/cookies-instagram.txt"
-PARAMS_COOKIES=""
 
-# Detect if it's Instagram to use cookies
-if [[ "$LINK" == *"instagram.com"* ]]; then
-    if [ -f "$COOKIES_INSTA" ]; then
-        echo "Instagram link detected. Loading cookies..."
-        PARAMS_COOKIES="--cookies $COOKIES_INSTA"
-    else
-        echo "Warning: Instagram link detected, but the cookie file was not found at $COOKIES_INSTA"
-    fi
-fi
-
-HASH=$(echo -n "$LINK" | md5sum | cut -c1-12)
+# Hash combinado de todos los links (orden fijo, para que la misma
+# combinación de links siempre caiga en la misma carpeta)
+HASH=$(printf '%s\n' "${LINKS[@]}" | sort | md5sum | cut -c1-12)
 DOWNLOAD_DIR="$HOME/Downloads/$HASH"
+mkdir -p "$DOWNLOAD_DIR"
+cd "$DOWNLOAD_DIR" || exit 1
 
-# Selection menu
 echo "============================================="
-echo " Choose an option for the link:"
+echo " Se procesarán ${#LINKS[@]} link(s)"
+echo " Carpeta destino: $DOWNLOAD_DIR"
 echo "============================================="
-echo "1) Download AUDIO (MP3 with thumbnail)"
-echo "2) Download VIDEO (Max quality)"
-echo "3) Download IMAGE (gallery-dl)"
-echo "4) Exit"
+echo "1) Descargar AUDIO (MP3 con miniatura)"
+echo "2) Descargar VIDEO (Máxima calidad)"
+echo "3) Descargar IMAGEN (gallery-dl)"
+echo "4) Salir"
 echo "============================================="
-read -p "Option [1-4]: " OPCION
+read -p "Opción [1-4]: " OPCION
 echo ""
 
-mkdir -p "$DOWNLOAD_DIR"
-cd "$DOWNLOAD_DIR"
+if [[ "$OPCION" == "4" ]]; then
+  echo "Operación cancelada."
+  cd "$HOME" || exit 0
+  rmdir "$DOWNLOAD_DIR" 2>/dev/null
+  exit 0
+fi
 
-# Process choice
-case $OPCION in
-1)
-    echo "Downloading audio..."
+for LINK in "${LINKS[@]}"; do
+  PARAMS_COOKIES=""
+  if [[ "$LINK" == *"instagram.com"* ]]; then
+    if [ -f "$COOKIES_INSTA" ]; then
+      echo "Instagram link detectado ($LINK). Cargando cookies..."
+      PARAMS_COOKIES="--cookies $COOKIES_INSTA"
+    else
+      echo "Advertencia: link de Instagram detectado, pero no se encontró el archivo de cookies en $COOKIES_INSTA"
+    fi
+  fi
+
+  echo ""
+  echo "--- Procesando: $LINK ---"
+
+  case $OPCION in
+  1)
+    echo "Descargando audio..."
     yt-dlp $PARAMS_COOKIES -x --audio-quality 0 --audio-format mp3 --embed-thumbnail -o "%(title)s.%(ext)s" "$LINK"
     ;;
-2)
-    echo "Downloading video..."
+  2)
+    echo "Descargando video..."
     yt-dlp $PARAMS_COOKIES -f "bestvideo+bestaudio/best" --merge-output-format mp4 --embed-metadata -o "%(title)s.%(ext)s" "$LINK"
     ;;
-3)
-    echo "Downloading image..."
+  3)
+    echo "Descargando imagen..."
     gallery-dl $PARAMS_COOKIES "$LINK"
     ;;
-4 | *)
-    echo "Operation cancelled."
-    rmdir "$DOWNLOAD_DIR"
-    exit 0
+  *)
+    echo "Opción inválida. Cancelando."
+    exit 1
     ;;
-esac
+  esac
+done
 
 echo ""
-echo "Downloads in $DOWNLOAD_DIR"
+echo "Descargas en $DOWNLOAD_DIR"
 echo "---"
 ls -1 "$DOWNLOAD_DIR" 2>/dev/null
-echo "Process completed."
+echo "Proceso completado."
+echo ""
+
+exec "$SHELL"
