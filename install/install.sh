@@ -477,6 +477,18 @@ setup_hotspot_network() {
   fi
 }
 
+setup_bgselector() {
+  # Unique temp dir
+  cd "$(mktemp -d)" || exit
+
+  # Install
+  git clone https://github.com/Lummotm/bgselector.git
+  cd bgselector
+  make install
+
+  cd >/dev/null
+}
+
 show_help() {
   echo "Uso: $0 [opción]"
   echo "Opciones modulares:"
@@ -484,6 +496,7 @@ show_help() {
   echo "  --login         Configura solo el gestor de sesión (Ly/Greetd)"
   echo "  --dotfiles      Solo clona y aplica dotfiles"
   echo "  --gpu           Configura solo el toggle de GPU"
+  echo "  --bgselector    Instala bgselector"
   echo "  --printers      Instala y configura CUPS y utilidades"
   echo "  --sudoers       Aplica reglas personalizadas de sudoers"
   echo "  --hotspot       Configura la red hotspot (solo laptop)"
@@ -511,6 +524,7 @@ full_install() {
   setup_audio
   setup_mpd_service
   setup_keyd_service
+  setup_bgselector
   setup_printers
   setup_fish_shell
   service_install bluetooth
@@ -557,6 +571,9 @@ case "$1" in
 --sudoers)
   ask_machine_type
   setup_sudoers
+  ;;
+--bgselector)
+  setup_bgselector
   ;;
 --hotspot)
   setup_hotspot_network
