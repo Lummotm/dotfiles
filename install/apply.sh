@@ -87,7 +87,7 @@ if ! command -v stow &>/dev/null || ! command -v 7z &>/dev/null || ! command -v 
   sudo pacman -S --noconfirm --needed stow p7zip rsync || exit 1
 fi
 
-rm -rf $HOME/.config/{waybar,rofi,niri,dunst} $HOME/.local/bin/
+rm -rf $HOME/.config/{waybar,rofi,niri,dunst}
 find "$HOME/.local/share" -xtype l -delete 2>/dev/null
 
 mkdir -vp \
