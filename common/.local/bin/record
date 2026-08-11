@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-DATE=$(date '+%Y%m%d_%H%M')
+DATE=$(date '+%Y%m%d_%H%M%S')
 RECORDING_DIR="$HOME/Videos/Recordings/"
 
 if ! command -v wf-recorder &>/dev/null; then
-    echo "wf-recorder no está instalado. Instalando vía pacman..."
-    sudo pacman -S --noconfirm wf-recorder
+  echo "wf-recorder no está instalado. Instalando vía pacman..."
+  sudo pacman -S --noconfirm wf-recorder
 fi
 
 wf-recorder -f "$RECORDING_DIR$DATE.mp4"
