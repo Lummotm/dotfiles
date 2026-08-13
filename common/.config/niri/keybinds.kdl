@@ -1,7 +1,7 @@
 // KEYBINDS
 binds {
     Super+P { 
-        spawn-sh "ROFI_ENGINE=tofi ~/.config/niri/bin/show_binds ~/dotfiles/common/.config/niri/keybinds.kdl" 
+        spawn-sh "ROFI_ENGINE=rofi ~/.config/niri/bin/show_binds ~/dotfiles/common/.config/niri/keybinds.kdl" 
     }
     Super+Alt+P hotkey-overlay-title="Power on/off monitors" { 
         spawn-sh "~/bin/sys/monitor-toggle.sh"
@@ -36,19 +36,19 @@ binds {
     Super+Shift+Alt+Q { quit; }
 
     Super+R hotkey-overlay-title="Application launcher" { 
-        spawn-sh "ROFI_ENGINE=tofi ~/bin/pickers/launcher.sh"; 
+        spawn-sh "ROFI_ENGINE=rofi ~/bin/pickers/launcher.sh"; 
     }
     Super+N hotkey-overlay-title="Notes Manager" {
-        spawn-sh "ROFI_ENGINE=tofi ~/bin/pickers/notes.sh";
+        spawn-sh "ROFI_ENGINE=rofi ~/bin/pickers/notes.sh";
     }
     Super+M hotkey-overlay-title="Music manager" { 
-        spawn-sh "ROFI_ENGINE=tofi ~/bin/pickers/music"; 
+        spawn-sh "ROFI_ENGINE=rofi ~/bin/pickers/music"; 
     }
     Super+Shift+C hotkey-overlay-title="Clipboard history" { 
-        spawn-sh "ROFI_ENGINE=tofi ~/bin/pickers/clipboard.sh"; 
+        spawn-sh "ROFI_ENGINE=rofi ~/bin/pickers/clipboard.sh"; 
     }
     Super+F hotkey-overlay-title="General Purpose Menu" { 
-        spawn-sh "ROFI_ENGINE=tofi ~/bin/pickers/center.sh"; 
+        spawn-sh "ROFI_ENGINE=rofi ~/bin/pickers/center.sh"; 
     }
 
 
