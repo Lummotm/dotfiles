@@ -41,7 +41,7 @@
         "exec": "~/.config/waybar/bin/brightness.sh",
         "interval": 5,
         "signal": 2,
-        "on-click": "sys-menu brightness --rofi",
+        "on-click": "$HOME/bin/pickers/brightness.sh",
         "on-scroll-up": "~/.config/waybar/bin/brightness.sh up",
         "on-scroll-down": "~/.config/waybar/bin/brightness.sh down",
         "tooltip": true
@@ -49,12 +49,12 @@
     "custom/wallpaper": {
         "format": "",
         "tooltip": false,
-        "on-click": "sys-menu wallpaper --rofi"
+        "on-click": "$HOME/bin/pickers/bgselector-wrapper"
     },
     "custom/launcher": {
         "format": "󰣇",
         "tooltip": false,
-        "on-click": "sys-menu launcher --rofi"
+        "on-click": "$HOME/bin/pickers/launcher.sh"
     },
     "niri/workspaces": {
         "on-click": "activate",
@@ -161,7 +161,7 @@
         "tooltip-format-ethernet": "{icon} Connected to <b>Ethernet</b>\nIP: {ipaddr}",
         "tooltip-format-linked": "{icon} <span color='#f9e2af' weight='bold'>VPN Active</span>\nInterface: {ifname}",
         "tooltip-format-disconnected": "<span color='#f38ba8'>Disconnected</span>",
-        "on-click": "sys-menu network --rofi",
+        "on-click": "$HOME/bin/pickers/ronema/network.sh",
         "tooltip": true,
         "max-length": 20
     },
@@ -177,7 +177,7 @@
         "tooltip-format-connected": "<span color='#89b4fa' weight='bold'>󰂱 Connected</span>\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}",
         "tooltip-format-enumerate-connected-battery": "{device_alias}  <span color='#6c7086'>|</span>  <span color='#a6e3a1'>󰁹 {device_battery_percentage}%</span>",
-        "on-click": "sys-menu bluetooth --rofi"
+        "on-click": "$HOME/bin/pickers/bluetooth.sh"
     },
     "pulseaudio#microphone": {
         "format": "{format_source}",
@@ -201,7 +201,7 @@
             "<span size='14pt'>󰕾</span>"
         ],
         "format-muted": "<span size='14pt'>󰝟</span>",
-        "on-click-right": "sys-menu audio --rofi",
+        "on-click-right": "$HOME/bin/pickers/audio.sh",
         "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
         "reverse-scrolling": true,
         "tooltip": true,
@@ -259,7 +259,7 @@
     },
     "custom/powermenu": {
         "format": "<span size='13pt'>󰐥</span>",
-        "on-click": "sys-menu power --rofi",
+        "on-click": "$HOME/bin/pickers/powermenu/power.sh",
         "tooltip": false
     },
     "custom/updates": {
