@@ -1,1 +1,1 @@
-/home/davidn/dotfiles/themes/borderless-huge-gaps-windows-vertbar/.config/waybar/bin/brightness.sh
+/home/davidn/dotfiles/themes/vertbar-fullscreen/.config/waybar/bin/brightness.sh
