@@ -37,4 +37,7 @@ window-rule {
   border {
     width 0
   }
+  shadow { 
+    off
+  }
 }
