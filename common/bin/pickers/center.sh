@@ -13,7 +13,7 @@ rofi_cmd() {
   rofi_core -w "$CHARS" \
     -c 'textbox{ padding: 5px;}' \
     -c "listview {lines: $LINES; columns:$COLUMNS;}" \
-    -p "Select Menu: " \
+    -p "Select Menu:" \
     -sort \
     -kb-accept-alt "" \
     -kb-custom-1 "Shift+Return"
