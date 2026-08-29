@@ -131,7 +131,7 @@ preloaders = [
 ]
 
 prepend_previewers = [
-    { mime = "audio/*",   run = "exifaudio"}
+    { mime = "audio/*",   run = "exifaudio"},
 ]
 previewers = [
     { url = "*/", run = "folder" },

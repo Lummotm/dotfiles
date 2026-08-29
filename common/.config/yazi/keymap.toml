@@ -43,9 +43,9 @@ keymap = [
     { on = "n", run = "find_arrow", desc = "Go to next result" },
     { on = "N", run = "find_arrow --previous", desc = "Go to previous result" },
     { on = "s",         run = "search --via=fd",             desc = "Search files by name via fd" },
-	{ on = "S",         run = "search --via=rg",             desc = "Search files by content via ripgrep" },
+    { on = "S",         run = "search --via=rg",             desc = "Search files by content via ripgrep" },
     { on = "z", run = "shell --block '~/.config/yazi/bin/zoxide_jump.sh'", desc = "Jump via Zoxide (Centered)" },
-    { on = "f", run = "shell --block \"$HOME/.config/yazi/bin/fzf_jump.sh\"", desc = "Jump via fzf (Centered)" },
+    { on = "f", run = "shell --block '$HOME/.config/yazi/bin/fzf_jump.sh'", desc = "Jump via fzf (Centered)" },
     { on = "<C-s>", run = "escape --search", desc = "Cancel search" },
 
     # Selection
@@ -79,7 +79,7 @@ keymap = [
     { on = [ "c", "d" ], run = "copy dirname", desc = "Copy directory name" },
     { on = [ "c", "a" ], run = "copy filename", desc = "Copy filename" },
     { on = [ "c", "n" ], run = "copy name_without_ext", desc = "Copy filename (no extension)" },
-    { on = [ "c", "z" ], run = ["shell '~/.config/yazi/bin/zip.sh \"$0\"' "], desc = "Create zip of current dir and copy to clipboard" },
+    { on = [ "c", "z" ], run = ["shell '~/.config/yazi/bin/zip.sh %s' "], desc = "Create zip of current dir and copy to clipboard" },
     # File Display & Sorting
     { on = [ "m", "s" ], run = "linemode size", desc = "Show size" },
     { on = [ "m", "p" ], run = "linemode permissions", desc = "Show permissions" },
@@ -115,31 +115,9 @@ keymap = [
 ]
 
 
-# Mounting made easy
-[[mgr.prepend_keymap]]
-on  = "M"
-run = "plugin mount"
-
-# Smart search/filter
-[[mgr.prepend_keymap]]
-on   = "F"
-run  = "plugin smart-filter"
-desc = "Smart filter"
-
-
-# Copies better than my script
-[[mgr.prepend_keymap]]
-on = "<C-y>"
-run = ["plugin wl-clipboard"]
-
-[[mgr.prepend_keymap]]
-on   = [ "R" ]
-run  = "plugin rsync"
-desc = "Copy files using rsync"
-
 [[mgr.prepend_keymap]]
 on = ["c", "f"]
 run = '''
-    shell 'ripdrag -xA "$@" &' 
+    shell 'ripdrag -x -A %s &' 
 '''
 desc = "Drag-out (Exportar)"
