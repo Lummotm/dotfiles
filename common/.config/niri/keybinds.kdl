@@ -21,7 +21,7 @@ binds {
         spawn "kitty"; 
     }
     Super+W hotkey-overlay-title="Launch Browser" { 
-        spawn "zen-browser"; 
+        spawn "helium-browser"; 
     }
 
     Super+A hotkey-overlay-title="Current status notification" { 
