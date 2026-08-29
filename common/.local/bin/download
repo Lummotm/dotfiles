@@ -51,7 +51,7 @@ for LINK in "${LINKS[@]}"; do
   case $OPCION in
   1)
     echo "Descargando audio..."
-    yt-dlp $PARAMS_COOKIES -x --audio-quality 0 --audio-format mp3 --embed-thumbnail -o "%(title)s.%(ext)s" "$LINK"
+    yt-dlp $PARAMS_COOKIES -x --audio-quality 0 --audio-format mp3 -o "%(title)s.%(ext)s" "$LINK"
     ;;
   2)
     echo "Descargando video..."
