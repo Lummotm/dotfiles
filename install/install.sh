@@ -2,11 +2,20 @@
 set -e
 
 IS_PERSONAL=""
+DRY_RUN=""
 PS3="Introduce el número de tu elección: "
 
 log() {
   echo -e "\n[$(date '+%H:%M:%S')] $1"
   echo "[$(date '+%H:%M:%S')] $1" >>"$HOME/install_dotfiles.log"
+}
+
+error_log() {
+  log "ERROR CRÍTICO: $1"
+}
+
+warning_log() {
+  log "ADVERTENCIA: $1"
 }
 
 trap 'rm -rf /tmp/yay_install 2>/dev/null || true' EXIT
@@ -16,7 +25,13 @@ service_install() {
   local flag="$2"
   local cmd="sudo systemctl"
   [[ "$flag" == "--user" ]] && cmd="systemctl --user"
-  $cmd enable --now "$service" 2>/dev/null || log "Advertencia: No se pudo habilitar $service"
+
+  if [[ "$DRY_RUN" == "y" ]]; then
+    log "DRY RUN: $cmd enable --now $service"
+    return 0
+  fi
+
+  $cmd enable --now "$service" 2>/dev/null || warning_log "No se pudo habilitar $service"
 }
 
 ask_machine_type() {
@@ -75,16 +90,29 @@ ask_personal_modules() {
 
 check_basics() {
   log "Comprobando conexión y espacio..."
+
+  if [[ "$DRY_RUN" == "y" ]]; then
+    log "DRY RUN: Verificando conexión a github.com"
+    log "DRY RUN: Verificando espacio en disco"
+    return 0
+  fi
+
   ping -c 1 github.com &>/dev/null || {
-    echo "Error: Sin internet"
+    error_log "Sin internet"
     exit 1
   }
   local available=$(df / | awk 'NR==2{print $4}')
-  [ "$available" -lt 10000000 ] && log "Advertencia: Poco espacio en disco (< 10GB)"
+  [ "$available" -lt 10000000 ] && warning_log "Poco espacio en disco (< 10GB)"
 }
 
 setup_custom_repo() {
   log "Añadiendo repositorio personalizado oglo-arch-repo..."
+
+  if [[ "$DRY_RUN" == "y" ]]; then
+    log "DRY RUN: Configurando repositorio oglo-arch-repo en /etc/pacman.conf"
+    return 0
+  fi
+
   if ! grep -q "\[oglo-arch-repo\]" /etc/pacman.conf; then
     echo -e '\n[oglo-arch-repo]\nSigLevel = Optional DatabaseOptional\nServer = https://gitlab.com/Oglo12/$repo/-/raw/main/$arch' | sudo tee -a /etc/pacman.conf >/dev/null
     sudo pacman -Sy
@@ -95,6 +123,14 @@ setup_custom_repo() {
 
 update_system_and_yay() {
   log "Actualizando sistema e instalando yay..."
+
+  if [[ "$DRY_RUN" == "y" ]]; then
+    log "DRY RUN: Actualizando mirrorlist con reflector"
+    log "DRY RUN: Instalando base-devel y git"
+    log "DRY RUN: Instalando yay desde AUR"
+    return 0
+  fi
+
   sudo reflector --latest 10 --sort rate --protocol https --country Spain,France,Germany --save /etc/pacman.d/mirrorlist || true
   sudo pacman -Syu --noconfirm --needed base-devel git
 
@@ -169,6 +205,14 @@ install_all_packages() {
 
   mapfile -t packages < <(printf '%s\n' "${ALL_PACKAGES[@]}" | sort -u)
 
+  if [[ "$DRY_RUN" == "y" ]]; then
+    log "DRY RUN: Se instalarían ${#packages[@]} paquetes:"
+    printf '%s\n' "${packages[@]}" | while read pkg; do
+      log "  - $pkg"
+    done
+    return 0
+  fi
+
   log "Validando disponibilidad de paquetes en los repositorios y AUR..."
   local valid_packages=()
   local missing_packages=()
@@ -179,7 +223,7 @@ install_all_packages() {
       valid_packages+=("$pkg")
     else
       missing_packages+=("$pkg")
-      log "⚠️ ADVERTENCIA: No se encontró el paquete '$pkg'. Se omitirá de la instalación."
+      warning_log "No se encontró el paquete '$pkg'. Se omitirá de la instalación."
     fi
   done
 
@@ -205,6 +249,13 @@ install_all_packages() {
 setup_dotfiles() {
   log "Clonando y aplicando dotfiles..."
   local REPO_DIR="$HOME/dotfiles"
+
+  if [[ "$DRY_RUN" == "y" ]]; then
+    log "DRY RUN: Clonando dotfiles desde github.com/Lummotm/dotfiles"
+    log "DRY RUN: Aplicando dotfiles para $machine_type"
+    return 0
+  fi
+
   [ ! -d "$REPO_DIR" ] && git clone "https://github.com/Lummotm/dotfiles" "$REPO_DIR"
 
   cd "$REPO_DIR"
@@ -216,45 +267,93 @@ setup_dotfiles() {
     chmod +x "$APPLY_SCRIPT"
     "$APPLY_SCRIPT" "$machine_type"
   else
-    log "Error: Script de aplicación no encontrado en $APPLY_SCRIPT"
+    error_log "Script de aplicación no encontrado en $APPLY_SCRIPT"
   fi
 }
 
 setup_audio() {
   log "Aplicando exclusión a discord en audio."
+
+  if [[ "$DRY_RUN" == "y" ]]; then
+    log "DRY RUN: Copiando 10-adjustQuirkRules.conf a /etc/pipewire/pipewire-pulse.d/"
+    log "DRY RUN: Reiniciando pipewire, pipewire-pulse y wireplumber"
+    return 0
+  fi
+
   local TARGET_DIR="/etc/pipewire/pipewire-pulse.d"
   sudo mkdir -p "$TARGET_DIR"
-  sudo cp $HOME/dotfiles/extra/10-adjustQuirkRules.conf \
-    "$TARGET_DIR"/10-adjustQuirkRules.conf
-  systemctl --user restart pipewire pipewire-pulse wireplumber
+  if sudo cp $HOME/dotfiles/extra/10-adjustQuirkRules.conf \
+    "$TARGET_DIR"/10-adjustQuirkRules.conf; then
+    systemctl --user restart pipewire pipewire-pulse wireplumber
+  else
+    error_log "No se pudo configurar la exclusión de audio para Discord"
+  fi
 }
 
 setup_mpd_service() {
   log "Configurando MPD..."
-  mkdir -p ~/.config/mpd/playlists ~/.local/state/mpd
-  chmod 755 ~/.config/mpd ~/.local/state/mpd
-  [ -d ~/Music ] && chmod 755 ~/Music
-  service_install mpd --user
+
+  if [[ "$DRY_RUN" == "y" ]]; then
+    log "DRY RUN: Creando directorios ~/.config/mpd/playlists y ~/.local/state/mpd"
+    log "DRY RUN: Habilitando servicio mpd (user)"
+    return 0
+  fi
+
+  if mkdir -p ~/.config/mpd/playlists ~/.local/state/mpd; then
+    chmod 755 ~/.config/mpd ~/.local/state/mpd
+    [ -d ~/Music ] && chmod 755 ~/Music
+    service_install mpd --user
+  else
+    error_log "No se pudieron crear los directorios de MPD"
+  fi
 }
 
 setup_keyd_service() {
   log "Configurando keyd..."
+
+  if [[ "$DRY_RUN" == "y" ]]; then
+    log "DRY RUN: Copiando configuración de keyd a /etc/keyd/default.conf"
+    log "DRY RUN: Habilitando servicio keyd"
+    return 0
+  fi
+
   local src="$HOME/dotfiles/extra/keyd/default.conf"
   if [ -f "$src" ]; then
-    sudo mkdir -p /etc/keyd
-    sudo cp "$src" /etc/keyd/default.conf
-    service_install keyd
+    if sudo mkdir -p /etc/keyd && sudo cp "$src" /etc/keyd/default.conf; then
+      service_install keyd
+    else
+      error_log "No se pudo copiar la configuración de keyd"
+    fi
+  else
+    warning_log "No se encontró la configuración de keyd en $src"
   fi
 }
 
 setup_fish_shell() {
   log "Configurando Fish..."
+
+  if [[ "$DRY_RUN" == "y" ]]; then
+    log "DRY RUN: Cambiando shell por defecto a /usr/bin/fish"
+    return 0
+  fi
+
   local current=$(getent passwd "$USER" | cut -d: -f7)
-  [ "$current" != "/usr/bin/fish" ] && sudo chsh -s /usr/bin/fish "$USER" || true
+  if [ "$current" != "/usr/bin/fish" ]; then
+    sudo chsh -s /usr/bin/fish "$USER" || error_log "No se pudo cambiar la shell a Fish"
+  fi
 }
 
 setup_login() {
   log "Configurando el gestor de sesión..."
+
+  if [[ "$DRY_RUN" == "y" ]]; then
+    log "DRY RUN: Deshabilitando servicios de login antiguos"
+    log "DRY RUN: Instalando wayland-launcher"
+    log "DRY RUN: Copiando sesiones .desktop"
+    [[ "$use_autologin" =~ ^[Yy]$ ]] && log "DRY RUN: Configurando Greetd con autologin"
+    [[ ! "$use_autologin" =~ ^[Yy]$ ]] && log "DRY RUN: Configurando Ly sin autologin"
+    return 0
+  fi
 
   # Limpieza previa de servicios
   sudo systemctl disable ly.service ly@tty2.service greetd sddm getty@tty2.service 2>/dev/null || true
@@ -271,7 +370,7 @@ setup_login() {
     sudo cp "$HOME/dotfiles/extra/bin/wayland-launcher" "/usr/local/bin/wayland-launcher"
     sudo chmod 755 "/usr/local/bin/wayland-launcher"
   else
-    log "Advertencia: No se encontró wayland-launcher en extra/bin/"
+    warning_log "No se encontró wayland-launcher en extra/bin/"
   fi
 
   # 2. Copiar sesiones .desktop (Para Ly, tanto en laptop como desktop)
@@ -298,7 +397,7 @@ setup_login() {
       sudo cp "$greetd_config" /etc/greetd/config.toml
       sudo systemctl enable greetd.service
     else
-      log "Error Crítico: No se encontró la configuración en $greetd_config"
+      error_log "No se encontró la configuración en $greetd_config"
     fi
 
   else
@@ -327,12 +426,18 @@ setup_login() {
 setup_printers() {
   log "Configurando el servicio de impresión (CUPS)..."
 
+  if [[ "$DRY_RUN" == "y" ]]; then
+    log "DRY RUN: Habilitando servicio cups"
+    log "DRY RUN: Añadiendo usuario $USER a grupos lp y sys"
+    return 0
+  fi
+
   # Habilitar e iniciar el demonio de CUPS
   service_install cups
 
   # Añadir tu usuario al grupo 'lp' (para acceso directo por USB)
   # y 'sys' (por si necesitas administrar impresoras sin sudo en localhost:631)
-  sudo usermod -aG lp "$USER"
+  sudo usermod -aG lp "$USER" || error_log "No se pudo añadir al usuario al grupo lp"
   sudo usermod -aG sys "$USER" 2>/dev/null || true
 
   log "Impresión configurada. Usa 'system-config-printer' para añadir la impresora USB."
@@ -340,18 +445,32 @@ setup_printers() {
 
 setup_autocpufreq() {
   log "Instalando autocpufreq..."
+
+  if [[ "$DRY_RUN" == "y" ]]; then
+    log "DRY RUN: Deshabilitando cpupower y thermald"
+    log "DRY RUN: Instalando servicio auto-cpufreq"
+    return 0
+  fi
+
   sudo systemctl disable --now cpupower.service thermald.service 2>/dev/null || true
-  sudo auto-cpufreq --install || true
+  sudo auto-cpufreq --install || warning_log "No se pudo instalar auto-cpufreq"
 }
 
 setup_sudoers() {
   log "Configurando reglas sudoers..."
+
+  if [[ "$DRY_RUN" == "y" ]]; then
+    log "DRY RUN: Copiando custom-rules a /etc/sudoers.d/"
+    [[ "$machine_type" == "laptop" ]] && log "DRY RUN: Copiando laptop-rules a /etc/sudoers.d/"
+    return 0
+  fi
+
   if [ -f "$HOME/dotfiles/extra/sudoers/custom-rules" ]; then
     if sudo visudo -cf "$HOME/dotfiles/extra/sudoers/custom-rules" &>/dev/null; then
       sudo cp "$HOME/dotfiles/extra/sudoers/custom-rules" /etc/sudoers.d/custom-rules
       sudo chmod 440 /etc/sudoers.d/custom-rules
     else
-      log "Error Crítico: fallos de sintaxis en custom-rules."
+      error_log "Fallos de sintaxis en custom-rules"
     fi
   fi
 
@@ -360,13 +479,19 @@ setup_sudoers() {
       sudo cp "$HOME/dotfiles/extra/sudoers/laptop-rules" /etc/sudoers.d/laptop-rules
       sudo chmod 440 /etc/sudoers.d/laptop-rules
     else
-      log "Error Crítico: fallos de sintaxis en laptop-rules."
+      error_log "Fallos de sintaxis en laptop-rules"
     fi
   fi
 }
 
 setup_crucial_disk_fstab() {
   log "Configurando Crucial X9 en fstab con candados de seguridad..."
+
+  if [[ "$DRY_RUN" == "y" ]]; then
+    log "DRY RUN: Detectando particiones del Crucial X9"
+    log "DRY RUN: Configurando montaje en /home/$USER/mnt/"
+    return 0
+  fi
 
   local LABEL_NTFS="CrucialX9"
   local LABEL_EXT4="CrucialX9_ext4"
@@ -377,14 +502,14 @@ setup_crucial_disk_fstab() {
   UUID_EXT4=$(sudo blkid -o value -s UUID "$(sudo blkid -L "$LABEL_EXT4" 2>/dev/null)" 2>/dev/null || true)
 
   if [[ -z "$UUID_NTFS" && -z "$UUID_EXT4" ]]; then
-    log "Advertencia: Disco Crucial X9 no detectado (ninguna partición encontrada). Saltando configuración de fstab."
+    warning_log "Disco Crucial X9 no detectado (ninguna partición encontrada). Saltando configuración de fstab."
     return
   fi
   if [[ -z "$UUID_NTFS" ]]; then
-    log "Advertencia: Partición NTFS del Crucial X9 (label: $LABEL_NTFS) no detectada. Se omitirá."
+    warning_log "Partición NTFS del Crucial X9 (label: $LABEL_NTFS) no detectada. Se omitirá."
   fi
   if [[ -z "$UUID_EXT4" ]]; then
-    log "Advertencia: Partición ext4 del Crucial X9 (label: $LABEL_EXT4) no detectada. Se omitirá."
+    warning_log "Partición ext4 del Crucial X9 (label: $LABEL_EXT4) no detectada. Se omitirá."
   fi
 
   local MOUNT_NTFS="/home/$USER/mnt/Crucial_X9"
@@ -430,34 +555,62 @@ setup_crucial_disk_fstab() {
 
 setup_sysctl_gaming() {
   log "Optimizando sysctl para gaming (vm.max_map_count)..."
+
+  if [[ "$DRY_RUN" == "y" ]]; then
+    log "DRY RUN: Copiando 80-gamecompatibility.conf a /etc/sysctl.d/"
+    return 0
+  fi
+
   local src="$HOME/dotfiles/extra/80-gamecompatibility.conf"
   if [ -f "$src" ]; then
-    sudo cp "$src" /etc/sysctl.d/80-gamecompatibility.conf
-    sudo sysctl --system >/dev/null
+    if sudo cp "$src" /etc/sysctl.d/80-gamecompatibility.conf; then
+      sudo sysctl --system >/dev/null
+    else
+      error_log "No se pudo copiar la configuración de sysctl"
+    fi
   else
-    log "Advertencia: No se encontró 80-gamecompatibility.conf en extra/"
+    warning_log "No se encontró 80-gamecompatibility.conf en extra/"
   fi
 }
 
 setup_toggle_gpu() {
   log "Configurando scripts de GPU (Solo Laptop)..."
 
+  if [[ "$DRY_RUN" == "y" ]]; then
+    log "DRY RUN: Copiando gpu-check y gpu-toggle a /usr/local/bin/"
+    log "DRY RUN: Aplicando reglas sudoers para GPU"
+    return 0
+  fi
+
   # Copiamos solo los scripts individuales
-  sudo cp ~/dotfiles/extra/bin/gpu-check /usr/local/bin/gpu-check 2>/dev/null || true
-  sudo cp ~/dotfiles/extra/bin/gpu-toggle /usr/local/bin/gpu-toggle 2>/dev/null || true
-  sudo chmod 755 /usr/local/bin/gpu-check /usr/local/bin/gpu-toggle 2>/dev/null || true
+  if sudo cp ~/dotfiles/extra/bin/gpu-check /usr/local/bin/gpu-check 2>/dev/null; then
+    sudo cp ~/dotfiles/extra/bin/gpu-toggle /usr/local/bin/gpu-toggle 2>/dev/null
+    sudo chmod 755 /usr/local/bin/gpu-check /usr/local/bin/gpu-toggle 2>/dev/null
+  else
+    warning_log "No se encontraron los scripts de GPU para copiar"
+  fi
 
   # Aplicamos reglas de Sudoers exclusivas de la GPU
   if [ -f "$HOME/dotfiles/extra/sudoers/gpu-rules" ]; then
     if sudo visudo -cf "$HOME/dotfiles/extra/sudoers/gpu-rules" &>/dev/null; then
       sudo cp "$HOME/dotfiles/extra/sudoers/gpu-rules" /etc/sudoers.d/gpu-rules
       sudo chmod 440 /etc/sudoers.d/gpu-rules
+    else
+      error_log "Fallos de sintaxis en gpu-rules"
     fi
   fi
 }
 
 setup_hotspot_network() {
   log "Configurando Hotspot..."
+
+  if [[ "$DRY_RUN" == "y" ]]; then
+    log "DRY RUN: Detectando interfaces eth y wifi"
+    log "DRY RUN: Configurando IP forwarding y reglas UFW"
+    log "DRY RUN: Creando conexión Hotspot en NetworkManager"
+    return 0
+  fi
+
   local eth=$(nmcli -t -f DEVICE,TYPE device status | grep ":ethernet" | head -n1 | cut -d: -f1)
   local wifi=$(nmcli -t -f DEVICE,TYPE device status | grep ":wifi" | head -n1 | cut -d: -f1)
 
@@ -474,39 +627,68 @@ setup_hotspot_network() {
 
     nmcli con delete "Hotspot" 2>/dev/null || true
     nmcli con add type wifi ifname "$wifi" con-name "Hotspot" autoconnect no ssid "Hotspot" 802-11-wireless.mode ap 802-11-wireless-security.key-mgmt wpa-psk 802-11-wireless-security.psk "ThinkingRock123" 802-11-wireless-security.proto rsn 802-11-wireless-security.group ccmp 802-11-wireless-security.pairwise ccmp 802-11-wireless-security.pmf 0 ipv4.method shared
+  else
+    warning_log "No se encontraron interfaces eth y wifi para configurar el hotspot"
   fi
 }
 
 setup_bgselector() {
+  log "Instalando bgselector..."
+
+  if [[ "$DRY_RUN" == "y" ]]; then
+    log "DRY RUN: Clonando e instalando bgselector desde GitHub"
+    return 0
+  fi
+
   # Unique temp dir
   cd "$(mktemp -d)" || exit
 
   # Install
-  git clone https://github.com/Lummotm/bgselector.git
+  git clone https://github.com/Lummotm/bgselector.git || error_log "No se pudo clonar bgselector"
   cd bgselector
-  make install
+  make install || error_log "No se pudo instalar bgselector"
 
   cd >/dev/null
 }
 
 show_help() {
-  echo "Uso: $0 [opción]"
-  echo "Opciones modulares:"
-  echo "  --full          Ejecución completa (por defecto)"
-  echo "  --login         Configura solo el gestor de sesión (Ly/Greetd)"
-  echo "  --dotfiles      Solo clona y aplica dotfiles"
-  echo "  --gpu           Configura solo el toggle de GPU"
-  echo "  --bgselector    Instala bgselector"
-  echo "  --printers      Instala y configura CUPS y utilidades"
-  echo "  --sudoers       Aplica reglas personalizadas de sudoers"
-  echo "  --hotspot       Configura la red hotspot (solo laptop)"
-  echo "  --help          Muestra este menú"
+  cat <<EOF
+Uso: $0 [opción]
+
+Opciones modulares:
+  --full              Ejecución completa (por defecto)
+  --login             Configura solo el gestor de sesión (Ly/Greetd)
+  --dotfiles          Solo clona y aplica dotfiles
+  --gpu               Configura solo el toggle de GPU
+  --bgselector        Instala bgselector
+  --printers          Instala y configura CUPS y utilidades
+  --sudoers           Aplica reglas personalizadas de sudoers
+  --hotspot           Configura la red hotspot (solo laptop)
+  --services-desktop  Configura servicios para desktop (sin instalación completa)
+  --services-laptop   Configura servicios para laptop (sin instalación completa)
+  --help              Muestra este menú
+
+Variables de entorno:
+  IS_PERSONAL=y       Activa módulos personales sin preguntar
+  DRY_RUN=y           Simula la ejecución sin hacer cambios reales
+
+Ejemplos:
+  $0 --full                          # Instalación completa interactiva
+  $0 --services-desktop              # Solo servicios de desktop
+  IS_PERSONAL=y $0 --services-desktop # Servicios desktop con módulos personales
+  DRY_RUN=y $0 --services-laptop     # Simular servicios de laptop
+  IS_PERSONAL=y DRY_RUN=y $0 --full  # Simular instalación completa con módulos personales
+EOF
 }
 
 full_install() {
   clear
   echo "Instalador Base del Sistema"
   echo "------------------------------"
+
+  if [[ "$DRY_RUN" == "y" ]]; then
+    log "MODO DRY RUN ACTIVADO - No se realizarán cambios reales"
+  fi
 
   ask_machine_type
   ask_de_profile
@@ -549,6 +731,10 @@ full_install() {
   if [[ "$autoyes" =~ ^[Yy]$ ]]; then
     reboot
   else
+    if [[ "$DRY_RUN" == "y" ]]; then
+      log "DRY RUN: No se reiniciará el sistema"
+      exit 0
+    fi
     read -p "¿Reiniciar ahora? (y/N): " -n 1 -r
     [[ $REPLY =~ ^[Yy]$ ]] && reboot
   fi
@@ -583,6 +769,35 @@ case "$1" in
   ;;
 --full | "")
   full_install
+  ;;
+--services-desktop)
+  machine_type="desktop"
+  setup_audio
+  setup_mpd_service
+  setup_keyd_service
+  setup_sysctl_gaming
+  setup_fish_shell
+  service_install bluetooth
+
+  if [[ "$IS_PERSONAL" =~ ^[Yy]$ ]]; then
+    setup_crucial_disk_fstab
+  fi
+  ;;
+--services-laptop)
+  machine_type="laptop"
+  setup_audio
+  setup_mpd_service
+  setup_keyd_service
+  setup_sysctl_gaming
+  setup_fish_shell
+  service_install bluetooth
+  setup_autocpufreq
+
+  if [[ "$IS_PERSONAL" =~ ^[Yy]$ ]]; then
+    setup_crucial_disk_fstab
+    setup_hotspot_network
+    setup_toggle_gpu
+  fi
   ;;
 --help | *)
   show_help
