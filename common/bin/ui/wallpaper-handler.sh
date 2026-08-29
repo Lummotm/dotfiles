@@ -2,7 +2,7 @@
 set -euo pipefail
 
 WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
-CURRENT_WALL="$WALLPAPER_DIR/current-wallpaper"
+CURRENT_WALL="$HOME/.cache/current-wallpaper"
 LIGHT_FLAG="$HOME/.tmp/light_flag"
 TMP_FILE_PATH="$HOME/.cache/tmp.png"
 
