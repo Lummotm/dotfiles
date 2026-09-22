@@ -8,6 +8,8 @@
 """
 Sincronizador avanzado Calibre/KOReader -> Obsidian.
 Metadatos reducidos a lo esencial, progreso en % exacto (>1% para "reading") y portadas.
+Los highlights nuevos se añaden al final de la sección "## Highlights" sin tocar
+nada de lo que hayas escrito a mano.
 """
 
 import json
@@ -137,6 +139,36 @@ def find_book_in_vault(book_title):
     return None
 
 
+def merge_highlights(body, highlights):
+    """Append only new highlights to the '## Highlights' section, leaving
+    everything else in the note (manual edits, other sections) untouched."""
+
+    def norm(s):
+        return re.sub(r"\s+", " ", s).strip().lower()
+
+    normalized_body = norm(body)
+    new = [h for h in highlights if norm(h) not in normalized_body]
+    if not new:
+        return body
+
+    block = "".join(f"> {t}\n\n" for t in new)
+
+    m = re.search(r"^## Highlights[ \t]*$", body, re.MULTILINE)
+    if not m:
+        # No section yet: create it at the end of the note
+        prefix = body.rstrip() + "\n\n" if body.strip() else ""
+        return f"{prefix}## Highlights\n\n{block}".rstrip() + "\n"
+
+    # Section ends at the next level 1-2 heading, or at end of file
+    start = m.end()
+    nxt = re.search(r"^#{1,2} ", body[start:], re.MULTILINE)
+    end = start + nxt.start() if nxt else len(body)
+
+    merged = body[:end].rstrip() + "\n\n" + block
+    tail = body[end:]
+    return (merged + tail) if tail else merged.rstrip() + "\n"
+
+
 def update_or_create_md(book, author, series, series_index, ko_data):
     md_path = find_book_in_vault(book)
 
@@ -197,30 +229,25 @@ def update_or_create_md(book, author, series, series_index, ko_data):
                         else:
                             frontmatter[k] = v
 
-            if "## Highlights" in rest_of_file:
-                body_content = rest_of_file.split("## Highlights")[0].strip()
-            else:
-                body_content = rest_of_file.strip()
+            # Se conserva el cuerpo tal cual; los highlights nuevos se
+            # insertan después con merge_highlights()
+            body_content = rest_of_file.lstrip("\n")
     else:
         author_path = os.path.join(OBSIDIAN_VAULT, author)
         os.makedirs(author_path, exist_ok=True)
         md_path = os.path.join(author_path, f"{book}.md")
         print(f"✨ Creando: {book}")
 
-    # Sobreescribir archivo con la nueva estructura
+    body_content = merge_highlights(body_content, highlights)
+
+    # Reescribir el archivo: frontmatter actualizado + cuerpo preservado
     with open(md_path, "w", encoding="utf-8") as f:
         f.write("---\n")
         for k, v in frontmatter.items():
             v = str(v).replace('"', "")
             f.write(f"{k}: {v}\n")
         f.write("---\n\n")
-
-        if body_content:
-            f.write(f"{body_content}\n\n")
-
-        if highlights:
-            f.write("## Highlights\n\n")
-            f.writelines(f"> {text}\n\n" for text in highlights)
+        f.write(body_content)
 
 
 # --- FLUJO PRINCIPAL ---
