@@ -6,7 +6,7 @@
 
 ROFI_CORE="$HOME/bin/pickers/dependencies/core.sh"
 SEARCH_DIRS=(
-  "$HOME/Documents"
+  "$HOME/Documents/University/current-course/"
   "$HOME/Library"
 )
 
@@ -32,7 +32,8 @@ else
 fi
 
 DOCS=$(
-  fd -e pdf -e epub . "${SEARCH_DIRS[@]}" 2>/dev/null | awk -F'/' '{
+  fd -L -e pdf -e epub . "${SEARCH_DIRS[@]}" 2>/dev/null | awk -F'/' '{
+        full_path = $0
         filename = $NF
         parent_dir = $(NF-1)
         chars = 35
@@ -43,7 +44,8 @@ DOCS=$(
             short_name = filename
         }
 
-        print short_name "\t " parent_dir "\t                                        \t///" parent_dir "///" filename
+        # Guardamos la ruta completa (full_path) en el delimitador '///'
+        print short_name "\t " parent_dir "\t                                        \t///" full_path
     }' | column -t -s $'\t'
 )
 
@@ -52,13 +54,16 @@ DOCS=$(
 SELECTED=$(printf '%s\n' "$DOCS" | rofi_core -w "40%" -p "Docs:")
 
 if [[ -n "$SELECTED" ]]; then
-  PARENT_DIR=$(echo "$SELECTED" | awk -F'///' '{print $2}')
-  FILENAME=$(echo "$SELECTED" | awk -F'///' '{print $3}')
+  # Extraemos la ruta completa del elemento seleccionado
+  RAW_PATH=$(echo "$SELECTED" | awk -F'///' '{print $2}' | xargs)
 
-  REAL_PATH=$(fd -F "$FILENAME" "${SEARCH_DIRS[@]}" 2>/dev/null | grep -F "/$PARENT_DIR/$FILENAME" | head -n 1)
+  if [[ -n "$RAW_PATH" ]]; then
+    # Resolvemos el symlink a la ruta real ejecutable/legible por Sioyek
+    REAL_PATH=$(realpath "$RAW_PATH" 2>/dev/null || readlink -f "$RAW_PATH" 2>/dev/null)
 
-  if [[ -n "$REAL_PATH" && -f "$REAL_PATH" ]]; then
-    sioyek "$REAL_PATH" &>/dev/null &
-    disown
+    if [[ -n "$REAL_PATH" && -f "$REAL_PATH" ]]; then
+      sioyek "$REAL_PATH" &>/dev/null &
+      disown
+    fi
   fi
 fi
