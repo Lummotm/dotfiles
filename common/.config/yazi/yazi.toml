@@ -31,10 +31,10 @@ ueberzug_offset = [ 0, 0, 0, 0 ]
 [opener]
 # Tus scripts personalizados
 quick_open = [
-    { run = '~/.config/yazi/bin/mime_selector.sh "$1" open', block = true, desc = "Open With" }
+    { run = 'bash ~/.config/yazi/bin/mime_selector.sh %s1 open', block = true, desc = "Open With" }
 ]
 set_sys_default = [
-    { run = '~/.config/yazi/bin/mime_selector.sh "$1" set', block = true, desc = "Set Default" }
+    { run = 'bash ~/.config/yazi/bin/mime_selector.sh %s1 set', block = true, desc = "Set Default" }
 ]
 # Comandos estándar
 edit = [
