@@ -24,174 +24,177 @@ ICON_ERROR="dialog-error"
 echo "--- Session $(date) ---" >>"$LOG_FILE"
 
 rofi_cmd() {
-    rofi_core -w "38ch" -N -mesg "Select a disk to mount:" -c 'textbox{padding: 2px 5px;}'
+  rofi_core -w "38ch" -N -mesg "Select a disk to mount:" -c 'textbox{padding: 2px 5px;}'
 }
 
 log() {
-    echo "[$(date '+%H:%M:%S')] $1" >>"$LOG_FILE"
+  echo "[$(date '+%H:%M:%S')] $1" >>"$LOG_FILE"
 }
 
 notification() {
-    [[ "$NOTIFICATIONS" == "true" && -x "$(command -v notify-send)" ]] || return
-    local icon="${3:-$ICON_DRIVE}"
-    notify-send -r 99 -t 2000 -u low "$1" "$2" -i "$icon"
+  [[ "$NOTIFICATIONS" == "true" && -x "$(command -v notify-send)" ]] || return
+  local icon="${3:-$ICON_DRIVE}"
+  notify-send -r 99 -t 2000 -u low "$1" "$2" -i "$icon"
 }
 
 get_drives_fresh() {
-    DEVICES_DEV=()
-    DEVICES_LABEL=()
-    DEVICES_INFO=()
-    DEVICES_MOUNT=()
+  DEVICES_DEV=()
+  DEVICES_LABEL=()
+  DEVICES_INFO=()
+  DEVICES_MOUNT=()
 
-    local raw_output
-    raw_output=$(lsblk -P -n -o NAME,LABEL,SIZE,MOUNTPOINT,TYPE,FSTYPE)
+  local raw_output
+  raw_output=$(lsblk -P -n -o NAME,LABEL,SIZE,MOUNTPOINT,TYPE,FSTYPE)
 
-    while read -r line; do
-        local NAME="" LABEL="" SIZE="" MOUNTPOINT="" TYPE="" FSTYPE=""
-        eval "$line"
+  while read -r line; do
+    local NAME="" LABEL="" SIZE="" MOUNTPOINT="" TYPE="" FSTYPE=""
+    eval "$line"
 
-        if [[ "$NAME" == loop* || "$NAME" == zram* ]]; then continue; fi
-        if [[ "$MOUNTPOINT" == "/" || "$MOUNTPOINT" == "[SWAP]" ]]; then continue; fi
-        if [[ "$MOUNTPOINT" == "/boot"* ]]; then continue; fi
-        if [[ "$MOUNTPOINT" == "/home"* && "$MOUNTPOINT" != *"/mnt/"* ]]; then continue; fi
+    if [[ "$NAME" == loop* || "$NAME" == zram* ]]; then continue; fi
+    if [[ "$MOUNTPOINT" == "/" || "$MOUNTPOINT" == "[SWAP]" ]]; then continue; fi
+    if [[ "$MOUNTPOINT" == "/boot"* ]]; then continue; fi
+    if [[ "$MOUNTPOINT" == "/home"* && "$MOUNTPOINT" != *"/mnt/"* ]]; then continue; fi
 
-        local check_uuid
-        check_uuid=$(lsblk -no UUID "/dev/$NAME" 2>/dev/null)
-        if [[ "$check_uuid" == "$TARGET_UUID_EXT4" ]]; then continue; fi
+    local check_uuid
+    check_uuid=$(lsblk -no UUID "/dev/$NAME" 2>/dev/null)
+    if [[ "$check_uuid" == "$TARGET_UUID_EXT4" ]]; then continue; fi
 
-        if [[ "$SIZE" == "1M" || "$SIZE" == "16M" || "$SIZE" == "200M" || "$SIZE" == "748M" || "$SIZE" == "529M" ]]; then continue; fi
-        if [[ "$TYPE" == "disk" && -z "$FSTYPE" ]]; then continue; fi
+    if [[ "$SIZE" == "1M" || "$SIZE" == "16M" || "$SIZE" == "200M" || "$SIZE" == "748M" || "$SIZE" == "529M" ]]; then continue; fi
+    if [[ "$TYPE" == "disk" && -z "$FSTYPE" ]]; then continue; fi
 
-        if [[ "$HIDE_MOUNTED" == "true" && -n "$MOUNTPOINT" ]]; then continue; fi
+    if [[ "$HIDE_MOUNTED" == "true" && -n "$MOUNTPOINT" ]]; then continue; fi
 
-        [[ -z "$LABEL" ]] && LABEL="Unknown"
-        local info_str="[${FSTYPE^^}] ${SIZE}"
+    [[ -z "$LABEL" ]] && LABEL="Unknown"
+    local info_str="[${FSTYPE^^}] ${SIZE}"
 
-        DEVICES_DEV+=("/dev/$NAME")
-        DEVICES_LABEL+=("$LABEL")
-        DEVICES_INFO+=("$info_str")
-        DEVICES_MOUNT+=("$MOUNTPOINT")
+    DEVICES_DEV+=("/dev/$NAME")
+    DEVICES_LABEL+=("$LABEL")
+    DEVICES_INFO+=("$info_str")
+    DEVICES_MOUNT+=("$MOUNTPOINT")
 
-    done <<<"$raw_output"
+  done <<<"$raw_output"
 }
 
 mount_crucial() {
-    local device
-    device=$(blkid -U "$TARGET_UUID")
-    [[ -z "$device" ]] && log "ERROR: Crucial X9 no detectado" && return 1
+  local device
+  device=$(blkid -U "$TARGET_UUID")
+  [[ -z "$device" ]] && log "ERROR: Crucial X9 no detectado" && return 1
 
-    mkdir -p "$MOUNT_POINT_NTFS"
-    mkdir -p "$MOUNT_POINT_EXT4"
+  mkdir -p "$MOUNT_POINT_NTFS"
+  mkdir -p "$MOUNT_POINT_EXT4"
 
-    # Limpiar automount de udisks si existe
-    umount "$UDISKS_MEDIA/Crucial X9" 2>/dev/null
+  # Limpiar automount de udisks si existe
+  umount "$UDISKS_MEDIA/Crucial X9" 2>/dev/null
 
-    log "Montando Crucial X9 completo..."
+  log "Montando Crucial X9 completo..."
+  if mount "$MOUNT_POINT_NTFS" 2>/dev/null; then
+    mount "$MOUNT_POINT_EXT4" 2>/dev/null
+    notification "Disco Montado" "Crucial X9 y Compatdata listos." "$ICON_MOUNTED"
+    log "SUCCESS: Crucial X9 montado"
+
+    # Redo desktop shortcuts
+    python3 "$HOME/bin/utils/create-desktops"
+  else
+    log "FALLO INICIAL: Crucial X9 (Posible NTFS sucio)"
+    notification "Reparando..." "Detectado error en NTFS, ejecutando ntfsfix..." "$ICON_ERROR"
+    sudo /usr/bin/ntfsfix -d "$device" >>"$LOG_FILE" 2>&1
     if mount "$MOUNT_POINT_NTFS" 2>/dev/null; then
-        mount "$MOUNT_POINT_EXT4" 2>/dev/null
-        notification "Disco Montado" "Crucial X9 y Compatdata listos." "$ICON_MOUNTED"
-        log "SUCCESS: Crucial X9 montado"
+      mount "$MOUNT_POINT_EXT4" 2>/dev/null
+      notification "Disco Montado" "Reparado y combo montado con éxito" "$ICON_MOUNTED"
+      log "SUCCESS: Crucial X9 montado tras ntfsfix"
     else
-        log "FALLO INICIAL: Crucial X9 (Posible NTFS sucio)"
-        notification "Reparando..." "Detectado error en NTFS, ejecutando ntfsfix..." "$ICON_ERROR"
-        sudo /usr/bin/ntfsfix -d "$device" >>"$LOG_FILE" 2>&1
-        if mount "$MOUNT_POINT_NTFS" 2>/dev/null; then
-            mount "$MOUNT_POINT_EXT4" 2>/dev/null
-            notification "Disco Montado" "Reparado y combo montado con éxito" "$ICON_MOUNTED"
-            log "SUCCESS: Crucial X9 montado tras ntfsfix"
-        else
-            notification "Error Crítico" "Fallo incluso tras ntfsfix" "$ICON_ERROR"
-            log "ERROR: Fallo crítico al montar Crucial X9"
-        fi
+      notification "Error Crítico" "Fallo incluso tras ntfsfix" "$ICON_ERROR"
+      log "ERROR: Fallo crítico al montar Crucial X9"
     fi
+  fi
 }
 
 unmount_crucial() {
-    log "Desmontando Crucial X9 completo..."
-    umount "$MOUNT_POINT_EXT4" 2>/dev/null
-    umount "$UDISKS_MEDIA/Crucial X9" 2>/dev/null
-    if umount "$MOUNT_POINT_NTFS" 2>/dev/null; then
-        notification "Disco Desmontado" "Crucial X9 extraído con éxito" "$ICON_UNMOUNTED"
-        log "SUCCESS: Crucial X9 desmontado"
-    else
-        notification "Error" "No se pudo desmontar el almacenamiento principal." "$ICON_ERROR"
-        log "ERROR: Fallo al desmontar Crucial X9"
-    fi
+  log "Desmontando Crucial X9 completo..."
+  umount "$MOUNT_POINT_EXT4" 2>/dev/null
+  umount "$UDISKS_MEDIA/Crucial X9" 2>/dev/null
+  if umount "$MOUNT_POINT_NTFS" 2>/dev/null; then
+    notification "Disco Desmontado" "Crucial X9 extraído con éxito" "$ICON_UNMOUNTED"
+    log "SUCCESS: Crucial X9 desmontado"
+  else
+    notification "Error" "No se pudo desmontar el almacenamiento principal." "$ICON_ERROR"
+    log "ERROR: Fallo al desmontar Crucial X9"
+  fi
 }
 
 selection_action() {
-    [[ -z "$SELECTION" ]] && exit 0
+  [[ -z "$SELECTION" ]] && exit 0
 
-    case "$SELECTION" in
-    "Scan Devices") rofi_menu ;;
-    "Show All") HIDE_MOUNTED="false" && rofi_menu ;;
-    "Hide Mounted") HIDE_MOUNTED="true" && rofi_menu ;;
-    *"No devices found"*) rofi_menu ;;
-    "--mount-crucial")
-        if mountpoint -q "$MOUNT_POINT_NTFS"; then
-            log "INFO: Crucial X9 ya montado, nada que hacer."
-        else
-            mount_crucial
-        fi
-        ;;
-    *)
-        local dev_name=$(echo "$SELECTION" | sed -n 's/.*(\(.*\)).*/\1/p')
-        local device="/dev/$dev_name"
-        local current_uuid=$(lsblk -no UUID "$device")
+  case "$SELECTION" in
+  "Scan Devices") rofi_menu ;;
+  "Show All") HIDE_MOUNTED="false" && rofi_menu ;;
+  "Hide Mounted") HIDE_MOUNTED="true" && rofi_menu ;;
+  *"No devices found"*) rofi_menu ;;
+  "--mount-crucial")
+    if mountpoint -q "$MOUNT_POINT_NTFS"; then
+      log "INFO: Crucial X9 ya montado, nada que hacer."
+    else
+      mount_crucial
+    fi
+    ;;
+  *)
+    local dev_name=$(echo "$SELECTION" | sed -n 's/.*(\(.*\)).*/\1/p')
+    local device="/dev/$dev_name"
+    local current_uuid=$(lsblk -no UUID "$device")
 
-        if [[ "$current_uuid" == "$TARGET_UUID" ]]; then
-            if mountpoint -q "$MOUNT_POINT_NTFS"; then
-                unmount_crucial
-            else
-                mount_crucial
-            fi
-        else
-            local current_mnt=$(lsblk -no MOUNTPOINT "$device")
-            if [[ -n "$current_mnt" ]] && mountpoint -q "$current_mnt"; then
-                udisksctl unmount -b "$device"
-                notification "Disco Desmontado" "$device extraído con éxito" "$ICON_UNMOUNTED"
-                find "$HOME/mnt/" -maxdepth 1 -type l -delete 2>/dev/null
-            else
-                udisksctl mount -b "$device"
-                notification "Disco Montado" "$device listo." "$ICON_MOUNTED"
-                ln -s "$UDISKS_MEDIA"/* "$HOME/mnt/" 2>/dev/null
-            fi
-        fi
-        ;;
-    esac
+    if [[ "$current_uuid" == "$TARGET_UUID" ]]; then
+      if mountpoint -q "$MOUNT_POINT_NTFS"; then
+        unmount_crucial
+      else
+        mount_crucial
+      fi
+    else
+      local current_mnt=$(lsblk -no MOUNTPOINT "$device")
+      if [[ -n "$current_mnt" ]] && mountpoint -q "$current_mnt"; then
+        udisksctl unmount -b "$device"
+        notification "Disco Desmontado" "$device extraído con éxito" "$ICON_UNMOUNTED"
+        find "$HOME/mnt/" -maxdepth 1 -type l -delete 2>/dev/null
+      else
+        udisksctl mount -b "$device"
+        notification "Disco Montado" "$device listo." "$ICON_MOUNTED"
+        ln -s "$UDISKS_MEDIA"/* "$HOME/mnt/" 2>/dev/null
+      fi
+    fi
+    ;;
+  esac
 }
 
 rofi_menu() {
-    get_drives_fresh
-    local options=""
-    local i=0
+  get_drives_fresh
+  local options=""
+  local i=0
 
-    for dev in "${DEVICES_DEV[@]}"; do
-        local label="${DEVICES_LABEL[$i]}"
-        local info="${DEVICES_INFO[$i]}"
-        local mnt="${DEVICES_MOUNT[$i]}"
-        local dev_name="${dev#/dev/}"
+  for dev in "${DEVICES_DEV[@]}"; do
+    local label="${DEVICES_LABEL[$i]}"
+    local info="${DEVICES_INFO[$i]}"
+    local mnt="${DEVICES_MOUNT[$i]}"
+    local dev_name="${dev#/dev/}"
 
-        if [[ -n "$mnt" ]]; then
-            options="${options}Mounted: ${label} (${dev_name}) ${info}\n"
-        else
-            options="${options}${label} (${dev_name})   ${info}\n"
-        fi
-        ((i++))
-    done
-
-    [[ -z "$options" ]] && options="No devices found\n"
-
-    local toggle_txt
-    [[ "$HIDE_MOUNTED" == "true" ]] && toggle_txt="Show All" || toggle_txt="Hide Mounted"
-    options="${options}\nScan Devices\n${toggle_txt}"
-
-    if [[ -n "$1" ]]; then
-        SELECTION="$1"
+    if [[ -n "$mnt" ]]; then
+      options="${options}Mounted: ${label} (${dev_name}) ${info}\n"
     else
-        SELECTION=$(echo -e "$options" | rofi_cmd)
+      options="${options}${label} (${dev_name})   ${info}\n"
     fi
-    selection_action
+    ((i++))
+  done
+
+  [[ -z "$options" ]] && options="No devices found\n"
+
+  local toggle_txt
+  [[ "$HIDE_MOUNTED" == "true" ]] && toggle_txt="Show All" || toggle_txt="Hide Mounted"
+  options="${options}\nScan Devices\n${toggle_txt}"
+
+  if [[ -n "$1" ]]; then
+    SELECTION="$1"
+  else
+    SELECTION=$(echo -e "$options" | rofi_cmd)
+  fi
+  selection_action
 }
 
 rofi_menu "$1"
