@@ -4,6 +4,7 @@ source "$HOME/bin/pickers/dependencies/core.sh"
 COLUMNS=2
 LINES=5
 CHARS="35ch"
+BG_SELECTOR_DIR="$HOME/Pictures/Wallpapers/Mios/"
 
 # 1. Exportar ROFI_ENGINE para que todos los scripts hijos lo hereden por defecto
 export ROFI_ENGINE="${ROFI_ENGINE:-rofi}"
@@ -71,7 +72,7 @@ case "$CHOICE" in
 "$OPT_MONITOR") "$PICKERS_DIR/monitors.sh" ;;
 "$OPT_BRIGHTNESS") "$PICKERS_DIR/brightness.sh" ;;
 "$OPT_WALL")
-  "$PICKERS_DIR/bgselector-wrapper"
+  "$PICKERS_DIR/bgselector-wrapper" "$BG_SELECTOR_DIR"
   ;;
 "$OPT_THEME") "$PICKERS_DIR/theme-selector.sh" ;;
 "$OPT_KILL") "$PICKERS_DIR/process-killer.sh" ;;
