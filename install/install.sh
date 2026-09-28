@@ -167,7 +167,8 @@ install_all_packages() {
   )
   local PKG_DE_GENERAL=(
     libxkbcommon-x11 libdecor waybar awww cliphist keyd
-    pywal nwg-look aurutils polkit-gnome tumbler gvfs-mtp sxiv hyprlock
+    pywal nwg-look aurutils polkit-gnome tumbler gvfs-mtp hyprlock
+    qview # Image view with no bullshit, actaully usefull
     dunst gtk2 betterbird-bin wl-clipboard libnotify bluez-utils
     qrencode nm-connection-editor xorg-xrandr ddcutil
     # install launchers
