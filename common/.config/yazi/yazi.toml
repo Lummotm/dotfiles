@@ -2,6 +2,7 @@
 #:schema https://yazi-rs.github.io/schemas/yazi.json
 
 [mgr]
+overwrite = true
 ratio          = [ 1, 4, 3 ]
 sort_by        = "alphabetical"
 sort_sensitive = false
