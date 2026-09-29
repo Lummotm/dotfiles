@@ -168,11 +168,13 @@ install_all_packages() {
   local PKG_DE_GENERAL=(
     libxkbcommon-x11 libdecor waybar awww cliphist keyd
     pywal nwg-look aurutils polkit-gnome tumbler gvfs-mtp hyprlock
-    qview # Image view with no bullshit, actaully usefull
+    qview   # Image view with no bullshit, actually usefull
+    foliate # Epub reader, beter that zathura
     dunst gtk2 betterbird-bin wl-clipboard libnotify bluez-utils
     qrencode nm-connection-editor xorg-xrandr ddcutil
     # install launchers
     rofi rofi-calc tofi
+
   )
   local PKG_LAPTOP=(brightnessctl auto-cpufreq)
   local PKG_NIRI=(niri xwayland-satellite xdg-desktop-portal-gnome)
