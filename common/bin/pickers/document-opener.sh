@@ -73,7 +73,7 @@ if [[ -n "$SELECTED" ]]; then
       if [[ "${EXTENSION,,}" == "epub" ]]; then
         foliate "$REAL_PATH" &>/dev/null &
       elif [[ "${EXTENSION,,}" == "pdf" ]]; then
-        zathura "$REAL_PATH" &>/dev/null &
+        sioyek "$REAL_PATH" --new-window &>/dev/null &
       fi
 
       disown
