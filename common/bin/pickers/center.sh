@@ -36,23 +36,26 @@ OPT_KILL="  Killer"
 OPT_ICONS="  Icons"
 OPT_COLORS="  Color Picker"
 OPT_HOTKEYS=" 󰧺 Binds/Hotkeys"
-OPT_CHARGING_MODE=""
 OPT_MUSIC="  Music"
 OPT_NOTES=" 󰂺 Notes"
+OPT_CHARGING_MODE="  Charge Mode"
 OPT_DOCUMENTS=" 󱔗 Documents"
+OPT_LAUNCHER=" 󰌧 Launcher "
+
+MAIN_STRING="$OPT_AUDIO\n$OPT_NET\n$OPT_BLUETOOTH\n$OPT_MONITOR\n$OPT_BRIGHTNESS\n$OPT_WALL\n$OPT_THEME\n$OPT_KILL\n$OPT_MOUNT\n$OPT_POWER\n$OPT_COLORS\n$OPT_ICONS\n$OPT_CALC\n$OPT_HOTKEYS\n$OPT_MUSIC\n$OPT_NOTES\n$OPT_DOCUMENTS\n$OPT_LAUNCHER"
 
 # Detección de batería
 for bat in /sys/class/power_supply/BAT*; do
   if [[ -d "$bat" ]]; then
     if [[ -f /sys/class/power_supply/AC0/online ]] && [[ $(cat /sys/class/power_supply/AC0/online) == 1 ]]; then
-      OPT_CHARGING_MODE="  Charge Mode"
+      MAIN_STRING="$MAIN_STRING\n$OPT_CHARGING_MODE"
     fi
     break
   fi
 done
 
 # 3. Lanzar el menú usando rofi_cmd (ahora respeta ROFI_ENGINE)
-CHOICE=$(echo -e "$OPT_AUDIO\n$OPT_NET\n$OPT_BLUETOOTH\n$OPT_MONITOR\n$OPT_BRIGHTNESS\n$OPT_WALL\n$OPT_THEME\n$OPT_KILL\n$OPT_MOUNT\n$OPT_POWER\n$OPT_COLORS\n$OPT_ICONS\n$OPT_CALC\n$OPT_HOTKEYS\n$OPT_MUSIC\n$OPT_NOTES\n$OPT_DOCUMENTS\n$OPT_CHARGING_MODE" | rofi_cmd)
+CHOICE=$(echo -e "$MAIN_STRING" | rofi_cmd)
 EXIT_CODE=$?
 
 [[ -z "$CHOICE" ]] && exit 0
@@ -72,7 +75,11 @@ case "$CHOICE" in
 "$OPT_MONITOR") "$PICKERS_DIR/monitors.sh" ;;
 "$OPT_BRIGHTNESS") "$PICKERS_DIR/brightness.sh" ;;
 "$OPT_WALL")
-  "$PICKERS_DIR/bgselector-wrapper" "$BG_SELECTOR_DIR"
+  if [[ "$MODE" == "ALTERNATIVE_MODE" ]]; then
+    "$HOME/bin/ui/wallpaper-randomizer.sh" "$BG_SELECTOR_DIR"
+  else
+    "$PICKERS_DIR/bgselector-wrapper" "$BG_SELECTOR_DIR"
+  fi
   ;;
 "$OPT_THEME") "$PICKERS_DIR/theme-selector.sh" ;;
 "$OPT_KILL") "$PICKERS_DIR/process-killer.sh" ;;
@@ -92,4 +99,5 @@ case "$CHOICE" in
 "$OPT_MUSIC") "$PICKERS_DIR/music" ;;
 "$OPT_NOTES") "$PICKERS_DIR/notes.sh" ;;
 "$OPT_DOCUMENTS") "$PICKERS_DIR/document-opener.sh" ;;
+"$OPT_LAUNCHER") "$PICKERS_DIR/launcher" ;;
 esac
