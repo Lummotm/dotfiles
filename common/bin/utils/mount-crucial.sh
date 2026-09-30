@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-LOG_FILE="$HOME/logs/romount.log"
+LOG_FILE="$HOME/logs/mount_crucial.log"
 TARGET_UUID=$(sudo blkid -o value -s UUID "$(sudo blkid -L "CrucialX9" 2>/dev/null)" 2>/dev/null)
 MOUNT_POINT_NTFS="$HOME/mnt/Crucial_X9"
 MOUNT_POINT_EXT4="$HOME/mnt/Crucial_X9_ext4"
