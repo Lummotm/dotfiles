@@ -40,8 +40,8 @@ fi
 } &
 
 {
-  $HOME/bin/pickers/mount.sh --mount-crucial
-  $HOME/bin/utils/create-desktops
+  # Now its a standalone script, and automatically creates the desktop shortcuts
+  $HOME/bin/utils/mount-crucial.sh
 } &
 
 {
