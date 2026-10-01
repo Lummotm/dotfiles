@@ -1,4 +1,5 @@
 [Default Applications]
+inode/directory=org.gnome.Nautilus.desktop
 video/mp4=vlc.desktop
 application/x-shellscript=nvim.desktop
 text/x-python=nvim.desktop
