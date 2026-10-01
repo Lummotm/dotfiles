@@ -105,22 +105,6 @@ check_basics() {
   [ "$available" -lt 10000000 ] && warning_log "Poco espacio en disco (< 10GB)"
 }
 
-setup_custom_repo() {
-  log "Añadiendo repositorio personalizado oglo-arch-repo..."
-
-  if [[ "$DRY_RUN" == "y" ]]; then
-    log "DRY RUN: Configurando repositorio oglo-arch-repo en /etc/pacman.conf"
-    return 0
-  fi
-
-  if ! grep -q "\[oglo-arch-repo\]" /etc/pacman.conf; then
-    echo -e '\n[oglo-arch-repo]\nSigLevel = Optional DatabaseOptional\nServer = https://gitlab.com/Oglo12/$repo/-/raw/main/$arch' | sudo tee -a /etc/pacman.conf >/dev/null
-    sudo pacman -Sy
-  else
-    log "El repositorio oglo-arch-repo ya estaba configurado."
-  fi
-}
-
 update_system_and_yay() {
   log "Actualizando sistema e instalando yay..."
 
@@ -661,6 +645,29 @@ setup_bgselector() {
   cd >/dev/null
 }
 
+setup_pacman() {
+  log "Configurando pacman..."
+
+  if [[ "$DRY_RUN" == "y" ]]; then
+    log "DRY RUN: Verificando distribución y configurando /etc/pacman.conf"
+    return 0
+  fi
+
+  # Comprobamos si la distro es CachyOS
+  if grep -qi "cachyos" /etc/os-release 2>/dev/null || grep -qi "cachyos" /proc/version 2>/dev/null; then
+    log "Sistema CachyOS detectado. Aplicando pacman.conf completo con repositorios CachyOS..."
+    sudo cp "$HOME/dotfiles/extra/pacman-cachyos.conf" /etc/pacman.conf
+  else
+    warning_log "No estás en CachyOS. Evitando añadir repos de CachyOS por seguridad."
+    log "Habilitando multilib y optimizaciones estándar en el pacman.conf actual..."
+
+    sudo cp "$HOME/dotfiles/extra/pacman.conf" /etc/pacman.conf
+  fi
+
+  # Refrescar bases de datos tras el cambio
+  sudo pacman -Sy
+}
+
 show_help() {
   cat <<EOF
 Uso: $0 [opción]
@@ -706,7 +713,7 @@ full_install() {
   ask_autoyes
 
   check_basics
-  setup_custom_repo
+  setup_pacman
   update_system_and_yay
   install_all_packages
   setup_dotfiles
