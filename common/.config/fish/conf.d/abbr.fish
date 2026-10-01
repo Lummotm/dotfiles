@@ -25,14 +25,9 @@ abbr mg "media-grabber"
 
 abbr mount-user "sudo mount -o uid=$(id -u),gid=$(id -g),umask=000"
 
-abbr tray-kill "pkill -f -9 discord && pkill -f -15 steam" 
-
 abbr matlab "sudo systemctl start docker && distrobox enter  matlab -- clear && ~/.local/MATLAB/R2025b/bin/matlab -nodesktop"
 abbr update-grub "sudo grub-mkconfig -o /boot/grub/grub.cfg"
 
 
 # Install abbr
-abbr s "yay -Ss"
-abbr i "yay -S"
-abbr r "yay -Rns"
 abbr fbin "pacman -F"
