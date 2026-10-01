@@ -44,9 +44,7 @@ selection_action() {
   "Show All") HIDE_MOUNTED="false" && rofi_menu ;;
   "Hide Mounted") HIDE_MOUNTED="true" && rofi_menu ;;
   "--mount-crucial" | *"CrucialX9"*) "$HOME/bin/utils/mount-crucial.sh" ;;
-  *"CANON_DC"*)
-    "$HOME/bin/utils/mount-canon.sh" "/dev/$(echo "$SELECTION" | sed -n 's/.*(\(.*\)).*/\1/p')"
-    ;;
+  *"CANON_DC"*) "$HOME/bin/utils/mount-canon.sh" ;;
   *) handle_generic_mount "/dev/$(echo "$SELECTION" | sed -n 's/.*(\(.*\)).*/\1/p')" ;;
   esac
 }
