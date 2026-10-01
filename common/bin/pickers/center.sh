@@ -99,5 +99,5 @@ case "$CHOICE" in
 "$OPT_MUSIC") "$PICKERS_DIR/music" ;;
 "$OPT_NOTES") "$PICKERS_DIR/notes.sh" ;;
 "$OPT_DOCUMENTS") "$PICKERS_DIR/document-opener.sh" ;;
-"$OPT_LAUNCHER") "$PICKERS_DIR/launcher" ;;
+"$OPT_LAUNCHER") "$PICKERS_DIR/launcher.sh" ;;
 esac
