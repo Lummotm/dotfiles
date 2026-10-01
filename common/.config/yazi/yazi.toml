@@ -31,7 +31,7 @@ ueberzug_offset = [ 0, 0, 0, 0 ]
 
 [opener]
 # Tus scripts personalizados
-quick_open = [
+open_with = [
     { run = 'bash ~/.config/yazi/bin/mime_selector.sh %s1 open', block = true, desc = "Open With" }
 ]
 set_sys_default = [
@@ -75,16 +75,16 @@ download = [
 [open]
 rules = [
     # Folder
-    { url = "*/", use = [ "edit", "open", "reveal" ] },
+    { url = "*/", use = [ "edit", "open", "open_with", "set_sys_default", "reveal" ] },
     # Text
-    { mime = "text/*", use = [ "edit", "quick_open", "set_sys_default", "reveal" ] },
+    { mime = "text/*", use = [ "edit", "open_with", "set_sys_default", "reveal" ] },
     # Image
-    { mime = "image/*", use = [ "open", "quick_open", "set_sys_default", "reveal" ] },
+    { mime = "image/*", use = [ "open", "open_with", "set_sys_default", "reveal" ] },
     # Media
-    { mime = "{audio,video}/*", use = [ "play", "quick_open", "set_sys_default", "reveal" ] },
+    { mime = "{audio,video}/*", use = [ "play", "open_with", "set_sys_default", "reveal" ] },
     # Code / JSON
-    { mime = "application/{json,ndjson}", use = [ "edit", "quick_open", "set_sys_default", "reveal" ] },
-    { mime = "*/javascript", use = [ "edit", "quick_open", "set_sys_default", "reveal" ] },
+    { mime = "application/{json,ndjson}", use = [ "edit", "open_with", "set_sys_default", "reveal" ] },
+    { mime = "*/javascript", use = [ "edit", "open_with", "set_sys_default", "reveal" ] },
     # Archive
     { mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", use = [ "extract", "reveal" ] },
     # Empty file
@@ -92,7 +92,7 @@ rules = [
     # Virtual file system
     { mime = "vfs/{absent,stale}", use = "download" },
     # Fallback
-    { url = "*", use = [ "open", "quick_open", "set_sys_default", "reveal" ] },
+    { url = "*", use = [ "open", "open_with", "set_sys_default", "reveal" ] },
 ]
 
 [tasks]
