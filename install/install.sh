@@ -142,23 +142,27 @@ update_system_and_yay() {
 
 install_all_packages() {
   local PKG_CORE=(
-    git stow base-devel pipewire pipewire-alsa pipewire-pulse libpulse
-    unzip unrar 7zip ncdu fish tmux starship reflector inotify-tools
+    git stow unzip unrar 7zip ncdu fish tmux
+    base-devel pipewire pipewire-alsa pipewire-pulse libpulse
+    starship reflector inotify-tools
     zip expect bc libgit2 libmpdclient alsa-utils fd
     # Ntfs deppendencies
     ntfs-3g ntfsprogs curl
+    npm
   )
   local PKG_USER_APPS=(
-    neovim vlc vlc-plugin-ffmpeg mpd mpc rmpc yazi btop eza fzf zoxide
-    sioyek-git mpd-mpris kitty npm zen-browser-bin yt-dlp keepassxc
-    discord lazygit wikiman man-db man-pages arch-wiki-docs steam
-    proton-ge-custom-bin protonplus heroic-games-launcher-bin calibre-bin
-    udisks2 proton-vpn-gtk-app gimp atlauncher-bin obsidian-bin anki
-    qpdf transmission-qt perl-image-exiftool imagemagick
+    kitty neovim yazi btop eza fzf zoxide lazygit wikiman man-db man-pages arch-wiki-docs
+    vlc vlc-plugin-ffmpeg
+    mpd mpc rmpc mpd-mpris
+    zen-browser-bin yt-dlp
+    keepassxc obsidian-bin anki
+    discord steam proton-ge-custom-bin protonplus heroic-games-launcher-bin atlauncher-bin
+    gamemode gamescope lib32-gamemode
+    calibre-bin
+    udisks2 proton-vpn-gtk-app gimp qpdf transmission-qt
+    perl-image-exiftool imagemagick
     # Thumnails on nautilus
     xapp-mp3-thumbnailer nautilus
-    # for the color picker
-    yad gamemode gamescope lib32-gamemode
   )
   local PKG_NVIM_DEPS=(
     tree-sitter tree-sitter-c tree-sitter-cli tree-sitter-lua
@@ -169,12 +173,15 @@ install_all_packages() {
     libxkbcommon-x11 libdecor waybar awww cliphist keyd
     pywal nwg-look aurutils polkit-gnome tumbler gvfs-mtp hyprlock
     qview   # Image view with no bullshit, actually usefull
-    foliate # Epub reader, beter that zathura
+    foliate # Epub reader, beter that sioyek
+    evince  # Document viewer, that renders better than sioyek
+    # sioyek generally errors for me on big documents
     dunst gtk2 betterbird-bin wl-clipboard libnotify bluez-utils
     qrencode nm-connection-editor xorg-xrandr ddcutil
     # install launchers
     rofi rofi-calc tofi
-
+    # for the color picker
+    yad
   )
   local PKG_LAPTOP=(brightnessctl auto-cpufreq)
   local PKG_NIRI=(niri xwayland-satellite xdg-desktop-portal-gnome)
