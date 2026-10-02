@@ -448,6 +448,7 @@ setup_autocpufreq() {
 
   sudo systemctl disable --now cpupower.service thermald.service 2>/dev/null || true
   sudo auto-cpufreq --install || warning_log "No se pudo instalar auto-cpufreq"
+  sudo systemctl enable --now auto-cpufreq
 }
 
 setup_sudoers() {
