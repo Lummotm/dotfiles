@@ -42,6 +42,7 @@ fi
 {
   # Now its a standalone script, and automatically creates the desktop shortcuts
   $HOME/bin/utils/mount-crucial.sh
+  $HOME/bin/utils/mount-canon.sh --mount-copy
 } &
 
 {
