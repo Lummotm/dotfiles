@@ -25,13 +25,13 @@ binds {
     }
 
     Super+A hotkey-overlay-title="Current status notification" { 
-        spawn-sh "~/bin/ui/notify-sys.sh"; 
+        spawn "~/bin/ui/notify-sys.sh"; 
     }
     Super+B hotkey-overlay-title="Toggle Waybar" { 
         spawn-sh "pkill waybar || waybar"; 
     }
     Super+Alt+A hotkey-overlay-title="Toggle theme (Light/Dark)" { 
-        spawn-sh "~/bin/ui/wallpaper-handler.sh toggle"; 
+        spawn "~/bin/ui/wallpaper-handler.sh" "toggle"; 
     }
     Super+Shift+Alt+Q { quit; }
 
@@ -57,7 +57,7 @@ binds {
     Super+Alt+Shift+C { spawn "tmux" "kill-server"; }
 
     Super+V hotkey-overlay-title="Toggle Floating Window (Centered)" { 
-        spawn-sh "~/.config/niri/bin/resize_window centering"; 
+        spawn "~/.config/niri/bin/resize_window" "centering"; 
     }
     Super+Shift+V { switch-focus-between-floating-and-tiling; }
 
@@ -142,7 +142,7 @@ binds {
     }
 
     F8 hotkey-overlay-title="Toggle touchpad" { 
-        spawn-sh "~/bin/sys/touchpad-toggle.sh niri"; 
+        spawn "~/bin/sys/touchpad-toggle.sh" "niri"; 
     }
 
     Super+Escape { toggle-keyboard-shortcuts-inhibit; }
