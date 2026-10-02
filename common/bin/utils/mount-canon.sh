@@ -3,7 +3,8 @@ source "$HOME/bin/pickers/dependencies/core.sh"
 
 LOG_FILE="$HOME/logs/mount_canon.log"
 DEST_DIR="$HOME/Pictures/Cámara"
-DEVICE="${1:-$(blkid -L "CANON_DC")}"
+DEVICE="$(blkid -L "CANON_DC")"
+FLAG="$1"
 
 mkdir -p "$HOME/logs"
 log() { echo "[$(date '+%H:%M:%S')] [CANON] $1" >>"$LOG_FILE"; }
@@ -31,8 +32,12 @@ else
 fi
 
 # Mostrar rofi
-ACTION=$(echo -e "$MENU_OPTIONS" | rofi_cmd)
-[[ -z "$ACTION" ]] && exit 0
+if [[ $FLAG == "--mount-copy" ]]; then
+  ACTION="Sincronizar y Extraer"
+else
+  ACTION=$(echo -e "$MENU_OPTIONS" | rofi_cmd)
+  [[ -z "$ACTION" ]] && exit 0
+fi
 
 # Lógica según la acción seleccionada
 if [[ "$ACTION" == "Solo Montar" ]]; then
