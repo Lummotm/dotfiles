@@ -17,8 +17,10 @@ rofi_cmd() {
 }
 
 [[ -z "$DEVICE" ]] && {
-  log "ERROR: Tarjeta no detectada."
-  notification "Error" "Tarjeta no detectada." "dialog-error"
+  if ! [[ $FLAG == "--mount-copy" ]]; then
+    log "ERROR: Tarjeta no detectada."
+    notification "Error" "Tarjeta no detectada." "dialog-error"
+  fi
   exit 1
 }
 
