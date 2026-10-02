@@ -22,7 +22,7 @@ rofi_cmd() {
   rofi -dmenu \
     -p "Uptime: $uptime" \
     -mesg "Uptime: $uptime" \
-    -theme ${theme}
+    -theme "${theme}"
 }
 
 # Confirmation CMD
@@ -30,7 +30,7 @@ confirm_cmd() {
   rofi -dmenu \
     -p 'Confirmation' \
     -mesg 'Are you Sure?' \
-    -theme ${theme_confirm}
+    -theme "${theme_confirm}"
 }
 
 # Ask for confirmation
@@ -40,8 +40,9 @@ confirm_exit() {
 
 # Pass variables to rofi dmenu
 run_rofi() {
-  # He cambiado el orden para que tenga sentido visual, ajustalo a tu gusto
-  echo -e "$suspend\n$logout\n$softreboot\n$reboot\n$shutdown" | rofi_cmd
+  # echo -e "$suspend\n$logout\n$softreboot\n$reboot\n$shutdown" | rofi_cmd
+  # Asi es mas comodo.
+  echo -e "$shutdown\n$reboot\n$softreboot\n$suspend\n$logout" | rofi_cmd
 }
 
 # Execute Command
@@ -55,10 +56,12 @@ run_cmd() {
         --who="PowerMenu" \
         --why="Git sync before poweroff" \
         --mode=block \
-        bash -c 'timeout --kill-after=5 10 "$HOME/bin/sys/sync-git.sh" ~/Documents/Obsidian/ ~/Documents/Keepass/; systemctl poweroff'
+        bash -c 'time  --kill-after=5 10 
+      "$HOME/bin/sys/sync-git.sh" ~/Documents/Obsidian/ ~/Documents/Keepass/; 
+      systemctl poweroff'
     elif [[ $1 == '--reboot' ]]; then
       systemctl reboot
-    elif [[ $1 == '--soft-reboot' ]]; then # <--- Nueva lógica
+    elif [[ $1 == '--soft-reboot' ]]; then
       systemctl soft-reboot
     elif [[ $1 == '--suspend' ]]; then
       mpc -q pause
@@ -75,6 +78,8 @@ run_cmd() {
         qdbus org.kde.ksmserver /KSMServer logout 0 0 0
       elif pgrep -x "niri" >/dev/null; then
         pkill -f niri
+      elif pgrep -x "hyprland" >/dev/null; then
+        pkill -f Hyprland
       fi
     fi
   else
@@ -85,19 +90,19 @@ run_cmd() {
 # Actions
 chosen="$(run_rofi)"
 case ${chosen} in
-$shutdown)
+"$shutdown")
   run_cmd --shutdown
   ;;
-$reboot)
+"$reboot")
   run_cmd --reboot
   ;;
-$softreboot) # <--- Ahora pasa por run_cmd para pedir confirmación
+"$softreboot")
   run_cmd --soft-reboot
   ;;
-$suspend)
+"$suspend")
   run_cmd --suspend
   ;;
-$logout)
+"$logout")
   run_cmd --logout
   ;;
 esac
