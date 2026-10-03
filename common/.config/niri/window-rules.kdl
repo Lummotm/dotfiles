@@ -8,6 +8,7 @@ window-rule {
   match title=r#"(?i)whatsapp"#
   match title=r#"(?i)instagram"#
   match title=r#"(?i)Private"#
+  match title=r#"(?i)Among"#
   block-out-from "screencast"
 }
 
