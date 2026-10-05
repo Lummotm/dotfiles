@@ -1,4 +1,5 @@
 [Default Applications]
+video/matroska=vlc.desktop
 inode/directory=org.gnome.Nautilus.desktop
 video/mp4=vlc.desktop
 application/x-shellscript=nvim.desktop
@@ -16,7 +17,7 @@ application/xhtml+xml=zen.desktop
 application/x-extension-xhtml=zen.desktop
 application/x-extension-xht=zen.desktop
 x-scheme-handler/discord=vesktop.desktop
-application/pdf=sioyek.desktop
+application/pdf=org.gnome.Evince.desktop
 image/png=com.interversehq.qView.desktop
 image/jpeg=com.interversehq.qView.desktop
 text/x-matlab=nvim.desktop
