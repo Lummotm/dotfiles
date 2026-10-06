@@ -7,7 +7,7 @@
 # ///
 """
 Sincronizador avanzado Calibre/KOReader -> Obsidian.
-Metadatos reducidos a lo esencial, progreso en % exacto (>1% para "reading") y portadas.
+Metadatos reducidos a lo esencial, progreso en % exacto (>5% para "reading") y portadas.
 Los highlights nuevos se añaden al final de la sección "## Highlights" sin tocar
 nada de lo que hayas escrito a mano.
 """
@@ -80,7 +80,7 @@ def get_koreader_data(db_path):
             else:
                 progress = 0
 
-            # Lógica de estados con barrera del 1%
+            # Lógica de estados con barrera del 5% y marca completed
             status = "to read"
             summary_status = str(data.get("summary", {}).get("status", "")).lower()
 
@@ -88,11 +88,11 @@ def get_koreader_data(db_path):
                 progress = 100
                 status = "finished"
             elif (
-                progress >= 1
-            ):  # Exigimos al menos un 1% real para marcarlo como "reading"
+                progress >= 5
+            ):  # Exigimos al menos un 5% real para marcarlo como "reading"
                 status = "reading"
             else:
-                progress = 0  # Si es menos de 1%, lo reseteamos a 0 para mantener limpio el YAML
+                progress = 0  # Si es menos de 5%, lo reseteamos a 0 para mantener limpio el YAML
                 status = "to read"
 
             # 2. Extraer los subrayados/highlights
@@ -204,6 +204,7 @@ def update_or_create_md(book, author, series, series_index, ko_data):
                     k, v = line.split(":", 1)
                     k, v = k.strip(), v.strip()
 
+                    # Omitir claves viejas innecesarias
                     if k in [
                         "book_current_progress",
                         "book_total_length",
@@ -214,9 +215,14 @@ def update_or_create_md(book, author, series, series_index, ko_data):
 
                     if k not in ["author", "series", "series_index", "cover"]:
                         if k == "status":
-                            if v in ["dropped", "finished"] and new_progress < 100:
+                            # Mantener dropped o finished manuales si KOReader no dice que está finished
+                            if (
+                                v in ["dropped", "finished"]
+                                and new_status != "finished"
+                            ):
                                 frontmatter[k] = v
-                            elif new_progress >= 1:
+                            # Aplicar nuevo estado si pasó el 5% o lo marcó como finished en KOReader
+                            elif new_progress >= 5 or new_status == "finished":
                                 frontmatter[k] = new_status
                             else:
                                 frontmatter[k] = v
@@ -229,8 +235,7 @@ def update_or_create_md(book, author, series, series_index, ko_data):
                         else:
                             frontmatter[k] = v
 
-            # Se conserva el cuerpo tal cual; los highlights nuevos se
-            # insertan después con merge_highlights()
+            # Se conserva el cuerpo tal cual; los highlights nuevos se insertan después
             body_content = rest_of_file.lstrip("\n")
     else:
         author_path = os.path.join(OBSIDIAN_VAULT, author)

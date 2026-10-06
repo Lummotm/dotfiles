@@ -15,9 +15,10 @@ awww-daemon &
 dunst &
 sunsetr &
 mpd-mpris &
+bluetoothclt power off &
 
-$HOME/bin/sys/mute-sound.sh
-$HOME/bin/sys/monitor-toggle.sh startup
+"$HOME"/bin/sys/mute-sound.sh
+"$HOME"/bin/sys/monitor-toggle.sh startup
 mpc stop
 
 # Launch stuff when on charger
@@ -29,27 +30,31 @@ else
 fi
 
 {
-  $HOME/bin/sys/battery-mode-check.sh
-  $HOME/bin/sys/battery-notification.sh
+  "$HOME"/bin/sys/battery-mode-check.sh
+  "$HOME"/bin/sys/battery-notification.sh
 } &
 
 {
   # Deberia de esperar a que se busque wifi antes de sync
   sleep 2
-  $HOME/bin/sys/sync-git.sh ~/Documents/Obsidian/ ~/Documents/Keepass/
+  "$HOME"/bin/sys/sync-git.sh ~/Documents/Obsidian/ ~/Documents/Keepass/
 } &
 
 {
   # Now its a standalone script, and automatically creates the desktop shortcuts
-  $HOME/bin/utils/mount-crucial.sh
-  $HOME/bin/utils/mount-canon.sh --mount-copy
+  "$HOME"/bin/utils/mount-crucial.sh
+  "$HOME"/bin/utils/mount-canon.sh --mount-copy
 } &
 
 {
   sleep 2
   # $HOME/bin/ui/wallpaper-randomizer.sh --score
-  $HOME/bin/pickers/bgselector/bgselector --cache
-  $HOME/.config/hypr/bin/gen-art.sh
+  "$HOME"/bin/pickers/bgselector/bgselector --cache
+  "$HOME"/.config/hypr/bin/gen-art.sh
+} &
+
+{
+  "$HOME"/bin/utils/parse-books-from-library.py
 } &
 
 # Clipboard

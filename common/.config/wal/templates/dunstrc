@@ -22,17 +22,17 @@ highlight = "{color3}"
 
 
 [urgency_low]
-background = "{color0}"
-foreground = "{color15}"
+background = "{background}"
+foreground = "{foreground}"
 timeout = 2
 
 [urgency_normal]
-background = "{color0}"
-foreground = "{color15}"
+background = "{background}"
+foreground = "{foreground}"
 timeout = 4
 
 [urgency_critical]
-background = "{color0}"
-foreground = "{color15}"
+background = "{background}"
+foreground = "{foreground}"
 frame_color = "{color2}"
 timeout = 0
