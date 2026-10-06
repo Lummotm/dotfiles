@@ -1,1 +1,0 @@
-/home/davidn/dotfiles/themes/vertbar-fullscreen/.config/waybar/bin/brightness.sh

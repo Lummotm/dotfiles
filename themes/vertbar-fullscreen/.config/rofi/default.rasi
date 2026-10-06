@@ -1,8 +1,8 @@
 @import "colors.rasi"
 
 * {
-    background:             @color0;
-    foreground:             @color7;
+    bg:             @background;
+    fg:             @foreground;
     accent:                 @color4;
     background-selection:   @color1;
     foreground-selection:   @color0;
