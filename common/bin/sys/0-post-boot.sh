@@ -11,11 +11,11 @@ for s in "${SCRIPTS[@]}"; do
 done
 
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-awww-daemon &
-dunst &
-sunsetr &
+# awww-daemon &
+# dunst &
+# sunsetr &
 mpd-mpris &
-bluetoothclt power off &
+# bluetoothctl power off &
 
 "$HOME"/bin/sys/mute-sound.sh
 "$HOME"/bin/sys/monitor-toggle.sh startup
@@ -29,10 +29,10 @@ else
   brightnessctl set 20%
 fi
 
-{
-  "$HOME"/bin/sys/battery-mode-check.sh
-  "$HOME"/bin/sys/battery-notification.sh
-} &
+# {
+#   "$HOME"/bin/sys/battery-mode-check.sh
+#   "$HOME"/bin/sys/battery-notification.sh
+# } &
 
 {
   # Deberia de esperar a que se busque wifi antes de sync

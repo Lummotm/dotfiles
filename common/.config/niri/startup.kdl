@@ -7,3 +7,4 @@
 // // spawn-at-startup "hyprlock"
 
 spawn-sh-at-startup "~/bin/sys/0-post-boot.sh"
+spawn-at-startup "noctalia"
