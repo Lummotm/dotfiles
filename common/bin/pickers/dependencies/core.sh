@@ -62,6 +62,10 @@ rofi_core() {
       engine="rofi"
       shift 1
       ;;
+    --noctalia)
+      engine="noctalia"
+      shift 1
+      ;;
     --)
       shift
       rofi_args+=("$@")
@@ -74,7 +78,13 @@ rofi_core() {
     esac
   done
 
-  if [[ "$engine" == "tofi" ]]; then
+  if [[ "$engine" == "noctalia" && "$password" == "true" ]]; then
+    engine="rofi"
+  fi
+
+  if [[ "$engine" == "noctalia" ]]; then
+    _noctalia_run "$prompt" "$mode" "$mesg" "$password" "${rofi_args[@]}"
+  elif [[ "$engine" == "tofi" ]]; then
     _tofi_run "$width" "$prompt" "$mode" "$mesg" "$password" "$hide_inputbar" "${rofi_args[@]}"
   else
     _rofi_run "$width" "$prompt" "$show_icons" "$mode" "$extra_css" "$hide_inputbar" "$mesg" "$password" "${rofi_args[@]}"
@@ -147,6 +157,27 @@ _tofi_run() {
       ;;
     esac
   done
+
+  "${cmd[@]}"
+}
+
+_noctalia_run() {
+  local prompt="$1" mode="$2" mesg="$3"
+  shift 4 # prompt, mode, mesg, password
+  local rofi_args=("$@")
+
+  for arg in "${rofi_args[@]}"; do
+    case "$arg" in
+    -kb-custom-* | -kb-accept-alt | -markup-rows | -no-custom | -sort | -a)
+      echo "[rofi-core:noctalia] aviso: flag '$arg' no soportado, ignorado" >&2
+      ;;
+    esac
+  done
+
+  # noctalia dmenu solo tiene un texto de placeholder: usamos prompt, o mesg si no hay
+  local label="${prompt:-$mesg}"
+  local cmd=(noctalia dmenu)
+  [[ -n "$label" ]] && cmd+=(-p "$label")
 
   "${cmd[@]}"
 }
