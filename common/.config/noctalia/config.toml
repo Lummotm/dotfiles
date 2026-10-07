@@ -1,6 +1,12 @@
 [theme]
 mode = "dark"
 
+[shell]
+niri_overview_type_to_launch_enabled = true
+
+[location]
+auto_locate = true # resolve coordinates from your IP address when true
+
 [bar.default]
 position = "top"
 
@@ -17,27 +23,10 @@ transition_on_startup = false   # animate the first wallpaper at shell startup (
 
 # Directory browsed by the wallpaper picker panel. Leave empty to use the
 # standard XDG Pictures directory (from `XDG_PICTURES_DIR` or `user-dirs.dirs`).
-directory           = ""
+directory           = "/home/davidn/Pictures/Wallpapers/Mios"
 # Theme-aware directories (used when theme mode is Light/Dark; Auto falls back to directory)
-directory_light     = "/home/user/Wallpapers/Light"
-directory_dark      = "/home/user/Wallpapers/Dark"
+directory_light     = "/home/davidn/Wallpapers/Light"
+directory_dark      = "/home/davidn/Wallpapers/Dark"
 # Enable per-monitor directory overrides (default: false)
 per_monitor_directories = false
 
-[wallpaper.default]
-path = "/home/user/Wallpapers/default.png"
-
-[wallpaper.automation]
-enabled                      = false
-interval_seconds             = 1800
-order                        = "random" # random | alphabetical
-recursive                    = false    # scan subdirectories when selecting random wallpapers (default: false)
-
-# Per-monitor overrides - same match rules as bar monitor overrides
-# Only active when per_monitor_directories = true
-[wallpaper.monitor.DP-2]
-enabled         = false
-fill_color      = "#202020"
-directory       = "/home/user/Wallpapers/Vertical"
-directory_light = "/home/user/Wallpapers/Vertical/Light"
-directory_dark  = "/home/user/Wallpapers/Vertical/Dark"
