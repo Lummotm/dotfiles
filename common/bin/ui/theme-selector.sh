@@ -21,25 +21,19 @@ list_theme_files() {
   find "$base" -type f -printf '%P\n' | sort
 }
 
-# Limpia symlinks huérfanos: compara el manifiesto actual (archivos del tema anterior)
-# contra el listado del nuevo tema. Elimina solo los archivos que no están en el nuevo.
 cleanup_stale() {
   local new_files="$1"
   [ -f "$MANIFEST" ] || return 0
 
-  # comm -23 compara líneas únicas del archivo 1 (el manifiesto anterior)
-  # y descarta las que coinciden con el archivo 2 (los archivos del tema actual).
   comm -23 <(sort "$MANIFEST") <(echo "$new_files") | while IFS= read -r rel; do
     [ -z "$rel" ] && continue
     local dst="$HOME/.config/$rel"
 
-    # Verificación de seguridad: solo borramos si es un symlink apuntando a nuestra carpeta de temas.
     if [ -L "$dst" ]; then
       local target
       target="$(readlink -f "$dst" || true)"
       if [[ "$target" == "$THEMES_DIR"/* ]]; then
         rm -f "$dst"
-        # Intentamos limpiar directorios vacíos tras borrar el symlink.
         rmdir -p --ignore-fail-on-non-empty "$(dirname "$dst")" 2>/dev/null || true
       fi
     fi
@@ -49,6 +43,10 @@ cleanup_stale() {
 apply_theme() {
   local theme="$1"
   local base="$THEMES_DIR/$theme/.config"
+
+  # Verificamos que el tema exista antes de aplicar
+  [ -d "$THEMES_DIR/$theme" ] || die "El tema '$theme' no existe en $THEMES_DIR"
+
   local new_files
   new_files="$(list_theme_files "$theme")"
 
@@ -95,12 +93,28 @@ pick_with_terminal() {
   done
 }
 
+# Manejo de argumentos actualizado
 case "${1:-}" in
---current) [ -f "$CURRENT_FILE" ] && cat "$CURRENT_FILE" || echo "(ninguno)" ;;
---terminal | "") pick_with_terminal ;;
+--current)
+  [ -f "$CURRENT_FILE" ] && cat "$CURRENT_FILE" || echo "(ninguno)"
+  ;;
+--terminal)
+  pick_with_terminal
+  ;;
 --theme)
   [ -n "${2:-}" ] || die "Uso: $0 --theme NOMBRE"
   apply_theme "$2"
   ;;
-*) echo "Uso: theme-selector.sh [--terminal|--theme NOMBRE|--current]" ;;
+"")
+  # Si no se pasa ningún argumento, muestra el menú interactivo
+  pick_with_terminal
+  ;;
+*)
+  # Si se pasa un argumento directo (ej. ./script.sh mi-tema), comprueba si es válido y lo aplica
+  if [ -d "$THEMES_DIR/$1" ]; then
+    apply_theme "$1"
+  else
+    die "Tema inválido o comando desconocido: $1. Uso: $0 [NOMBRE|--terminal|--theme NOMBRE|--current]"
+  fi
+  ;;
 esac
