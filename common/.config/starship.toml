@@ -12,3 +12,4 @@ success_symbol = '[❯](bold green)' # The 'success_symbol' segment is being set
 disabled = true
 [python]
 symbol = "  "
+

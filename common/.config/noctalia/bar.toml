@@ -1,0 +1,57 @@
+[bar]
+order = [ "default" ]
+
+[bar.default]
+auto_hide = false
+background_opacity = 0.5
+border = "outline"
+border_width = 0.0
+capsule = false
+capsule_border_width = 1.0
+capsule_fill = "surface_variant"
+capsule_group = []
+capsule_opacity = 1.0
+capsule_padding = 6.0
+capsule_thickness = 0.75999999046325684
+center = [ "clock" ]
+compositor_blur = true
+concave_edge_corners = true
+contact_shadow = false
+enabled = true
+end = [
+"media",
+"notifications",
+"clipboard",
+"network",
+"bluetooth",
+"volume",
+"brightness",
+"battery",
+"control-center",
+"session"
+]
+font_scale = 1.0
+font_weight = 500
+hover_highlight = true
+layer = "overlay"
+margin_edge = 0
+margin_ends = 100
+margin_opposite_edge = 0
+padding = 14
+panel_overlap = 1
+position = "top"
+radius = 12
+radius_bottom_left = 12
+radius_bottom_right = 12
+radius_top_left = 12
+radius_top_right = 12
+reserve_space = false
+scale = 1.0
+shadow = true
+show_on_workspace_switch = true
+smart_auto_hide = true
+start = [ "launcher", "wallpaper", "workspaces", "tray" ]
+thickness = 34
+widget_spacing = 6
+
+    [bar.default.dead_zone]

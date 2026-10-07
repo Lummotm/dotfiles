@@ -1,0 +1,270 @@
+[shell]
+app_icon_colorize = false
+avatar_path = ""
+button_borders = true
+card_borders = true
+clipboard_auto_paste = "auto"
+clipboard_confirm_clear_history = true
+clipboard_enabled = true
+clipboard_history_max_entries = 100
+clipboard_image_action_command = ""
+clipboard_keep_from_closed_apps = true
+corner_radius_scale = 1.0
+date_format = "%A, %x"
+disable_mipmaps = false
+external_ip_enabled = false
+font_family = "MesloLGS Nerd Font Propo"
+input_borders = true
+launch_apps_as_systemd_services = false
+launch_apps_custom_command = ""
+niri_overview_type_to_launch_enabled = true
+offline_mode = false
+panel_anchor_bar = "default"
+password_style = "default"
+polkit_agent = true
+popup_borders = true
+popup_shadows = true
+readline_shortcuts = false
+screen_time_enabled = true
+settings_expand_all_groups = false
+settings_show_advanced = true
+settings_window_translucent = true
+setup_wizard_enabled = true
+shared_gl_context = true
+show_location = true
+telemetry_enabled = false
+time_format = "{:%H:%M}"
+umbriel_overview_type_to_launch_enabled = false
+
+[shell.animation]
+enabled = true
+speed = 1.0
+
+[shell.greeter_sync]
+auto_sync = true
+
+[shell.keyboard_layout]
+
+[shell.launcher]
+app_grid = false
+auto_paste = "auto"
+categories = true
+compact = false
+fetch_exchange_rates = true
+pinned = []
+provider_prefix = "."
+show_app_actions = false
+show_app_origin_indicator = true
+show_icons = true
+sort_by_usage = true
+
+[shell.launcher.dmenu]
+
+[shell.launcher.panels]
+ignored = [ "polkit", "setup-wizard", "test", "launcher" ]
+
+[shell.mpris]
+blacklist = []
+
+[shell.panel]
+borders = true
+clipboard_placement = "attached"
+clipboard_position = "center"
+control_center_placement = "attached"
+control_center_position = "auto"
+floating_layer = "overlay"
+floating_offset = 8
+launcher_placement = "attached"
+launcher_position = "center"
+list_item_background = false
+open_near_click_clipboard = false
+open_near_click_control_center = false
+open_near_click_launcher = false
+open_near_click_session = false
+open_near_click_wallpaper = false
+polkit_placement = "attached"
+polkit_position = "center"
+session_placement = "attached"
+session_position = "auto"
+shadow = true
+transparency_mode = "glass"
+wallpaper_placement = "attached"
+wallpaper_position = "center"
+
+[shell.privacy]
+cam_filter_regex = ""
+mic_filter_regex = ""
+screen_filter_regex = ""
+
+[shell.screen_corners]
+enabled = false
+size = 32
+
+[shell.screenshot]
+annotate = false
+close_on_copy = true
+close_on_save = true
+confirm_region = false
+copy_to_clipboard = true
+directory = ""
+filename_pattern = ""
+freeze_screen = true
+pipe_command = ""
+pipe_to_command = false
+remember_last_region = false
+save_to_file = true
+show_cursor = false
+skip_annotate_on_copy_save = false
+
+[shell.session]
+grid = false
+grid_columns = 3
+show_shortcuts = true
+
+[shell.session.power]
+
+[[shell.session.actions]]
+action = "shutdown"
+command = ""
+countdown_seconds = 0.0
+enabled = true
+glyph = ""
+label = ""
+shortcut = "1"
+variant = "destructive"
+
+[[shell.session.actions]]
+action = "reboot"
+command = ""
+countdown_seconds = 0.0
+enabled = true
+glyph = ""
+label = ""
+shortcut = "2"
+variant = "default"
+
+[[shell.session.actions]]
+action = "lock"
+command = ""
+countdown_seconds = 0.0
+enabled = true
+glyph = ""
+label = ""
+shortcut = "3"
+variant = "default"
+
+[[shell.session.actions]]
+action = "logout"
+command = ""
+countdown_seconds = 0.0
+enabled = true
+glyph = ""
+label = ""
+shortcut = "4"
+variant = "default"
+
+[[shell.session.actions]]
+action = "lock_and_suspend"
+command = ""
+countdown_seconds = 0.0
+enabled = true
+glyph = ""
+label = ""
+shortcut = "5"
+variant = "default"
+
+[shell.shadow]
+alpha = 0.59999996423721313
+direction = "down"
+
+[shell.window_switcher]
+current_workspace_only = false
+mru = false
+show_all_outputs = true
+show_app_icon = true
+show_caption = true
+show_count = true
+style = "carousel"
+
+[dock]
+active_monitor_only = false
+active_opacity = 1.0
+active_scale = 1.0
+auto_hide = false
+background_opacity = 0.87999999523162842
+border = "outline"
+border_width = 0.0
+concave_edge_corners = true
+cross_axis_padding = 8
+enabled = false
+icon_size = 48
+inactive_opacity = 0.85000002384185791
+inactive_scale = 0.85000002384185791
+item_spacing = 6
+launcher_custom_image = ""
+launcher_custom_image_colorize = false
+launcher_icon = "grid-dots"
+launcher_position = "none"
+layer = "top"
+magnification = true
+magnification_scale = 1.4500000476837158
+main_axis_padding = 16
+margin_edge = 0
+margin_ends = 0
+monitors = []
+pinned = []
+position = "bottom"
+radius = 16
+radius_bottom_left = 16
+radius_bottom_right = 16
+radius_top_left = 16
+radius_top_right = 16
+reserve_space = true
+shadow = true
+show_dots = false
+show_instance_count = true
+show_running = true
+smart_auto_hide = false
+
+[control_center]
+hidden_tabs = [ "monitor" ]
+show_session_button = true
+show_shortcut_labels = true
+sidebar = "compact"
+sidebar_section = "compact"
+width = 700
+
+[control_center.calendar]
+show_events_card = true
+show_week_numbers = false
+
+[[control_center.shortcuts]]
+type = "wifi"
+
+[[control_center.shortcuts]]
+type = "bluetooth"
+
+[[control_center.shortcuts]]
+type = "nightlight"
+
+[[control_center.shortcuts]]
+type = "notification"
+
+[[control_center.shortcuts]]
+type = "dark_mode"
+
+[[control_center.shortcuts]]
+type = "session"
+
+[keybinds]
+cancel = [ "Escape" ]
+copy = [ "Ctrl+c" ]
+delete = [ "Delete" ]
+down = [ "Down", "Ctrl+j" ]
+left = [ "Left", "Ctrl+h" ]
+right = [ "Right", "Ctrl+l" ]
+save = [ "Ctrl+s" ]
+tab_next = [ "Tab" ]
+tab_previous = [ "Shift+ISO_Left_Tab" ]
+up = [ "Up", "Ctrl+k" ]
+validate = [ "Return", "KP_Enter", "space" ]
