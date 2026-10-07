@@ -31,7 +31,7 @@ binds {
         spawn-sh "pkill waybar || waybar"; 
     }
     Super+Alt+A hotkey-overlay-title="Toggle theme (Light/Dark)" { 
-        spawn "~/bin/ui/wallpaper-handler.sh" "toggle"; 
+        spawn "~/bin/utils/set-colors.sh" "toggle"; 
     }
     Super+Shift+Alt+Q { quit; }
 

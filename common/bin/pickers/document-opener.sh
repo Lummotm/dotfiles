@@ -13,6 +13,10 @@ else
   exit 1
 fi
 
+rofi_cmd() {
+  rofi_core -w "50%" "$@"
+}
+
 SEARCH_DIRS_JOINED=$(
   IFS=:
   echo "${SEARCH_DIRS[*]}"
@@ -41,7 +45,7 @@ DOCS=$(
             dir_path = (j==1) ? parts[j] : dir_path "/" parts[j]
         }
 
-        chars = 35
+        chars = 40
         if (length(filename) > chars) {
             short_name = substr(filename, 1, chars) "…"
         } else {
@@ -58,7 +62,7 @@ if [[ -z "$DOCS" ]]; then
   exit 1
 fi
 
-SELECTED=$(printf '%s\n' "$DOCS" | rofi_core -w "40%" -p "Docs:")
+SELECTED=$(printf '%s\n' "$DOCS" | rofi_cmd -p "Docs:")
 
 if [[ -n "$SELECTED" ]]; then
   RAW_PATH="${SELECTED#*///}"
@@ -69,12 +73,10 @@ if [[ -n "$SELECTED" ]]; then
     if [[ -n "$REAL_PATH" && -f "$REAL_PATH" ]]; then
       EXTENSION="${REAL_PATH##*.}"
 
-      # Convierte la extensión a minúsculas por seguridad y comprueba el tipo
       if [[ "${EXTENSION,,}" == "epub" ]]; then
         foliate "$REAL_PATH" &>/dev/null &
       elif [[ "${EXTENSION,,}" == "pdf" ]]; then
         sioyek "$REAL_PATH" --new-window &>/dev/null &
-        # evince "$REAL_PATH" &>/dev/null &
       fi
 
       disown
