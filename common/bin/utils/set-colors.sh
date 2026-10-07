@@ -74,8 +74,8 @@ dconf write /org/gnome/desktop/interface/color-scheme "\"$color_scheme\""
 python3 "$HOME/bin/ui/pywal-sioyek.py" 2>/dev/null || true
 pkill -SIGUSR2 waybar 2>/dev/null || (killall waybar && waybar &)
 niri msg action reload-config 2>/dev/null || true
-pkill -x dunst || true
+# pkill -x dunst || true
 sleep 0.3
-dunst &
+dunst || true &
 disown
 notify-send "Paleta aplicada" "$theme_name" -t 5000 -i preferences-desktop-color
