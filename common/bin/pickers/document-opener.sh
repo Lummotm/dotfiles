@@ -77,6 +77,8 @@ if [[ -n "$SELECTED" ]]; then
         foliate "$REAL_PATH" &>/dev/null &
       elif [[ "${EXTENSION,,}" == "pdf" ]]; then
         sioyek "$REAL_PATH" --new-window &>/dev/null &
+        # evince "$REAL_PATH" &>/dev/null &
+        # zathura "$REAL_PATH" &>/dev/null &
       fi
 
       disown
