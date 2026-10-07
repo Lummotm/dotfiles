@@ -1,0 +1,15 @@
+[theme]
+builtin = "Rosé Pine"
+community_palette = "ADW"
+custom_palette = ""
+mode = "dark"
+pure_black_dark = true
+shell_mode = "follow"
+source = "community"
+wallpaper_scheme = "m3-content"
+
+[theme.templates]
+builtin_ids = [ "btop", "gtk3", "gtk4", "kcolorscheme", "kitty", "niri", "qt" ]
+community_ids = [ "zen-browser", "neovim", "sioyek", "tmux", "yazi" ]
+enable_builtin_templates = true
+enable_community_templates = true

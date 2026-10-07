@@ -14,7 +14,7 @@ binds {
 
   // --- Noctalia: Sistema y UI ---
   Super+A hotkey-overlay-title="Control Center (Noctalia)" { 
-    spawn "noctalia" "msg" "panel-toggle" "system"; 
+    spawn "noctalia" "msg" "panel-toggle" "control-center"; 
   }
   Super+B hotkey-overlay-title="Toggle Dock/Bar" { 
     spawn "noctalia" "msg" "dock-toggle"; 
@@ -26,19 +26,16 @@ binds {
   Super+Shift+Alt+Q { quit; }
 
   // --- Noctalia: Menús y Pickers ---
-  Super+R hotkey-overlay-title="Application launcher (Noctalia)" { 
+  Super+F hotkey-overlay-title="Application launcher (Noctalia)" { 
     spawn "noctalia" "msg" "panel-toggle" "launcher"; 
   }
   Super+Shift+C hotkey-overlay-title="Clipboard history (Noctalia)" { 
     spawn "noctalia" "msg" "panel-toggle" "clipboard"; 
   }
-  Super+F hotkey-overlay-title="General Purpose Menu (Noctalia)" { 
-    spawn "noctalia" "msg" "panel-toggle" "control-center"; 
-  }
 
   // (Pickers pendientes de migrar a plugins de Noctalia)
-  Super+N hotkey-overlay-title="Notes Manager" { spawn-sh "ROFI_ENGINE=rofi ~/bin/pickers/notes.sh"; }
-  Super+M hotkey-overlay-title="Music manager" { spawn-sh "ROFI_ENGINE=rofi ~/bin/pickers/music"; }
+  Super+N hotkey-overlay-title="Notes Manager" { spawn-sh "ROFI_ENGINE=noctalia ~/bin/pickers/notes.sh"; }
+  Super+M hotkey-overlay-title="Music manager" { spawn-sh "ROFI_ENGINE=noctalia ~/bin/pickers/music"; }
 
 
   // --- Gestión de Ventanas (Niri) ---

@@ -1,0 +1,18 @@
+[wallpaper]
+directory = "/home/davidn/Pictures/Wallpapers/Mios"
+directory_dark = ""
+directory_light = ""
+edge_smoothness = 0.3
+enabled = true
+fill_color = "#111111"
+fill_mode = "crop"
+per_monitor_directories = false
+transition = [ "fade", "wipe", "disc", "stripes", "zoom", "honeycomb" ]
+transition_duration = 1500.0
+transition_on_startup = false
+
+[wallpaper.automation]
+enabled = false
+interval_seconds = 1800
+order = "random"
+recursive = false
