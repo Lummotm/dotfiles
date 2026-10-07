@@ -11,7 +11,7 @@ UDISKS_MEDIA="/run/media/$USER"
 echo "--- Session $(date) ---" >>"$LOG_FILE"
 
 rofi_cmd() {
-  rofi_core -w "38ch" -N -mesg "Select a disk to mount:" -c 'textbox{padding: 2px 5px;}'
+  rofi_core -w "38ch" -N -mesg "Select a disk to mount:" -c 'textbox{padding: 2px 5px;}' "$@"
 }
 
 log() { echo "[$(date '+%H:%M:%S')] $1" >>"$LOG_FILE"; }
