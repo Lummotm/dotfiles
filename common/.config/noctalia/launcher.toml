@@ -14,7 +14,7 @@ sort_by_usage = true
 [shell.launcher.dmenu]
 
 [shell.launcher.panels]
-ignored = [ "polkit", "setup-wizard", "test", "launcher" ]
+ignored = [ "polkit", "setup-wizard", "test", "launcher", "wallpaper" ]
 
 [shell.launcher.dmenu.entry.bluetooth]
 label = "Bluetooth"

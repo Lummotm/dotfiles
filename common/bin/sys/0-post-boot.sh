@@ -57,6 +57,8 @@ fi
   "$HOME"/bin/utils/parse-books-from-library.py
 } &
 
+noctalia &
+
 # Clipboard
 cliphist wipe
 wl-paste --type text --watch cliphist store &
