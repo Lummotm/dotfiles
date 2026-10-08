@@ -47,3 +47,11 @@ glyph = "wallpaper"
 global = false
 command = "noctalia msg panel-open wallpaper"
 exec = ""
+
+[shell.launcher.dmenu.entry.pickers]
+label = "Pickers"
+prefix = "pk"
+glyph = "apps"
+global = false
+command = "/home/davidn/bin/pickers/center-noctalia.sh --list"
+exec = "env ROFI_ENGINE=noctalia /home/davidn/bin/pickers/center-noctalia.sh '{selection}'"
