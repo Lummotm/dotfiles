@@ -1,0 +1,49 @@
+[shell.launcher]
+app_grid = false
+auto_paste = "auto"
+categories = true
+compact = false
+fetch_exchange_rates = true
+pinned = []
+provider_prefix = "."
+show_app_actions = false
+show_app_origin_indicator = true
+show_icons = true
+sort_by_usage = true
+
+[shell.launcher.dmenu]
+
+[shell.launcher.panels]
+ignored = [ "polkit", "setup-wizard", "test", "launcher" ]
+
+[shell.launcher.dmenu.entry.bluetooth]
+label = "Bluetooth"
+prefix = "bt"
+glyph = "bluetooth"
+global = false
+command = "noctalia msg panel-open control-center bluetooth"
+exec = ""
+
+[shell.launcher.dmenu.entry.settings]
+label = "Settings"
+prefix = "set"
+glyph = "settings"
+global = false
+command = "noctalia msg settings-open"
+exec = ""
+
+[shell.launcher.dmenu.entry.power]
+label = "Power"
+prefix = "pow"
+glyph = "power"
+global = false
+command = "noctalia msg panel-open session"
+exec = ""
+
+[shell.launcher.dmenu.entry.wallpaper]
+label = "Wallpaper"
+prefix = "wal"
+glyph = "wallpaper"
+global = false
+command = "noctalia msg panel-open wallpaper"
+exec = ""
