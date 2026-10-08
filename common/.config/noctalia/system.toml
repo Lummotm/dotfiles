@@ -195,24 +195,6 @@ volume_input = true
 volume_output = true
 wifi = true
 
-[plugin_settings]
-
-[plugins]
-auto_update = "all"
-enabled = [ "kenn/keybind-cheatsheet" ]
-
-[[plugins.source]]
-enabled = true
-kind = "git"
-location = "https://github.com/noctalia-dev/official-plugins"
-name = "official"
-
-[[plugins.source]]
-enabled = true
-kind = "git"
-location = "https://github.com/noctalia-dev/community-plugins"
-name = "community"
-
 [storage]
 key_file = ""
 key_source = "secret-service"
