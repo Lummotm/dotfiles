@@ -139,9 +139,6 @@ left = [ "Left", "Ctrl+h" ]
 right = [ "Right", "Ctrl+l" ]
 up = [ "Up", "Ctrl+k", "Ctrl+p" ]
 
-[lockscreen]
-blurred_desktop = true
-
 [lockscreen_widgets]
 enabled = true
 schema_version = 2
@@ -251,9 +248,12 @@ panel_placement = "attached"
 paper_opacity = 0.90000000000000002
 save_path = "/home/davidn/Documents/Noctes-notes"
 
+[plugin_settings."yocraft/web-launcher"]
+links = [ "GitHub|https://github.com", "YouTube|https://youtube.com", "Drive|https://drive.google.com/drive/u/0/" ]
+
 [plugins]
 auto_update = "official"
-enabled = [ "dotnetrob/cat", "remo/noctes", "noctalia/example" ]
+enabled = [ "dotnetrob/cat", "remo/noctes", "noctalia/example", "yocraft/web-launcher" ]
 
 [shell]
 font_family = "MesloLGS Nerd Font Propo"
