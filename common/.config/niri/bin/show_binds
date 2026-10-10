@@ -69,7 +69,7 @@ max_key_len = max(len(key) for key, _ in binds)
 lines = [f"{key.ljust(max_key_len + 4)} {desc}" for key, desc in binds]
 rofi_input = "\n".join(lines)
 
-engine = os.environ.get("ROFI_ENGINE", "rofi")
+engine = os.environ.get("PICKER_ENGINE", "rofi")
 
 try:
     if engine == "tofi":

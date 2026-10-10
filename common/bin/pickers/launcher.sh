@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 source "$HOME/bin/pickers/dependencies/core.sh"
 
-ENGINE="${ROFI_ENGINE:-rofi}"
+ENGINE="${PICKER_ENGINE:-rofi}"
 
 if [[ "$ENGINE" == "tofi" ]]; then
   APP_DIRS=(
