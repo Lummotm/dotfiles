@@ -171,21 +171,23 @@ mkdir -vp \
 
 manage_resources
 
-git update-index --assume-unchanged "$HOME/dotfiles/common/.config/rofi/colors.rasi" 2>/dev/null || true
-git update-index --assume-unchanged "$HOME/dotfiles/common/.config/waybar/colors.css" 2>/dev/null || true
-git update-index --assume-unchanged "$HOME/dotfiles/common/.config/zathura/zathurarc" 2>/dev/null || true
-git update-index --assume-unchanged "$HOME/dotfiles/common/.config/dunst/dunstrc" 2>/dev/null || true
-git update-index --assume-unchanged "$HOME/dotfiles/common/.config/nvim/lazy-lock.json" 2>/dev/null || true
-git update-index --assume-unchanged "$HOME/dotfiles/common/.config/discord/settings.json" 2>/dev/null || true
-git update-index --assume-unchanged "$HOME/dotfiles/common/.config/sioyek/prefs_user.config" 2>/dev/null || true
-git update-index --assume-unchanged "$HOME/dotfiles/common/.config/niri/colors.kdl" 2>/dev/null || true
-git update-index --assume-unchanged "$HOME/common/.config/btop/themes/noctalia.theme" 2>/dev/null || true
-git update-index --assume-unchanged "$HOME/common/.config/gtk-3.0/noctalia.css" 2>/dev/null || true
-git update-index --assume-unchanged "$HOME/common/.config/noctalia/launcher.toml" 2>/dev/null || true
-git update-index --assume-unchanged "$HOME/common/.config/tmux/themes/noctalia.conf" 2>/dev/null || true
-git update-index --assume-unchanged "$HOME/common/.config/yazi/flavors/noctalia.yazi/flavor.toml" 2>/dev/null || true
-git update-index --assume-unchanged "$HOME/common/.config/yazi/flavors/noctalia.yazi/tmtheme.xml" 2>/dev/null || true
-git update-index --assume-unchanged "$HOME/common/.local/state/noctalia/settings.toml" 2>/dev/null || true
+cd "$DOTFILES_DIR" || exit
+
+git update-index --assume-unchanged "dotfiles/common/.config/rofi/colors.rasi" 2>/dev/null
+git update-index --assume-unchanged "dotfiles/common/.config/waybar/colors.css" 2>/dev/null
+git update-index --assume-unchanged "dotfiles/common/.config/zathura/zathurarc" 2>/dev/null
+git update-index --assume-unchanged "dotfiles/common/.config/dunst/dunstrc" 2>/dev/null
+git update-index --assume-unchanged "dotfiles/common/.config/nvim/lazy-lock.json" 2>/dev/null
+git update-index --assume-unchanged "dotfiles/common/.config/discord/settings.json" 2>/dev/null
+git update-index --assume-unchanged "dotfiles/common/.config/sioyek/prefs_user.config" 2>/dev/null
+git update-index --assume-unchanged "dotfiles/common/.config/niri/colors.kdl" 2>/dev/null
+git update-index --assume-unchanged "common/.config/btop/themes/noctalia.theme" 2>/dev/null
+git update-index --assume-unchanged "common/.config/gtk-3.0/noctalia.css" 2>/dev/null
+git update-index --assume-unchanged "common/.config/noctalia/launcher.toml" 2>/dev/null
+git update-index --assume-unchanged "common/.config/tmux/themes/noctalia.conf" 2>/dev/null
+git update-index --assume-unchanged "common/.config/yazi/flavors/noctalia.yazi/flavor.toml" 2>/dev/null
+git update-index --assume-unchanged "common/.config/yazi/flavors/noctalia.yazi/tmtheme.xml" 2>/dev/null
+git update-index --assume-unchanged "common/.local/state/noctalia/settings.toml" 2>/dev/null
 
 git config --global http.postBuffer 52428800
 
