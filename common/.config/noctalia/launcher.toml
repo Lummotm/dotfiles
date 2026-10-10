@@ -16,37 +16,39 @@ sort_by_usage = true
 [shell.launcher.panels]
 ignored = [ "polkit", "setup-wizard", "test", "launcher", "wallpaper" ]
 
-[shell.launcher.dmenu.entry.bluetooth]
-label = "Bluetooth"
-prefix = "bt"
-glyph = "bluetooth"
-global = false
-command = "noctalia msg panel-open control-center bluetooth"
-exec = ""
+# Workarounds like this don't seem to work
 
-[shell.launcher.dmenu.entry.settings]
-label = "Settings"
-prefix = "set"
-glyph = "settings"
-global = false
-command = "noctalia msg settings-open"
-exec = ""
-
-[shell.launcher.dmenu.entry.power]
-label = "Power"
-prefix = "pow"
-glyph = "power"
-global = false
-command = "noctalia msg panel-open session"
-exec = ""
-
-[shell.launcher.dmenu.entry.wallpaper]
-label = "Wallpaper"
-prefix = "wal"
-glyph = "wallpaper"
-global = false
-command = "noctalia msg panel-open wallpaper"
-exec = ""
+# [shell.launcher.dmenu.entry.bluetooth]
+# label = "Bluetooth"
+# prefix = "bt"
+# glyph = "bluetooth"
+# global = false
+# command = "noctalia msg panel-open control-center bluetooth"
+# exec = ""
+#
+# [shell.launcher.dmenu.entry.settings]
+# label = "Settings"
+# prefix = "set"
+# glyph = "settings"
+# global = false
+# command = "noctalia msg settings-open"
+# exec = ""
+#
+# [shell.launcher.dmenu.entry.power]
+# label = "Power"
+# prefix = "pow"
+# glyph = "power"
+# global = false
+# command = "noctalia msg panel-open session"
+# exec = ""
+#
+# [shell.launcher.dmenu.entry.wallpaper]
+# label = "Wallpaper"
+# prefix = "wal"
+# glyph = "wallpaper"
+# global = false
+# command = "noctalia msg panel-open wallpaper"
+# exec = ""
 
 [shell.launcher.dmenu.entry.pickers]
 label = "Pickers"

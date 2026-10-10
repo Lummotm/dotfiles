@@ -97,9 +97,9 @@ widget_order = [
     [desktop_widgets.widget.desktop-widget-0000000000000006]
     box_height = 0.0
     box_width = 0.0
-    cx = 170.0
-    cy = 170.0
-    output = "eDP-1"
+    cx = 147.51998901367188
+    cy = 184.48001098632812
+    output = "HDMI-A-1"
     placement_height = 1080.0
     placement_width = 1920.0
     rotation = 0.029781000688672066
@@ -117,7 +117,7 @@ widget_order = [
     box_width = 0.0
     cx = 170.0
     cy = 410.0
-    output = "eDP-1"
+    output = "HDMI-A-1"
     placement_height = 1080.0
     placement_width = 1920.0
     rotation = -0.053856000304222107
@@ -253,7 +253,7 @@ links = [ "GitHub|https://github.com", "YouTube|https://youtube.com", "Drive|htt
 
 [plugins]
 auto_update = "official"
-enabled = [ "dotnetrob/cat", "remo/noctes", "noctalia/example", "yocraft/web-launcher" ]
+enabled = [ "dotnetrob/cat", "remo/noctes", "yocraft/web-launcher" ]
 
 [shell]
 font_family = "MesloLGS Nerd Font Propo"
@@ -325,13 +325,13 @@ wallpaper_scheme = "m3-content"
 
     [theme.templates]
     builtin_ids = [ "btop", "gtk3", "gtk4", "kcolorscheme", "kitty", "niri", "qt" ]
-    community_ids = [ "zen-browser", "discord", "sioyek", "tmux", "yazi" ]
+    community_ids = [ "zen-browser", "discord", "steam", "sioyek", "tmux", "yazi" ]
 
 [wallpaper.default]
-path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0238.JPG"
+path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0394.JPG"
 
 [wallpaper.last]
-path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0238.JPG"
+path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0394.JPG"
 
 [wallpaper.monitors.HDMI-A-1]
 path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0394.JPG"
