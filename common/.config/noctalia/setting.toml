@@ -1,2 +1,22 @@
 [location]
 auto_locate = true
+
+[shell.panel]
+floating_layer = "overlay" 
+launcher_placement = "attached"
+polkit_placement = "attached"
+transparency_mode = "glass"
+wallpaper_position = "center"
+
+[shell.window_switcher]
+style = "carousel"  
+
+[bar.default]
+layer = "overlay"  
+
+[dock]
+layer = "overlay"  
+
+[notification]
+layer = "overlay" 
+
