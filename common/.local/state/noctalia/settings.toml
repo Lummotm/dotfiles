@@ -4,6 +4,7 @@ config_version = 14
 background_opacity = 0.4999999888241291
 center = [ "cat", "clock" ]
 end = [ "media", "notifications", "clipboard", "network", "bluetooth", "volume", "brightness", "battery", "session" ]
+layer = "overlay"
 reserve_space = false
 smart_auto_hide = true
 start = [ "launcher", "workspaces", "tray" ]
@@ -129,6 +130,7 @@ widget_order = [
 
 [dock]
 enabled = false
+layer = "overlay"
 
 [hooks]
 shutting_down = "\"$HOME/bin/sys/0-pre-shutdown.sh\""
@@ -257,6 +259,7 @@ enabled = [ "dotnetrob/cat", "remo/noctes", "yocraft/web-launcher", "alexander/g
 
 [shell]
 font_family = "MesloLGS Nerd Font Propo"
+niri_overview_type_to_launch_enabled = true
 panel_anchor_bar = "default"
 polkit_agent = true
 screen_time_enabled = true
