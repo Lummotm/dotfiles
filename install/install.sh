@@ -337,7 +337,7 @@ setup_fish_shell() {
   fi
 }
 
-setup_login() {
+setup_login_greeter() {
   log "Configurando el gestor de sesión..."
 
   if [[ "$DRY_RUN" == "y" ]]; then
@@ -743,7 +743,7 @@ full_install() {
     fi
   fi
 
-  setup_login
+  setup_login_greeter
 
   log "¡Instalación completada!"
   if [[ "$autoyes" =~ ^[Yy]$ ]]; then
@@ -763,7 +763,7 @@ case "$1" in
   ask_machine_type
   ask_de_profile
   ask_autologin
-  setup_login
+  setup_login_greeter
   ;;
 --dotfiles)
   ask_machine_type
