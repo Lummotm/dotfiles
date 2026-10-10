@@ -253,7 +253,7 @@ links = [ "GitHub|https://github.com", "YouTube|https://youtube.com", "Drive|htt
 
 [plugins]
 auto_update = "official"
-enabled = [ "dotnetrob/cat", "remo/noctes", "yocraft/web-launcher" ]
+enabled = [ "dotnetrob/cat", "remo/noctes", "yocraft/web-launcher", "alexander/game-launcher" ]
 
 [shell]
 font_family = "MesloLGS Nerd Font Propo"
