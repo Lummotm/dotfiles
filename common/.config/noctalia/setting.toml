@@ -20,3 +20,5 @@ layer = "overlay"
 [notification]
 layer = "overlay" 
 
+[brightness]
+enable_ddcutil = true
