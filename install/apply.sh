@@ -7,13 +7,17 @@ TARGET_WALL_DIR="$HOME/Pictures/Wallpapers"
 TARGET_THEMES_DIR="$HOME/.themes"
 COMPRESSED_WALL_DIR="$HOME/temp/wallpapers_1080p-webp"
 
+PROFILE=""
+UPDATE_RESOURCES=false
+INTERACTIVE_THEME=true
+THEME_TO_APPLY=""
+SYMLINKS_ONLY=false
+
 log() { echo "[$(date '+%H:%M:%S')] $*"; }
 
 manage_resources() {
-  echo ""
-  read -p "¿Deseas restaurar/actualizar los recursos pesados? (s/N): " confirm
-  if [[ "$confirm" =~ ^[sS]$ ]]; then
-    log "Iniciando gestión de recursos..."
+  if [ "$UPDATE_RESOURCES" = true ]; then
+    log "Iniciando gestión de recursos pesados..."
     TEMP_EXTRACT="/tmp/dotfiles_resources"
     mkdir -p "$TEMP_EXTRACT"
 
@@ -72,16 +76,84 @@ manage_resources() {
     rm -rf "$TEMP_EXTRACT"
     fc-cache -fv >/dev/null
     update-desktop-database ~/.local/share/applications/ >/dev/null 2>&1
+    log "Gestión de recursos finalizada."
   fi
 }
 
-ask_theme_selector() {
-  echo ""
-  read -p "¿Deseas abrir el selector de temas visual? (s/N): " confirm_theme
-  if [[ "$confirm_theme" =~ ^[sS]$ ]]; then
-    [ -f "$THEME_SELECTOR" ] && bash "$THEME_SELECTOR"
+handle_theme() {
+  if [ "$SYMLINKS_ONLY" = true ]; then
+    if [ -f "$THEME_SELECTOR" ]; then
+      CURRENT_THEME=$(bash "$THEME_SELECTOR" --current)
+      if [ "$CURRENT_THEME" != "(ninguno)" ]; then
+        bash "$THEME_SELECTOR" --theme "$CURRENT_THEME"
+      fi
+    fi
+    return 0
+  fi
+
+  if [ -n "$THEME_TO_APPLY" ]; then
+    log "Aplicando tema: $THEME_TO_APPLY"
+    if [ -f "$THEME_SELECTOR" ]; then
+      bash "$THEME_SELECTOR" --theme "$THEME_TO_APPLY"
+    else
+      (cd "$DOTFILES_DIR/themes" && stow --target="$HOME" -S "$THEME_TO_APPLY")
+    fi
+  elif [ "$INTERACTIVE_THEME" = true ] && [ -f "$THEME_SELECTOR" ]; then
+    log "Abriendo selector de temas..."
+    bash "$THEME_SELECTOR"
+  else
+    log "Aplicando tema de fallback (vertbar-bordered)..."
+    (cd "$DOTFILES_DIR/themes" && stow --target="$HOME" -S vertbar-bordered)
   fi
 }
+
+while [[ "$#" -gt 0 ]]; do
+  case $1 in
+  laptop | desktop)
+    PROFILE="$1"
+    shift
+    ;;
+  --update-resources)
+    UPDATE_RESOURCES=true
+    shift
+    ;;
+  --symlinks-only)
+    SYMLINKS_ONLY=true
+    INTERACTIVE_THEME=false
+    UPDATE_RESOURCES=false
+    shift
+    ;;
+  --noctalia)
+    THEME_TO_APPLY="noctalia"
+    INTERACTIVE_THEME=false
+    shift
+    ;;
+  --theme)
+    THEME_TO_APPLY="$2"
+    INTERACTIVE_THEME=false
+    shift 2
+    ;;
+  -h | --help)
+    echo "Uso: $0 <laptop|desktop> [OPCIONES]"
+    echo "Opciones:"
+    echo "  --update-resources  Extrae/actualiza fuentes, iconos, wallpapers (omite por defecto)"
+    echo "  --symlinks-only     Solo regenera los enlaces stow (ignora temas interactivos)"
+    echo "  --noctalia          Aplica directamente el tema 'noctalia'"
+    echo "  --theme <nombre>    Aplica un tema específico directamente"
+    exit 0
+    ;;
+  *)
+    echo "Error: Argumento desconocido: $1"
+    exit 1
+    ;;
+  esac
+done
+
+if [ -z "$PROFILE" ]; then
+  echo "Error: Debes especificar un perfil."
+  echo "Uso: $0 <laptop|desktop> [OPCIONES]"
+  exit 1
+fi
 
 if ! command -v stow &>/dev/null || ! command -v 7z &>/dev/null || ! command -v rsync &>/dev/null; then
   sudo pacman -S --noconfirm --needed stow p7zip rsync || exit 1
@@ -99,35 +171,32 @@ mkdir -vp \
 
 manage_resources
 
-# Recursos variables que no queremos que git haga tracking
-git update-index --assume-unchanged "$HOME/dotfiles/common/.config/rofi/colors.rasi"
-git update-index --assume-unchanged "$HOME/dotfiles/common/.config/waybar/colors.css"
-git update-index --assume-unchanged "$HOME/dotfiles/common/.config/zathura/zathurarc"
-git update-index --assume-unchanged "$HOME/dotfiles/common/.config/dunst/dunstrc"
-git update-index --assume-unchanged "$HOME/dotfiles/common/.config/nvim/lazy-lock.json"
-git update-index --assume-unchanged "$HOME/dotfiles/common/.config/discord/settings.json"
-git update-index --assume-unchanged "$HOME/dotfiles/common/.config/sioyek/prefs_user.config"
-git update-index --assume-unchanged "$HOME/dotfiles/common/.config/niri/colors.kdl"
+git update-index --assume-unchanged "$HOME/dotfiles/common/.config/rofi/colors.rasi" 2>/dev/null || true
+git update-index --assume-unchanged "$HOME/dotfiles/common/.config/waybar/colors.css" 2>/dev/null || true
+git update-index --assume-unchanged "$HOME/dotfiles/common/.config/zathura/zathurarc" 2>/dev/null || true
+git update-index --assume-unchanged "$HOME/dotfiles/common/.config/dunst/dunstrc" 2>/dev/null || true
+git update-index --assume-unchanged "$HOME/dotfiles/common/.config/nvim/lazy-lock.json" 2>/dev/null || true
+git update-index --assume-unchanged "$HOME/dotfiles/common/.config/discord/settings.json" 2>/dev/null || true
+git update-index --assume-unchanged "$HOME/dotfiles/common/.config/sioyek/prefs_user.config" 2>/dev/null || true
+git update-index --assume-unchanged "$HOME/dotfiles/common/.config/niri/colors.kdl" 2>/dev/null || true
+git update-index --assume-unchanged "$HOME/common/.config/btop/themes/noctalia.theme" 2>/dev/null || true
+git update-index --assume-unchanged "$HOME/common/.config/gtk-3.0/noctalia.css" 2>/dev/null || true
+git update-index --assume-unchanged "$HOME/common/.config/noctalia/launcher.toml" 2>/dev/null || true
+git update-index --assume-unchanged "$HOME/common/.config/tmux/themes/noctalia.conf" 2>/dev/null || true
+git update-index --assume-unchanged "$HOME/common/.config/yazi/flavors/noctalia.yazi/flavor.toml" 2>/dev/null || true
+git update-index --assume-unchanged "$HOME/common/.config/yazi/flavors/noctalia.yazi/tmtheme.xml" 2>/dev/null || true
+git update-index --assume-unchanged "$HOME/common/.local/state/noctalia/settings.toml" 2>/dev/null || true
 
-# Mejora util
 git config --global http.postBuffer 52428800
 
 cd "$DOTFILES_DIR" || exit
 
-case "$1" in
-laptop | desktop)
-  log "Aplicando perfil: $1..."
-  [ -f "extra/mimeapps.list" ] && cp "extra/mimeapps.list" "$HOME/.config/mimeapps.list"
+log "Aplicando perfil: $PROFILE..."
+[ -f "extra/mimeapps.list" ] && cp "extra/mimeapps.list" "$HOME/.config/mimeapps.list"
 
-  stow --target="$HOME" --ignore='opencode\.desktop' -S common
-  (cd "$DOTFILES_DIR/themes" && stow --target="$HOME" -S vertbar-bordered)
-  stow --target="$HOME" -S "$1"
+stow --target="$HOME" --ignore='opencode\.desktop' -S common
+stow --target="$HOME" -S "$PROFILE"
 
-  ask_theme_selector
-  log "¡Hecho!"
-  ;;
-*)
-  echo "Uso: $0 <laptop|desktop>"
-  exit 1
-  ;;
-esac
+handle_theme
+
+log "¡Hecho!"
