@@ -4,9 +4,9 @@ ROFI_THEME="$HOME/.config/rofi/default.rasi"
 TOFI_CONFIG_DEFAULT="$HOME/.config/tofi/config"
 
 # Permite forzar el engine globalmente para testear en bloque:
-#   ROFI_ENGINE=tofi ./rofi-audio.sh
+#   PICKER_ENGINE=tofi ./rofi-audio.sh
 # o por script suelto pasando --tofi a rofi_core.
-ROFI_ENGINE="${ROFI_ENGINE:-rofi}"
+PICKER_ENGINE="${PICKER_ENGINE:-rofi}"
 
 rofi_core() {
   local width="60ch"
@@ -18,7 +18,7 @@ rofi_core() {
   local mesg=""
   local password="false"
   local rofi_args=()
-  local engine="$ROFI_ENGINE"
+  local engine="$PICKER_ENGINE"
 
   while [[ $# -gt 0 ]]; do
     case "$1" in

@@ -6,8 +6,8 @@ LINES=5
 CHARS="35ch"
 BG_SELECTOR_DIR="$HOME/Pictures/Wallpapers/Mios/"
 
-# 1. Exportar ROFI_ENGINE para que todos los scripts hijos lo hereden por defecto
-export ROFI_ENGINE="${ROFI_ENGINE:-rofi}"
+# 1. Exportar PICKER_ENGINE para que todos los scripts hijos lo hereden por defecto
+export PICKER_ENGINE="${PICKER_ENGINE:-rofi}"
 
 # 2. rofi_cmd unificado que usa rofi_core (compatible tanto con rofi como con tofi)
 rofi_cmd() {
@@ -54,7 +54,7 @@ for bat in /sys/class/power_supply/BAT*; do
   fi
 done
 
-# 3. Lanzar el menú usando rofi_cmd (ahora respeta ROFI_ENGINE)
+# 3. Lanzar el menú usando rofi_cmd (ahora respeta PICKER_ENGINE)
 CHOICE=$(echo -e "$MAIN_STRING" | rofi_cmd)
 EXIT_CODE=$?
 

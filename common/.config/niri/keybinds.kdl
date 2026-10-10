@@ -1,7 +1,7 @@
 // KEYBINDS
 binds {
   // --- Utilidades Custom ---
-  Super+P { spawn-sh "ROFI_ENGINE=rofi ~/.config/niri/bin/show_binds ~/dotfiles/common/.config/niri/keybinds.kdl"; }
+  Super+P { spawn-sh "PICKER_ENGINE=rofi ~/.config/niri/bin/show_binds ~/dotfiles/common/.config/niri/keybinds.kdl"; }
   Super+Alt+P hotkey-overlay-title="Power on/off monitors" { spawn-sh "~/bin/sys/monitor-toggle.sh"; }
   Super+Tab { toggle-overview; }
 
@@ -34,8 +34,8 @@ binds {
   }
 
   // (Pickers pendientes de migrar a plugins de Noctalia)
-  Super+N hotkey-overlay-title="Notes Manager" { spawn-sh "ROFI_ENGINE=noctalia ~/bin/pickers/notes.sh"; }
-  Super+M hotkey-overlay-title="Music manager" { spawn-sh "ROFI_ENGINE=noctalia ~/bin/pickers/music"; }
+  Super+N hotkey-overlay-title="Notes Manager" { spawn-sh "PICKER_ENGINE=noctalia ~/bin/pickers/notes.sh"; }
+  Super+M hotkey-overlay-title="Music manager" { spawn-sh "PICKER_ENGINE=noctalia ~/bin/pickers/music"; }
 
 
   // --- Gestión de Ventanas (Niri) ---

@@ -45,9 +45,9 @@ fi
 
 if [[ -n "$1" ]]; then
   choice=$(trim "$1")
-  export ROFI_ENGINE="${ROFI_ENGINE:-noctalia}"
+  export PICKER_ENGINE="${PICKER_ENGINE:-noctalia}"
 else
-  export ROFI_ENGINE="${ROFI_ENGINE:-rofi}"
+  export PICKER_ENGINE="${PICKER_ENGINE:-rofi}"
   choice=$(printf '%s\n' "${ORDER[@]}" | rofi_core -w "35ch" -p "Select Menu:")
   choice=$(trim "$choice")
 fi
