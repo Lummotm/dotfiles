@@ -26,6 +26,12 @@ enabled = true
 [hooks]
 shutting_down = "~/bin/sys/0-pre-shutdown.sh"
 
+[keybinds]
+down = [ "Down", "Ctrl+j", "Ctrl+p" ]
+left = [ "Left", "Ctrl+l" ]
+right = [ "Right", "Ctrl+h" ]
+up = [ "Up", "Ctrl+k", "Ctrl+n" ]
+
 [lockscreen_widgets]
 enabled = false
 schema_version = 2
