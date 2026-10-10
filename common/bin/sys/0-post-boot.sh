@@ -57,7 +57,7 @@ fi
   "$HOME"/bin/utils/parse-books-from-library.py
 } &
 
-noctalia &
+# noctalia &
 
 # Clipboard
 cliphist wipe
