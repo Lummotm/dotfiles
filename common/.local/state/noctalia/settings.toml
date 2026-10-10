@@ -328,13 +328,13 @@ wallpaper_scheme = "m3-content"
     community_ids = [ "zen-browser", "discord", "steam", "sioyek", "tmux", "yazi" ]
 
 [wallpaper.default]
-path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0394.JPG"
+path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0238.JPG"
 
 [wallpaper.last]
-path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0394.JPG"
+path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0238.JPG"
 
 [wallpaper.monitors.HDMI-A-1]
-path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0394.JPG"
+path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0238.JPG"
 
 [wallpaper.monitors.eDP-1]
 path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0238.JPG"
