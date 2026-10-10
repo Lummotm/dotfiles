@@ -1,18 +1,15 @@
 // KEYBINDS
 binds {
-  // --- Utilidades Custom ---
   Super+P { spawn-sh "PICKER_ENGINE=rofi ~/.config/niri/bin/show_binds ~/dotfiles/common/.config/niri/keybinds.kdl"; }
   Super+Alt+P hotkey-overlay-title="Power on/off monitors" { spawn-sh "~/bin/sys/monitor-toggle.sh"; }
   Super+Tab { toggle-overview; }
 
-  // --- Aplicaciones ---
   Super+Alt+E hotkey-overlay-title="Launch file manager (Nautilus)" { spawn "nautilus"; }
   Super+E hotkey-overlay-title="Launch file manager (Yazi)" { spawn "kitty" "--title=yazi" "-e" "yazi"; }
   Super+Q hotkey-overlay-title="Launch Tmux session" { spawn "kitty" "--title=tmux" "-e" ".config/tmux/bin/tmux-launcher.sh"; }
   Super+Alt+Q hotkey-overlay-title="Launch new terminal (Kitty)" { spawn "kitty"; }
   Super+W hotkey-overlay-title="Launch Browser" { spawn "zen-browser"; }
 
-  // --- Noctalia: Sistema y UI ---
   Super+A hotkey-overlay-title="Control Center (Noctalia)" { 
     spawn "noctalia" "msg" "panel-toggle" "control-center"; 
   }
@@ -20,12 +17,10 @@ binds {
     spawn "noctalia" "msg" "dock-toggle"; 
   }
   Super+Alt+A hotkey-overlay-title="Toggle theme (Light/Dark)" { 
-    // Noctalia maneja el tema nativamente, si prefieres mantener tu script cámbialo a set-colors.sh
     spawn "noctalia" "msg" "theme-mode-toggle"; 
   }
   Super+Shift+Alt+Q { quit; }
 
-  // --- Noctalia: Menús y Pickers ---
   Super+F hotkey-overlay-title="Application launcher (Noctalia)" { 
     spawn "noctalia" "msg" "panel-toggle" "launcher"; 
   }
@@ -33,12 +28,10 @@ binds {
     spawn "noctalia" "msg" "panel-toggle" "clipboard"; 
   }
 
-  // (Pickers pendientes de migrar a plugins de Noctalia)
   Super+N hotkey-overlay-title="Notes Manager" { spawn-sh "PICKER_ENGINE=noctalia ~/bin/pickers/notes.sh"; }
-  Super+M hotkey-overlay-title="Music manager" { spawn-sh "PICKER_ENGINE=noctalia ~/bin/pickers/music"; }
+  Super+M hotkey-overlay-title="Music manager" { spawn-sh "PICKER_ENGINE=noctalia ~/bin/pickers/music.sh"; }
 
 
-  // --- Gestión de Ventanas (Niri) ---
   Super+C { close-window; }
   Super+Alt+C { spawn "tmux" "kill-session"; }
   Super+Alt+Shift+C { spawn "tmux" "kill-server"; }
@@ -95,8 +88,6 @@ binds {
   Super+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
   Super+WheelScrollUp   cooldown-ms=1150 { focus-workspace-up; }
 
-  // --- Hardware, Volumen y Brillo (Noctalia IPC) ---
-  // Noctalia gestiona el OSD visual, por lo que notify-send.sh ya no es necesario.
   XF86AudioRaiseVolume allow-when-locked=true hotkey-overlay-title="Volume up" { 
     spawn "noctalia" "msg" "volume-up"; 
   }
@@ -116,12 +107,10 @@ binds {
     spawn "noctalia" "msg" "brightness-down"; 
   }
 
-  // --- Screenshots ---
   Print hotkey-overlay-title="Screenshot (fullscreen)" { screenshot-screen show-pointer=false; }
   Super+Print hotkey-overlay-title="Screenshot (selected region)" { screenshot show-pointer=false; }
   Shift+Print hotkey-overlay-title="Screenshot (current window)" { spawn "niri" "msg" "action" "screenshot-window" "--write-to-disk=false"; }
 
-  // --- Varios ---
   F8 hotkey-overlay-title="Toggle touchpad" { spawn "~/bin/sys/touchpad-toggle.sh" "niri"; }
   Super+Escape { toggle-keyboard-shortcuts-inhibit; }
 
