@@ -18,13 +18,6 @@ ignored = [ "polkit", "setup-wizard", "test", "launcher", "wallpaper" ]
 
 # Workarounds like this don't seem to work
 
-[shell.launcher.dmenu.entry.bluetooth]
-label = "Bluetooth"
-prefix = "bt"
-glyph = "bluetooth"
-global = false
-command = "noctalia msg panel-open control-center bluetooth"
-exec = ""
 
 [shell.launcher.dmenu.entry.settings]
 label = "Settings"
@@ -48,6 +41,22 @@ prefix = "wal"
 glyph = "wallpaper"
 global = false
 command = "noctalia msg panel-open wallpaper"
+exec = ""
+
+[shell.launcher.dmenu.entry.audio]
+label = "Audio"
+prefix = "aud"
+glyph = "volume-2"
+global = false
+command = "noctalia msg panel-open control-center audio"
+exec = ""
+
+[shell.launcher.dmenu.entry.bluetooth]
+label = "Bluetooth"
+prefix = "bt"
+glyph = "bluetooth"
+global = false
+command = "noctalia msg panel-open control-center bluetooth"
 exec = ""
 
 [shell.launcher.dmenu.entry.pickers]

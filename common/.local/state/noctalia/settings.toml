@@ -2,20 +2,13 @@ config_version = 14
 
 [bar.default]
 background_opacity = 0.44999998994171619
-end = [
-    "media",
-    "tray",
-    "notifications",
-    "clipboard",
-    "network",
-    "bluetooth",
-    "volume",
-    "brightness",
-    "battery",
-    "session"
-]
+center = [ "cat", "clock" ]
+end = [ "media", "network", "bluetooth", "volume", "brightness", "battery", "session" ]
+font_weight = 700
 reserve_space = false
 smart_auto_hide = true
+start = [ "launcher", "notifications", "tray", "workspaces" ]
+widget_spacing = 10
 
 [calendar]
 enabled = true
@@ -23,14 +16,32 @@ enabled = true
     [calendar.account.personal_google]
     type = "google"
 
+[[control_center.shortcuts]]
+type = "wifi"
+
+[[control_center.shortcuts]]
+type = "bluetooth"
+
+[[control_center.shortcuts]]
+type = "dark_mode"
+
+[[control_center.shortcuts]]
+type = "nightlight"
+
+[[control_center.shortcuts]]
+type = "notification"
+
+[[control_center.shortcuts]]
+type = "session"
+
 [hooks]
 shutting_down = "~/bin/sys/0-pre-shutdown.sh"
 
 [keybinds]
-down = [ "Down", "Ctrl+j", "Ctrl+p" ]
-left = [ "Left", "Ctrl+l" ]
-right = [ "Right", "Ctrl+h" ]
-up = [ "Up", "Ctrl+k", "Ctrl+n" ]
+down = [ "Down", "Ctrl+n", "Ctrl+j" ]
+left = [ "Left", "Ctrl+h" ]
+right = [ "Right", "Ctrl+l" ]
+up = [ "Up", "Ctrl+p", "Ctrl+k" ]
 
 [lockscreen_widgets]
 enabled = false
@@ -126,6 +137,9 @@ mode = "dark"
 source = "wallpaper"
 wallpaper_scheme = "m3-content"
 
+    [theme.templates]
+    community_ids = [ "zen-browser", "sioyek", "tmux", "yazi" ]
+
 [wallpaper.default]
 path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0109.png"
 
@@ -134,3 +148,9 @@ path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0109.png"
 
 [wallpaper.monitors.HDMI-A-1]
 path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0109.png"
+
+[widget.cat]
+type = "dotnetrob/cat:cat"
+
+[widget.workspaces]
+style = "focus_hint"

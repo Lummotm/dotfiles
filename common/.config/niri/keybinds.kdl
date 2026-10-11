@@ -21,6 +21,9 @@ binds {
   }
   Super+Shift+Alt+Q { quit; }
 
+  Super+R hotkey-overlay-title="Application launcher (Noctalia)" { 
+    spawn "noctalia" "msg" "panel-toggle" "launcher"; 
+  }
   Super+F hotkey-overlay-title="Application launcher (Noctalia)" { 
     spawn "noctalia" "msg" "panel-toggle" "launcher"; 
   }
