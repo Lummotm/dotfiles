@@ -59,6 +59,14 @@ global = false
 command = "noctalia msg panel-open control-center bluetooth"
 exec = ""
 
+[shell.launcher.dmenu.entry.edit]
+label = "Edit Widgets"
+prefix = "ew"
+glyph = "widget"
+global = false
+command = "noctalia msg launcher-close && noctalia msg desktop-widgets-edit"
+exec = ""
+
 [shell.launcher.dmenu.entry.pickers]
 label = "Pickers"
 prefix = "pk"

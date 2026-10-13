@@ -1,3 +1,8 @@
+[include]
+files = [
+  "lockscreen/clean-lockscreen.toml",
+]
+
 [location]
 auto_locate = true
 
