@@ -16,9 +16,6 @@ sort_by_usage = true
 [shell.launcher.panels]
 ignored = [ "polkit", "setup-wizard", "test", "launcher", "wallpaper" ]
 
-# Workarounds like this don't seem to work
-
-
 [shell.launcher.dmenu.entry.settings]
 label = "Settings"
 prefix = "set"
@@ -57,14 +54,6 @@ prefix = "bt"
 glyph = "bluetooth"
 global = false
 command = "noctalia msg panel-open control-center bluetooth"
-exec = ""
-
-[shell.launcher.dmenu.entry.edit]
-label = "Edit Widgets"
-prefix = "ew"
-glyph = "widget"
-global = false
-command = "noctalia msg launcher-close && noctalia msg desktop-widgets-edit"
 exec = ""
 
 [shell.launcher.dmenu.entry.pickers]

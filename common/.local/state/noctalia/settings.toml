@@ -268,16 +268,16 @@ wallpaper_scheme = "m3-content"
     community_ids = [ "zen-browser", "sioyek", "tmux", "yazi" ]
 
 [wallpaper.default]
-path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0238.JPG"
+path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0394.JPG"
 
 [wallpaper.last]
-path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0238.JPG"
+path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0394.JPG"
 
 [wallpaper.monitors.HDMI-A-1]
 path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0369.JPG"
 
 [wallpaper.monitors.eDP-1]
-path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0238.JPG"
+path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0394.JPG"
 
 [[wallpaper.favorite]]
 palette_source = "wallpaper"
