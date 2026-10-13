@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+notify-send -t 1000 "Shuting Down"
+
 mpc stop
 systemd-inhibit \
   --what=handle-lid-switch \

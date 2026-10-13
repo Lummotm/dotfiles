@@ -8,7 +8,7 @@ MOUNT_POINT_EXT4="$HOME/mnt/Crucial_X9_ext4"
 mkdir -p "$HOME/logs"
 log() { echo "[$(date '+%H:%M:%S')] [CrucialX9] $1" >>"$LOG_FILE"; }
 notification() {
-  [[ -x "$(command -v notify-send)" ]] && notify-send -r 99 -t 2000 -u low "$1" "$2" -i "${3:-drive-harddisk}"
+  [[ -x "$(command -v notify-send)" ]] && notify-send -r 99 -t 1000 -u low "$1" "$2" -i "${3:-drive-harddisk}"
 }
 
 # --- LÓGICA DE DESMONTAJE ---

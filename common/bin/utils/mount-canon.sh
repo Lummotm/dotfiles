@@ -9,7 +9,7 @@ FLAG="$1"
 mkdir -p "$HOME/logs"
 log() { echo "[$(date '+%H:%M:%S')] [CANON] $1" >>"$LOG_FILE"; }
 notification() {
-  [[ -x "$(command -v notify-send)" ]] && notify-send -r 99 -t 3500 -u low "$1" "$2" -i "${3:-camera-photo}"
+  [[ -x "$(command -v notify-send)" ]] && notify-send -r 99 -t 1000 -u low "$1" "$2" -i "${3:-camera-photo}"
 }
 
 rofi_cmd() {

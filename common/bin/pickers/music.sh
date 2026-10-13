@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-
 # Port a bash de https://github.com/Marco98/rofi-mpc usando core.sh
 # Motor: PICKER_ENGINE=rofi|tofi|noctalia (ver core.sh)
 
 source "$HOME/bin/pickers/dependencies/core.sh"
 
+# ---------- Etiquetas (Nerd Font) ----------
 TOGGLE=$'\U000f040e Play/Pause'
 NEXT=$'\U000f04ad Next'
 PREV=$'\U000f04ae Prev'
@@ -17,6 +17,7 @@ OPT_PLAYLISTS=$'\U000f0411 Playlists'
 OPT_ALL_SONGS=$'\uf001 All Songs'
 OPT_PLAY_ALL="[Play All]"
 
+# ---------- Helpers ----------
 # menu "prompt" "mesg" [selected_row]   (opciones por stdin)
 menu() {
   local prompt="$1" mesg="$2" row="$3"
@@ -35,6 +36,33 @@ escape_markup() {
 
 playlist_len() { mpc playlist | wc -l; }
 
+# notification "titulo" "cuerpo" [icono]
+notification() {
+  command -v notify-send >/dev/null 2>&1 || return 0
+  notify-send -r 99 -t 1500 -u low "$1" "$2" -i "${3:-multimedia-player}"
+}
+
+# Notifica la pista actual, con título opcional ("Playing" por defecto)
+notify_track() {
+  local t
+  t=$(mpc -f '[%artist% - ]%title%' current)
+  notification "${1:-Playing}" "$(escape_markup "${t:-Nothing playing}")" \
+    "${2:-media-playback-start}"
+}
+
+# Lee el estado actual (tras cambiarlo) desde mpc
+mpc_flag() { mpc | grep -o "$1: [a-z]*" | head -n1 | cut -d' ' -f2; }
+
+repeat_label() {
+  if [[ "$(mpc_flag repeat)" != on ]]; then
+    echo Off
+  elif [[ "$(mpc_flag single)" == off ]]; then
+    echo On
+  else
+    echo Single
+  fi
+}
+
 play_last_added() { mpc play "$(playlist_len)"; }
 
 show_sources() {
@@ -47,13 +75,13 @@ show_sources() {
   "$OPT_ALBUMS")
     chosen=$(mpc list album | menu "Choose Album: " "")
     if [[ -n "$chosen" ]]; then
-      mpc findadd album "$chosen" && mpc play
+      mpc findadd album "$chosen" && mpc play >/dev/null
     fi
     ;;
   "$OPT_ARTISTS")
     chosen=$(mpc list artist | menu "Choose Artist: " "")
     if [[ -n "$chosen" ]]; then
-      mpc findadd artist "$chosen" && mpc play
+      mpc findadd artist "$chosen" && mpc play >/dev/null
     fi
     ;;
   "$OPT_ALL_SONGS")
@@ -66,17 +94,17 @@ show_sources() {
     if [[ "$chosen" == "$OPT_PLAY_ALL" ]]; then
       mpc update
       printf '%s\n' "$files" | mpc add
-      mpc play
+      mpc play >/dev/null
     elif [[ -n "$chosen" ]]; then
       mpc add "$chosen"
-      play_last_added
+      play_last_added >/dev/null
     fi
     ;;
   "$OPT_PLAYLISTS")
     chosen=$(mpc lsplaylists | grep -v -e '^[[:space:]]*$' -e '^tmp\.m3u$' |
       menu "Playlist: " "")
     if [[ -n "$chosen" ]]; then
-      mpc load "${chosen%.m3u}" && mpc play
+      mpc load "${chosen%.m3u}" && mpc play >/dev/null
     fi
     ;;
   esac
@@ -102,10 +130,11 @@ show_track_list() {
   if [[ "$sel" == "SOURCES" ]]; then
     show_sources
   else
-    mpc play "$sel"
+    mpc play "$sel" >/dev/null
   fi
 }
 
+# ---------- Estado ----------
 status_output=$(mpc)
 current_title=$(mpc -f '%title%' current)
 
@@ -119,9 +148,22 @@ fi
 
 onoff() { [[ "$status_output" == *"$1: on"* ]] && echo On || echo Off; }
 RANDOM_OPT=$'\U000f049d Random: '"$(onoff random)"
-REPEAT_OPT=$'\U000f0456 Repeat: '"$(onoff repeat)"
+
+# Repeat cicla: Off -> On -> Single (repeat + single) -> Off
+if [[ "$status_output" != *"repeat: on"* ]]; then
+  repeat_state=off
+  REPEAT_LABEL=Off
+elif [[ "$status_output" == *"single: off"* ]]; then
+  repeat_state=on
+  REPEAT_LABEL=On
+else
+  repeat_state=single
+  REPEAT_LABEL=Single
+fi
+REPEAT_OPT=$'\U000f0456 Repeat: '"$REPEAT_LABEL"
 CONSUME_OPT=$'\U000f10d8 Consume: '"$(onoff consume)"
 
+# ---------- Menú principal ----------
 if [[ "$(playlist_len)" -eq 0 ]]; then
   show_sources
   exit 0
@@ -134,16 +176,42 @@ selection=$(printf '%s\n' \
   menu "Select: " "$current_track" 1)
 
 case "$selection" in
-"$TOGGLE") mpc toggle ;;
-"$NEXT") mpc next ;;
-"$PREV") mpc prev ;;
-"$STOP") mpc stop && mpc clear ;;
-"$RANDOM_OPT") mpc random ;;
-"$REPEAT_OPT") mpc repeat ;;
-"$CONSUME_OPT") mpc consume ;;
+"$TOGGLE")
+  mpc toggle >/dev/null
+  if [[ "$(mpc)" == *"[playing]"* ]]; then
+    notify_track "Playing"
+  else
+    notify_track "Paused" media-playback-pause
+  fi
+  ;;
+"$NEXT")
+  mpc next >/dev/null
+  ;;
+"$PREV")
+  mpc prev >/dev/null
+  ;;
+"$STOP")
+  mpc stop >/dev/null && mpc clear >/dev/null
+  ;;
+"$RANDOM_OPT")
+  mpc random >/dev/null
+  notification "Random" "$(mpc_flag random)" media-playlist-shuffle
+  ;;
+"$REPEAT_OPT")
+  case "$repeat_state" in
+  off) mpc single off >/dev/null && mpc repeat on >/dev/null ;;
+  on) mpc single on >/dev/null ;;
+  single) mpc single off >/dev/null && mpc repeat off >/dev/null ;;
+  esac
+  notification "Repeat" "$(repeat_label)" media-playlist-repeat
+  ;;
+"$CONSUME_OPT")
+  mpc consume >/dev/null
+  notification "Consume" "$(mpc_flag consume)" media-playlist-consume
+  ;;
 "$LIST") show_track_list ;;
 Volume\ *)
   vol="${selection#Volume }"
-  mpc volume "${vol%\%}"
+  mpc volume "${vol%\%}" >/dev/null
   ;;
 esac
