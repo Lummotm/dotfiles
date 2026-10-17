@@ -83,7 +83,7 @@ widget_order = [
 
         [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
         background = false
-        color = "secondary"
+        color = "surface"
         font_family = "undefined medium"
 
     # --- Reloj (HDMI-A-1) ---
@@ -100,5 +100,5 @@ widget_order = [
 
         [lockscreen_widgets.widget.lockscreen-widget-0000000000000002.settings]
         background = false
-        color = "secondary"
+        color = "surface"
         font_family = "undefined medium"

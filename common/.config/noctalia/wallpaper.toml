@@ -1,9 +1,9 @@
 [wallpaper]
-directory = "/home/davidn/Pictures/Wallpapers/Mios"
+directory = "/home/davidn/Pictures/Wallpapers/"
 directory_dark = ""
 directory_light = ""
 edge_smoothness = 0.3
-enabled = true
+enabled = false
 fill_color = "#111111"
 fill_mode = "crop"
 per_monitor_directories = false
