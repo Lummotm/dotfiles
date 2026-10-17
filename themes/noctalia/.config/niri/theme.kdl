@@ -11,7 +11,8 @@ prefer-no-csd
 // Noctalia theming
 // Place the regular wallpaper on the backdrop.
 layer-rule {
-  match namespace="^noctalia-wallpaper"
+  // match namespace="^noctalia-wallpaper"
+  match namespace="^talis-desktop-experimental$"
   place-within-backdrop true
 }
 
