@@ -1,0 +1,98 @@
+[desktop_widgets]
+schema_version = 2
+widget_order = [ 
+    "desktop-widget-0000000000000001", 
+    "desktop-widget-0000000000000005", 
+    "desktop-widget-0000000000000007", 
+    "desktop-widget-0000000000000008", 
+    "desktop-widget-0000000000000009" 
+]
+
+    [desktop_widgets.grid]
+    cell_size = 24
+    major_interval = 4
+    visible = false
+
+    [desktop_widgets.widget.desktop-widget-0000000000000001]
+    box_height = 348.0
+    box_width = 586.0
+    cx = 1594.0
+    cy = 226.0
+    output = "HDMI-A-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "calendar"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000001.settings]
+        background_opacity = 0.25
+        background_padding = 12
+        background_radius = 12
+
+    [desktop_widgets.widget.desktop-widget-0000000000000005]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 217.04019165039062
+    cy = 168.0
+    output = "HDMI-A-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.030933000147342682
+    type = "remo/noctes:note"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000005.settings]
+        background = false
+        font_size = 16
+        key = "nota-1"
+        paper_height = 230
+        paper_width = 250
+
+    # --- Widget de calendario original en eDP-1 ---
+
+    [desktop_widgets.widget.desktop-widget-0000000000000007]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 1556.0
+    cy = 828.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "calendar"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000007.settings]
+        background_opacity = 0.14999999999999999
+
+    [desktop_widgets.widget.desktop-widget-0000000000000008]
+    box_height = 348.0
+    box_width = 586.0
+    cx = 1594.0
+    cy = 226.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "calendar"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000008.settings]
+        background_opacity = 0.25
+        background_padding = 12
+        background_radius = 12
+
+    [desktop_widgets.widget.desktop-widget-0000000000000009]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 217.04019165039062
+    cy = 168.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.030933000147342682
+    type = "remo/noctes:note"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000009.settings]
+        background = false
+        font_size = 16
+        key = "nota-1"
+        paper_height = 230
+        paper_width = 250
