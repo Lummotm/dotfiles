@@ -174,19 +174,25 @@ manage_resources
 
 cd "$DOTFILES_DIR" || exit
 
-git update-index --assume-unchanged "common/.config/rofi/colors.rasi" 2>/dev/null
-git update-index --assume-unchanged "common/.config/waybar/colors.css" 2>/dev/null
-git update-index --assume-unchanged "common/.config/zathura/zathurarc" 2>/dev/null
-git update-index --assume-unchanged "common/.config/dunst/dunstrc" 2>/dev/null
-git update-index --assume-unchanged "common/.config/nvim/lazy-lock.json" 2>/dev/null
-git update-index --assume-unchanged "common/.config/discord/settings.json" 2>/dev/null
-git update-index --assume-unchanged "common/.config/sioyek/prefs_user.config" 2>/dev/null
-git update-index --assume-unchanged "common/.config/niri/colors.kdl" 2>/dev/null
-git update-index --assume-unchanged "common/.config/btop/themes/noctalia.theme" 2>/dev/null
-git update-index --assume-unchanged "common/.config/gtk-3.0/noctalia.css" 2>/dev/null
-git update-index --assume-unchanged "common/.config/tmux/themes/noctalia.conf" 2>/dev/null
-git update-index --assume-unchanged "common/.config/yazi/flavors/noctalia.yazi/flavor.toml" 2>/dev/null
-git update-index --assume-unchanged "common/.config/yazi/flavors/noctalia.yazi/tmtheme.xml" 2>/dev/null
+files=(
+  "common/.config/rofi/colors.rasi"
+  "common/.config/waybar/colors.css"
+  "common/.config/zathura/zathurarc"
+  "common/.config/dunst/dunstrc"
+  "common/.config/nvim/lazy-lock.json"
+  "common/.config/discord/settings.json"
+  "common/.config/sioyek/prefs_user.config"
+  "common/.config/niri/colors.kdl"
+  "common/.config/btop/themes/noctalia.theme"
+  "common/.config/gtk-3.0/noctalia.css"
+  "common/.config/tmux/themes/noctalia.conf"
+  "common/.config/yazi/flavors/noctalia.yazi/flavor.toml"
+  "common/.config/yazi/flavors/noctalia.yazi/tmtheme.xml"
+)
+
+for file in "${files[@]}"; do
+  git update-index --skip-worktree "$file" 2>/dev/null
+done
 
 git config --global http.postBuffer 52428800
 
