@@ -36,23 +36,18 @@ type = "session"
 
 [desktop_widgets]
 schema_version = 2
-widget_order = [
-    "desktop-widget-0000000000000001",
-    "desktop-widget-0000000000000005",
-    "desktop-widget-0000000000000006",
-    "desktop-widget-0000000000000007"
-]
+widget_order = [ "desktop-widget-0000000000000001", "desktop-widget-0000000000000005", "desktop-widget-0000000000000007" ]
 
     [desktop_widgets.grid]
     cell_size = 24
     major_interval = 4
-    visible = true
+    visible = false
 
     [desktop_widgets.widget.desktop-widget-0000000000000001]
     box_height = 408.0
     box_width = 648.0
-    cx = 1560.0
-    cy = 828.0
+    cx = 1563.0
+    cy = 259.0
     output = "HDMI-A-1"
     placement_height = 1080.0
     placement_width = 1920.0
@@ -60,16 +55,16 @@ widget_order = [
     type = "calendar"
 
         [desktop_widgets.widget.desktop-widget-0000000000000001.settings]
-        background_opacity = 0.45000000000000001
+        background_opacity = 0.25
         background_padding = 12
         background_radius = 12
 
     [desktop_widgets.widget.desktop-widget-0000000000000005]
     box_height = 0.0
     box_width = 0.0
-    cx = 170.0
-    cy = 170.0
-    output = "eDP-1"
+    cx = 217.04019165039062
+    cy = 168.0
+    output = "HDMI-A-1"
     placement_height = 1080.0
     placement_width = 1920.0
     rotation = 0.030933000147342682
@@ -77,23 +72,10 @@ widget_order = [
 
         [desktop_widgets.widget.desktop-widget-0000000000000005.settings]
         background = false
+        font_size = 16
         key = "nota-1"
-
-    [desktop_widgets.widget.desktop-widget-0000000000000006]
-    box_height = 120.0
-    box_width = 216.0
-    cx = 1774.0
-    cy = 540.0
-    output = "HDMI-A-1"
-    placement_height = 1080.0
-    placement_width = 1920.0
-    rotation = 0.0
-    type = "weather"
-
-        [desktop_widgets.widget.desktop-widget-0000000000000006.settings]
-        background = true
-        background_opacity = 0.45000000000000001
-        background_padding = 12
+        paper_height = 230
+        paper_width = 250
 
     [desktop_widgets.widget.desktop-widget-0000000000000007]
     box_height = 0.0
@@ -107,7 +89,14 @@ widget_order = [
     type = "calendar"
 
         [desktop_widgets.widget.desktop-widget-0000000000000007.settings]
-        background_opacity = 0.45000000000000001
+        background_opacity = 0.14999999999999999
+
+[dock]
+background_opacity = 0.44999998994171619
+enabled = true
+icon_size = 30
+reserve_space = false
+smart_auto_hide = true
 
 [hooks]
 shutting_down = "~/bin/sys/0-pre-shutdown.sh"
@@ -117,6 +106,11 @@ down = [ "Down", "Ctrl+n", "Ctrl+j" ]
 left = [ "Left", "Ctrl+h" ]
 right = [ "Right", "Ctrl+l" ]
 up = [ "Up", "Ctrl+p", "Ctrl+k" ]
+
+[lockscreen]
+allow_empty_password = true
+blurred_desktop = true
+transition = [ "honeycomb", "stripes", "wipe", "zoom" ]
 
 [lockscreen_widgets]
 enabled = true
@@ -195,7 +189,7 @@ widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-login-box@HDMI-A-1", 
 
         [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
         background = false
-        color = "secondary"
+        color = "surface"
         font_family = "undefined medium"
 
 [notification]
@@ -207,10 +201,11 @@ width = 500
 background_opacity = 0.44999998994171619
 
 [plugin_settings."remo/noctes"]
+paper_opacity = 0.70000000000000007
 save_path = "/home/davidn/Documents/Noctes-notes"
 
 [plugins]
-enabled = [ "remo/noctes", "yocraft/web-launcher", "dotnetrob/cat", "alexander/game-launcher" ]
+enabled = [ "remo/noctes", "dotnetrob/cat", "yuuto/arch-updater", "Lummotm/keepass" ]
 
 [shell]
 avatar_path = "/home/davidn/Pictures/Beibis/IMG-20260622-WA0001.jpg"
@@ -260,45 +255,33 @@ settings_window_translucent = true
     variant = "default"
 
 [theme]
-mode = "light"
-source = "wallpaper"
+builtin = "Rosé Pine"
+mode = "dark"
+source = "builtin"
 wallpaper_scheme = "m3-content"
 
     [theme.templates]
     community_ids = [ "zen-browser", "sioyek", "tmux", "yazi" ]
 
 [wallpaper.default]
-path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0394.JPG"
+path = "/home/davidn/Pictures/Wallpapers/Claude-Monet-el-puente-de-argenteuil.jpg"
 
 [wallpaper.last]
-path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0394.JPG"
+path = "/home/davidn/Pictures/Wallpapers/Claude-Monet-el-puente-de-argenteuil.jpg"
 
 [wallpaper.monitors.HDMI-A-1]
-path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0369.JPG"
+path = "/home/davidn/Pictures/Wallpapers/Claude-Monet-el-puente-de-argenteuil.jpg"
 
 [wallpaper.monitors.eDP-1]
-path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0394.JPG"
-
-[[wallpaper.favorite]]
-palette_source = "wallpaper"
-path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0109.png"
-theme_mode = "dark"
-wallpaper_scheme = "m3-content"
-
-[[wallpaper.favorite]]
-path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0238.JPG"
-
-[[wallpaper.favorite]]
-path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0394.JPG"
-
-[[wallpaper.favorite]]
-path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_0369.JPG"
-
-[[wallpaper.favorite]]
-path = "/home/davidn/Pictures/Wallpapers/Mios/IMG_LISBOA.jpg"
+path = "/home/davidn/Pictures/Wallpapers/Claude-Monet-cliffs-at-pourville-1985.jpg"
 
 [widget.cat]
 type = "dotnetrob/cat:cat"
+
+[widget.media]
+hide_artist = true
+show_progress = true
+title_scroll = "always"
 
 [widget.workspaces]
 style = "focus_hint"
