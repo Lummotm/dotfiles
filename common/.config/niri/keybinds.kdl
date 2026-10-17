@@ -13,9 +13,6 @@ binds {
   Super+A hotkey-overlay-title="Control Center (Noctalia)" { 
     spawn "noctalia" "msg" "panel-toggle" "control-center"; 
   }
-  Super+B hotkey-overlay-title="Toggle Dock/Bar" { 
-    spawn "noctalia" "msg" "dock-toggle"; 
-  }
   Super+Alt+A hotkey-overlay-title="Toggle theme (Light/Dark)" { 
     spawn "noctalia" "msg" "theme-mode-toggle"; 
   }
@@ -32,6 +29,7 @@ binds {
   }
 
   Super+N hotkey-overlay-title="Notes Manager" { spawn-sh "PICKER_ENGINE=noctalia ~/bin/pickers/notes.sh"; }
+  Super+Shift+N hotkey-overlay-title="Document Manager" { spawn-sh "PICKER_ENGINE=noctalia ~/bin/pickers/document-opener.sh"; }
   Super+M hotkey-overlay-title="Music manager" { spawn-sh "PICKER_ENGINE=noctalia ~/bin/pickers/music.sh"; }
 
 

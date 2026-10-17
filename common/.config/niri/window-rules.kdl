@@ -59,6 +59,14 @@ window-rule {
   open-maximized true
 }
 
+window-rule {
+  match app-id="zenity"
+  open-floating true
+  default-column-width { fixed 720; }
+  default-window-height { fixed 480; }
+
+}
+
 debug {
   // Allows notification actions and window activation from Noctalia.
   honor-xdg-activation-with-invalid-serial
