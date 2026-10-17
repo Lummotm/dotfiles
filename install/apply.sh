@@ -160,6 +160,7 @@ if ! command -v stow &>/dev/null || ! command -v 7z &>/dev/null || ! command -v 
 fi
 
 rm -rf $HOME/.config/{waybar,rofi,niri,dunst}
+cp $HOME/dotfiles/extra/bashrc $HOME/.bashrc
 find "$HOME/.local/share" -xtype l -delete 2>/dev/null
 
 mkdir -vp \

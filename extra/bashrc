@@ -1,0 +1,13 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+PS1='[\u@\h \W]\$ '
+export YT_X_FZF_OPTS="--color=bg:-1,bg+:-1,gutter:-1,prompt:5,pointer:5,marker:5"
+
+export SUDO_EDITOR=nvim
