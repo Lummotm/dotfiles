@@ -46,8 +46,8 @@ widget_order = [ "desktop-widget-0000000000000001", "desktop-widget-000000000000
     [desktop_widgets.widget.desktop-widget-0000000000000001]
     box_height = 348.0
     box_width = 586.0
-    cx = 1594.0
-    cy = 226.0
+    cx = 1595.0
+    cy = 234.0
     output = "HDMI-A-1"
     placement_height = 1080.0
     placement_width = 1920.0
@@ -126,7 +126,6 @@ widget_order = [
     major_interval = 4
     visible = true
 
-    # --- Login Box (HDMI-A-1) ---
     [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
     box_height = 70.0
     box_width = 368.0
@@ -154,7 +153,6 @@ widget_order = [
         show_unlock_hint = false
         show_weather = true
 
-    # --- Login Box (eDP-1) ---
     [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
     box_height = 70.0
     box_width = 368.0
@@ -182,7 +180,6 @@ widget_order = [
         show_unlock_hint = false
         show_weather = true
 
-    # --- Reloj (eDP-1) ---
     [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
     box_height = 448.0
     box_width = 1248.0
@@ -199,7 +196,6 @@ widget_order = [
         color = "surface"
         font_family = "undefined medium"
 
-    # --- Reloj (HDMI-A-1) ---
     [lockscreen_widgets.widget.lockscreen-widget-0000000000000002]
     box_height = 448.0
     box_width = 1248.0
@@ -291,13 +287,13 @@ wallpaper_scheme = "m3-content"
     community_ids = [ "zen-browser", "sioyek", "tmux", "yazi" ]
 
 [wallpaper.default]
-path = "/usr/share/talis/assets/scenes/1080p/day/beauty.png"
+path = "/home/davidn/Pictures/Wallpapers/Claude-Monet-impresion-sol-naciente.jpg"
 
 [wallpaper.last]
-path = "/usr/share/talis/assets/scenes/1080p/day/beauty.png"
+path = "/home/davidn/Pictures/Wallpapers/Claude-Monet-impresion-sol-naciente.jpg"
 
 [wallpaper.monitors.HDMI-A-1]
-path = "/usr/share/talis/assets/scenes/1080p/day/beauty.png"
+path = "/home/davidn/Pictures/Wallpapers/Claude-Monet-impresion-sol-naciente.jpg"
 
 [wallpaper.monitors.eDP-1]
 path = "/home/davidn/Pictures/Wallpapers/Claude-Monet-cliffs-at-pourville-1985.jpg"
