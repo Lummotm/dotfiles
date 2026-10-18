@@ -14,6 +14,7 @@ done
 # awww-daemon &
 # dunst &
 # sunsetr &
+# $HOME/bin/utils/start-talis.sh &
 mpd-mpris &
 # bluetoothctl power off &
 
