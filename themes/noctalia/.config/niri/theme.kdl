@@ -67,3 +67,13 @@ blur {
   noise 0.03      // grain overlay (default: 0.02)
   saturation 1.0  // color saturation boost (default: 1.5)
 }
+
+
+// Noctalia window rules 
+window-rule {
+  // Rounded corners for a modern look.
+  geometry-corner-radius 20
+
+  // Clips window contents to the rounded corner boundaries.
+  clip-to-geometry true
+}

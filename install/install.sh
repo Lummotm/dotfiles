@@ -340,81 +340,58 @@ setup_fish_shell() {
 setup_login_greeter() {
   log "Configurando el gestor de sesión..."
 
+  local wm_name="$de_profile"
+  local greetd_base="$HOME/dotfiles/extra/greetd"
+  local greetd_config
+
+  if [[ "$use_autologin" =~ ^[Yy]$ ]]; then
+    greetd_config="$greetd_base/${wm_name}.toml"
+  else
+    greetd_config="$greetd_base/noctalia.toml"
+  fi
+
   if [[ "$DRY_RUN" == "y" ]]; then
     log "DRY RUN: Deshabilitando servicios de login antiguos"
     log "DRY RUN: Instalando wayland-launcher"
     log "DRY RUN: Copiando sesiones .desktop"
-    [[ "$use_autologin" =~ ^[Yy]$ ]] && log "DRY RUN: Configurando Greetd con autologin"
-    [[ ! "$use_autologin" =~ ^[Yy]$ ]] && log "DRY RUN: Configurando Ly sin autologin"
+    log "DRY RUN: Configurando Greetd con $greetd_config"
     return 0
   fi
 
+  if [[ ! -f "$greetd_config" ]]; then
+    error_log "No se encontró la configuración en $greetd_config"
+    return 1
+  fi
+
   # Limpieza previa de servicios
-  sudo systemctl disable ly.service ly@tty2.service greetd sddm getty@tty2.service 2>/dev/null || true
+  sudo systemctl disable ly.service ly@tty2.service sddm getty@tty2.service 2>/dev/null || true
   sudo rm -f /etc/systemd/system/getty@tty1.service.d/autologin.conf 2>/dev/null
   sudo systemctl daemon-reload
 
-  local toggle_script="$HOME/.config/niri/bin/niri_prop_toggle.py"
-  local startup_kdl="$HOME/.config/niri/startup.kdl"
-  local wm_name="$de_profile"
-  local greetd_base="$HOME/dotfiles/extra/greetd"
-
-  # 1. Instalar el wayland-launcher universal para Greetd y Ly
+  # 1. wayland-launcher universal
   if [ -f "$HOME/dotfiles/extra/bin/wayland-launcher" ]; then
-    sudo cp "$HOME/dotfiles/extra/bin/wayland-launcher" "/usr/local/bin/wayland-launcher"
-    sudo chmod 755 "/usr/local/bin/wayland-launcher"
+    sudo cp "$HOME/dotfiles/extra/bin/wayland-launcher" /usr/local/bin/wayland-launcher
+    sudo chmod 755 /usr/local/bin/wayland-launcher
   else
     warning_log "No se encontró wayland-launcher en extra/bin/"
   fi
 
-  # 2. Copiar sesiones .desktop (Para Ly, tanto en laptop como desktop)
+  # 2. Sesiones .desktop
   sudo mkdir -p /usr/share/wayland-sessions/
-  sudo cp ~/dotfiles/extra/wayland-sessions/*.desktop /usr/share/wayland-sessions/ 2>/dev/null || true
+  sudo cp "$HOME"/dotfiles/extra/wayland-sessions/*.desktop /usr/share/wayland-sessions/ 2>/dev/null || true
 
-  if [[ "$use_autologin" =~ ^[Yy]$ ]]; then
-    log "Habilitando Autologin con Greetd y bloqueo inicial con hyprlock..."
-    sudo pacman -S --needed --noconfirm greetd python hyprlock
+  # 3. Greetd (y fuera Ly si estaba instalado)
+  local pkgs=(greetd python)
+  [[ "$use_autologin" =~ ^[Yy]$ ]] && pkgs+=(hyprlock)
+  sudo pacman -S --needed --noconfirm "${pkgs[@]}"
 
-    # No se porque hace exit aun con el true al lado
-    set +e
-    # Desabilitar tema de login que no sea el que queremos
-    sudo systemctl disable getty@tty2.service || true
-    sudo systemctl disable ly@tty2.service || true
-    sudo pacman -Rns --noconfirm ly
-    set -e
+  pacman -Qi ly &>/dev/null && sudo pacman -Rns --noconfirm ly
 
-    # Determinamos qué toml usar según el entorno elegido
-    local greetd_config="$greetd_base/${wm_name}.toml"
-
-    if [ -f "$greetd_config" ]; then
-      sudo mkdir -p /etc/greetd
-      sudo cp "$greetd_config" /etc/greetd/config.toml
-      sudo systemctl enable greetd.service
-    else
-      error_log "No se encontró la configuración en $greetd_config"
-    fi
-
-  else
-    log "Configurando Ly (Login manual)..."
-    sudo pacman -S --needed --noconfirm ly python
-
-    set +e
-    sudo systemctl disable getty@tty2.service || true
-    sudo systemctl disable greetd.service || true
-    sudo systemctl enable ly@tty2.service
-    sudo pacman -Rns --noconfirm greetd
-    set -e
-
-    # Copy new wayland session file to dir
-    sudo cp "$HOME/dotfiles/extra/wayland-sessions/hyprland.desktop" /usr/share/wayland-sessions/hyprland.desktop
-    sudo cp "$HOME/dotfiles/extra/wayland-sessions/niri.desktop" /usr/share/wayland-sessions/niri.desktop
-
-    # log "Intentando desactivar hyprlock en el inicio del compositor para evitar doble login..."
-    #
-    # # Niri: Intentamos usar el script de python. Si falla o no existe, no pasa nada (|| true).
-    # python "$toggle_script" "$startup_kdl" "spawn-at-startup" "hyprlock" 2>/dev/null || true
-
-  fi
+  # 4. Config + enable
+  log "Habilitando Greetd con $(basename "$greetd_config")..."
+  sudo mkdir -p /etc/greetd
+  sudo cp "$greetd_config" /etc/greetd/config.toml
+  sudo systemctl enable greetd.service
 }
 
 setup_printers() {
@@ -684,6 +661,7 @@ Opciones modulares:
   --hotspot           Configura la red hotspot (solo laptop)
   --services-desktop  Configura servicios para desktop (sin instalación completa)
   --services-laptop   Configura servicios para laptop (sin instalación completa)
+  --dns               Reglas de dns custom
   --help              Muestra este menú
 
 Variables de entorno:
@@ -697,6 +675,21 @@ Ejemplos:
   DRY_RUN=y $0 --services-laptop     # Simular servicios de laptop
   IS_PERSONAL=y DRY_RUN=y $0 --full  # Simular instalación completa con módulos personales
 EOF
+}
+
+setup_custom_dns() {
+  echo "Instalando reglas custom de dns."
+  sudo mkdir -p /etc/systemd/resolved.conf.d
+
+  sudo tee /etc/systemd/resolved.conf.d/dns_servers.conf >/dev/null <<EOF
+[Resolve]
+DNS=1.1.1.1 1.0.0.1 2606:4700:4700::1111 2606:4700:4700::1001
+FallbackDNS=8.8.8.8 8.8.4.4
+DNSOverTLS=yes
+EOF
+
+  sudo systemctl restart systemd-resolved
+  sudo resolvectl flush-caches
 }
 
 full_install() {
@@ -719,6 +712,7 @@ full_install() {
   install_all_packages
   setup_dotfiles
   setup_sysctl_gaming
+  setup_custom_dns
 
   setup_sudoers
   setup_audio
@@ -784,6 +778,9 @@ case "$1" in
   ;;
 --printers)
   setup_printers
+  ;;
+--dns)
+  setup_custom_dns
   ;;
 --full | "")
   full_install

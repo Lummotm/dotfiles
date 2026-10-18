@@ -36,7 +36,12 @@ type = "session"
 
 [desktop_widgets]
 schema_version = 2
-widget_order = [ "desktop-widget-0000000000000001", "desktop-widget-0000000000000005", "desktop-widget-0000000000000007" ]
+widget_order = [
+    "desktop-widget-0000000000000001",
+    "desktop-widget-0000000000000005",
+    "desktop-widget-0000000000000007",
+    "desktop-widget-0000000000000008"
+]
 
     [desktop_widgets.grid]
     cell_size = 24
@@ -62,12 +67,12 @@ widget_order = [ "desktop-widget-0000000000000001", "desktop-widget-000000000000
     [desktop_widgets.widget.desktop-widget-0000000000000005]
     box_height = 0.0
     box_width = 0.0
-    cx = 217.04019165039062
-    cy = 168.0
+    cx = 496.04019165039062
+    cy = 938.0
     output = "HDMI-A-1"
     placement_height = 1080.0
     placement_width = 1920.0
-    rotation = 0.030933000147342682
+    rotation = 0.0
     type = "remo/noctes:note"
 
         [desktop_widgets.widget.desktop-widget-0000000000000005.settings]
@@ -90,6 +95,24 @@ widget_order = [ "desktop-widget-0000000000000001", "desktop-widget-000000000000
 
         [desktop_widgets.widget.desktop-widget-0000000000000007.settings]
         background_opacity = 0.14999999999999999
+
+    [desktop_widgets.widget.desktop-widget-0000000000000008]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 230.0
+    cy = 947.0
+    output = "HDMI-A-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "remo/noctes:note"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000008.settings]
+        background = false
+        background_opacity = 0.25
+        background_padding = 12
+        background_radius = 12
+        key = "nota-3"
 
 [dock]
 background_opacity = 0.44999998994171619
@@ -223,6 +246,7 @@ background_opacity = 0.44999998994171619
 [plugin_settings."remo/noctes"]
 paper_opacity = 0.70000000000000007
 save_path = "/home/davidn/Documents/Noctes-notes"
+tilt = false
 
 [plugins]
 enabled = [ "remo/noctes", "dotnetrob/cat", "yuuto/arch-updater", "Lummotm/keepass" ]

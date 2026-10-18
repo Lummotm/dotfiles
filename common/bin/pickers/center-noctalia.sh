@@ -12,7 +12,7 @@ P="$HOME/bin/pickers"
 pick_color() { yad --color --title="Selector" | wl-copy; }
 
 # Orden de la lista y comando asociado a cada opcion
-ORDER=(Audio Network Monitor Brightness Killer Mount "Color Picker" Icons Notes Documents)
+ORDER=(Audio Network Monitor Brightness Killer Mount "Color Picker" Icons Notes Documents Themes)
 declare -A ACTIONS=(
   [Audio]="$P/audio.sh"
   [Network]="$P/ronema/network.sh"
@@ -24,6 +24,7 @@ declare -A ACTIONS=(
   [Icons]="$P/nerd-icons.sh"
   [Notes]="$P/notes.sh"
   [Documents]="$P/document-opener.sh"
+  [Themes]="$P/theme-selector.sh"
 )
 
 # Charge Mode: solo en portatil enchufado
