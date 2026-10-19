@@ -1,4 +1,4 @@
-config_version = 14
+config_version = 15
 
 [bar.default]
 background_opacity = 0.44999998994171619
@@ -38,9 +38,11 @@ type = "session"
 schema_version = 2
 widget_order = [
     "desktop-widget-0000000000000001",
-    "desktop-widget-0000000000000005",
     "desktop-widget-0000000000000007",
-    "desktop-widget-0000000000000008"
+    "desktop-widget-0000000000000008",
+    "desktop-widget-0000000000000009",
+    "desktop-widget-000000000000000a",
+    "desktop-widget-000000000000000b"
 ]
 
     [desktop_widgets.grid]
@@ -64,29 +66,11 @@ widget_order = [
         background_padding = 12
         background_radius = 12
 
-    [desktop_widgets.widget.desktop-widget-0000000000000005]
-    box_height = 0.0
-    box_width = 0.0
-    cx = 496.04019165039062
-    cy = 938.0
-    output = "HDMI-A-1"
-    placement_height = 1080.0
-    placement_width = 1920.0
-    rotation = 0.0
-    type = "remo/noctes:note"
-
-        [desktop_widgets.widget.desktop-widget-0000000000000005.settings]
-        background = false
-        font_size = 16
-        key = "nota-1"
-        paper_height = 230
-        paper_width = 250
-
     [desktop_widgets.widget.desktop-widget-0000000000000007]
-    box_height = 0.0
-    box_width = 0.0
-    cx = 1556.0
-    cy = 828.0
+    box_height = 360.390625
+    box_width = 571.30859375
+    cx = 1592.470703125
+    cy = 230.546875
     output = "eDP-1"
     placement_height = 1080.0
     placement_width = 1920.0
@@ -94,12 +78,12 @@ widget_order = [
     type = "calendar"
 
         [desktop_widgets.widget.desktop-widget-0000000000000007.settings]
-        background_opacity = 0.14999999999999999
+        background_opacity = 0.10000000000000001
 
     [desktop_widgets.widget.desktop-widget-0000000000000008]
     box_height = 0.0
     box_width = 0.0
-    cx = 230.0
+    cx = 150.0
     cy = 947.0
     output = "HDMI-A-1"
     placement_height = 1080.0
@@ -114,9 +98,55 @@ widget_order = [
         background_radius = 12
         key = "nota-3"
 
+    [desktop_widgets.widget.desktop-widget-0000000000000009]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 165.0
+    cy = 686.0
+    output = "HDMI-A-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "remo/noctes:note"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000009.settings]
+        background = false
+        font_size = 16
+        key = "nota-4"
+        paper_height = 300
+        paper_width = 250
+
+    [desktop_widgets.widget.desktop-widget-000000000000000a]
+    box_height = 192.9140625
+    box_width = 214.75390625
+    cx = 1755.857421875
+    cy = 957.4375
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "noctalia/timer:desktop"
+
+        [desktop_widgets.widget.desktop-widget-000000000000000a.settings]
+        background_opacity = 0.10000000000000001
+
+    [desktop_widgets.widget.desktop-widget-000000000000000b]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 382.0
+    cy = 948.0
+    output = "HDMI-A-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "remo/noctes:note"
+
+        [desktop_widgets.widget.desktop-widget-000000000000000b.settings]
+        background = false
+        key = "nota-1"
+
 [dock]
 background_opacity = 0.44999998994171619
-enabled = true
 icon_size = 30
 reserve_space = false
 smart_auto_hide = true
@@ -235,6 +265,9 @@ widget_order = [
         color = "surface"
         font_family = "undefined medium"
 
+[nightlight]
+enabled = true
+
 [notification]
 background_opacity = 0.44999998994171619
 position = "top_center"
@@ -249,7 +282,7 @@ save_path = "/home/davidn/Documents/Noctes-notes"
 tilt = false
 
 [plugins]
-enabled = [ "remo/noctes", "dotnetrob/cat", "yuuto/arch-updater", "Lummotm/keepass" ]
+enabled = [ "remo/noctes", "dotnetrob/cat", "yuuto/arch-updater", "Lummotm/keepass", "noctalia/timer" ]
 
 [shell]
 avatar_path = "/home/davidn/Pictures/Beibis/IMG-20260622-WA0001.jpg"
@@ -258,7 +291,11 @@ niri_overview_type_to_launch_enabled = true
 settings_window_translucent = true
 
     [shell.greeter_sync]
-    auto_sync = true
+    auto_sync = false
+
+    [shell.launcher]
+    categories = false
+    layout = "simple"
 
     [shell.mpris]
     blacklist = [ "firefox" ]
@@ -304,23 +341,23 @@ settings_window_translucent = true
 [theme]
 builtin = "Rosé Pine"
 mode = "dark"
-source = "builtin"
+source = "wallpaper"
 wallpaper_scheme = "m3-content"
 
     [theme.templates]
     community_ids = [ "zen-browser", "sioyek", "tmux", "yazi" ]
 
 [wallpaper.default]
-path = "/home/davidn/Pictures/Wallpapers/Claude-Monet-impresion-sol-naciente.jpg"
+path = "/home/davidn/Pictures/Wallpapers/wallhaven-5yk9o1_1920x1080.png"
 
 [wallpaper.last]
-path = "/home/davidn/Pictures/Wallpapers/Claude-Monet-impresion-sol-naciente.jpg"
+path = "/home/davidn/Pictures/Wallpapers/wallhaven-5yk9o1_1920x1080.png"
 
 [wallpaper.monitors.HDMI-A-1]
-path = "/home/davidn/Pictures/Wallpapers/Claude-Monet-impresion-sol-naciente.jpg"
+path = "/home/davidn/Pictures/Wallpapers/wallhaven-5yk9o1_1920x1080.png"
 
 [wallpaper.monitors.eDP-1]
-path = "/home/davidn/Pictures/Wallpapers/Claude-Monet-cliffs-at-pourville-1985.jpg"
+path = "/home/davidn/Pictures/Wallpapers/Claude-Monet-el-tamesis-bajo-westminster.jpg"
 
 [widget.cat]
 type = "dotnetrob/cat:cat"
