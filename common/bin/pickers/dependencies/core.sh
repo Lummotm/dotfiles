@@ -8,6 +8,22 @@ TOFI_CONFIG_DEFAULT="$HOME/.config/tofi/config"
 # o por script suelto pasando --tofi a rofi_core.
 PICKER_ENGINE="${PICKER_ENGINE:-rofi}"
 
+# Timeout en segundos para cualquier picker (0 o vacío = sin timeout).
+# Se puede definir desde fuera:
+#   PICKER_TIMEOUT=8 ./script.sh
+# o dentro de un script, antes de llamar a rofi_core.
+PICKER_TIMEOUT="${PICKER_TIMEOUT:-0}"
+
+# Ejecuta el comando con timeout si PICKER_TIMEOUT > 0.
+# -k 1: si el proceso ignora SIGTERM, SIGKILL tras 1s.
+_with_timeout() {
+  if [[ "$PICKER_TIMEOUT" =~ ^[0-9]+$ && "$PICKER_TIMEOUT" -gt 0 ]]; then
+    timeout -k 1 "$PICKER_TIMEOUT" "$@"
+  else
+    "$@"
+  fi
+}
+
 rofi_core() {
   local width="60ch"
   local prompt=""
@@ -124,7 +140,7 @@ _rofi_run() {
   [[ -n "$mesg" ]] && cmd+=(-mesg "$mesg")
   [[ "$password" == "true" ]] && cmd+=(-password)
 
-  "${cmd[@]}" "${rofi_args[@]}"
+  _with_timeout "${cmd[@]}" "${rofi_args[@]}"
 }
 
 _tofi_run() {
@@ -158,7 +174,7 @@ _tofi_run() {
     esac
   done
 
-  "${cmd[@]}"
+  _with_timeout "${cmd[@]}"
 }
 
 _noctalia_run() {
@@ -174,10 +190,17 @@ _noctalia_run() {
     esac
   done
 
-  # noctalia dmenu solo tiene un texto de placeholder: usamos prompt, o mesg si no hay
   local label="${prompt:-$mesg}"
   local cmd=(noctalia dmenu)
   [[ -n "$label" ]] && cmd+=(-p "$label")
 
-  "${cmd[@]}"
+  _with_timeout "${cmd[@]}"
+  local rc=$?
+
+  # 124 = timeout, 137 = SIGKILL tras -k 1: el cliente murió pero el launcher sigue abierto
+  if [[ $rc -eq 124 || $rc -eq 137 ]]; then
+    noctalia msg panel-close launcher >/dev/null 2>&1
+  fi
+
+  return $rc
 }
