@@ -578,31 +578,46 @@ setup_hotspot_network() {
   log "Configurando Hotspot..."
 
   if [[ "$DRY_RUN" == "y" ]]; then
-    log "DRY RUN: Detectando interfaces eth y wifi"
+    log "DRY RUN: Detectando interfaz wifi"
     log "DRY RUN: Configurando IP forwarding y reglas UFW"
     log "DRY RUN: Creando conexión Hotspot en NetworkManager"
     return 0
   fi
 
-  local eth=$(nmcli -t -f DEVICE,TYPE device status | grep ":ethernet" | head -n1 | cut -d: -f1)
-  local wifi=$(nmcli -t -f DEVICE,TYPE device status | grep ":wifi" | head -n1 | cut -d: -f1)
+  local wifi
+  wifi=$(nmcli -t -f DEVICE,TYPE device status | awk -F: '$2=="wifi"{print $1; exit}')
 
-  if [[ -n "$eth" && -n "$wifi" ]]; then
-    echo "net.ipv4.ip_forward=1" | sudo tee /etc/sysctl.d/99-hotspot.conf >/dev/null
-    sudo sysctl --system >/dev/null
-
-    if command -v ufw &>/dev/null; then
-      sudo ufw route allow in on "$wifi" out on "$eth"
-      sudo ufw allow in on "$wifi" to any port 67 proto udp
-      sudo ufw allow in on "$wifi" to any port 53
-      sudo ufw --force enable
-    fi
-
-    nmcli con delete "Hotspot" 2>/dev/null || true
-    nmcli con add type wifi ifname "$wifi" con-name "Hotspot" autoconnect no ssid "Hotspot" 802-11-wireless.mode ap 802-11-wireless-security.key-mgmt wpa-psk 802-11-wireless-security.psk "ThinkingRock123" 802-11-wireless-security.proto rsn 802-11-wireless-security.group ccmp 802-11-wireless-security.pairwise ccmp 802-11-wireless-security.pmf 0 ipv4.method shared
-  else
-    warning_log "No se encontraron interfaces eth y wifi para configurar el hotspot"
+  if [[ -z "$wifi" ]]; then
+    warning_log "No se encontró interfaz wifi para configurar el hotspot"
+    return 1
   fi
+
+  # IP forwarding persistente
+  echo "net.ipv4.ip_forward=1" | sudo tee /etc/sysctl.d/99-hotspot.conf >/dev/null
+  sudo sysctl --system >/dev/null
+
+  # UFW: reglas por wifi, independientes del nombre del ethernet
+  if command -v ufw &>/dev/null; then
+    sudo ufw route allow in on "$wifi"
+    sudo ufw route allow out on "$wifi"
+    sudo ufw allow in on "$wifi" to any port 67 proto udp
+    sudo ufw allow in on "$wifi" to any port 53 proto udp
+    sudo ufw allow in on "$wifi" to any port 53 proto tcp
+    sudo ufw --force enable
+  fi
+
+  # Conexión Hotspot (se recrea para que quede siempre con la config actual)
+  nmcli con delete "Hotspot" 2>/dev/null || true
+  nmcli con add type wifi ifname "$wifi" con-name "Hotspot" autoconnect no \
+    ssid "Hotspot" \
+    802-11-wireless.mode ap \
+    802-11-wireless-security.key-mgmt wpa-psk \
+    802-11-wireless-security.psk "ThinkingRock123" \
+    802-11-wireless-security.proto rsn \
+    802-11-wireless-security.group ccmp \
+    802-11-wireless-security.pairwise ccmp \
+    802-11-wireless-security.pmf 0 \
+    ipv4.method shared
 }
 
 setup_bgselector() {
