@@ -163,7 +163,8 @@ install_all_packages() {
     dunst gtk2 betterbird-bin wl-clipboard libnotify bluez-utils
     qrencode nm-connection-editor xorg-xrandr ddcutil
     # install launchers
-    rofi rofi-calc tofi
+    # rofi rofi-calc tofi
+    noctalia
     # for the color picker
     yad
   )
@@ -337,14 +338,26 @@ setup_fish_shell() {
   fi
 }
 
+setup_cool_greeter() {
+  log "Instalando fggreeter."
+  git clone https://github.com/Lummotm/fggreeter
+  cd fggreeter
+  sudo cp $HOME/dotfiles/extra/bin/start-niri /usr/local/bin/start-niri
+  ./install.sh --session /usr/local/bin/start-niri --user "$USER"
+}
+
 setup_login_greeter() {
   log "Configurando el gestor de sesión..."
 
   local wm_name="$de_profile"
   local greetd_base="$HOME/dotfiles/extra/greetd"
   local greetd_config
+  local use_fggreeter=0
 
-  if [[ "$use_autologin" =~ ^[Yy]$ ]]; then
+  if [[ "$machine_type" == "laptop" ]]; then
+    use_fggreeter=1
+    greetd_config="$greetd_base/noctalia.toml" # fallback si fggreeter falla
+  elif [[ "$use_autologin" =~ ^[Yy]$ ]]; then
     greetd_config="$greetd_base/${wm_name}.toml"
   else
     greetd_config="$greetd_base/noctalia.toml"
@@ -354,7 +367,11 @@ setup_login_greeter() {
     log "DRY RUN: Deshabilitando servicios de login antiguos"
     log "DRY RUN: Instalando wayland-launcher"
     log "DRY RUN: Copiando sesiones .desktop"
-    log "DRY RUN: Configurando Greetd con $greetd_config"
+    if [[ "$use_fggreeter" -eq 1 ]]; then
+      setup_cool_greeter
+    else
+      log "DRY RUN: Configurando Greetd con $greetd_config"
+    fi
     return 0
   fi
 
@@ -363,12 +380,10 @@ setup_login_greeter() {
     return 1
   fi
 
-  # Limpieza previa de servicios
   sudo systemctl disable ly.service ly@tty2.service sddm getty@tty2.service 2>/dev/null || true
   sudo rm -f /etc/systemd/system/getty@tty1.service.d/autologin.conf 2>/dev/null
   sudo systemctl daemon-reload
 
-  # 1. wayland-launcher universal
   if [ -f "$HOME/dotfiles/extra/bin/wayland-launcher" ]; then
     sudo cp "$HOME/dotfiles/extra/bin/wayland-launcher" /usr/local/bin/wayland-launcher
     sudo chmod 755 /usr/local/bin/wayland-launcher
@@ -376,42 +391,28 @@ setup_login_greeter() {
     warning_log "No se encontró wayland-launcher en extra/bin/"
   fi
 
-  # 2. Sesiones .desktop
   sudo mkdir -p /usr/share/wayland-sessions/
   sudo cp "$HOME"/dotfiles/extra/wayland-sessions/*.desktop /usr/share/wayland-sessions/ 2>/dev/null || true
 
-  # 3. Greetd (y fuera Ly si estaba instalado)
   local pkgs=(greetd python)
   [[ "$use_autologin" =~ ^[Yy]$ ]] && pkgs+=(hyprlock)
   sudo pacman -S --needed --noconfirm "${pkgs[@]}"
 
   pacman -Qi ly &>/dev/null && sudo pacman -Rns --noconfirm ly
 
-  # 4. Config + enable
-  log "Habilitando Greetd con $(basename "$greetd_config")..."
   sudo mkdir -p /etc/greetd
-  sudo cp "$greetd_config" /etc/greetd/config.toml
-  sudo systemctl enable greetd.service
-}
-
-setup_printers() {
-  log "Configurando el servicio de impresión (CUPS)..."
-
-  if [[ "$DRY_RUN" == "y" ]]; then
-    log "DRY RUN: Habilitando servicio cups"
-    log "DRY RUN: Añadiendo usuario $USER a grupos lp y sys"
-    return 0
+  if [[ "$use_fggreeter" -eq 1 ]]; then
+    if setup_cool_greeter; then
+      log "fggreeter instalado; greetd configurado por su install.sh."
+    else
+      warning_log "fggreeter falló; usando $(basename "$greetd_config") como respaldo."
+      sudo cp "$greetd_config" /etc/greetd/config.toml
+    fi
+  else
+    log "Habilitando Greetd con $(basename "$greetd_config")..."
+    sudo cp "$greetd_config" /etc/greetd/config.toml
   fi
-
-  # Habilitar e iniciar el demonio de CUPS
-  service_install cups
-
-  # Añadir tu usuario al grupo 'lp' (para acceso directo por USB)
-  # y 'sys' (por si necesitas administrar impresoras sin sudo en localhost:631)
-  sudo usermod -aG lp "$USER" || error_log "No se pudo añadir al usuario al grupo lp"
-  sudo usermod -aG sys "$USER" 2>/dev/null || true
-
-  log "Impresión configurada. Usa 'system-config-printer' para añadir la impresora USB."
+  sudo systemctl enable greetd.service
 }
 
 setup_autocpufreq() {
