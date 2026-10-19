@@ -64,3 +64,10 @@ debug {
   honor-xdg-activation-with-invalid-serial
 }
 
+
+window-rule {
+  match title=r#"(?i)foliate"#
+  open-floating true
+  default-column-width { fixed 920; }
+  default-window-height { fixed 960; }
+}
