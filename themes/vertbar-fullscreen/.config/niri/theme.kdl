@@ -44,8 +44,17 @@ overview {
     }
 }
 
+
 layer-rule {
-    match namespace="awww-daemon"
+  match namespace="noctalia-window-switcher"
+  background-effect {
+    blur true
+    xray false
+  }
+}
+
+layer-rule {
+    // match namespace=""
     place-within-backdrop true
 }
 
