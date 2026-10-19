@@ -43,7 +43,7 @@ overview {
 }
 
 layer-rule {
-    match namespace="awww-daemon"
+    match namespace=""
     place-within-backdrop true
 }
 
