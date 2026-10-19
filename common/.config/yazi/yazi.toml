@@ -52,7 +52,7 @@ play = [
     { run = "mediainfo %s1 & pause", block = true, desc = "Show media info", for = "windows" },
 ]
 open = [
-    { run = "xdg-open %s1",    desc = "Open", for = "linux" },
+    { run = "xdg-open %s1",    desc = "Open", for = "linux" , orphan = true },
     { run = "open %s",         desc = "Open", for = "macos" },
     { run = 'start "" %s1',    desc = "Open", for = "windows", orphan = true },
     { run = "termux-open %s1", desc = "Open", for = "android" },
