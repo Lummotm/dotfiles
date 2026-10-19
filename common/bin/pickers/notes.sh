@@ -42,16 +42,6 @@ get_folder_by_pattern() {
   fi
 }
 
-# Ejecuta el actualizador de tareas externo
-update_todos() {
-  local script_path="$HOME/bin/pickers/dependencies/update-todos.py"
-  if [ -f "$script_path" ]; then
-    python3 "$script_path" "$NOTE_PATH"
-  else
-    notify-send "Error" "No se encontró el script: $script_path"
-  fi
-}
-
 # Interfaz con el script de Python para formatear el menú o parsear la ruta final
 parse_selected() {
   local SELECTED=$1
@@ -121,17 +111,12 @@ open_content() {
     local encoded="${target// /%20}"
     xdg-open "obsidian://open?path=$encoded" >/dev/null 2>&1 &
   else
-    # Preprocesado de to-dos si se abren los archivos índice
-    if [[ "$target" == "$NOTE_PATH/01_todo_inbox.md" ]] || [[ "$target" == "$NOTE_PATH/00_todo.md" ]]; then
-      update_todos
-    fi
-
     # Generamos un nombre de sesión único y limpio basado en el archivo
     local filename=$(basename "$target")
     local session_name="note_${filename//[^a-zA-Z0-9]/_}"
 
     # Expandimos los comandos en una variable para no depender de funciones exportadas dentro de Tmux
-    local inner_cmd="cd '$NOTE_PATH' && nvim '$target'; python3 '$HOME/bin/pickers/dependencies/image_compresion.py'; python3 '$HOME/bin/pickers/dependencies/update-todos.py'; if [ -n \"\$(git -C '$NOTE_PATH' status --porcelain)\" ]; then bash '$SYNC_SCRIPT' '$NOTE_PATH'; else notify-send 'Obsidian' 'Sin cambios, saltando sync.'; fi"
+    local inner_cmd="cd '$NOTE_PATH' && nvim '$target'; python3 '$HOME/bin/pickers/dependencies/image_compresion.py'; if [ -n \"\$(git -C '$NOTE_PATH' status --porcelain)\" ]; then bash '$SYNC_SCRIPT' '$NOTE_PATH'; else notify-send 'Obsidian' 'Sin cambios, saltando sync.'; fi"
 
     # Usar nvim solo o solo tmux
     # Envolvemos el comando en una sesión de Tmux con el flag -A (Attach/Create)
@@ -149,7 +134,6 @@ sync_notes() {
   # Funcion de limpieza
   optimizar_vault() {
     python3 "$HOME/bin/pickers/dependencies/image_compresion.py"
-    python3 "$HOME/bin/pickers/dependencies/update-todos.py"
   }
 
   # Tu menú interactivo de estrategia
@@ -267,7 +251,6 @@ case "$SELECTED" in
   open_content "$tmp_file"
   ;;
 "$DAILY_NOTE")
-  python3 "$HOME/bin/pickers/dependencies/update-todos.py"
   daily_path=$(get_folder_by_pattern "$DAILY_NOTES_PATTERN")
   # this way it sorts orderly
   current_date=$(date +%Y-%m-%d)
