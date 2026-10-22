@@ -93,13 +93,13 @@ rofi_core() {
       ;;
     esac
   done
-
-  if [[ "$engine" == "noctalia" && "$password" == "true" ]]; then
-    engine="rofi"
-  fi
+  #
+  # if [[ "$engine" == "noctalia" && "$password" == "true" ]]; then
+  #   engine="rofi"
+  # fi
 
   if [[ "$engine" == "noctalia" ]]; then
-    _noctalia_run "$prompt" "$mode" "$mesg" "$password" "${rofi_args[@]}"
+    _noctalia_run "$prompt" "$mode" "$mesg" "${rofi_args[@]}"
   elif [[ "$engine" == "tofi" ]]; then
     _tofi_run "$width" "$prompt" "$mode" "$mesg" "$password" "$hide_inputbar" "${rofi_args[@]}"
   else
