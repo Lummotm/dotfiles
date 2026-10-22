@@ -662,6 +662,13 @@ setup_pacman() {
   sudo pacman -Sy
 }
 
+setup_grub() {
+  git clone https://github.com/Lummotm/minimal-grub-theme.git
+  cd minimal-grub-theme
+  chmod +x install.sh uninstall.sh
+  sudo ./install.sh -font 24
+}
+
 show_help() {
   cat <<EOF
 Uso: $0 [opción]
