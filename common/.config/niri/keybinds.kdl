@@ -13,6 +13,9 @@ binds {
   Super+A hotkey-overlay-title="Control Center (Noctalia)" { 
     spawn "noctalia" "msg" "panel-toggle" "control-center"; 
   }
+  Super+Shift+A hotkey-overlay-title="Wallpaper Selector (Noctalia)" { 
+    spawn "noctalia" "msg" "panel-toggle" "wallpaper"; 
+  }
   Super+Alt+A hotkey-overlay-title="Toggle theme (Light/Dark)" { 
     spawn "noctalia" "msg" "theme-mode-toggle"; 
   }
