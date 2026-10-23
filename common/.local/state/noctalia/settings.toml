@@ -368,16 +368,16 @@ wallpaper_scheme = "m3-content"
     community_ids = [ "zen-browser", "sioyek", "tmux", "yazi" ]
 
 [wallpaper.default]
-path = "/home/davidn/Pictures/Wallpapers/Monet/Claude-Monet-impresion-sol-naciente.jpg"
+path = "/home/davidn/Pictures/Wallpapers/Landscape/wallhaven-3zv7r3.jpg"
 
 [wallpaper.last]
-path = "/home/davidn/Pictures/Wallpapers/Monet/Claude-Monet-impresion-sol-naciente.jpg"
+path = "/home/davidn/Pictures/Wallpapers/Landscape/wallhaven-3zv7r3.jpg"
 
 [wallpaper.monitors.HDMI-A-1]
 path = "/home/davidn/Pictures/Wallpapers/Monet/Claude-Monet-impresion-sol-naciente.jpg"
 
 [wallpaper.monitors.eDP-1]
-path = "/home/davidn/Pictures/Wallpapers/Monet/Claude-Monet-impresion-sol-naciente.jpg"
+path = "/home/davidn/Pictures/Wallpapers/Landscape/wallhaven-3zv7r3.jpg"
 
 [widget.cat]
 type = "dotnetrob/cat:cat"
