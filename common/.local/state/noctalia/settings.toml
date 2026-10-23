@@ -40,15 +40,16 @@ widget_order = [
     "desktop-widget-0000000000000001",
     "desktop-widget-0000000000000007",
     "desktop-widget-0000000000000008",
-    "desktop-widget-0000000000000009",
     "desktop-widget-000000000000000a",
-    "desktop-widget-000000000000000b"
+    "desktop-widget-000000000000000b",
+    "desktop-widget-000000000000000c",
+    "desktop-widget-000000000000000d"
 ]
 
     [desktop_widgets.grid]
-    cell_size = 24
+    cell_size = 16
     major_interval = 4
-    visible = false
+    visible = true
 
     [desktop_widgets.widget.desktop-widget-0000000000000001]
     box_height = 348.0
@@ -79,13 +80,14 @@ widget_order = [
 
         [desktop_widgets.widget.desktop-widget-0000000000000007.settings]
         background_opacity = 0.10000000000000001
+        background_radius = 12
 
     [desktop_widgets.widget.desktop-widget-0000000000000008]
     box_height = 0.0
     box_width = 0.0
-    cx = 150.0
-    cy = 947.0
-    output = "HDMI-A-1"
+    cx = 170.0
+    cy = 170.0
+    output = "eDP-1"
     placement_height = 1080.0
     placement_width = 1920.0
     rotation = 0.0
@@ -97,24 +99,6 @@ widget_order = [
         background_padding = 12
         background_radius = 12
         key = "nota-3"
-
-    [desktop_widgets.widget.desktop-widget-0000000000000009]
-    box_height = 0.0
-    box_width = 0.0
-    cx = 165.0
-    cy = 686.0
-    output = "HDMI-A-1"
-    placement_height = 1080.0
-    placement_width = 1920.0
-    rotation = 0.0
-    type = "remo/noctes:note"
-
-        [desktop_widgets.widget.desktop-widget-0000000000000009.settings]
-        background = false
-        font_size = 16
-        key = "nota-4"
-        paper_height = 300
-        paper_width = 250
 
     [desktop_widgets.widget.desktop-widget-000000000000000a]
     box_height = 192.9140625
@@ -129,13 +113,14 @@ widget_order = [
 
         [desktop_widgets.widget.desktop-widget-000000000000000a.settings]
         background_opacity = 0.10000000000000001
+        background_radius = 12
 
     [desktop_widgets.widget.desktop-widget-000000000000000b]
     box_height = 0.0
     box_width = 0.0
-    cx = 382.0
-    cy = 948.0
-    output = "HDMI-A-1"
+    cx = 170.0
+    cy = 410.0
+    output = "eDP-1"
     placement_height = 1080.0
     placement_width = 1920.0
     rotation = 0.0
@@ -144,6 +129,39 @@ widget_order = [
         [desktop_widgets.widget.desktop-widget-000000000000000b.settings]
         background = false
         key = "nota-1"
+
+    [desktop_widgets.widget.desktop-widget-000000000000000c]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 208.83203125
+    cy = 655.8828125
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "remo/noctes:note"
+
+        [desktop_widgets.widget.desktop-widget-000000000000000c.settings]
+        background = false
+        font_size = 16
+        key = "nota-4"
+        paper_height = 250
+        paper_width = 300
+
+    [desktop_widgets.widget.desktop-widget-000000000000000d]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 170.0
+    cy = 890.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "remo/noctes:note"
+
+        [desktop_widgets.widget.desktop-widget-000000000000000d.settings]
+        background = false
+        key = "nota-5"
 
 [dock]
 background_opacity = 0.44999998994171619
@@ -288,6 +306,7 @@ enabled = [ "remo/noctes", "dotnetrob/cat", "yuuto/arch-updater", "Lummotm/keepa
 avatar_path = "/home/davidn/Pictures/Beibis/IMG-20260622-WA0001.jpg"
 font_family = "JetBrainsMono Nerd Font Propo"
 niri_overview_type_to_launch_enabled = true
+screen_time_enabled = true
 settings_window_translucent = true
 
     [shell.greeter_sync]
@@ -340,6 +359,7 @@ settings_window_translucent = true
 
 [theme]
 builtin = "Rosé Pine"
+community_palette = "Catppuccin Frappe Rosewater"
 mode = "dark"
 source = "wallpaper"
 wallpaper_scheme = "m3-content"
@@ -348,16 +368,16 @@ wallpaper_scheme = "m3-content"
     community_ids = [ "zen-browser", "sioyek", "tmux", "yazi" ]
 
 [wallpaper.default]
-path = "/home/davidn/Pictures/Wallpapers/wallhaven-5yk9o1_1920x1080.png"
+path = "/home/davidn/Pictures/Wallpapers/Monet/Claude-Monet-impresion-sol-naciente.jpg"
 
 [wallpaper.last]
-path = "/home/davidn/Pictures/Wallpapers/wallhaven-5yk9o1_1920x1080.png"
+path = "/home/davidn/Pictures/Wallpapers/Monet/Claude-Monet-impresion-sol-naciente.jpg"
 
 [wallpaper.monitors.HDMI-A-1]
-path = "/home/davidn/Pictures/Wallpapers/wallhaven-5yk9o1_1920x1080.png"
+path = "/home/davidn/Pictures/Wallpapers/Monet/Claude-Monet-impresion-sol-naciente.jpg"
 
 [wallpaper.monitors.eDP-1]
-path = "/home/davidn/Pictures/Wallpapers/Claude-Monet-el-tamesis-bajo-westminster.jpg"
+path = "/home/davidn/Pictures/Wallpapers/Monet/Claude-Monet-impresion-sol-naciente.jpg"
 
 [widget.cat]
 type = "dotnetrob/cat:cat"
