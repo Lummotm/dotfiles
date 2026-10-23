@@ -47,15 +47,17 @@ fi
   "$HOME"/bin/utils/mount-canon.sh --mount-copy
 } &
 
-{
-  sleep 2
-  # $HOME/bin/ui/wallpaper-randomizer.sh --score
-  "$HOME"/bin/pickers/bgselector/bgselector --cache
-  "$HOME"/.config/hypr/bin/gen-art.sh
-} &
+# Legacy from my wallpaper selector
+# {
+#   sleep 2
+#   # $HOME/bin/ui/wallpaper-randomizer.sh --score
+#   # "$HOME"/bin/pickers/bgselector/bgselector --cache
+#   # "$HOME"/.config/hypr/bin/gen-art.sh
+# } &
 
 {
   "$HOME"/bin/utils/parse-books-from-library.py
+  "$HOME/bin/utils/create-desktops"
 } &
 
 # noctalia &
