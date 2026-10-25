@@ -1,7 +1,0 @@
-[flavor]
-dark = "noctalia"
-light = "noctalia"
-
-[tabs]
-sep_inner = { open = "", close = "" }
-sep_outer = { open = "", close = "" }
