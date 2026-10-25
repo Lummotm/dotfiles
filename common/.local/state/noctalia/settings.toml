@@ -365,19 +365,19 @@ source = "wallpaper"
 wallpaper_scheme = "m3-content"
 
     [theme.templates]
-    community_ids = [ "zen-browser", "sioyek", "tmux", "yazi" ]
+    community_ids = [ "zen-browser", "neovim", "sioyek" ]
 
 [wallpaper.default]
-path = "/home/davidn/Pictures/Wallpapers/Landscape/wallhaven-j5z6mq.jpg"
+path = "/home/davidn/Pictures/Wallpapers/Monet/Claude-Monet-el-tamesis-bajo-westminster.jpg"
 
 [wallpaper.last]
-path = "/home/davidn/Pictures/Wallpapers/Landscape/wallhaven-j5z6mq.jpg"
+path = "/home/davidn/Pictures/Wallpapers/Monet/Claude-Monet-el-tamesis-bajo-westminster.jpg"
 
 [wallpaper.monitors.HDMI-A-1]
 path = "/home/davidn/Pictures/Wallpapers/Monet/Claude-Monet-impresion-sol-naciente.jpg"
 
 [wallpaper.monitors.eDP-1]
-path = "/home/davidn/Pictures/Wallpapers/Landscape/wallhaven-j5z6mq.jpg"
+path = "/home/davidn/Pictures/Wallpapers/Monet/Claude-Monet-el-tamesis-bajo-westminster.jpg"
 
 [widget.cat]
 type = "dotnetrob/cat:cat"
