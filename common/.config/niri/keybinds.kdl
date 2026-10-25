@@ -25,7 +25,7 @@ binds {
     spawn "noctalia" "msg" "panel-toggle" "launcher"; 
   }
   Super+F hotkey-overlay-title="Application launcher (Noctalia)" { 
-    spawn "noctalia" "msg" "panel-toggle" "launcher"; 
+    spawn "noctalia" "msg" "panel-toggle" "launcher" "."; 
   }
   Super+Shift+C hotkey-overlay-title="Clipboard history (Noctalia)" { 
     spawn "noctalia" "msg" "panel-toggle" "clipboard"; 
