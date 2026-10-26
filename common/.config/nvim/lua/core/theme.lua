@@ -1,43 +1,40 @@
--- Theme configuration module
-
 local M = {}
 
-function M.setup()
-	vim.opt.termguicolors = true
+-- Overrides que deben sobrevivir a cada recarga de paleta
+function M.apply_overrides()
+  local set = vim.api.nvim_set_hl
+  local c = require("base16-colorscheme").colors
 
-	-- Transparent backgrounds for floating windows
-	vim.schedule(function()
-		vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
-		vim.api.nvim_set_hl(0, "WhichKeyFloat", { bg = "NONE" })
-		vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE" })
-		vim.api.nvim_set_hl(0, "CursorLine", { bg = "NONE" })
-		vim.api.nvim_set_hl(0, "BlinkDocumentation", { bg = "NONE" })
-		vim.api.nvim_set_hl(0, "BlinkDocumentationBorder", { bg = "NONE" })
-		vim.api.nvim_set_hl(0, "MatchParen", { bg = "NONE", fg = "#7aa2f7", underline = true })
-		vim.api.nvim_set_hl(0, "Visual", { bg = "#414868", fg = "#ffffff" })
-		vim.api.nvim_set_hl(0, "FloatBorder", { bg = "NONE" })
-		vim.api.nvim_set_hl(0, "Pmenu", { bg = "NONE" })
-	end)
+  for _, g in ipairs({
+    "NormalFloat", "FloatBorder", "SignColumn", "Pmenu",
+  }) do
+    set(0, g, { bg = "NONE" })
+  end
 
-	-- Remove statusline separators for cleaner look
-	vim.opt.fillchars:append({ stl = " ", stlnc = " " })
-
-	-- Hide command line, rely on statusline
-	vim.opt.cmdheight = 0
+  set(0, "MatchParen", { fg = c.base0D, bg = "NONE", underline = true })
+  set(0, "Visual", { bg = c.base02 })
 end
 
-function M.setup_blink_float(opts)
-	if not opts then
-		return
-	end
+function M.setup()
+  local b16 = require("base16-colorscheme")
+  local orig = b16.setup
+  b16.setup = function(...)
+    orig(...)
+    M.apply_overrides()
+    vim.api.nvim_exec_autocmds("User", { pattern = "ThemeReload", modeline = false })
+  end
 
-	-- Apply rounded borders to Blink completion windows
-	opts.completion.documentation.window =
-		vim.tbl_deep_extend("force", opts.completion.documentation.window or {}, { border = "rounded", winblend = 0 })
-	opts.completion.menu =
-		vim.tbl_deep_extend("force", opts.completion.menu or {}, { border = "rounded", winblend = 0 })
-	opts.signature.window =
-		vim.tbl_deep_extend("force", opts.signature.window or {}, { border = "rounded", winblend = 0 })
+  vim.api.nvim_create_autocmd("OptionSet", {
+    group = vim.api.nvim_create_augroup("ThemeBackground", { clear = true }),
+    pattern = "background",
+    callback = function()
+      vim.schedule(function()
+        require("matugen").setup()
+      end)
+    end,
+  })
+
+  require("matugen").setup()
 end
 
 return M

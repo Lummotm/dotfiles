@@ -1,48 +1,48 @@
--- Core keybindings: Custom mappings for common actions
+-- Core keybindings (sin dependencias de plugins)
 
-local keymap = vim.keymap.set
-local opts = { noremap = true, silent = true }
+local map = vim.keymap.set
 
 -- CLIPBOARD
-keymap({ "n", "v" }, "<leader>y", '"+y', { desc = "Copy to system clipboard" })
-keymap("n", "<leader>Y", '"+Y', { desc = "Copy line to system clipboard" })
-keymap({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
+map({ "n", "v" }, "<leader>y", '"+y', { desc = "Copy to system clipboard" })
+map("n", "<leader>Y", '"+Y', { desc = "Copy line to system clipboard" })
+map({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
 
--- SCROLL
-keymap("n", "<C-d>", "<C-d>zz", opts)
-keymap("n", "<C-u>", "<C-u>zz", opts)
+-- SCROLL (centrado)
+map("n", "<C-d>", "<C-d>zz", { desc = "Scroll down (centered)" })
+map("n", "<C-u>", "<C-u>zz", { desc = "Scroll up (centered)" })
 
 -- QUIT
-keymap("n", "<leader>q", ":q!<CR>", { desc = "Force quit" })
+map("n", "<leader>q", "<cmd>q<CR>", { desc = "Quit" })
 
--- SPELL
-keymap("n", "<leader>ss", function()
-	if not vim.opt.spell:get() then
-		vim.opt.spell = true
-		vim.opt.spelllang = "es"
+-- SPELL: ES -> EN -> OFF
+map("n", "<leader>ss", function()
+	if not vim.wo.spell then
+		vim.wo.spell = true
+		vim.bo.spelllang = "es"
 		print("Spellcheck: ES")
-	elseif vim.opt.spelllang:get()[1] == "es" then
-		vim.opt.spelllang = "en"
+	elseif vim.bo.spelllang == "es" then
+		vim.bo.spelllang = "en"
 		print("Spellcheck: EN")
 	else
-		vim.opt.spell = false
+		vim.wo.spell = false
 		print("Spellcheck: OFF")
 	end
 end, { desc = "Toggle Spell (ES/EN/OFF)" })
 
 -- BUFFERS
-keymap("n", "<leader>bd", ":bdelete<CR>", { desc = "Delete buffer" })
-keymap("n", "<leader>bn", ":bnext<CR>", { desc = "Next buffer" })
-keymap("n", "<leader>bp", ":bprevious<CR>", { desc = "Previous buffer" })
-keymap("n", "<leader>ba", ':%bdelete|edit #|normal `"<CR>', { desc = "Delete all except current" })
-keymap("n", "<leader>bD", ":bdelete!<CR>", { desc = "Force delete buffer" })
-keymap("n", "<leader>bw", ":w!<CR>", { desc = "Save buffer" })
-vim.keymap.set("n", "<leader>bb", function()
-	local buffers = vim.fn.getbufinfo({ buflisted = 1 })
-	local qf_items = {}
-	for _, buf in ipairs(buffers) do
+map("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "Delete buffer" })
+map("n", "<leader>bD", "<cmd>bdelete!<CR>", { desc = "Force delete buffer" })
+map("n", "<leader>bn", "<cmd>bnext<CR>", { desc = "Next buffer" })
+map("n", "<leader>bp", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
+map("n", "<leader>bw", "<cmd>w!<CR>", { desc = "Save buffer" })
+map("n", "<leader>ba", [[<cmd>%bdelete|edit #|normal `"<CR>]], { desc = "Delete all except current" })
+
+-- Buffers abiertos en quickfix (el <CR> especial vive en autocmds.lua)
+map("n", "<leader>bb", function()
+	local items = {}
+	for _, buf in ipairs(vim.fn.getbufinfo({ buflisted = 1 })) do
 		if buf.name ~= "" then
-			table.insert(qf_items, {
+			table.insert(items, {
 				filename = buf.name,
 				lnum = 1,
 				col = 1,
@@ -53,78 +53,60 @@ vim.keymap.set("n", "<leader>bb", function()
 
 	vim.fn.setqflist({}, " ", {
 		title = "Buffers",
-		items = qf_items,
+		items = items,
 		context = { is_buffer_qf = true },
 	})
-
 	vim.cmd("copen")
-end, { desc = "Open open buffers in quickfix list" })
+end, { desc = "Open buffers in quickfix" })
 
 -- WINDOWS
-keymap("n", "<leader>wh", "<C-w>h", { desc = "Move to left window" })
-keymap("n", "<leader>wj", "<C-w>j", { desc = "Move to lower window" })
-keymap("n", "<leader>wk", "<C-w>k", { desc = "Move to upper window" })
-keymap("n", "<leader>wl", "<C-w>l", { desc = "Move to right window" })
-keymap("n", "<leader>ws", "<C-w>v", { desc = "Split window vertically" })
-keymap("n", "<leader>wv", "<C-w>s", { desc = "Split window horizontally" })
-keymap("n", "<leader>we", "<C-w>=", { desc = "Make windows equal size" })
-keymap("n", "<leader>wq", "<C-w>q", { desc = "Close current window" })
-keymap("n", "<leader>wx", "<C-w>x", { desc = "Swap current window with next" })
+map("n", "<leader>wh", "<C-w>h", { desc = "Move to left window" })
+map("n", "<leader>wj", "<C-w>j", { desc = "Move to lower window" })
+map("n", "<leader>wk", "<C-w>k", { desc = "Move to upper window" })
+map("n", "<leader>wl", "<C-w>l", { desc = "Move to right window" })
+map("n", "<leader>ws", "<C-w>v", { desc = "Split vertically" })
+map("n", "<leader>wv", "<C-w>s", { desc = "Split horizontally" })
+map("n", "<leader>we", "<C-w>=", { desc = "Equalize windows" })
+map("n", "<leader>wq", "<C-w>q", { desc = "Close window" })
+map("n", "<leader>wx", "<C-w>x", { desc = "Swap with next window" })
 
 -- CODE
-keymap("n", "<leader>ci", "gg=G", { desc = "Auto-indent entire file" })
+map("n", "<leader>ci", "gg=G", { desc = "Auto-indent entire file" })
 
-keymap("n", "<leader>cf", function()
-	local conform_ok, conform = pcall(require, "conform")
-	if conform_ok then
+map("n", "<leader>cf", function()
+	local ok, conform = pcall(require, "conform")
+	if ok then
 		conform.format({ async = true })
 	else
 		vim.lsp.buf.format()
 	end
 end, { desc = "Format buffer (conform/LSP)" })
 
-keymap("n", "<leader>ct", function()
-	local conform_ok, conform = pcall(require, "conform")
-	if conform_ok then
-		local current = vim.g.disable_autoformat or false
-		vim.g.disable_autoformat = not current
-		print("Auto-format on save: " .. (current and "ON" or "OFF"))
-	else
-		print("Conform not available")
-	end
+map("n", "<leader>ct", function()
+	vim.g.disable_autoformat = not vim.g.disable_autoformat
+	print("Auto-format on save: " .. (vim.g.disable_autoformat and "OFF" or "ON"))
 end, { desc = "Toggle auto-format on save" })
 
--- MARKDOWN
-keymap("n", "<leader>m", ":MarkdownPreviewToggle<CR>", { desc = "Toggle Markdown Preview" })
-
--- Compile.lua
+-- COMPILE
 local compile = require("core.compile")
+map("n", "<leader>cc", compile.compile, { desc = "Compile" })
+map("n", "<leader>cr", compile.run, { desc = "Run" })
+map("n", "<leader>cR", compile.reset, { desc = "Reset compile/run command" })
+map("n", "<leader>cw", compile.focus, { desc = "Toggle focus on compile terminal" })
 
-vim.keymap.set("n", "<leader>cc", function()
-	vim.cmd("Compile")
-end, { desc = "Compilar (Compile)" })
-
-vim.keymap.set("n", "<leader>cR", function()
-	compile.reset()
-end, { desc = "Reiniciar comando de compilación" })
-
-vim.keymap.set("n", "<leader>cr", ":Run<CR>", { desc = "Compile and Run" })
-
--- Diagonostics
-vim.keymap.set("n", "gl", function()
-	local current_win = vim.api.nvim_get_current_win()
-	local wininfo = vim.fn.getwininfo(current_win)[1]
-
-	if wininfo and wininfo.loclist == 1 then
+-- DIAGNOSTICS: toggle loclist
+map("n", "gl", function()
+	local info = vim.fn.getwininfo(vim.api.nvim_get_current_win())[1]
+	if info and info.loclist == 1 then
 		vim.cmd("lclose")
-	else
-		vim.diagnostic.setloclist()
+		return
+	end
 
-		for _, winid in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
-			if vim.fn.getwininfo(winid)[1].loclist == 1 then
-				vim.api.nvim_set_current_win(winid)
-				break
-			end
+	vim.diagnostic.setloclist()
+	for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+		if vim.fn.getwininfo(win)[1].loclist == 1 then
+			vim.api.nvim_set_current_win(win)
+			break
 		end
 	end
-end, { desc = "Toggle, refresh and focus diagnostics in loclist" })
+end, { desc = "Toggle diagnostics loclist" })
