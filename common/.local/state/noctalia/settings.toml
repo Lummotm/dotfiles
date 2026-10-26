@@ -133,8 +133,8 @@ widget_order = [
     [desktop_widgets.widget.desktop-widget-000000000000000c]
     box_height = 0.0
     box_width = 0.0
-    cx = 208.83203125
-    cy = 655.8828125
+    cx = 170.0
+    cy = 656.0
     output = "eDP-1"
     placement_height = 1080.0
     placement_width = 1920.0
@@ -145,8 +145,8 @@ widget_order = [
         background = false
         font_size = 16
         key = "nota-4"
-        paper_height = 250
-        paper_width = 300
+        paper_height = 200
+        paper_width = 220
 
     [desktop_widgets.widget.desktop-widget-000000000000000d]
     box_height = 0.0
@@ -359,7 +359,7 @@ settings_window_translucent = true
 
 [theme]
 builtin = "Rosé Pine"
-community_palette = "Catppuccin Frappe Rosewater"
+community_palette = "Lilac AMOLED"
 mode = "light"
 source = "wallpaper"
 wallpaper_scheme = "m3-content"
@@ -368,16 +368,16 @@ wallpaper_scheme = "m3-content"
     community_ids = [ "zen-browser", "neovim", "sioyek" ]
 
 [wallpaper.default]
-path = "/home/davidn/Pictures/Wallpapers/Monet/Claude-Monet-el-tamesis-bajo-westminster.jpg"
+path = "/home/davidn/Pictures/Wallpapers/Fotos/IMG_0238.JPG"
 
 [wallpaper.last]
-path = "/home/davidn/Pictures/Wallpapers/Monet/Claude-Monet-el-tamesis-bajo-westminster.jpg"
+path = "/home/davidn/Pictures/Wallpapers/Fotos/IMG_0238.JPG"
 
 [wallpaper.monitors.HDMI-A-1]
-path = "/home/davidn/Pictures/Wallpapers/Monet/Claude-Monet-impresion-sol-naciente.jpg"
+path = "/home/davidn/Pictures/Wallpapers/Fotos/IMG_0238.JPG"
 
 [wallpaper.monitors.eDP-1]
-path = "/home/davidn/Pictures/Wallpapers/Monet/Claude-Monet-el-tamesis-bajo-westminster.jpg"
+path = "/home/davidn/Pictures/Wallpapers/Monet/Claude-Monet-water-lilies.jpeg"
 
 [widget.cat]
 type = "dotnetrob/cat:cat"
