@@ -1,34 +1,36 @@
 #!/usr/bin/env bash
 
-# Si estamos dentro de tmux, salir de la sesión (detach)
+PREFIX="term-"
+SELF="$(realpath "$0")"
+
+# Modo 1: dentro de tmux -> detach
 if [ -n "$TMUX" ]; then
-    tmux detach-client
-    exit 0
+  tmux detach-client
+  exit 0
 fi
 
-# Prefijo para nuestras terminales genéricas (así no chocan con tus proyectos)
-PREFIX="term-"
-
-# Buscamos el primer "tag" o slot (del 1 al 10) que esté libre
-for i in {1..10}; do
+# Modo 2: lanzado desde una terminal con "--inner" -> lógica de sesiones
+if [ "$1" = "--inner" ]; then
+  for i in {1..10}; do
     session_name="${PREFIX}${i}"
-
-    # Comprobamos si la sesión ya existe
     if tmux has-session -t "$session_name" 2>/dev/null; then
-        # Si existe, miramos si tiene clientes conectados (ventanas de Kitty usándola)
-        attached=$(tmux list-sessions -F "#{session_name} #{session_attached}" | grep "^${session_name} " | awk '{print $2}')
-
-        if [ "$attached" -eq 0 ]; then
-            # Está huérfana (libre), nos conectamos para recuperar el estado
-            exec tmux attach -t "$session_name"
-        fi
-        # Si tiene clientes conectados, el bucle continúa buscando el siguiente número
+      attached=$(tmux display-message -p -t "$session_name" '#{session_attached}')
+      [ "$attached" -eq 0 ] && exec tmux attach -t "$session_name"
     else
-        # La sesión no existe, creamos una nueva con este nombre ("tag")
-        exec tmux new-session -s "$session_name"
+      exec tmux new-session -s "$session_name"
     fi
-done
+  done
+  exec tmux new-session
+fi
 
-# Fallback de seguridad: si logras tener 10 terminales abiertas a la vez,
-# simplemente abre una sesión genérica sin nombre.
-exec tmux new-session
+# Modo 3: lanzado desde el compositor -> abrir la terminal elegida
+term="${1:-kitty}"
+case "$term" in
+kitty) exec kitty --title=tmux -e "$SELF" --inner ;;
+foot) exec foot --title=tmux "$SELF" --inner ;;
+ghostty) exec ghostty --title=tmux -e "$SELF" --inner ;;
+*)
+  echo "Terminal no soportada: $term" >&2
+  exit 1
+  ;;
+esac

@@ -3,11 +3,12 @@ binds {
   Super+P { spawn-sh "PICKER_ENGINE=rofi ~/.config/niri/bin/show_binds ~/dotfiles/common/.config/niri/keybinds.kdl"; }
   Super+Alt+P hotkey-overlay-title="Power on/off monitors" { spawn-sh "~/bin/sys/monitor-toggle.sh"; }
   Super+Tab { toggle-overview; }
+  Alt+Tab { spawn-sh "noctalia msg window-switcher hold"; }
 
   Super+Alt+E hotkey-overlay-title="Launch file manager (Nautilus)" { spawn "nautilus"; }
   Super+E hotkey-overlay-title="Launch file manager (Yazi)" { spawn "kitty" "--title=yazi" "-e" "yazi"; }
-  Super+Q hotkey-overlay-title="Launch Tmux session" { spawn "kitty" "--title=tmux" "-e" ".config/tmux/bin/tmux-launcher.sh"; }
-  Super+Alt+Q hotkey-overlay-title="Launch new terminal (Kitty)" { spawn "kitty"; }
+  Super+Q hotkey-overlay-title="Launch Tmux session" { spawn ".config/tmux/bin/tmux-launcher.sh" "foot"; }
+  Super+Alt+Q hotkey-overlay-title="Launch new terminal" { spawn "foot"; }
   Super+W hotkey-overlay-title="Launch Browser" { spawn "zen-browser"; }
 
   Super+A hotkey-overlay-title="Control Center (Noctalia)" { 
@@ -19,6 +20,11 @@ binds {
   Super+Alt+A hotkey-overlay-title="Toggle theme (Light/Dark)" { 
     spawn "noctalia" "msg" "theme-mode-toggle"; 
   }
+  Super+Shift+Q hotkey-overlay-title="Open calendar" { 
+    spawn "noctalia" "msg" "panel-open" "control-center" "calendar";
+  }
+
+
   Super+Shift+Alt+Q { quit; }
 
   Super+R hotkey-overlay-title="Application launcher (Noctalia)" { 

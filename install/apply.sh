@@ -159,8 +159,8 @@ if ! command -v stow &>/dev/null || ! command -v 7z &>/dev/null || ! command -v 
   sudo pacman -S --noconfirm --needed stow p7zip rsync || exit 1
 fi
 
-rm -rf $HOME/.config/{waybar,rofi,niri,dunst}
-cp $HOME/dotfiles/extra/bashrc $HOME/.bashrc
+rm -rf "$HOME"/.config/{waybar,rofi,niri,dunst}
+cp "$HOME"/dotfiles/extra/bashrc $HOME/.bashrc
 find "$HOME/.local/share" -xtype l -delete 2>/dev/null
 
 mkdir -vp \
@@ -188,6 +188,8 @@ files=(
   "common/.config/tmux/themes/noctalia.conf"
   "common/.config/yazi/flavors/noctalia.yazi/flavor.toml"
   "common/.config/yazi/flavors/noctalia.yazi/tmtheme.xml"
+  "common/.config/kitty/themes/noctalia.conf"
+  "common/.config/niri/noctalia.kdl"
 )
 
 for file in "${files[@]}"; do

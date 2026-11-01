@@ -1,6 +1,7 @@
 include "startup.kdl"
 include "colors.kdl"
 include "theme.kdl"
+include "general-theme.kdl"
 include "keybinds.kdl"
 include "env-vars.kdl"
 include "window-rules.kdl"
