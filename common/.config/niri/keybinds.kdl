@@ -7,8 +7,8 @@ binds {
 
   Super+Alt+E hotkey-overlay-title="Launch file manager (Nautilus)" { spawn "nautilus"; }
   Super+E hotkey-overlay-title="Launch file manager (Yazi)" { spawn "kitty" "--title=yazi" "-e" "yazi"; }
-  Super+Q hotkey-overlay-title="Launch Tmux session" { spawn ".config/tmux/bin/tmux-launcher.sh" "foot"; }
-  Super+Alt+Q hotkey-overlay-title="Launch new terminal" { spawn "foot"; }
+  Super+Q hotkey-overlay-title="Launch Tmux session" { spawn ".config/tmux/bin/tmux-launcher.sh" "kitty"; }
+  Super+Alt+Q hotkey-overlay-title="Launch new terminal" { spawn "kitty"; }
   Super+W hotkey-overlay-title="Launch Browser" { spawn "zen-browser"; }
 
   Super+A hotkey-overlay-title="Control Center (Noctalia)" { 
