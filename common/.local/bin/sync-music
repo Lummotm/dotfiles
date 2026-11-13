@@ -1,66 +1,118 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# sync-music: perfil de música para termux-sync
+set -euo pipefail
 
-USER_TERMUX="u0_a308"
-LOCAL_DIR="$HOME/Music"
-REMOTE_DIR="~/storage/music"
+show_profile_help() {
+  cat <<EOF
+sync-music - Sincroniza ~/Music con ~/storage/music en Termux usando termux-sync.
 
-EXCLUDE_ARGS=(
-    --exclude="Merlin"
-    --exclude=".thumbnails"
-    --exclude=".data"
-    --exclude=".cover"
-)
+USO
+  sync-music [IP] [PUERTO] [--dir=1|2] [--delete] [--dry-run]
 
-IP=""
-PORT=""
-DELETE_ARG=""
+  --dir=1   PC -> Móvil. Ejecuta el script de playlists antes de subir.
+  --dir=2   Móvil -> PC. Ejecuta el script de playlists después de bajar.
+  Si no se indica --dir, lo pregunta.
 
-for arg in "$@"; do
-    if [[ "$arg" == "--delete" ]]; then
-        DELETE_ARG="--delete"
-    elif [[ "$arg" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-        IP="$arg"
-    elif [[ "$arg" =~ ^[0-9]+$ ]]; then
-        PORT="$arg"
-    fi
+VALORES POR DEFECTO (sobreescribibles con variables de entorno)
+  USER_TERMUX   u0_a308
+  LOCAL_DIR     \$HOME/Music
+  REMOTE_DIR    ~/storage/music
+
+EXCLUDES FIJOS
+  Merlin, .thumbnails, .data, .cover
+
+Para ver todas las opciones del motor: termux-sync --help
+EOF
+}
+
+for a in "$@"; do
+  case "$a" in
+  -h | --help)
+    show_profile_help
+    exit 0
+    ;;
+  esac
 done
 
-if [ -z "$IP" ]; then
-    echo "Error: Dirección IP no especificada."
-    echo "Uso: $0 <IP> [PUERTO] [--delete]"
-    exit 1
-fi
+# ---------------------------------------------------------------------------
+# Configuración del perfil
+# ---------------------------------------------------------------------------
+export USER_TERMUX="${USER_TERMUX:-u0_a308}"
+LOCAL_DIR="${LOCAL_DIR:-$HOME/Music}"
+REMOTE_DIR="${REMOTE_DIR:-~/storage/music}"
+FIX_PY="$HOME/bin/utils/music-playlist-fix.py"
+PLAYLISTS="$HOME/Music/0-playlists/*.m3u"
 
-if [ -z "$PORT" ]; then
-    read -p "Puerto SSH (ej. 8022): " PORT
-    if [ -z "$PORT" ]; then
-        echo "Error: Puerto obligatorio."
-        exit 1
+# ---------------------------------------------------------------------------
+# Parseo de argumentos
+# ---------------------------------------------------------------------------
+IP=""
+PORT=""
+DIR=""
+PASS=()
+
+for arg in "$@"; do
+  case "$arg" in
+  --dir=*) DIR="${arg#--dir=}" ;;
+  --delete | --dry-run) PASS+=("$arg") ;;
+  *)
+    if [[ "$arg" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+      IP="$arg"
+    elif [[ "$arg" =~ ^[0-9]+$ ]]; then
+      PORT="$arg"
+    else
+      echo "Argumento desconocido: '$arg'. Usa --help."
+      exit 1
     fi
+    ;;
+  esac
+done
+
+# ---------------------------------------------------------------------------
+# Sentido: argumento o pregunta
+# ---------------------------------------------------------------------------
+if [ -z "$DIR" ]; then
+  echo "Dirección de sincronización:"
+  echo "1) PC -> Móvil"
+  echo "2) Móvil -> PC"
+  read -rp "Opción (1 o 2): " DIR
 fi
 
-echo "Dirección de sincronización:"
-echo "1) PC -> Móvil"
-echo "2) Móvil -> PC"
-read -p "Opción (1 o 2): " DIRECTION
+# ---------------------------------------------------------------------------
+# Hooks específicos de música
+# chmod se aplica antes y después. El script de playlists va antes de subir
+# (dir 1) o después de bajar (dir 2), para que los cambios lleguen al destino.
+# ---------------------------------------------------------------------------
+CHMOD_CMD="chmod 644 $PLAYLISTS 2>/dev/null || true"
+FIX_CMD="python3 '$FIX_PY' --silent"
 
-echo "Iniciando..."
+case "$DIR" in
+1)
+  PRE="$CHMOD_CMD; $FIX_CMD"
+  POST="$CHMOD_CMD"
+  ;;
+2)
+  PRE="$CHMOD_CMD"
+  POST="$FIX_CMD; $CHMOD_CMD"
+  ;;
+*)
+  echo "Opción no válida: '$DIR'. Usa 1 o 2."
+  exit 1
+  ;;
+esac
 
-chmod 644 "$HOME/Music/0-playlists/"*.m3u
-
-if [ "$DIRECTION" == "1" ]; then
-    # Se expande el array correctamente usando "${EXCLUDE_ARGS[@]}"
-    python3 "$HOME/bin/utils/music-playlist-fix.py" --silent
-    rsync -rtvP --no-perms --inplace $DELETE_ARG "${EXCLUDE_ARGS[@]}" -e "ssh -p $PORT" "${LOCAL_DIR}/" "${USER_TERMUX}@${IP}:${REMOTE_DIR}"
-elif [ "$DIRECTION" == "2" ]; then
-    # Se expande el array correctamente usando "${EXCLUDE_ARGS[@]}"
-    rsync -rtvP --no-perms --inplace $DELETE_ARG "${EXCLUDE_ARGS[@]}" -e "ssh -p $PORT" "${USER_TERMUX}@${IP}:${REMOTE_DIR}/" "$LOCAL_DIR"
-    python3 "$HOME/bin/utils/music-playlist-fix.py" --silent
-else
-    echo "Opción no válida. Cancelando."
-    exit 1
-fi
-
-chmod 644 "$HOME/Music/0-playlists/"*.m3u
-
-echo "Sincronización finalizada."
+# ---------------------------------------------------------------------------
+# Llamada al motor
+# ---------------------------------------------------------------------------
+exec termux-sync \
+  ${IP:+"$IP"} ${PORT:+"$PORT"} \
+  --dir="$DIR" \
+  --local="$LOCAL_DIR" \
+  --remote="$REMOTE_DIR" \
+  --exclude=Merlin \
+  --exclude=.thumbnails \
+  --exclude=.data \
+  --exclude=.cover \
+  --pre="$PRE" \
+  --post="$POST" \
+  "${PASS[@]}"

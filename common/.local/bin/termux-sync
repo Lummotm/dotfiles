@@ -1,0 +1,253 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PROG="$(basename "$0")"
+
+# ---------------------------------------------------------------------------
+# Ayuda
+# ---------------------------------------------------------------------------
+show_help() {
+  cat <<EOF
+$PROG - Sincroniza un directorio entre el PC y Termux (Android) mediante rsync sobre SSH.
+
+USO
+  $PROG [IP] [PUERTO] [OPCIONES]
+
+ARGUMENTOS POSICIONALES (en cualquier orden)
+  IP        Dirección IPv4 del móvil (ej. 192.168.1.50).
+            Si se omite, se pide por teclado.
+  PUERTO    Puerto SSH de Termux (ej. 8022).
+            Si se omite, se pide por teclado.
+
+OPCIONES
+  --local=RUTA       Directorio del PC. Acepta ~ (se expande a \$HOME).
+                     Si se omite, usa \$LOCAL_DIR o se pide por teclado.
+  --remote=RUTA      Directorio en el móvil (dentro de Termux).
+                     Si se omite, usa \$REMOTE_DIR o se pide por teclado.
+                     Ejemplo: '~/storage/shared/DCIM/Camera'
+  --dir=N            Sentido de la copia:
+                       1  Local -> Remoto  (PC -> Móvil)
+                       2  Remoto -> Local  (Móvil -> PC)
+                     Si se omite, usa \$DIRECTION o muestra un menú.
+  --exclude=PATRON   Excluye archivos o carpetas que coincidan con PATRON.
+                     Se puede repetir. Ejemplo: --exclude=.thumbnails
+  --pre=COMANDO      Ejecuta COMANDO en bash antes de rsync.
+  --post=COMANDO     Ejecuta COMANDO en bash después de rsync (solo si rsync termina bien).
+  --delete           Modo espejo: borra en el destino lo que no exista en el origen.
+  --dry-run          Simula la sincronización sin copiar ni borrar nada.
+  -h, --help         Muestra esta ayuda y sale.
+
+VARIABLES DE ENTORNO
+  USER_TERMUX      Usuario de Termux (salida de 'whoami', ej. u0_a431).
+                   Si no está definida, se pide por teclado.
+  LOCAL_DIR        Equivale a --local=.
+  REMOTE_DIR       Equivale a --remote=.
+  DIRECTION        Equivale a --dir=.
+
+  Prioridad: argumento de línea de comandos > variable de entorno > pregunta interactiva.
+
+LÓGICA DE EJECUCIÓN
+  1. Parsea los argumentos. Cualquier argumento desconocido aborta el script.
+  2. Pide por teclado los datos que falten: IP, puerto, usuario, directorios y sentido.
+  3. Expande ~ en la ruta local.
+  4. Valida:
+       - Sentido 1: el directorio local debe existir.
+       - Sentido 2: el directorio local se crea si no existe.
+  5. Construye origen y destino con barras finales controladas:
+       - Sentido 1: origen "LOCAL/"  destino "usuario@IP:REMOTO"
+       - Sentido 2: origen "usuario@IP:REMOTO/"  destino "LOCAL"
+     Así se copia el CONTENIDO del directorio origen, no la carpeta en sí.
+  6. Ejecuta --pre (si existe).
+  7. Ejecuta rsync con:
+       -r             recursivo
+       -t             conserva las fechas de modificación
+       -v             salida detallada
+       -P             progreso y reanudación (--partial --progress)
+       --no-perms     no copia permisos (útil entre Android y Linux)
+       --inplace      escribe directamente sobre el archivo destino
+       -e "ssh -p PUERTO"
+       --exclude=...  (si se han indicado)
+       --delete       (opcional) elimina en el destino lo que no esté en el origen
+       --dry-run      (opcional) solo muestra lo que haría
+  8. Ejecuta --post (si existe). Si rsync falla, no se ejecuta.
+
+CÓDIGOS DE SALIDA
+  0   Sincronización correcta.
+  1   Error de argumentos, datos faltantes, validación o sentido no válido.
+  *   Cualquier otro código lo devuelve rsync o el hook que falle.
+
+EJEMPLOS
+  # Todo por argumentos, PC -> Móvil
+  $PROG 192.168.1.50 8022 --local=~/fotos/Camera --remote='~/storage/shared/DCIM/Camera' --dir=1
+
+  # Móvil -> PC, usuario por variable de entorno
+  USER_TERMUX=u0_a431 $PROG 192.168.1.50 8022 --local=~/Imagenes --remote='~/storage/shared/DCIM/Camera' --dir=2
+
+  # Excluir carpetas y ejecutar un comando al terminar
+  $PROG 192.168.1.50 8022 --local=~/Music --remote='~/storage/music' --dir=1 \\
+    --exclude=.thumbnails --exclude=Merlin --post='echo listo'
+
+  # Probar antes de copiar
+  $PROG 192.168.1.50 8022 --local=~/fotos --remote='~/storage/shared/DCIM/Camera' --dir=1 --dry-run
+
+  # Espejo completo (CUIDADO: borra en el destino)
+  $PROG 192.168.1.50 8022 --local=~/fotos --remote='~/storage/shared/DCIM/Camera' --dir=2 --delete --dry-run
+
+NOTAS
+  - --delete borra archivos en el DESTINO. Con --dir=2 pueden desaparecer
+    fotos del PC que no estén en el móvil. Usa --dry-run antes.
+  - Entrecomilla las rutas que contengan ~ cuando se pasen como --remote=,
+    para que el shell no las expanda antes de tiempo.
+  - Los hooks se ejecutan con 'bash -c', así que las rutas con \$HOME se
+    expanden al ejecutarse.
+  - Requisitos: rsync y ssh en el PC; sshd activo en Termux (comando 'sshd')
+    y acceso al almacenamiento con 'termux-setup-storage'.
+EOF
+}
+
+# ---------------------------------------------------------------------------
+# Valores por defecto (entorno)
+# ---------------------------------------------------------------------------
+IP=""
+PORT=""
+DELETE_ARG=""
+DRY_RUN_ARG=""
+EXCLUDES=()
+PRE_CMD=""
+POST_CMD=""
+DIRECTION="${DIRECTION:-}"
+LOCAL_DIR="${LOCAL_DIR:-}"
+REMOTE_DIR="${REMOTE_DIR:-}"
+USER_TERMUX="${USER_TERMUX:-}"
+
+# ---------------------------------------------------------------------------
+# Parseo de argumentos
+# ---------------------------------------------------------------------------
+for arg in "$@"; do
+  case "$arg" in
+  -h | --help)
+    show_help
+    exit 0
+    ;;
+  --delete) DELETE_ARG="--delete" ;;
+  --dry-run) DRY_RUN_ARG="--dry-run" ;;
+  --local=*) LOCAL_DIR="${arg#--local=}" ;;
+  --remote=*) REMOTE_DIR="${arg#--remote=}" ;;
+  --dir=*) DIRECTION="${arg#--dir=}" ;;
+  --exclude=*) EXCLUDES+=("--exclude=${arg#--exclude=}") ;;
+  --pre=*) PRE_CMD="${arg#--pre=}" ;;
+  --post=*) POST_CMD="${arg#--post=}" ;;
+  *)
+    if [[ "$arg" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+      IP="$arg"
+    elif [[ "$arg" =~ ^[0-9]+$ ]]; then
+      PORT="$arg"
+    else
+      echo "Error: argumento desconocido '$arg'."
+      echo "Ejecuta '$PROG --help' para ver las opciones."
+      exit 1
+    fi
+    ;;
+  esac
+done
+
+# ---------------------------------------------------------------------------
+# Datos que falten: se piden por teclado
+# ---------------------------------------------------------------------------
+if [ -z "$IP" ]; then
+  read -rp "Dirección IP del móvil: " IP
+  [ -z "$IP" ] && {
+    echo "Error: Dirección IP obligatoria."
+    exit 1
+  }
+fi
+
+if [ -z "$PORT" ]; then
+  read -rp "Puerto SSH (ej. 8022): " PORT
+  [ -z "$PORT" ] && {
+    echo "Error: Puerto obligatorio."
+    exit 1
+  }
+fi
+
+if [ -z "$USER_TERMUX" ]; then
+  read -rp "Usuario de Termux (salida de 'whoami', ej. u0_a431): " USER_TERMUX
+  [ -z "$USER_TERMUX" ] && {
+    echo "Error: Usuario obligatorio."
+    exit 1
+  }
+fi
+
+if [ -z "$LOCAL_DIR" ]; then
+  read -rp "Directorio local (PC): " LOCAL_DIR
+  [ -z "$LOCAL_DIR" ] && {
+    echo "Error: Directorio local obligatorio."
+    exit 1
+  }
+fi
+
+if [ -z "$REMOTE_DIR" ]; then
+  read -rp "Directorio remoto (Termux, ej. ~/storage/shared/DCIM/Camera): " REMOTE_DIR
+  [ -z "$REMOTE_DIR" ] && {
+    echo "Error: Directorio remoto obligatorio."
+    exit 1
+  }
+fi
+
+if [ -z "$DIRECTION" ]; then
+  echo "Dirección de sincronización:"
+  echo "1) Local -> Remoto (PC -> Móvil)"
+  echo "2) Remoto -> Local (Móvil -> PC)"
+  read -rp "Opción (1 o 2): " DIRECTION
+fi
+
+# ---------------------------------------------------------------------------
+# Normalización y validación
+# ---------------------------------------------------------------------------
+LOCAL_DIR="${LOCAL_DIR/#\~/$HOME}"
+
+case "$DIRECTION" in
+1)
+  if [ ! -d "$LOCAL_DIR" ]; then
+    echo "Error: el directorio local '$LOCAL_DIR' no existe."
+    exit 1
+  fi
+  SRC="${LOCAL_DIR%/}/"
+  DST="${USER_TERMUX}@${IP}:${REMOTE_DIR%/}"
+  ;;
+2)
+  mkdir -p "$LOCAL_DIR"
+  SRC="${USER_TERMUX}@${IP}:${REMOTE_DIR%/}/"
+  DST="${LOCAL_DIR%/}"
+  ;;
+*)
+  echo "Opción no válida ('$DIRECTION'). Usa 1 o 2. Cancelando."
+  exit 1
+  ;;
+esac
+
+# ---------------------------------------------------------------------------
+# Sincronización
+# ---------------------------------------------------------------------------
+RSYNC_OPTS=(-rtvP --no-perms --inplace)
+[ -n "$DELETE_ARG" ] && RSYNC_OPTS+=("$DELETE_ARG")
+[ -n "$DRY_RUN_ARG" ] && RSYNC_OPTS+=("$DRY_RUN_ARG")
+
+echo "Origen:  $SRC"
+echo "Destino: $DST"
+[ -n "$DRY_RUN_ARG" ] && echo "(simulación: no se copiará nada)"
+
+if [ -n "$PRE_CMD" ]; then
+  echo "Ejecutando pre-hook..."
+  bash -c "$PRE_CMD"
+fi
+
+echo "Iniciando..."
+rsync "${RSYNC_OPTS[@]}" "${EXCLUDES[@]}" -e "ssh -p $PORT" "$SRC" "$DST"
+
+if [ -n "$POST_CMD" ]; then
+  echo "Ejecutando post-hook..."
+  bash -c "$POST_CMD"
+fi
+
+echo "Sincronización finalizada."
